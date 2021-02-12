@@ -1,0 +1,3 @@
+include ':BottomTabBar'
+include ':app'
+rootProject.name = "BlitzIt"
