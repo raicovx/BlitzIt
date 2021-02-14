@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/intro">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="au.com.blitzit.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/intro"
+        android:name="au.com.blitzit.ui.intro.IntroFragment"
+        android:label="intro_fragment"
+        tools:layout="@layout/fragment_intro">
+        <action
+            android:id="@+id/intro_to_login"
+            app:destination="@id/login"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/login"
+        android:name="au.com.blitzit.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
         android:name="au.com.blitzit.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="au.com.blitzit.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>
