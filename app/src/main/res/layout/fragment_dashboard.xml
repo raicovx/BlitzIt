@@ -1,13 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/light_grey">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:id="@+id/TitleSpace"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/avenir"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="Your Plan Overview"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/avenir"
+                android:textSize="32dp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"
+                android:text="Ronnie Ruse"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="NDIS Number: 430100000"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/avenir"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="8dp"
+                    android:textSize="20dp"
+                    android:text="PLAN"/>
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="32dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/avenir"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="24dp"
+                    android:background="@drawable/active_display"
+                    android:text="ACTIVE"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/avenir"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="Start Date: 19/10/2019"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="End Date: 20/10/2021"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/dark_grey">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Overview"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/avenir"
+                    android:textStyle="bold"
+                    android:textSize="24dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/dark_white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Overview"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/dark_grey"
+                    android:fontFamily="@font/avenir"
+                    android:textStyle="bold"
+                    android:textSize="24dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:background="@drawable/rounded_corners"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/rounded_top_corners"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
