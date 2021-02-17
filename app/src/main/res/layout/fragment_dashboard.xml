@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:background="@drawable/dashboard_colour_gradient"
             android:id="@+id/TitleSpace"
-            android:paddingBottom="8dp"
+            android:paddingBottom="12dp"
             android:paddingTop="8dp">
 
             <TextView
@@ -122,7 +122,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/dark_grey">
@@ -141,7 +141,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/dark_white">
@@ -149,7 +149,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Overview"
+                    android:text="Invoices"
                     android:textAlignment="center"
                     android:gravity="center"
                     android:textColor="@color/dark_grey"
@@ -162,19 +162,183 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/capacity_building"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
             android:background="@drawable/rounded_corners"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:orientation="vertical"
             >
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/rounded_top_corners"/>
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/rounded_top_corners"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="CAPACITY BUILDING"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/avenir"
+                    android:textStyle="bold"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Improved daily living skills"
+                android:gravity="center_vertical"
+                android:textColor="@color/dark_grey"
+                android:fontFamily="@font/avenir"
+                android:textSize="16dp"
+                android:background="@color/light_grey"
+                android:paddingLeft="24dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="256dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="256dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/cb_plan_budget"
+                        android:layout_width="match_parent"
+                        android:layout_height="128dp"
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="16dp"
+                            android:text="Plan Budget"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/darker_grey"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingBottom="16dp"
+                            android:text="$10,000.00"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/darker_grey"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cb_plan_balance"
+                        android:layout_width="match_parent"
+                        android:layout_height="128dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="1dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="16dp"
+                            android:text="Plan Balance"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/darker_grey"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingBottom="16dp"
+                            android:text="$10,000.00"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/darker_grey"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cb_progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="256dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginLeft="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Plan Balance"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/darker_grey"
+                        android:fontFamily="@font/avenir"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Plan Balance"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/darker_grey"
+                        android:fontFamily="@font/avenir"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingTop="16dp"
+                        android:text="Plan Balance"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/darker_grey"
+                        android:fontFamily="@font/avenir"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -18,6 +18,7 @@
     <color name="blitz_it_orange">#1C85C1</color>
 
     <color name="dark_grey">#616161</color>
+    <color name="darker_grey">#424242</color>
     <color name="dark_white">#fafafa</color>
     <color name="light_grey">#e0e0e0</color>
 </resources>
