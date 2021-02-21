@@ -30,7 +30,7 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/username_field"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="48dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/auth_input_bg"
@@ -47,9 +47,8 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password_field"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="48dp"
-        android:layout_marginBottom="32dp"
         android:background="@drawable/auth_input_bg"
         android:hint="@string/password"
         android:paddingStart="16dp"
@@ -57,10 +56,28 @@
         android:fontFamily="@font/avenir"
         android:maxLines="1"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@id/login_button"
+        app:layout_constraintBottom_toTopOf="@id/forgot_password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+
+    <Button
+        android:id="@+id/forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#8000000"
+        android:backgroundTint="@null"
+        android:text="@string/forgot_password"
+        android:textColor="@color/dark_grey"
+        android:textAllCaps="false"
+        android:fontFamily="@font/avenir"
+        android:textSize="16sp"
+        android:textAlignment="viewEnd"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
         android:id="@+id/login_button"

@@ -27,10 +27,10 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:fontFamily="@font/avenir"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:text="Your Plan Overview"/>
+                android:text="@string/your_plan_overview"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
@@ -45,11 +45,12 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:fontFamily="@font/avenir"
-                android:textSize="32dp"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"
-                android:text="Ronnie Ruse"/>
+                android:text="Ronnie Ruse"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -58,8 +59,9 @@
                 android:gravity="center"
                 android:fontFamily="@font/avenir"
                 android:textColor="@color/white"
-                android:textSize="20dp"
-                android:text="NDIS Number: 430100000"/>
+                android:textSize="20sp"
+                android:text="NDIS Number: 430100000"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,9 +77,9 @@
                     android:gravity="center"
                     android:fontFamily="@font/avenir"
                     android:textColor="@color/white"
-                    android:layout_marginRight="8dp"
-                    android:textSize="20dp"
-                    android:text="PLAN"/>
+                    android:layout_marginEnd="8dp"
+                    android:textSize="20sp"
+                    android:text="@string/plan"/>
 
                 <TextView
                     android:layout_width="114dp"
@@ -86,10 +88,10 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:fontFamily="@font/avenir"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="24dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="24sp"
                     android:background="@drawable/active_display"
-                    android:text="ACTIVE"/>
+                    android:text="@string/active"/>
 
             </LinearLayout>
 
@@ -101,8 +103,9 @@
                 android:fontFamily="@font/avenir"
                 android:layout_marginTop="12dp"
                 android:textColor="@color/white"
-                android:textSize="20dp"
-                android:text="Start Date: 19/10/2019"/>
+                android:textSize="20sp"
+                android:text="Start Date: 19/10/2019"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -111,8 +114,9 @@
                 android:gravity="center"
                 android:fontFamily="@font/avenir"
                 android:textColor="@color/white"
-                android:textSize="20dp"
-                android:text="End Date: 20/10/2021"/>
+                android:textSize="20sp"
+                android:text="End Date: 20/10/2021"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <Button
@@ -123,7 +127,7 @@
             android:layout_marginTop="12dp"
             app:backgroundTint="@color/dark_grey"
             android:background="@drawable/round_button"
-            android:text="View Statements"
+            android:text="@string/view_statements"
             android:fontFamily="@font/avenir"
             android:textSize="18sp"
             android:textAllCaps="false"/>

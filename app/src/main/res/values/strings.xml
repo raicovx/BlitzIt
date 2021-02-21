@@ -7,4 +7,19 @@
     <string name="register">Register</string>
     <string name="username_email">Username / Email</string>
     <string name="password">Password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="plan_budget">Plan Budget</string>
+    <string name="plan_balance">Plan Balance</string>
+    <string name="progress">Progress</string>
+    <string name="remaining">Remaining</string>
+    <string name="view_budget">View Budget</string>
+    <string name="core_description">Assitance with daily life, consumables, social and community participation</string>
+    <string name="core">CORE</string>
+    <string name="capacity_building">CAPACITY BUILDING</string>
+    <string name="improved_living">Improved daily living skills</string>
+    <string name="support_coordination">Support Coordination</string>
+    <string name="your_plan_overview">Your Plan Overview</string>
+    <string name="plan">PLAN</string>
+    <string name="active">ACTIVE</string>
+    <string name="view_statements">View Statements</string>
 </resources>

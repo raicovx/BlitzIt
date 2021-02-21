@@ -20,35 +20,38 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            tools:ignore="ContentDescription"
             android:background="@drawable/rounded_top_corners"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="CAPACITY BUILDING"
+            android:text="@string/capacity_building"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/white"
             android:fontFamily="@font/avenir"
             android:textStyle="bold"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
     </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Improved daily living skills"
+        android:text="@string/improved_living"
         android:gravity="center_vertical"
         android:textColor="@color/dark_grey"
         android:fontFamily="@font/avenir"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:background="@color/light_grey"
-        android:paddingLeft="24dp"/>
+        android:paddingStart="24dp"
+        tools:ignore="RtlSymmetry" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp">
+        android:layout_height="256dp"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +65,7 @@
                 android:layout_height="128dp"
                 android:orientation="vertical"
                 android:background="@color/white"
-                android:layout_marginRight="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -70,12 +73,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingTop="16dp"
-                    android:text="Plan Budget"
+                    android:text="@string/plan_budget"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -87,7 +90,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -95,36 +99,34 @@
                 android:id="@+id/cb_plan_balance"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@color/white"
-                android:layout_marginRight="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginTop="1dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="64dp"
                     android:paddingTop="16dp"
-                    android:text="Plan Balance"
+                    android:text="@string/plan_balance"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="64dp"
                     android:paddingBottom="16dp"
                     android:text="$10,000.00"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp"
-                    android:background="@drawable/rounded_bottom_corners"/>
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_bottom_corners"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -137,24 +139,22 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="@color/white"
-            android:layout_marginLeft="1dp">
+            android:layout_marginStart="1dp">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_weight="1"
+                android:layout_height="64dp"
                 android:paddingTop="16dp"
-                android:text="Progress"
+                android:text="@string/progress"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/darker_grey"
                 android:fontFamily="@font/avenir"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <com.app.progresviews.ProgressWheel
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="128dp"
                 app:barWidth="16dp"
                 app:countText="100%"
                 app:countTextColor="@color/blitz_it_medium_blue"
@@ -165,15 +165,14 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_weight="1"
+                android:layout_height="64dp"
                 android:paddingBottom="16dp"
-                android:text="Remaining"
+                android:text="@string/remaining"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/avenir"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
 
 
@@ -184,17 +183,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Support Coordination"
+        android:text="@string/support_coordination"
         android:gravity="center_vertical"
         android:textColor="@color/dark_grey"
         android:fontFamily="@font/avenir"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:background="@color/light_grey"
-        android:paddingLeft="24dp"/>
+        android:paddingStart="24dp"
+        tools:ignore="RtlSymmetry"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp">
+        android:layout_height="256dp"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -208,7 +209,7 @@
                 android:layout_height="128dp"
                 android:orientation="vertical"
                 android:background="@color/white"
-                android:layout_marginRight="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -216,12 +217,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingTop="16dp"
-                    android:text="Plan Budget"
+                    android:text="@string/plan_budget"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -233,7 +234,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -241,35 +243,33 @@
                 android:id="@+id/sc_plan_balance"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@color/white"
-                android:layout_marginRight="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginTop="1dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="64dp"
                     android:paddingTop="16dp"
-                    android:text="Plan Balance"
+                    android:text="@string/plan_balance"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="64dp"
                     android:paddingBottom="16dp"
                     android:text="$28,519.93"
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="@color/darker_grey"
                     android:fontFamily="@font/avenir"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
@@ -282,24 +282,22 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="@color/white"
-            android:layout_marginLeft="1dp">
+            android:layout_marginStart="1dp">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_weight="1"
+                android:layout_height="64dp"
                 android:paddingTop="16dp"
-                android:text="Progress"
+                android:text="@string/progress"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/darker_grey"
                 android:fontFamily="@font/avenir"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <com.app.progresviews.ProgressWheel
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="128dp"
                 app:barWidth="16dp"
                 app:countText="98%"
                 app:countTextColor="@color/blitz_it_medium_blue"
@@ -310,15 +308,14 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_weight="1"
+                android:layout_height="64dp"
                 android:paddingBottom="16dp"
-                android:text="Remaining"
+                android:text="@string/remaining"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/avenir"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -340,7 +337,7 @@
             android:layout_marginBottom="12dp"
             app:backgroundTint="@color/dark_grey"
             android:background="@drawable/round_button"
-            android:text="View Budget"
+            android:text="@string/view_budget"
             android:fontFamily="@font/avenir"
             android:textSize="18sp"
             android:textAllCaps="false"/>
