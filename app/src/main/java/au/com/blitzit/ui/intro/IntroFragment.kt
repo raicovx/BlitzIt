@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class IntroFragment : Fragment() {
 
@@ -30,6 +32,10 @@ class IntroFragment : Fragment() {
             val action = IntroFragmentDirections.introToLogin()
             this.findNavController().navigate(action)
         }
+
+        var mActivity: MainActivity = activity as MainActivity
+        mActivity.HideFAB()
+
         return view
     }
 

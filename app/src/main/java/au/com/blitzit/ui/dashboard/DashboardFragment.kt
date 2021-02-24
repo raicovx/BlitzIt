@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 
 class DashboardFragment : Fragment() {
@@ -17,7 +18,11 @@ class DashboardFragment : Fragment() {
     private lateinit var viewModel: DashboardViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View?
+    {
+        var mActivity : MainActivity = activity as MainActivity
+        mActivity.ShowFAB()
+
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 

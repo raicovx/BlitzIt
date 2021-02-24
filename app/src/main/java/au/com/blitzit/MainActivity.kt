@@ -3,16 +3,26 @@ package au.com.blitzit
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
+
+    lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        fab = findViewById(R.id.floatingActionButton)
+    }
 
-        //val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //val navController = navHost.navController
-
+    public fun HideFAB()
+    {
+        fab.hide()
+    }
+    public fun ShowFAB()
+    {
+        fab.show()
     }
 }

@@ -65,7 +65,7 @@
         android:id="@+id/forgot_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#8000000"
+        android:background="?selectableItemBackground"
         android:backgroundTint="@null"
         android:text="@string/forgot_password"
         android:textColor="@color/dark_grey"
