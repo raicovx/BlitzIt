@@ -32,4 +32,17 @@
         android:name="au.com.blitzit.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="au.com.blitzit.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="au.com.blitzit.ui.contactus.ContactUsFragment"
+        android:label="ContactUsFragment" />
 </navigation>

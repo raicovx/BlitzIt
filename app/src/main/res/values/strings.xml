@@ -22,4 +22,24 @@
     <string name="plan">PLAN</string>
     <string name="active">ACTIVE</string>
     <string name="view_statements">View Statements</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_plans">My Plans</string>
+    <string name="invoices">Invoices</string>
+    <string name="track_spending">Track Spending</string>
+    <string name="my_providers">My Providers</string>
+    <string name="settings_information"><![CDATA[Settings & Information]]></string>
+    <string name="contact_us">Contact Us</string>
+    <string name="www_blitzit_com_au">www.blitzit.com.au</string>
+    <string name="website">Website</string>
+    <string name="hello_blitzit_com_au">hello@blitzit.com.au</string>
+    <string name="_1300_966_119">1300 966 119</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="windsor_nsw_2756">Windsor NSW 2756</string>
+    <string name="po_box_4323">PO Box 4323</string>
+    <string name="_319_george_street">319 George Street</string>
+    <string name="postal_address">Postal Address</string>
+    <string name="pitt_town_nsw_2756">Pitt Town NSW 2756</string>
+    <string name="book_a_consultation">Book A Consultation</string>
+    <string name="visit_us">Visit Us</string>
 </resources>

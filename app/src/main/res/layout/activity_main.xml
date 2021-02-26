@@ -12,15 +12,18 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:backgroundTint="@color/blitz_it_medium_blue"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:backgroundTint="@color/blitz_it_medium_blue"
+        android:clickable="true"
         android:elevation="6dp"
         android:focusable="true"
-        tools:ignore="ContentDescription"/>
+        android:src="@drawable/menu_icon"
+        app:tint="@color/white"
+        app:maxImageSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="ContentDescription" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

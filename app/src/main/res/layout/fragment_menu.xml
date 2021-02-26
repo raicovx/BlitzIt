@@ -3,55 +3,222 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.menu.MenuFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/menu_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:background="@color/dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/light_grey">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp">
+            android:layout_height="80dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/back_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?selectableItemBackground"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/back_btn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
+                android:id="@+id/contact_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact Us"
-                android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:fontFamily="@font/avenir"
-                android:textSize="16sp"
+                android:layout_height="match_parent"
                 android:background="?selectableItemBackground"
                 android:backgroundTint="@null"
+                android:fontFamily="@font/avenir"
+                android:gravity="center_vertical"
+                android:text="@string/contact_us"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="192dp"
-            android:background="@color/dark_grey">
+            android:layout_height="160dp">
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/profile_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginStart="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/profile_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/my_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+            <Button
+                android:id="@+id/plans_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginEnd="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/plans_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/my_plans"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="192dp"
-            android:background="@color/dark_grey">
+            android:layout_height="160dp">
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/invoices_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginStart="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/invoices_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/invoices"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+            <Button
+                android:id="@+id/spending_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginEnd="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/spending_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/track_spending"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="192dp"
-            android:background="@color/dark_grey">
+            android:layout_height="160dp">
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/providers_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginStart="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/providers_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/my_providers"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/settings_button"
+                android:layout_width="128dp"
+                android:layout_height="144dp"
+                android:layout_marginEnd="64dp"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/settings_icon"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:paddingTop="22dp"
+                android:text="@string/settings_information"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_grey"
+                android:textSize="15sp"
+                app:cornerRadius="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
