@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <Button
-                    android:id="@+id/back_button"
+                    android:id="@+id/menu_back_button"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="?selectableItemBackground"
@@ -66,12 +66,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="ContentDescription"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/contact_button"
+                android:id="@+id/menu_contact_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="?selectableItemBackground"
@@ -93,7 +94,7 @@
             android:layout_height="160dp">
 
             <Button
-                android:id="@+id/profile_button"
+                android:id="@+id/menu_profile_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginStart="64dp"
@@ -112,7 +113,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/plans_button"
+                android:id="@+id/menu_plans_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginEnd="64dp"
@@ -137,7 +138,7 @@
             android:layout_height="160dp">
 
             <Button
-                android:id="@+id/invoices_button"
+                android:id="@+id/menu_invoices_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginStart="64dp"
@@ -156,7 +157,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/spending_button"
+                android:id="@+id/menu_spending_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginEnd="64dp"
@@ -181,7 +182,7 @@
             android:layout_height="160dp">
 
             <Button
-                android:id="@+id/providers_button"
+                android:id="@+id/menu_providers_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginStart="64dp"
@@ -200,7 +201,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/settings_button"
+                android:id="@+id/menu_settings_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
                 android:layout_marginEnd="64dp"
@@ -209,7 +210,7 @@
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:paddingTop="22dp"
-                android:text="@string/settings_information"
+                android:text="@string/setting_info"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
                 android:textSize="15sp"

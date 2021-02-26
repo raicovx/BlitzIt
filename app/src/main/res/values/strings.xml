@@ -13,7 +13,7 @@
     <string name="progress">Progress</string>
     <string name="remaining">Remaining</string>
     <string name="view_budget">View Budget</string>
-    <string name="core_description">Assitance with daily life, consumables, social and community participation</string>
+    <string name="core_description">Assistance with daily life, consumables, social and community participation</string>
     <string name="core">CORE</string>
     <string name="capacity_building">CAPACITY BUILDING</string>
     <string name="improved_living">Improved daily living skills</string>
@@ -27,7 +27,6 @@
     <string name="invoices">Invoices</string>
     <string name="track_spending">Track Spending</string>
     <string name="my_providers">My Providers</string>
-    <string name="settings_information"><![CDATA[Settings & Information]]></string>
     <string name="contact_us">Contact Us</string>
     <string name="www_blitzit_com_au">www.blitzit.com.au</string>
     <string name="website">Website</string>
@@ -42,4 +41,9 @@
     <string name="pitt_town_nsw_2756">Pitt Town NSW 2756</string>
     <string name="book_a_consultation">Book A Consultation</string>
     <string name="visit_us">Visit Us</string>
+    <string name="setting_info">Settings &amp; Information</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="about_this_app">About this app</string>
+    <string name="faqs">FAQs</string>
+    <string name="who_can_see_my_plan">Who can see my plan?</string>
 </resources>

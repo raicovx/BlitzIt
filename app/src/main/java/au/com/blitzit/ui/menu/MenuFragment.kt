@@ -10,10 +10,13 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import au.com.blitzit.ui.settings.SettingsFragmentDirections
 
 class MenuFragment : Fragment()
 {
     private lateinit var backButton: Button
+    private lateinit var contactButton: Button
+    private lateinit var settingsButton: Button
 
     companion object{
         fun newInstance() = MenuFragment
@@ -23,16 +26,30 @@ class MenuFragment : Fragment()
     {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
 
-        backButton = view.findViewById(R.id.back_button)
-        backButton.setOnClickListener { _ ->
-            val action = MenuFragmentDirections.actionMenuFragmentToDashboardFragment()
-            this.findNavController().navigate(action)
-        }
+        setOnClickListeners(view)
 
         //Hide the FAB
-        var mActivity : MainActivity = activity as MainActivity
+        val mActivity : MainActivity = activity as MainActivity
         mActivity.HideFAB()
 
         return view
+    }
+
+    private fun setOnClickListeners(view: View)
+    {
+        backButton = view.findViewById(R.id.menu_back_button)
+        backButton.setOnClickListener {
+            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToDashboardFragment())
+        }
+
+        contactButton = view.findViewById(R.id.menu_contact_button)
+        contactButton.setOnClickListener {
+            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToContactFragment())
+        }
+
+        settingsButton = view.findViewById(R.id.menu_settings_button)
+        settingsButton.setOnClickListener {
+            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSettingsFragment())
+        }
     }
 }

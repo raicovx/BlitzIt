@@ -40,9 +40,32 @@
         <action
             android:id="@+id/action_menuFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
     </fragment>
     <fragment
-        android:id="@+id/contactUsFragment"
-        android:name="au.com.blitzit.ui.contactus.ContactUsFragment"
-        android:label="ContactUsFragment" />
+        android:id="@+id/contactFragment"
+        android:name="au.com.blitzit.ui.settings.ContactFragment"
+        android:label="fragment_contactus"
+        tools:layout="@layout/fragment_contactus" >
+        <action
+            android:id="@+id/action_contactFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="au.com.blitzit.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 </navigation>
