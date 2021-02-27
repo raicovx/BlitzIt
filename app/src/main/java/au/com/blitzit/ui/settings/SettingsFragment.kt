@@ -14,6 +14,8 @@ class SettingsFragment : Fragment()
 {
     private lateinit var backButton: Button
     private lateinit var contactButton: Button
+    private lateinit var aboutAppButton: Button
+    private lateinit var faqButton: Button
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -31,14 +33,26 @@ class SettingsFragment : Fragment()
 
     private fun setOnClickListeners(view: View)
     {
+        val navControl = this.findNavController()
+
         backButton = view.findViewById(R.id.setting_back_button)
         backButton.setOnClickListener {
-            this.findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToMenuFragment())
+            navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToMenuFragment())
         }
 
         contactButton = view.findViewById(R.id.settings_contact_us)
         contactButton.setOnClickListener {
-            this.findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToContactFragment())
+            navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToContactFragment())
+        }
+
+        aboutAppButton = view.findViewById(R.id.settings_about_app)
+        aboutAppButton.setOnClickListener {
+            navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToAboutAppFragment())
+        }
+
+        faqButton = view.findViewById(R.id.settings_faq)
+        faqButton.setOnClickListener {
+            navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToFAQFragment())
         }
     }
 }

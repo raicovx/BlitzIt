@@ -46,4 +46,14 @@
     <string name="about_this_app">About this app</string>
     <string name="faqs">FAQs</string>
     <string name="who_can_see_my_plan">Who can see my plan?</string>
+    <string name="faq_1">Blitzit Plan Manager typically processes and pays invoices within three to five business days of receiving the invoice. While we endeavour to turn around your invoices within this time period, payments may sometimes be delayed due to circumstances out of our control. Please see <a href="https://www.blitzit.com.au/getting-paid">Getting Paid</a> for more information.</string>
+    <string name="faq_1_header">When will i be Paid?</string>
+    <string name="faq_2_header">How do I send you an Invoice?</string>
+    <string name="faq_2_part1">Simple send it to us via email: invoices@blitzit.com.au \n\nOr, put the invoice in the post and send to:</string>
+    <string name="faq_2_part2">Blitzit Plan Manager \nPO Box 4323 \nPitt Town, NSW, 2756</string>
+    <string name="faq_2_part3">(Note: please allow additional time if you choose to post your invoice as postage times are dependent on Australia Post. We will do our utmost to pay posted invoices promptly.)</string>
+    <string name="keyword_search">Keyword Search</string>
+    <string name="faq_desc_1">Whether you\'re a participant or service provider, we understand that you\'ll have a lot of questions about plan management.</string>
+    <string name="faq_desc_2">Here are some of the common questions we get asked</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
 </resources>
