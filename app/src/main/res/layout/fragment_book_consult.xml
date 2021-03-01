@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.settings.BookingFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="48dp"
+        android:background="@color/light_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/booking_topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:paddingBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/booking_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="Book A Consultation"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/booking_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/booking_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/booking_back_button"
+                app:layout_constraintStart_toStartOf="@+id/booking_back_button"
+                app:layout_constraintTop_toTopOf="@+id/booking_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/booking_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/booking_topBar" />
+
+            <TextView
+                android:id="@+id/booking_p1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/booking_text_p1"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booking_divider" />
+
+            <TextView
+                android:id="@+id/booking_p2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/booking_text_p2"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booking_p1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="48dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:elevation="4dp"
+            android:background="@drawable/rounded_bottom_corners"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/booking_topLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
+                android:text="First Name"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_fname"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:hint="First Name"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Last Name"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_lname"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:hint="Last Name"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Email Address"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_email"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:hint="abc@example.com"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Postcode"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_postcode"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:hint="2756"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Your Age"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_age"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/input_bg"
+                android:hint="21"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Appointment Type"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="56dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Tell us about your plan"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
+                android:text="Select the label that best represents your NDIS journey."
+                android:fontFamily="@font/avenir"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/booking_plan_option_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:background="@drawable/input_bg"
+                android:text="I am looking for a Plan Manager and have received an NDIS Plan"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/booking_plan_option_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:background="@drawable/input_bg"
+                android:text="I have an existing NDIS Plan Manager and am looking for a new manager"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/booking_plan_option_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:background="@drawable/input_bg"
+                android:text="I am eligible for NDIS, but have not received my NDIS plan"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/booking_plan_option_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:background="@drawable/input_bg"
+                android:text="I am not an NDIS Participant"
+                android:fontFamily="@font/avenir"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/dark_grey"
+                android:text="Notes"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/booking_notes"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/input_bg"
+                android:hint="Is there anything else we should know?"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="start|top"
+                android:fontFamily="@font/avenir"
+                android:maxLines="12"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/booking_submit"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="64dp"
+                android:background="@drawable/round_button"
+                android:fontFamily="@font/avenir"
+                android:text="Submit"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/blitz_it_light_blue"
+                app:cornerRadius="92dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

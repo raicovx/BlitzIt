@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_menuFragment_to_contactFragment"
             app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
@@ -55,6 +58,9 @@
         <action
             android:id="@+id/action_contactFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_contactFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -91,5 +97,35 @@
         <action
             android:id="@+id/action_FAQFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="au.com.blitzit.ui.settings.BookingFragment"
+        android:label="fragment_book_consult"
+        tools:layout="@layout/fragment_book_consult" >
+        <action
+            android:id="@+id/action_bookingFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_bookingFragment_to_bookingSuccessFragment2"
+            app:destination="@id/bookingSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingSuccessFragment"
+        android:name="au.com.blitzit.ui.settings.BookingSuccessFragment"
+        android:label="fragment_consult_success"
+        tools:layout="@layout/fragment_consult_success" >
+        <action
+            android:id="@+id/action_bookingSuccessFragment2_to_contactFragment"
+            app:destination="@id/contactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="au.com.blitzit.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

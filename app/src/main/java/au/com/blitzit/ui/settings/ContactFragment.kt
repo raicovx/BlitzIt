@@ -12,6 +12,7 @@ import au.com.blitzit.R
 class ContactFragment : Fragment()
 {
     private lateinit var backButton: Button
+    private lateinit var bookButton: Button
 
     companion object
     {
@@ -25,6 +26,11 @@ class ContactFragment : Fragment()
         backButton = view.findViewById(R.id.contact_back_button)
         backButton.setOnClickListener {
             this.findNavController().navigate(ContactFragmentDirections.actionContactFragmentToSettingsFragment())
+        }
+
+        bookButton = view.findViewById(R.id.contact_book)
+        bookButton.setOnClickListener {
+            this.findNavController().navigate(ContactFragmentDirections.actionContactFragmentToBookingFragment())
         }
 
         return view

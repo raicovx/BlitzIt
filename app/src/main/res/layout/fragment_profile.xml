@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.profile.ProfileFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:background="@color/light_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:paddingBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/profile_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/my_profile"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/profile_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/profile_back_button"
+                app:layout_constraintStart_toStartOf="@+id/profile_back_button"
+                app:layout_constraintTop_toTopOf="@+id/profile_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profile_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_topBar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/profile_divider">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:textColor="@color/white"
+                    android:text="@string/first_name"
+                    android:fontFamily="@font/avenir"
+                    android:textSize="24sp"
+                    android:gravity="center"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_bg"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:fontFamily="@font/avenir"
+                    android:maxLines="1"
+                    android:text="Ronnie"
+                    android:textColor="@color/dark_grey"
+                    android:inputType="none"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/last_name"
+                    android:fontFamily="@font/avenir"
+                    android:textSize="24sp"
+                    android:gravity="center"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_lname"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_bg"
+                    android:text="Ruse"
+                    android:textColor="@color/dark_grey"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:fontFamily="@font/avenir"
+                    android:maxLines="1"
+                    android:inputType="none"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/date_of_birth"
+                    android:fontFamily="@font/avenir"
+                    android:textSize="24sp"
+                    android:gravity="center"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_bg"
+                    android:text="01/01/1990"
+                    android:textColor="@color/dark_grey"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:fontFamily="@font/avenir"
+                    android:maxLines="1"
+                    android:inputType="none"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/ndis_number"
+                    android:fontFamily="@font/avenir"
+                    android:textSize="24sp"
+                    android:gravity="center"/>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_ndis"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_bg"
+                    android:text="430100000"
+                    android:textColor="@color/dark_grey"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:fontFamily="@font/avenir"
+                    android:maxLines="1"
+                    android:inputType="none"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/l_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:elevation="4dp"
+            android:background="@drawable/rounded_bottom_corners"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_topLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
+                android:text="@string/contact_number"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_contactnum"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:text="0412 345 678"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/participant_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:text="hello@sample.com.au"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/statements_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_statement_email"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:text="statement@sample.com.au"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/primary_contact_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_primary_email"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:text="contact@sample.com.au"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/address"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_address_line1"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:text="Address 1"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_address_line2"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/input_bg"
+                android:text="Address 2"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_address_suburb"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/input_bg"
+                android:text="Suburb"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_address_state"
+                    android:layout_width="140dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="@font/avenir"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="State"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_address_postcode"
+                    android:layout_width="140dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="@font/avenir"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="PostCode"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/support_coordinator_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_support_email"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/input_bg"
+                android:text="support@sample.com.au"
+                android:textColor="@color/dark_grey"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:fontFamily="@font/avenir"
+                android:maxLines="1"
+                android:inputType="none"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/booking_submit"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="48dp"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/avenir"
+            android:text="@string/edit_profile"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/blitz_it_light_blue"
+            app:cornerRadius="92dp"
+            app:layout_constraintTop_toBottomOf="@id/l_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
