@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.profile.ProfileEditFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:orientation="vertical"
+        android:background="@color/light_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cat_budget_topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:paddingBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/cat_budget_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/category_budget"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/cat_budget_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/cat_budget_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/cat_budget_back_button"
+                app:layout_constraintStart_toStartOf="@+id/cat_budget_back_button"
+                app:layout_constraintTop_toTopOf="@+id/cat_budget_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cat_budget_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cat_budget_topBar" />
+
+            <Button
+                android:id="@+id/cat_budget_view_tracking"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@drawable/round_button"
+                android:drawableEnd="@drawable/forward_arrow_white"
+                android:fontFamily="@font/avenir"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:text="@string/view_category_tracking"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_budget_divider" />
+
+            <TextView
+                android:id="@+id/cat_budget_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/avenir"
+                android:text="Capacity Building"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"
+                app:layout_constraintTop_toBottomOf="@id/cat_budget_view_tracking"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp"
+                app:layout_constraintTop_toBottomOf="@id/cat_budget_title">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/blitz_it_medium_blue"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center"
+                        android:text="@string/overview"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="256dp"
+                        android:background="@color/light_grey"
+                        android:baselineAligned="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="256dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="128dp"
+                                android:layout_marginEnd="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:background="@color/white"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/avenir"
+                                    android:gravity="center"
+                                    android:paddingTop="16dp"
+                                    android:text="@string/starting_balance"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/darker_grey"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/avenir"
+                                    android:gravity="center"
+                                    android:paddingBottom="16dp"
+                                    android:text="$10,000.00"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/darker_grey"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="128dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginEnd="1dp"
+                                android:background="@color/white"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="64dp"
+                                    android:fontFamily="@font/avenir"
+                                    android:gravity="center"
+                                    android:paddingTop="16dp"
+                                    android:text="@string/current_balance"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/darker_grey"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="64dp"
+                                    android:fontFamily="@font/avenir"
+                                    android:gravity="center"
+                                    android:paddingBottom="16dp"
+                                    android:text="$10,000.00"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/darker_grey"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="256dp"
+                            android:layout_marginStart="1dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="64dp"
+                                android:fontFamily="@font/avenir"
+                                android:gravity="center"
+                                android:paddingTop="16dp"
+                                android:text="@string/progress"
+                                android:textAlignment="center"
+                                android:textColor="@color/darker_grey"
+                                android:textSize="16sp" />
+
+                            <com.app.progresviews.ProgressWheel
+                                android:layout_width="match_parent"
+                                android:layout_height="128dp"
+                                app:barWidth="16dp"
+                                app:countText="100%"
+                                app:countTextColor="@color/blitz_it_medium_blue"
+                                app:countTextSize="20dp"
+                                app:percentage="360"
+                                app:progressColor="@color/blitz_it_medium_blue" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="64dp"
+                                android:fontFamily="@font/avenir"
+                                android:gravity="center"
+                                android:paddingBottom="16dp"
+                                android:text="@string/remaining"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:text="@string/contact_number"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_edit_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="@font/avenir"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="0412 345 678"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/edit_icon_round"
+                    android:src="@drawable/edit_icon"
+                    android:padding="3dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_contact"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_contact"
+                    app:layout_constraintTop_toTopOf="@+id/profile_edit_contact"
+                    tools:ignore="ContentDescription" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:text="@string/participant_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_edit_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="@font/avenir"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="example@email.com"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/edit_icon_round"
+                    android:src="@drawable/edit_icon"
+                    android:padding="3dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_email"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_email"
+                    app:layout_constraintTop_toTopOf="@+id/profile_edit_email"
+                    tools:ignore="ContentDescription" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:text="@string/statements_email"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_edit_statement_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="@font/avenir"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="example@email.com"
+                    android:textColor="@color/dark_grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/edit_icon_round"
+                    android:src="@drawable/edit_icon"
+                    android:padding="3dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_statement_email"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_statement_email"
+                    app:layout_constraintTop_toTopOf="@+id/profile_edit_statement_email"
+                    tools:ignore="ContentDescription" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:text="@string/notes"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_edit_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/input_bg"
+                    android:hint="Is there anything else we should know?"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/dark_grey"
+                    android:gravity="start|top"
+                    android:fontFamily="@font/avenir"
+                    android:maxLines="12"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edit_icon_round"
+                    android:src="@drawable/edit_icon"
+                    android:padding="3dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_notes"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_notes"
+                    tools:ignore="ContentDescription" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

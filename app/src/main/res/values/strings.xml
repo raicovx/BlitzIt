@@ -68,4 +68,16 @@
     <string name="primary_contact_email">Primary Contact Email</string>
     <string name="address">Address</string>
     <string name="support_coordinator_email">Support Coordinator Email</string>
+    <string name="edit_profile_text1">Your profile is based on information supplied to Blitzit Plan Manager when submitting your service agreement for your current plan.</string>
+    <string name="edit_profile_text2">Changes made through this Edit Request form are sent to Blitzit Plan Manager, and will be reflected on your active plan.</string>
+    <string name="edit_profile_text3">Changes made using the Edit Request form may take up to 48 hours before they are shown in your profile details.</string>
+    <string name="edit_profile_text4">Before submitting an Edit Request please confirm the details you are submitting are correct and accurate.</string>
+    <string name="edit_profile_text5">Blitzit Plan Manager may contact you to review the information supplied, before the changes take affect.</string>
+    <string name="submit_edit_request">Submit Edit Request</string>
+    <string name="notes">Notes</string>
+    <string name="starting_balance">Starting Balance</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="overview">Overview</string>
+    <string name="view_category_tracking">View Category Tracking</string>
+    <string name="category_budget">Category Budget</string>
 </resources>
