@@ -16,6 +16,7 @@ class SettingsFragment : Fragment()
     private lateinit var contactButton: Button
     private lateinit var aboutAppButton: Button
     private lateinit var faqButton: Button
+    private lateinit var profileButton: Button
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -53,6 +54,11 @@ class SettingsFragment : Fragment()
         faqButton = view.findViewById(R.id.settings_faq)
         faqButton.setOnClickListener {
             navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToFAQFragment())
+        }
+
+        profileButton = view.findViewById(R.id.settings_edit_profile)
+        profileButton.setOnClickListener {
+            navControl.navigate(SettingsFragmentDirections.actionSettingsFragmentToProfileEditFragment())
         }
     }
 }

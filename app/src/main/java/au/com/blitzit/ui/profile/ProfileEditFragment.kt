@@ -22,11 +22,10 @@ class ProfileEditFragment : Fragment()
     {
         val view = inflater.inflate(R.layout.fragment_profile_edit, container, false)
 
-        backButton = view.findViewById(R.id.profile_back_button)
+        backButton = view.findViewById(R.id.profile_edit_back_button)
         backButton.setOnClickListener { this.findNavController().navigate(ProfileEditFragmentDirections.actionProfileEditFragmentToProfileFragment()) }
 
-
-        TODO("Hook up submit button")
+        //TODO("Hook up submit button")
 
         return view
     }

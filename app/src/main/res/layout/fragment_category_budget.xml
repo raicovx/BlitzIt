@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.profile.ProfileEditFragment"
+    tools:context=".ui.budget.CategoryBudgetFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -272,171 +272,346 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="32dp"
             android:layout_marginTop="32dp">
 
-            <TextView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blitz_it_dark_blue"
-                android:text="@string/contact_number"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:textStyle="bold"/>
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_contact"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="0412 345 678"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_contact"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_contact"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_contact"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/blitz_it_medium_blue"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center"
+                        android:text="@string/allocated_funds"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:background="@color/light_grey"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="Provider A"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/allocated_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$15,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/remaining_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$14,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/light_grey"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="Provider B"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/allocated_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$3,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/remaining_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$2,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/blitz_it_dark_blue"
-                android:text="@string/participant_email"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:textStyle="bold"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="example@email.com"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_email"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_email"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_email"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/blitz_it_medium_blue"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center"
+                        android:text="@string/unallocated_funds"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/unallocated_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$12,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="0dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center_vertical"
+                        android:text="@string/remaining_funds"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="@drawable/input_bg"
+                        android:text="$12,000.00"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="21sp"
+                        android:gravity="end|center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:fontFamily="@font/avenir"
+                        android:maxLines="1"
+                        android:inputType="none"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/blitz_it_dark_blue"
-                android:text="@string/statements_email"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:textStyle="bold"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_statement_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="example@email.com"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_statement_email"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_statement_email"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_statement_email"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/blitz_it_dark_blue"
-                android:text="@string/notes"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:textStyle="bold"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_notes"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:paddingVertical="12dp"
-                    android:paddingHorizontal="12dp"
-                    android:background="@drawable/input_bg"
-                    android:hint="Is there anything else we should know?"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="@color/dark_grey"
-                    android:gravity="start|top"
-                    android:fontFamily="@font/avenir"
-                    android:maxLines="12"
-                    android:inputType="textMultiLine"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_notes"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_notes"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/blitz_it_medium_blue">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="16dp"
+                            android:paddingTop="8dp"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center"
+                            android:text="@string/invoices"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:paddingHorizontal="16dp"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center"
+                            android:text="@string/invoice_select_text"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="21sp" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/light_grey">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center_vertical"
+                            android:paddingStart="24dp"
+                            android:paddingEnd="0dp"
+                            android:text="@string/invoice_reference"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="21sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="24dp"
+                            android:paddingStart="16dp"
+                            android:text="@string/amount_paid"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="21sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

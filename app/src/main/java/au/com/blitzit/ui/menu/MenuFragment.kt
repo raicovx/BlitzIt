@@ -17,6 +17,7 @@ class MenuFragment : Fragment()
     private lateinit var backButton: Button
     private lateinit var contactButton: Button
     private lateinit var settingsButton: Button
+    private lateinit var profileButton: Button
 
     companion object{
         fun newInstance() = MenuFragment
@@ -50,6 +51,11 @@ class MenuFragment : Fragment()
         settingsButton = view.findViewById(R.id.menu_settings_button)
         settingsButton.setOnClickListener {
             this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSettingsFragment())
+        }
+
+        profileButton = view.findViewById(R.id.menu_profile_button)
+        profileButton.setOnClickListener {
+            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToProfileFragment())
         }
     }
 }

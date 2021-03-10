@@ -13,6 +13,7 @@ import au.com.blitzit.R
 class ProfileFragment : Fragment()
 {
     private lateinit var backButton: Button
+    private lateinit var editProfileButton: Button
 
     companion object
     {
@@ -24,9 +25,13 @@ class ProfileFragment : Fragment()
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         backButton = view.findViewById(R.id.profile_back_button)
-        backButton.setOnClickListener { this.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment()) }
+        backButton.setOnClickListener {
+            this.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment()) }
 
-        TODO("Edit profile")
+        editProfileButton = view.findViewById(R.id.profile_edit_button)
+        editProfileButton.setOnClickListener {
+            this.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
+        }
 
         return view
     }

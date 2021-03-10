@@ -31,7 +31,11 @@
         android:id="@+id/dashboardFragment"
         android:name="au.com.blitzit.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_categoryBudgetFragment"
+            app:destination="@id/categoryBudgetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuFragment"
         android:name="au.com.blitzit.ui.menu.MenuFragment"
@@ -79,6 +83,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_FAQFragment"
             app:destination="@id/FAQFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutAppFragment"
@@ -139,5 +146,18 @@
         <action
             android:id="@+id/action_profileEditFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryBudgetFragment"
+        android:name="au.com.blitzit.ui.budget.CategoryBudgetFragment"
+        android:label="fragment_category_budget"
+        tools:layout="@layout/fragment_category_budget" >
+        <action
+            android:id="@+id/action_categoryBudgetFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <argument
+            android:name="selectedbudget"
+            app:argType="au.com.blitzit.ui.budget.BudgetCategories"
+            android:defaultValue="ImprovedDailyLivingSkills" />
     </fragment>
 </navigation>

@@ -80,4 +80,10 @@
     <string name="overview">Overview</string>
     <string name="view_category_tracking">View Category Tracking</string>
     <string name="category_budget">Category Budget</string>
+    <string name="allocated_funds">Allocated Funds</string>
+    <string name="remaining_funds">Remaining Funds</string>
+    <string name="unallocated_funds">Unallocated Funds</string>
+    <string name="invoice_select_text">Select invoice below to view invoice details.</string>
+    <string name="invoice_reference">Invoice Reference</string>
+    <string name="amount_paid">Amount Paid</string>
 </resources>
