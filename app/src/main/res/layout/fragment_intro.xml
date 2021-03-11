@@ -37,8 +37,9 @@
     />
     <Button
         android:id="@+id/login_button"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="56dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_button"
         android:text="@string/log_in"
@@ -52,12 +53,13 @@
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="56dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/round_button"
-        android:text="@string/register"
+        android:text="@string/create_an_account"
         android:textAllCaps="true"
         android:textSize="20sp"
         android:fontFamily="@font/avenir"

@@ -86,4 +86,5 @@
     <string name="invoice_select_text">Select invoice below to view invoice details.</string>
     <string name="invoice_reference">Invoice Reference</string>
     <string name="amount_paid">Amount Paid</string>
+    <string name="create_an_account">Create an Account</string>
 </resources>
