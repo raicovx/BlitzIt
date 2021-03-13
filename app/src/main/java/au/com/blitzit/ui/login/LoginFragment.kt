@@ -47,8 +47,10 @@ class LoginFragment : Fragment() {
                 val imm: InputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
 
+                //viewModel.attemptLogin()
+
                 //Check the credentials
-                val result = viewModel.validateCredentials()
+                val result = viewModel.attemptLogin()
 
                 //handle result
                 if(result){

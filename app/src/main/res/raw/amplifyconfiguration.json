@@ -1,0 +1,66 @@
+{
+  "UserAgent": "aws-amplify-cli/2.0",
+  "Version": "1.0",
+  "api": {
+    "plugins": {
+      "awsAPIPlugin": {
+        "AdminQueries": {
+          "endpointType": "REST",
+          "endpoint": "https://nxbarl87d8.execute-api.ap-southeast-2.amazonaws.com/dev",
+          "region": "ap-southeast-2",
+          "authorizationType": "AWS_IAM"
+        },
+        "mobileAPI": {
+          "endpointType": "REST",
+          "endpoint": "https://hftkopqbcj.execute-api.ap-southeast-2.amazonaws.com/dev",
+          "region": "ap-southeast-2",
+          "authorizationType": "AWS_IAM"
+        }
+      }
+    }
+  },
+  "auth": {
+    "plugins": {
+      "awsCognitoAuthPlugin": {
+        "UserAgent": "aws-amplify/cli",
+        "Version": "0.1.0",
+        "IdentityManager": {
+          "Default": {}
+        },
+        "CredentialsProvider": {
+          "CognitoIdentity": {
+            "Default": {
+              "PoolId": "ap-southeast-2:21a87282-c58d-40b5-ba5e-339ff2c53b90",
+              "Region": "ap-southeast-2"
+            }
+          }
+        },
+        "CognitoUserPool": {
+          "Default": {
+            "PoolId": "ap-southeast-2_KynTqr7fG",
+            "AppClientId": "13j06oa2fqbq4c0fkgonvngnfc",
+            "Region": "ap-southeast-2"
+          }
+        },
+        "Auth": {
+          "Default": {
+            "OAuth": {
+              "WebDomain": "mobileauth-dev.auth.ap-southeast-2.amazoncognito.com",
+              "AppClientId": "13j06oa2fqbq4c0fkgonvngnfc",
+              "SignInRedirectURI": "http://localhost/signin/",
+              "SignOutRedirectURI": "http://localhost/signout/",
+              "Scopes": [
+                "phone",
+                "email",
+                "openid",
+                "profile",
+                "aws.cognito.signin.user.admin"
+              ]
+            },
+            "authenticationFlowType": "USER_SRP_AUTH"
+          }
+        }
+      }
+    }
+  }
+}
