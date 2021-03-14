@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.ui.budget.BudgetCategories
+import com.amplifyframework.core.Amplify
 
 class DashboardFragment : Fragment() {
 
@@ -20,6 +22,8 @@ class DashboardFragment : Fragment() {
 
     private lateinit var viewModel: DashboardViewModel
     private lateinit var IDLSButton: Button
+
+    private lateinit var titleName: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
@@ -33,6 +37,12 @@ class DashboardFragment : Fragment() {
         IDLSButton.setOnClickListener {
             this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(BudgetCategories.ImprovedDailyLivingSkills))
         }
+
+        //Amplify.Auth.fetchUserAttributes()
+
+        titleName = view.findViewById(R.id.dashboard_name)
+        //titleName.text =
+
 
         return view
     }
