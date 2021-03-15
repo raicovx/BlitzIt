@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
+import au.com.blitzit.auth.SignInState
 import com.amplifyframework.core.Amplify
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -54,12 +55,18 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             handleLogin(view)
         }
+
+        toggleShowOptions(false)
+
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        //add observers
+        AuthServices.liveSignInState.observeForever { onSignInStateChanged(it) }
     }
 
     private fun handleLogin(view: View)
@@ -70,9 +77,8 @@ class LoginFragment : Fragment() {
             val imm: InputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
 
-            toggleShowOptions(false)
-
-            var failed: Boolean = false
+            //toggleShowOptions(false)
+            /*var failed: Boolean = false
             Amplify.Auth.signIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString(),
                     { result ->
                         if (result.isSignInComplete)
@@ -95,10 +101,32 @@ class LoginFragment : Fragment() {
             if(failed) {
                 Toast.makeText(context, "Incorrect Credentials", Toast.LENGTH_SHORT).show()
                 toggleShowOptions(true)
-            }
+            }*/
+
+            AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString())
 
         }else{
             Toast.makeText(context, "Missing Username or Password", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun onSignInStateChanged(state: SignInState)
+    {
+        when(state)
+        {
+            SignInState.signedOut -> {
+                toggleShowOptions(true)
+            }
+            SignInState.signingIn -> {
+                toggleShowOptions(false)
+            }
+            SignInState.signedIn -> {
+                this.findNavController().navigate(LoginFragmentDirections.actionLoginToDashboardFragment())
+            }
+            SignInState.signInFailed -> {
+                toggleShowOptions(true)
+                Toast.makeText(context, "Incorrect Credentials", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
