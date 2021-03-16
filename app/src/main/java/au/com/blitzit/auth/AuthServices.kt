@@ -3,9 +3,12 @@ package au.com.blitzit.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.data.UserData
+import au.com.blitzit.data.UserPlan
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -74,11 +77,57 @@ object AuthServices
                     Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()}")
                     val user: Array<UserData> = Gson().fromJson(it.data.asString(), Array<UserData>::class.java)
                     userData = user[0]
-                    liveSignInState.postValue(SignInState.SignedIn)
+
+                    getPlanData()
                 },
                 {
                     Log.e("GAZ_ERROR", "GET failed.", it)
                 }
         )
+    }
+
+    private fun getPlanData()
+    {
+        val request = RestOptions.builder()
+                .addPath("/participant/${userData.ndis_number}")
+                .build()
+
+        Amplify.API.get("mobileAPI", request,
+                { it ->
+                    Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${it.data.asString()}")
+                    val user: UserData = Gson().fromJson(it.data.asString(), UserData::class.java)
+                    userData = user
+
+                    getPlanDetails()
+                },
+                {
+                    Log.e("GAZ_ERROR", "GET failed.", it)
+                }
+        )
+    }
+
+    private fun getPlanDetails()
+    {
+        val planID : String? = userData.plans?.let { UserPlan.findActivePlan(it)?.planID }
+        if(!planID.isNullOrEmpty()) {
+            val request = RestOptions.builder()
+                    .addPath("/participant/${userData.ndis_number}/${planID}")
+                    .build()
+
+            Amplify.API.get("mobileAPI", request,
+                    {
+                        Log.i("GAZ_INFO", "GET succeeded for PlanDetails: ${it.data.asString()}")
+                        val user: UserData = Gson().fromJson(it.data.asString(), UserData::class.java)
+                        userData = user
+
+                        liveSignInState.postValue(SignInState.SignedIn)
+                    },
+                    {
+                        Log.e("GAZ_ERROR", "GET failed.", it)
+                    }
+            )
+        }
+        else
+            liveSignInState.postValue(SignInState.SignedIn)
     }
 }
