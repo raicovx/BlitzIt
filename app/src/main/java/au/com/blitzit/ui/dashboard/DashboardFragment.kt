@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.ui.budget.BudgetCategories
 import com.amplifyframework.core.Amplify
 
@@ -41,7 +42,7 @@ class DashboardFragment : Fragment() {
         //Amplify.Auth.fetchUserAttributes()
 
         titleName = view.findViewById(R.id.dashboard_name)
-        //titleName.text =
+        titleName.text = AuthServices.userData.getFullName()
 
 
         return view

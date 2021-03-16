@@ -1,18 +1,20 @@
 package au.com.blitzit.auth
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.data.UserData
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
+import com.google.gson.Gson
+import org.json.JSONArray
+import org.json.JSONObject
 
 enum class SignInState(val state: String)
 {
-    signedOut("Signed Out"),
-    signingIn("Attempting sign in"),
-    signedIn("Signed In"),
-    signInFailed("Incorrect Credentials")
+    SignedOut("Signed Out"),
+    SigningIn("Attempting sign in"),
+    SignedIn("Signed In"),
+    SignInFailed("Incorrect Credentials")
 }
 
 object AuthServices
@@ -28,19 +30,19 @@ object AuthServices
 
     fun attemptSignIn(username: String, password: String)
     {
-        liveSignInState.postValue(SignInState.signingIn)
+        liveSignInState.postValue(SignInState.SigningIn)
         Amplify.Auth.signIn(username, password,
                 { result ->
                     if (result.isSignInComplete)
                     {
                         Log.i("AuthQuickstart", "Sign in succeeded")
-                        //TODO("Collect userdata here, then post on success of that")
-                        liveSignInState.postValue(SignInState.signedIn)
+                        getUserData()
+                        liveSignInState.postValue(SignInState.SignedIn)
                     }
                     else
                     {
                         Log.i("AuthQuickstart", "Sign in not complete")
-                        liveSignInState.postValue(SignInState.signInFailed)
+                        liveSignInState.postValue(SignInState.SignInFailed)
                     }
                 },
                 { Log.e("AuthQuickstart", "Failed to sign in", it) }
@@ -52,24 +54,31 @@ object AuthServices
         Amplify.Auth.fetchAuthSession(
                 {
                     Log.i("AmplifyQuickstart", "Auth session = $it")
-                    liveSignInState.postValue(SignInState.signedIn)
+                    getUserData()
                 },
                 {
                     Log.e("AmplifyQuickstart", "Failed to fetch auth session")
-                    liveSignInState.postValue(SignInState.signedOut)
+                    liveSignInState.postValue(SignInState.SignedOut)
                 }
         )
     }
 
-    fun getUserData()
+    private fun getUserData()
     {
         val request = RestOptions.builder()
-                .addPath("https://hftkopqbcj.execute-api.ap-southeast-2.amazonaws.com/dev/participant/")
+                .addPath("/participant")
                 .build()
 
-        Amplify.API.get(request,
-                { Log.i("MyAmplifyApp", "GET succeeded: $it") },
-                { Log.e("MyAmplifyApp", "GET failed.", it) }
+        Amplify.API.get("mobileAPI", request,
+                {
+                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()}")
+                    val user: Array<UserData> = Gson().fromJson(it.data.asString(), Array<UserData>::class.java)
+                    userData = user[0]
+                    liveSignInState.postValue(SignInState.SignedIn)
+                },
+                {
+                    Log.e("GAZ_ERROR", "GET failed.", it)
+                }
         )
     }
 }

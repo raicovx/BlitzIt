@@ -1,7 +1,5 @@
 package au.com.blitzit.data
 
-import com.amplifyframework.core.model.temporal.Temporal
-
 class UserData constructor(val ndis_number: Int,
                     val first_name: String,
                     val last_name: String,
@@ -10,7 +8,10 @@ class UserData constructor(val ndis_number: Int,
                     val suburb: String,
                     val postcode: Int,
                     val state: String,
-                    val date_of_birth: Temporal.Date)
+                    val date_of_birth: String)
 {
-
+    fun getFullName(): String
+    {
+        return "$first_name $last_name"
+    }
 }
