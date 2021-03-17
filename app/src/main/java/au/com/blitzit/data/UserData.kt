@@ -2,6 +2,7 @@ package au.com.blitzit.data
 
 import android.util.Log
 import com.google.gson.annotations.SerializedName
+import kotlin.math.log
 
 class UserData constructor(
         val ndis_number: Int,
@@ -13,11 +14,26 @@ class UserData constructor(
         val postcode: Int,
         val state: String,
         val date_of_birth: String,
-        val plans: Array<UserPlan>?)
+        var plans: Array<UserPlan>?)
 {
     fun getFullName(): String
     {
         return "$first_name $last_name"
+    }
+
+    fun findActivePlan() : UserPlan?
+    {
+        if(!plans.isNullOrEmpty()) {
+            for (i in plans!!.indices) {
+                if (plans!![i].status == "Active") {
+                    Log.i("GAZ_INFO", "Found active plan: ${plans!![i].planID}")
+                    return plans!![i]
+                }
+            }
+        }
+        //Nothing found, return null
+        Log.i("GAZ_INFO", "Found nothing")
+        return null
     }
 }
 
@@ -30,26 +46,35 @@ class UserPlan constructor(
         @SerializedName("plan_end_date")
         val planEndDate: String,
         @SerializedName("parts")
-        val planCategories: Array<PlanCategory>)
+        val planParts: Array<PlanParts>)
 {
-    companion object{
-        fun findActivePlan(plans: Array<UserPlan>) : UserPlan?
+    public fun getPartCategories(): List<String>
+    {
+        var categories: List<String> = listOf()
+        for(part: PlanParts in planParts)
         {
-            for(plan: UserPlan in plans)
-            {
-                if(plan.status == "Active") {
-                    Log.i("GAZ_INFO", "Found ${plan.planID}")
-                    return plan
-                }
+            if(!categories.contains(part.category)) {
+                categories = categories.plus(part.category)
             }
-            //Nothing found, return null
-            Log.i("GAZ_INFO", "Found nothing")
-            return null
         }
+
+        return categories
+    }
+
+    public fun getPartByCategory(category: String): List<PlanParts>
+    {
+        var parts: List<PlanParts> = listOf()
+        for(part: PlanParts in planParts)
+        {
+            if(part.category == category)
+                parts = parts.plus(part)
+        }
+
+        return parts
     }
 }
 
-class PlanCategory constructor(
+class PlanParts constructor(
         val balance: Double,
         val budget: Double,
         val label: String,

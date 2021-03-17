@@ -108,26 +108,28 @@ object AuthServices
 
     private fun getPlanDetails()
     {
-        val planID : String? = userData.plans?.let { UserPlan.findActivePlan(it)?.planID }
-        if(!planID.isNullOrEmpty()) {
+        val plan : UserPlan? = userData.findActivePlan()
+        val index: Int? = userData.plans?.indexOf(plan)
+        if (plan != null && index != null) {
             val request = RestOptions.builder()
-                    .addPath("/participant/${userData.ndis_number}/${planID}")
+                    .addPath("/participant/${userData.ndis_number}/${plan?.planID}")
                     .build()
 
             Amplify.API.get("mobileAPI", request,
                     {
                         Log.i("GAZ_INFO", "GET succeeded for PlanDetails: ${it.data.asString()}")
-                        val user: UserData = Gson().fromJson(it.data.asString(), UserData::class.java)
-                        userData = user
+                        val userPlan: UserPlan = Gson().fromJson(it.data.asString(), UserPlan::class.java)
+                        userData.plans?.set(index, userPlan)
 
+                        Log.i("GAZ_INFO", "auth part test ${userData.plans?.get(index)?.planParts?.get(0)?.category}")
                         liveSignInState.postValue(SignInState.SignedIn)
                     },
                     {
                         Log.e("GAZ_ERROR", "GET failed.", it)
                     }
             )
-        }
-        else
+        } else
             liveSignInState.postValue(SignInState.SignedIn)
+
     }
 }
