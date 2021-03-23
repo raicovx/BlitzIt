@@ -68,32 +68,6 @@ class LoginFragment : Fragment() {
             val imm: InputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
 
-            //toggleShowOptions(false)
-            /*var failed: Boolean = false
-            Amplify.Auth.signIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString(),
-                    { result ->
-                        if (result.isSignInComplete)
-                        {
-                            Log.i("Auth", "Sign in succeeded")
-                            this.findNavController().navigate(LoginFragmentDirections.actionLoginToDashboardFragment())
-                        }
-                        else
-                        {
-                            failed = true
-                            Log.i("AuthQ", "Sign in not complete")
-                        }
-                    },
-                    {
-                        failed = true
-                        Log.e("AuthQuickstart", "Failed to sign in", it)
-                    }
-            )
-
-            if(failed) {
-                Toast.makeText(context, "Incorrect Credentials", Toast.LENGTH_SHORT).show()
-                toggleShowOptions(true)
-            }*/
-
             AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString())
 
         }else{

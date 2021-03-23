@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:fontFamily="@font/avenir"
+        android:text="@string/sign_up_type_2"
+        android:textAllCaps="false"
+        android:textSize="21sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/avenir"
+        android:gravity="center"
+        android:text="@string/sign_up_participant_complete"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="21sp" />
+
+
+
+    <Button
+        android:id="@+id/sign_up_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/avenir"
+        android:text="@string/submit"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/blitz_it_orange"
+        app:cornerRadius="92dp" />
+
+</LinearLayout>

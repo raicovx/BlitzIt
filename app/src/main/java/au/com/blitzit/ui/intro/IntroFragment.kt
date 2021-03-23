@@ -21,6 +21,7 @@ class IntroFragment : Fragment() {
     private lateinit var viewModel: IntroViewModel
 
     private lateinit var loginButton: Button
+    private lateinit var registerButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +32,10 @@ class IntroFragment : Fragment() {
         loginButton.setOnClickListener { _ ->
             val action = IntroFragmentDirections.introToLogin()
             this.findNavController().navigate(action)
+        }
+        registerButton = view.findViewById(R.id.register_button)
+        registerButton.setOnClickListener {
+            this.findNavController().navigate(IntroFragmentDirections.actionIntroToSignUpTypeFragment())
         }
 
         var mActivity: MainActivity = activity as MainActivity

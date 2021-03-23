@@ -17,6 +17,9 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_intro_to_signUpTypeFragment"
+            app:destination="@id/signUpTypeFragment" />
     </fragment>
     <fragment
         android:id="@+id/login"
@@ -159,5 +162,45 @@
             android:name="selectedbudget"
             app:argType="au.com.blitzit.ui.budget.BudgetCategories"
             android:defaultValue="ImprovedDailyLivingSkills" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpTypeFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpTypeFragment"
+        android:label="fragment_signup_type"
+        tools:layout="@layout/fragment_signup_type" >
+        <action
+            android:id="@+id/action_signUpTypeFragment_to_intro"
+            app:destination="@id/intro" />
+        <action
+            android:id="@+id/action_signUpTypeFragment_to_signUpHelpFragment"
+            app:destination="@id/signUpHelpFragment" />
+        <action
+            android:id="@+id/action_signUpTypeFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpHelpFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpHelpFragment"
+        android:label="fragment_signup_help"
+        tools:layout="@layout/fragment_signup_help" >
+        <action
+            android:id="@+id/action_signUpHelpFragment_to_signUpTypeFragment"
+            app:destination="@id/signUpTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpTypeFragment"
+            app:destination="@id/signUpTypeFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpHelpFragment"
+            app:destination="@id/signUpHelpFragment" />
+        <argument
+            android:name="signuptype"
+            app:argType="au.com.blitzit.ui.registration.SignUpAccountType"
+            android:defaultValue="PARTICIPANT" />
     </fragment>
 </navigation>

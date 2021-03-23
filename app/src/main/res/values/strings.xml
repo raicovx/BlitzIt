@@ -87,4 +87,14 @@
     <string name="invoice_reference">Invoice Reference</string>
     <string name="amount_paid">Amount Paid</string>
     <string name="create_an_account">Create an Account</string>
+    <string name="sign_up_help">For help creating your New Account, please contact Blitzit Plan Manager and speak to one of our friendly team members.</string>
+    <string name="question_mark">\?</string>
+    <string name="sign_up_type_1">I am an NDIS Participant</string>
+    <string name="sign_up_type_2">I am a Parent/Guardian/Authorised Representative of a Participant</string>
+    <string name="sign_up_type_3">I am a Support Coordinator</string>
+    <string name="sign_up_type_header">How will you be using the Blitzit App?</string>
+    <string name="sign_up_participant_complete">Please complete the following:</string>
+    <string name="submit">Submit</string>
+    <string name="abn">ABN</string>
+    <string name="email_address">Email Address</string>
 </resources>

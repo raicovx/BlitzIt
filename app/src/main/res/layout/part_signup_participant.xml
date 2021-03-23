@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="32dp"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:fontFamily="@font/avenir"
+        android:text="@string/sign_up_type_1"
+        android:textAllCaps="false"
+        android:textSize="21sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/avenir"
+        android:gravity="center"
+        android:text="@string/sign_up_participant_complete"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="21sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/white"
+        android:text="@string/first_name"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/sign_up_fname"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_bg"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/avenir"
+        android:textSize="21sp"
+        android:maxLines="1"
+        android:hint="Joe"
+        android:textColor="@color/dark_grey"
+        android:inputType="text"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:text="@string/last_name"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/sign_up_lname"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_bg"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/avenir"
+        android:textSize="21sp"
+        android:maxLines="1"
+        android:hint="Smith"
+        android:textColor="@color/dark_grey"
+        android:inputType="text"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:text="@string/email_address"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/sign_up_email"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_bg"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/avenir"
+        android:textSize="21sp"
+        android:maxLines="1"
+        android:hint="example@address.com"
+        android:textColor="@color/dark_grey"
+        android:inputType="textEmailAddress"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:text="@string/date_of_birth"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/sign_up_dob"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_bg"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/avenir"
+        android:textSize="21sp"
+        android:maxLines="1"
+        android:hint="01/12/1992"
+        android:textColor="@color/dark_grey"
+        android:inputType="date"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:text="@string/ndis_number"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/sign_up_ndis"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_bg"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:fontFamily="@font/avenir"
+        android:textSize="21sp"
+        android:maxLines="1"
+        android:hint="430100000"
+        android:textColor="@color/dark_grey"
+        android:inputType="number"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/sign_up_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/avenir"
+        android:text="@string/submit"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/blitz_it_orange"
+        app:cornerRadius="92dp" />
+
+</LinearLayout>

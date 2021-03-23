@@ -28,7 +28,8 @@ object AuthServices
         private set //Makes setting userdata private
 
     init {
-        checkAuthSession()
+        //checkAuthSession()
+        liveSignInState.postValue(SignInState.SignedOut)
     }
 
     fun attemptSignIn(username: String, password: String)
@@ -40,7 +41,7 @@ object AuthServices
                     {
                         Log.i("AuthQuickstart", "Sign in succeeded")
                         getUserData()
-                        liveSignInState.postValue(SignInState.SignedIn)
+                        //liveSignInState.postValue(SignInState.SignedIn)
                     }
                     else
                     {
@@ -48,7 +49,11 @@ object AuthServices
                         liveSignInState.postValue(SignInState.SignInFailed)
                     }
                 },
-                { Log.e("AuthQuickstart", "Failed to sign in", it) }
+                {
+                    Log.e("AuthQuickstart", "Failed to sign in", it)
+                    liveSignInState.postValue(SignInState.SignInFailed)
+                }
+
         )
     }
 
@@ -74,7 +79,7 @@ object AuthServices
 
         Amplify.API.get("mobileAPI", request,
                 {
-                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()}")
+                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()} Code: ${it.code.toString()}")
                     val user: Array<UserData> = Gson().fromJson(it.data.asString(), Array<UserData>::class.java)
                     userData = user[0]
 
