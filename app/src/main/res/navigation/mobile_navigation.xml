@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_login_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_login_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -202,5 +205,26 @@
             android:name="signuptype"
             app:argType="au.com.blitzit.ui.registration.SignUpAccountType"
             android:defaultValue="PARTICIPANT" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpConfirmationFragment"
+            app:destination="@id/signUpConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpConfirmationFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpConfirmationFragment"
+        android:label="fragment_signup_confirmation"
+        tools:layout="@layout/fragment_signup_confirmation" >
+        <action
+            android:id="@+id/action_signUpConfirmationFragment_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="au.com.blitzit.ui.login.ForgotPasswordFragment"
+        android:label="fragment_forgotpassword"
+        tools:layout="@layout/fragment_forgotpassword" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_login"
+            app:destination="@id/login" />
     </fragment>
 </navigation>

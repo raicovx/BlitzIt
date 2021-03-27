@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import au.com.blitzit.auth.AuthServices
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class IntroFragment : Fragment() {
@@ -36,6 +37,11 @@ class IntroFragment : Fragment() {
         registerButton = view.findViewById(R.id.register_button)
         registerButton.setOnClickListener {
             this.findNavController().navigate(IntroFragmentDirections.actionIntroToSignUpTypeFragment())
+        }
+
+        val signout: Button = view.findViewById(R.id.signout_button_TEMP)
+        signout.setOnClickListener {
+            AuthServices.attemptSignOut()
         }
 
         var mActivity: MainActivity = activity as MainActivity

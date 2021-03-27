@@ -2,10 +2,18 @@ package au.com.blitzit.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import au.com.blitzit.helper.CranstekHelper
 import com.amplifyframework.api.rest.RestOperation
 import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.auth.AuthUserAttributeKey
+import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.TypeAdapter
+import com.google.gson.annotations.SerializedName
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
 
 enum class RegistrationState(val state: String)
 {
@@ -15,7 +23,8 @@ enum class RegistrationState(val state: String)
     SigningUp("Unsure"),
     SignedUp("Registered and Signed up"),
     AlreadyRegistered("An account using this email has been found. Please contact Blitzit"),
-    Failed01("Registration failed")
+    Failed01("Registration failed"),
+    SignUpFailed01("Sign up failed")
 }
 
 data class RegistrationDetails(
@@ -25,11 +34,17 @@ data class RegistrationDetails(
         val ndis_number: String,
         val type: String
 )
+data class RegistrationResponse(
+        val id: String?,
+        val already_registered: String?
+)
 
 object AuthRegistration
 {
     val liveRegistrationState = MutableLiveData<RegistrationState>()
-    lateinit var requestResponse: String
+    private lateinit var registrationDetails: RegistrationDetails
+    private lateinit var registrationResponse: RegistrationResponse
+    private lateinit var responseID: String
 
     init {
         liveRegistrationState.postValue(RegistrationState.NotRegistered)
@@ -39,10 +54,10 @@ object AuthRegistration
     {
         liveRegistrationState.postValue(RegistrationState.Registering)
 
-        val details = RegistrationDetails(dob, email, lName, ndis, type)
+        registrationDetails = RegistrationDetails(CranstekHelper.formatDateForRegistration(dob), email, lName, ndis, type)
 
-        val gson = Gson()
-        val json: String = gson.toJson(details)
+        val gson = GsonBuilder().setPrettyPrinting().create()
+        val json: String = gson.toJson(registrationDetails)
         Log.i("GAZ_POST_INFO", json)
 
         val request = RestOptions.builder()
@@ -51,12 +66,47 @@ object AuthRegistration
                 .build()
         Amplify.API.post("mobileAPI", request,
                     {
-                        Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${it.data.asString()}")
-                        liveRegistrationState.postValue(RegistrationState.Registered)
+                        Log.i("GAZ_INFO", "POST succeeded, return Data: ${it.data.asString()}")
+
+                        registrationResponse = Gson().fromJson(it.data.asString(), RegistrationResponse::class.java)
+                        if(registrationResponse.id != null) {
+                            Log.i("GAZ_INFO", "Registration POST Accepted: ${registrationResponse.id}")
+                            liveRegistrationState.postValue(RegistrationState.Registered)
+                        }
+                        else {
+                            Log.i("GAZ_INFO", "Already Registered: ${registrationResponse.already_registered}")
+                            liveRegistrationState.postValue(RegistrationState.AlreadyRegistered)
+                        }
                     },
                     {
-                        Log.e("GAZ_ERROR", "GET failed.", it)
+                        Log.e("GAZ_ERROR", "Register POST failed.", it)
                         liveRegistrationState.postValue(RegistrationState.Failed01)
                     })
+    }
+
+    fun attemptConfirmation(password: String, confirmationCode: String)
+    {
+        if(registrationResponse.id != null)
+        {
+            liveRegistrationState.postValue(RegistrationState.SigningUp)
+
+            Log.i("GAZ_INFO", "confirmation code: $confirmationCode")
+            Log.i("GAZ_INFO", "confirmation code: ${registrationResponse.id}")
+
+            val options = AuthSignUpOptions.builder()
+                    .userAttribute(AuthUserAttributeKey.email(), registrationDetails.email )
+                    .userAttribute(AuthUserAttributeKey.custom("requestId"), registrationResponse.id!!)
+                    .userAttribute(AuthUserAttributeKey.custom("code"), confirmationCode)
+                    .build()
+            Amplify.Auth.signUp(registrationDetails.email, password, options,
+                    {
+                        Log.i("GAZ_INFO", "Sign up succeeded: $it")
+                        liveRegistrationState.postValue(RegistrationState.SignedUp)
+                    },
+                    {
+                        Log.i("GAZ_INFO", "Sign up failed: $it")
+                        liveRegistrationState.postValue(RegistrationState.SignUpFailed01)
+                    })
+        }
     }
 }

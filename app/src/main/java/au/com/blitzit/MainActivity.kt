@@ -1,9 +1,11 @@
 package au.com.blitzit
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.amplifyframework.core.Amplify
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity()
@@ -23,6 +25,14 @@ class MainActivity : AppCompatActivity()
         fab.setOnClickListener {
             navHostFragment.navController.navigate(R.id.menuFragment)
         }
+    }
+
+    override fun onDestroy() {
+        Amplify.Auth.signOut(
+                { Log.i("AuthQuickstart", "Signed out successfully") },
+                { Log.e("AuthQuickstart", "Sign out failed", it) }
+        )
+        super.onDestroy()
     }
 
     public fun HideFAB()

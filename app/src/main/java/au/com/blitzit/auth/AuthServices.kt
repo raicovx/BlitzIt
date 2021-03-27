@@ -137,4 +137,12 @@ object AuthServices
             liveSignInState.postValue(SignInState.SignedIn)
 
     }
+
+    fun attemptSignOut()
+    {
+        Amplify.Auth.signOut(
+                { Log.i("AuthQuickstart", "Signed out successfully") },
+                { Log.e("AuthQuickstart", "Sign out failed", it) }
+        )
+    }
 }

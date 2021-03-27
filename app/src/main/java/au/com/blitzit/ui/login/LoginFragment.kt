@@ -46,6 +46,9 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             handleLogin(view)
         }
+        forgotPassword.setOnClickListener {
+            this.findNavController().navigate(LoginFragmentDirections.actionLoginToForgotPasswordFragment())
+        }
 
         toggleShowOptions(false)
 
