@@ -118,4 +118,9 @@ object AuthRegistration
                     })
         }
     }
+
+    fun resetRegistrationState()
+    {
+        liveRegistrationState.postValue(RegistrationState.NotRegistered)
+    }
 }

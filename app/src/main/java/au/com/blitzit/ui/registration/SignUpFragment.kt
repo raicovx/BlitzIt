@@ -150,11 +150,16 @@ class SignUpFragment : Fragment()
     {
         when(state){
             RegistrationState.Registered -> {
-                Toast.makeText(context, "Registered", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Registered", Toast.LENGTH_SHORT).show()
                 this.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpConfirmationFragment())
             }
             RegistrationState.Registering -> {
                 toggleShowOptions(false)
+            }
+            RegistrationState.AlreadyRegistered -> {
+                toggleShowOptions(true)
+                AuthRegistration.resetRegistrationState()
+                Toast.makeText(context, "Account is already registered", Toast.LENGTH_SHORT).show()
             }
         }
     }
