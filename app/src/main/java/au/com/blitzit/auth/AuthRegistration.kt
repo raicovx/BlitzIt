@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.helper.CranstekHelper
 import com.amplifyframework.api.rest.RestOperation
 import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
@@ -91,14 +92,22 @@ object AuthRegistration
             liveRegistrationState.postValue(RegistrationState.SigningUp)
 
             Log.i("GAZ_INFO", "confirmation code: $confirmationCode")
-            Log.i("GAZ_INFO", "confirmation code: ${registrationResponse.id}")
+            Log.i("GAZ_INFO", "response code: ${registrationResponse.id}")
+            Log.i("GAZ_INFO", "email: ${registrationDetails.email}")
+            Log.i("GAZ_INFO", "password: $password")
+
+            val attrs = mapOf(
+                    AuthUserAttributeKey.email() to registrationDetails.email,
+                    AuthUserAttributeKey.custom("custom:requestId") to registrationResponse.id!!,
+                    AuthUserAttributeKey.custom("custom:code") to confirmationCode
+            )
 
             val options = AuthSignUpOptions.builder()
-                    .userAttribute(AuthUserAttributeKey.email(), registrationDetails.email )
-                    .userAttribute(AuthUserAttributeKey.custom("requestId"), registrationResponse.id!!)
-                    .userAttribute(AuthUserAttributeKey.custom("code"), confirmationCode)
+                    .userAttributes(attrs.map { AuthUserAttribute(it.key, it.value) })
                     .build()
-            Amplify.Auth.signUp(registrationDetails.email, password, options,
+            Log.i("GAZ_INFO", "attr: ${options.userAttributes}")
+
+            Amplify.Auth.signUp(registrationDetails.email.toLowerCase(), password, options,
                     {
                         Log.i("GAZ_INFO", "Sign up succeeded: $it")
                         liveRegistrationState.postValue(RegistrationState.SignedUp)
