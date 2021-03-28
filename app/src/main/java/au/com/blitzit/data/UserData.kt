@@ -8,7 +8,7 @@ class UserData constructor(
         val ndis_number: Int,
         val first_name: String,
         val last_name: String,
-        val mobile: Int,
+        val mobile: String,
         val address_line: String,
         val suburb: String,
         val postcode: Int,
@@ -48,7 +48,7 @@ class UserPlan constructor(
         @SerializedName("parts")
         val planParts: Array<PlanParts>)
 {
-    public fun getPartCategories(): List<String>
+    fun getPartCategories(): List<String>
     {
         var categories: List<String> = listOf()
         for(part: PlanParts in planParts)
@@ -61,7 +61,7 @@ class UserPlan constructor(
         return categories
     }
 
-    public fun getPartByCategory(category: String): List<PlanParts>
+    fun getPartByCategory(category: String): List<PlanParts>
     {
         var parts: List<PlanParts> = listOf()
         for(part: PlanParts in planParts)
