@@ -2,15 +2,12 @@ package au.com.blitzit.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserData
 import au.com.blitzit.data.UserPlan
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import org.json.JSONArray
-import org.json.JSONObject
 
 enum class SignInState(val state: String)
 {
@@ -117,7 +114,7 @@ object AuthServices
         val index: Int? = userData.plans?.indexOf(plan)
         if (plan != null && index != null) {
             val request = RestOptions.builder()
-                    .addPath("/participant/${userData.ndis_number}/${plan?.planID}")
+                    .addPath("/participant/${userData.ndis_number}/${plan.planID}")
                     .build()
 
             Amplify.API.get("mobileAPI", request,

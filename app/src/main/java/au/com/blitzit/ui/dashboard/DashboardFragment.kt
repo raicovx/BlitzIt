@@ -2,7 +2,6 @@ package au.com.blitzit.ui.dashboard
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +15,6 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserPlan
-import au.com.blitzit.ui.budget.BudgetCategories
-import com.amplifyframework.core.Amplify
 import com.app.progresviews.ProgressWheel
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -95,7 +92,7 @@ class DashboardFragment : Fragment() {
 
     private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
     {
-        val parts: List<PlanParts>? = AuthServices.userData.findActivePlan()?.getPartByCategory(category)
+        val parts: List<PlanParts>? = AuthServices.userData.findActivePlan()?.getPartListByCategory(category)
         if (parts != null)
         {
             for(part: PlanParts in parts)
@@ -122,7 +119,11 @@ class DashboardFragment : Fragment() {
                 progress.setPercentage(df.format(radialPercent).toInt())
                 progress.setStepCountText(df.format(percent).toString() + "%")
 
-                //TODO("Setup view budget buttons")
+                //Sets up the view budget button
+                val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
+                viewButton.setOnClickListener {
+                    this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(part.category))
+                }
 
                 container?.addView(subCategoryView)
             }

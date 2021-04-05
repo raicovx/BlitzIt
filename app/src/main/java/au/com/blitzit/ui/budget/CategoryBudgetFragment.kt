@@ -13,20 +13,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import au.com.blitzit.auth.AuthServices
+import au.com.blitzit.data.PlanParts
+import au.com.blitzit.data.UserPlan
+import com.app.progresviews.ProgressWheel
 
-enum class BudgetCategories{
-    ImprovedDailyLivingSkills,
-    SupportCoordination,
-    Core
-}
 
 class CategoryBudgetFragment : Fragment()
 {
     private lateinit var backButton : Button
 
-    private lateinit var titleText : TextView
-
     private val args: CategoryBudgetFragmentArgs by navArgs()
+    private lateinit var planPart: PlanParts
 
     companion object
     {
@@ -49,8 +47,14 @@ class CategoryBudgetFragment : Fragment()
 
     private fun setupViewForSelected(view: View)
     {
-        titleText = view.findViewById(R.id.cat_budget_title)
-        if(args.selectedbudget == BudgetCategories.ImprovedDailyLivingSkills)
-            titleText.text = "Improved Living ya'll"
+        planPart = AuthServices.userData.findActivePlan()!!.getPartListByCategory(args.catBudgetArgs)[0]
+
+        val titleText: TextView = view.findViewById(R.id.cat_budget_title)
+        val subtitleText: TextView = view.findViewById(R.id.cat_budget_subtitle)
+
+        //Overview card
+        val startingBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_start_balance)
+        val currentBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_current_balance)
+        val progressWheel: ProgressWheel = view.findViewById(R.id.cat_budget_overview_progress)
     }
 }

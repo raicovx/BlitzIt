@@ -162,9 +162,9 @@
             android:id="@+id/action_categoryBudgetFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
         <argument
-            android:name="selectedbudget"
-            app:argType="au.com.blitzit.ui.budget.BudgetCategories"
-            android:defaultValue="ImprovedDailyLivingSkills" />
+            android:name="cat_budget_args"
+            app:argType="string"
+            android:defaultValue="failed" />
     </fragment>
     <fragment
         android:id="@+id/signUpTypeFragment"

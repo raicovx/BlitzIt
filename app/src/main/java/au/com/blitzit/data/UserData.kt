@@ -61,7 +61,7 @@ class UserPlan constructor(
         return categories
     }
 
-    fun getPartByCategory(category: String): List<PlanParts>
+    fun getPartListByCategory(category: String): List<PlanParts>
     {
         var parts: List<PlanParts> = listOf()
         for(part: PlanParts in planParts)
