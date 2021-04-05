@@ -15,6 +15,7 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserPlan
+import au.com.blitzit.helper.CranstekHelper
 import com.app.progresviews.ProgressWheel
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -95,34 +96,26 @@ class DashboardFragment : Fragment() {
         val parts: List<PlanParts>? = AuthServices.userData.findActivePlan()?.getPartListByCategory(category)
         if (parts != null)
         {
-            for(part: PlanParts in parts)
+            for(i in parts.indices)
             {
                 //Fill categories with sub categories here
                 val subCategoryView = inflater.inflate(R.layout.part_dashboard_subcategory, container, false)
 
                 val subTitle: TextView = subCategoryView.findViewById(R.id.part_subcategory_title)
-                subTitle.text = part.label
+                subTitle.text = parts[i].label
 
-                val currencyDF = DecimalFormat("###,###,###.##")
                 val startBalance: TextView = subCategoryView.findViewById(R.id.part_subcategory_start_balance)
-                val startBalanceStr = "$" + currencyDF.format(part.budget)
-                startBalance.text = startBalanceStr
+                startBalance.text = CranstekHelper.convertToCurrency(parts[i].budget)
                 val balance: TextView = subCategoryView.findViewById(R.id.part_subcategory_balance)
-                val balanceStr = "$" + currencyDF.format(part.balance)
-                balance.text = balanceStr
+                balance.text = CranstekHelper.convertToCurrency(parts[i].balance)
 
-                val progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
-                val percent = part.balance / part.budget * 100
-                val radialPercent = (360 * percent) / 100
-                val df = DecimalFormat("#")
-                df.roundingMode = RoundingMode.CEILING
-                progress.setPercentage(df.format(radialPercent).toInt())
-                progress.setStepCountText(df.format(percent).toString() + "%")
+                var progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
+                CranstekHelper.setRadialWheel(progress, parts[i].budget, parts[i].balance)
 
                 //Sets up the view budget button
                 val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
                 viewButton.setOnClickListener {
-                    this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(part.category))
+                    this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(parts[i].category, i))
                 }
 
                 container?.addView(subCategoryView)

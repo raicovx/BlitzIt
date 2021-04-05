@@ -165,6 +165,10 @@
             android:name="cat_budget_args"
             app:argType="string"
             android:defaultValue="failed" />
+        <argument
+            android:name="planPartNumber"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/signUpTypeFragment"

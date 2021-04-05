@@ -16,6 +16,7 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserPlan
+import au.com.blitzit.helper.CranstekHelper
 import com.app.progresviews.ProgressWheel
 
 
@@ -47,14 +48,19 @@ class CategoryBudgetFragment : Fragment()
 
     private fun setupViewForSelected(view: View)
     {
-        planPart = AuthServices.userData.findActivePlan()!!.getPartListByCategory(args.catBudgetArgs)[0]
+        planPart = AuthServices.userData.findActivePlan()!!.getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
 
         val titleText: TextView = view.findViewById(R.id.cat_budget_title)
+        titleText.text = planPart.category
         val subtitleText: TextView = view.findViewById(R.id.cat_budget_subtitle)
+        subtitleText.text = planPart.label
 
         //Overview card
         val startingBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_start_balance)
+        startingBalanceTV.text = CranstekHelper.convertToCurrency(planPart.budget)
         val currentBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_current_balance)
+        currentBalanceTV.text = CranstekHelper.convertToCurrency(planPart.balance)
         val progressWheel: ProgressWheel = view.findViewById(R.id.cat_budget_overview_progress)
+        CranstekHelper.setRadialWheel(progressWheel, planPart.budget, planPart.balance)
     }
 }
