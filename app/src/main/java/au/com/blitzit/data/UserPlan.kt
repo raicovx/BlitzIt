@@ -11,7 +11,8 @@ class UserPlan constructor(
         @SerializedName("plan_end_date")
         val planEndDate: String,
         @SerializedName("parts")
-        val planParts: Array<PlanParts>)
+        val planParts: Array<PlanParts>,
+        var planInvoices: Array<UserInvoice>?)
 {
     fun getPartCategories(): List<String>
     {

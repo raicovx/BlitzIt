@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserData
+import au.com.blitzit.data.UserInvoice
 import au.com.blitzit.data.UserPlan
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
@@ -123,7 +124,34 @@ object AuthServices
                         val userPlan: UserPlan = Gson().fromJson(it.data.asString(), UserPlan::class.java)
                         userData.plans?.set(index, userPlan)
 
-                        Log.i("GAZ_INFO", "auth part test ${userData.plans?.get(index)?.planParts?.get(0)?.category}")
+                        getInvoiceDetails()
+                        //liveSignInState.postValue(SignInState.SignedIn)
+                    },
+                    {
+                        Log.e("GAZ_ERROR", "GET failed.", it)
+                    }
+            )
+        } else
+            liveSignInState.postValue(SignInState.SignInFailed)
+
+    }
+
+    private fun getInvoiceDetails()
+    {
+        val plan : UserPlan? = userData.findActivePlan()
+        if (plan != null)
+        {
+            val request = RestOptions.builder()
+                    .addPath("/participant/${userData.ndis_number}/${plan.planID}/invoices")
+                    .build()
+
+            Amplify.API.get("mobileAPI", request,
+                    {
+                        Log.i("GAZ_INFO", "GET succeeded for Invoice Details: ${it.data.asString()}")
+                        val invoices: Array<UserInvoice> = Gson().fromJson(it.data.asString(), Array<UserInvoice>::class.java)
+                        plan.planInvoices = invoices
+                        Log.i("GAZ_INFO", "Invoice test: ${plan.planInvoices!![0].provider}")
+
                         liveSignInState.postValue(SignInState.SignedIn)
                     },
                     {
@@ -131,8 +159,7 @@ object AuthServices
                     }
             )
         } else
-            liveSignInState.postValue(SignInState.SignedIn)
-
+            liveSignInState.postValue(SignInState.SignInFailed)
     }
 
     fun attemptSignOut()
