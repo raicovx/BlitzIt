@@ -352,6 +352,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -378,6 +379,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -418,6 +420,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -445,6 +448,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                 </LinearLayout>
@@ -501,6 +505,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -528,6 +533,7 @@
                         android:fontFamily="@font/avenir"
                         android:maxLines="1"
                         android:inputType="none"
+                        android:focusable="false"
                         tools:ignore="HardcodedText" />
 
                 </LinearLayout>
