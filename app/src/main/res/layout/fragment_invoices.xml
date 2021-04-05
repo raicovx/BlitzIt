@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.budget.CategoryBudgetFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:orientation="vertical"
+        android:background="@color/light_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cat_budget_topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:paddingBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/cat_budget_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/invoices"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/cat_budget_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/cat_budget_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/cat_budget_back_button"
+                app:layout_constraintStart_toStartOf="@+id/cat_budget_back_button"
+                app:layout_constraintTop_toTopOf="@+id/cat_budget_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cat_budget_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cat_budget_topBar" />
+
+            <TextView
+                android:id="@+id/cat_budget_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/avenir"
+                android:text="Remove this"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"
+                app:layout_constraintTop_toBottomOf="@id/cat_budget_divider"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/blitz_it_medium_blue"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/invoice_provider_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:paddingTop="12dp"
+                            android:background="@color/blitz_it_medium_blue"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center"
+                            android:text="provider"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="32dp"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:paddingHorizontal="32dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@color/blitz_it_medium_blue"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center"
+                            android:text="@string/invoice_details_tooltip"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="21sp" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/invoice_provider_header"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="16dp"
+                            android:background="@color/light_grey"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center_vertical"
+                            android:text="Invoice Reference"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="21sp"
+                            app:layout_constraintEnd_toStartOf="@id/invoice_claim_header"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/invoice_claim_header"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="32dp"
+                            android:paddingVertical="16dp"
+                            android:background="@color/light_grey"
+                            android:fontFamily="@font/avenir"
+                            android:gravity="center_vertical|end"
+                            android:text="Claim Amount"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="21sp"
+                            app:layout_constraintStart_toEndOf="@id/invoice_provider_header"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/part_invoice"/>
+                    <include layout="@layout/part_invoice"/>
+                    <include layout="@layout/part_invoice"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
