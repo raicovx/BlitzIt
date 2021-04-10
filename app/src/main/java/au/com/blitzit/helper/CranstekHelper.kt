@@ -3,6 +3,9 @@ package au.com.blitzit.helper
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.util.Patterns
+import android.widget.TextView
+import au.com.blitzit.R
+import au.com.blitzit.auth.AuthServices
 import com.app.progresviews.ProgressWheel
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -50,10 +53,23 @@ object CranstekHelper
         return date1.after(date2)
     }
 
-    //Rotates a bitmap and returns the result
-    fun Bitmap.rotate(degrees: Float): Bitmap
+    //Sets the active display of a plan (text view)
+    fun setPlanStatusDisplay(tv: TextView, status: String)
     {
-        val matrix = Matrix().apply { postRotate(degrees) }
-        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+        when(status)
+        {
+            "Active" -> {
+                tv.text = "Active"
+                tv.setBackgroundResource(R.drawable.active_display)
+            }
+            "Expired" -> {
+                tv.text = "Expired"
+                tv.setBackgroundResource(R.drawable.expired_display)
+            }
+            "Archived" -> {
+                tv.text = "Archived"
+                tv.setBackgroundResource(R.drawable.archived_display)
+            }
+        }
     }
 }

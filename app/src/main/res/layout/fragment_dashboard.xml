@@ -84,6 +84,7 @@
                     android:text="@string/plan"/>
 
                 <TextView
+                    android:id="@+id/dashboard_plan_status"
                     android:layout_width="114dp"
                     android:layout_height="32dp"
                     android:textAlignment="center"

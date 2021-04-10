@@ -33,7 +33,7 @@ class DashboardFragment : Fragment() {
     {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        var mActivity : MainActivity = activity as MainActivity
+        val mActivity : MainActivity = activity as MainActivity
         mActivity.ShowFAB()
 
         setupDashboard(view)
@@ -57,9 +57,10 @@ class DashboardFragment : Fragment() {
         val ndis = "NDIS Number: " + AuthServices.userData.ndis_number
         ndisNumber.text = ndis
 
-        //TODO("Set the active, expired or archived plan display")
+        val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
+        CranstekHelper.setPlanStatusDisplay(planStatus, AuthServices.userData.getMostRecentPlan().status)
 
-        val activePlan: UserPlan? = AuthServices.userData.getMostRecentPlan()
+        val activePlan: UserPlan = AuthServices.userData.getMostRecentPlan()
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
         val sDate = "Start Date: " + activePlan?.planStartDate
@@ -70,54 +71,48 @@ class DashboardFragment : Fragment() {
 
     private fun createCategories(inflater: LayoutInflater, container: ViewGroup?)
     {
-        val categoryList : List<String>? = AuthServices.userData.getMostRecentPlan().getPartCategories()
+        val categoryList : List<String> = AuthServices.userData.getMostRecentPlan().getPartCategories()
 
-        if (categoryList != null)
+        for(category: String in categoryList)
         {
-            for(category: String in categoryList)
-            {
-                //Create categories here
-                val categoryView = inflater.inflate(R.layout.part_dashboard_category, container, false)
-                val titleText: TextView = categoryView.findViewById(R.id.part_category_title)
-                titleText.text = category
+            //Create categories here
+            val categoryView = inflater.inflate(R.layout.part_dashboard_category, container, false)
+            val titleText: TextView = categoryView.findViewById(R.id.part_category_title)
+            titleText.text = category
 
-                container?.addView(categoryView)
+            container?.addView(categoryView)
 
-                val subCategoryFiller: LinearLayout = categoryView.findViewById(R.id.part_subcategory_filler)
-                createSubCategories(category, inflater, subCategoryFiller)
-            }
+            val subCategoryFiller: LinearLayout = categoryView.findViewById(R.id.part_subcategory_filler)
+            createSubCategories(category, inflater, subCategoryFiller)
         }
     }
 
     private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
     {
-        val parts: List<PlanParts>? = AuthServices.userData.getMostRecentPlan().getPartListByCategory(category)
-        if (parts != null)
+        val parts: List<PlanParts> = AuthServices.userData.getMostRecentPlan().getPartListByCategory(category)
+        for(i in parts.indices)
         {
-            for(i in parts.indices)
-            {
-                //Fill categories with sub categories here
-                val subCategoryView = inflater.inflate(R.layout.part_dashboard_subcategory, container, false)
+            //Fill categories with sub categories here
+            val subCategoryView = inflater.inflate(R.layout.part_dashboard_subcategory, container, false)
 
-                val subTitle: TextView = subCategoryView.findViewById(R.id.part_subcategory_title)
-                subTitle.text = parts[i].label
+            val subTitle: TextView = subCategoryView.findViewById(R.id.part_subcategory_title)
+            subTitle.text = parts[i].label
 
-                val startBalance: TextView = subCategoryView.findViewById(R.id.part_subcategory_start_balance)
-                startBalance.text = CranstekHelper.convertToCurrency(parts[i].budget)
-                val balance: TextView = subCategoryView.findViewById(R.id.part_subcategory_balance)
-                balance.text = CranstekHelper.convertToCurrency(parts[i].balance)
+            val startBalance: TextView = subCategoryView.findViewById(R.id.part_subcategory_start_balance)
+            startBalance.text = CranstekHelper.convertToCurrency(parts[i].budget)
+            val balance: TextView = subCategoryView.findViewById(R.id.part_subcategory_balance)
+            balance.text = CranstekHelper.convertToCurrency(parts[i].balance)
 
-                var progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
-                CranstekHelper.setRadialWheel(progress, parts[i].budget, parts[i].balance)
+            val progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
+            CranstekHelper.setRadialWheel(progress, parts[i].budget, parts[i].balance)
 
-                //Sets up the view budget button
-                val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
-                viewButton.setOnClickListener {
-                    this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(parts[i].category, i))
-                }
-
-                container?.addView(subCategoryView)
+            //Sets up the view budget button
+            val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
+            viewButton.setOnClickListener {
+                this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(parts[i].category, i))
             }
+
+            container?.addView(subCategoryView)
         }
     }
 
