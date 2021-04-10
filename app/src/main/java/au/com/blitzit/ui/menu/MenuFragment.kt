@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.ui.settings.SettingsFragmentDirections
 
 class MenuFragment : Fragment()
@@ -62,6 +63,12 @@ class MenuFragment : Fragment()
         invoicesButton = view.findViewById(R.id.menu_invoices_button)
         invoicesButton.setOnClickListener {
             this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToInvoicesFragment())
+        }
+
+        val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)
+        signOutButton.setOnClickListener {
+            AuthServices.attemptSignOut()
+            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
         }
     }
 }

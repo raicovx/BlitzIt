@@ -39,11 +39,6 @@ class IntroFragment : Fragment() {
             this.findNavController().navigate(IntroFragmentDirections.actionIntroToSignUpTypeFragment())
         }
 
-        val signout: Button = view.findViewById(R.id.signout_button_TEMP)
-        signout.setOnClickListener {
-            AuthServices.attemptSignOut()
-        }
-
         var mActivity: MainActivity = activity as MainActivity
         mActivity.HideFAB()
 
