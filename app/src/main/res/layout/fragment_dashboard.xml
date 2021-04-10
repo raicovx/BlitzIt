@@ -121,20 +121,24 @@
                 android:textSize="20sp"
                 android:text="End Date: 20/10/2021"
                 tools:ignore="HardcodedText" />
-        </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="12dp"
-            app:backgroundTint="@color/dark_grey"
-            android:background="@drawable/round_button"
-            android:text="@string/view_statements"
-            android:fontFamily="@font/avenir"
-            android:textSize="18sp"
-            android:textAllCaps="false"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/round_button"
+                android:text="@string/view_statements"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/forward_arrow"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/dashboard_layout_filler"

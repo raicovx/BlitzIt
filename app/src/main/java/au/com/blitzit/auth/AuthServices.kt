@@ -8,6 +8,7 @@ import au.com.blitzit.data.UserPlan
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
 import com.google.gson.Gson
+import java.lang.Exception
 
 enum class SignInState(val state: String)
 {
@@ -25,8 +26,8 @@ object AuthServices
         private set //Makes setting userdata private
 
     init {
-        checkAuthSession()
-        liveSignInState.postValue(SignInState.SignedOut)
+        //checkAuthSession()
+        //liveSignInState.postValue(SignInState.SignedOut)
     }
 
     fun attemptSignIn(username: String, password: String)
@@ -54,12 +55,19 @@ object AuthServices
         )
     }
 
-    private fun checkAuthSession()
+    fun checkAuthSession()
     {
         Amplify.Auth.fetchAuthSession(
                 {
                     Log.i("AmplifyQuickstart", "Auth session = $it")
-                    getUserData()
+                    if(it.isSignedIn) {
+                        liveSignInState.postValue(SignInState.SigningIn)
+                        getUserData()
+                    }
+                    else
+                    {
+                        liveSignInState.postValue(SignInState.SignedOut)
+                    }
                 },
                 {
                     Log.e("AmplifyQuickstart", "Failed to fetch auth session")
@@ -76,7 +84,7 @@ object AuthServices
 
         Amplify.API.get("mobileAPI", request,
                 {
-                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()} Code: ${it.code.toString()}")
+                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()}")
                     val user: Array<UserData> = Gson().fromJson(it.data.asString(), Array<UserData>::class.java)
                     userData = user[0]
 
@@ -110,9 +118,9 @@ object AuthServices
 
     private fun getPlanDetails()
     {
-        val plan : UserPlan? = userData.getMostRecentPlan()
+        val plan : UserPlan = userData.getMostRecentPlan()
         val index: Int? = userData.plans?.indexOf(plan)
-        if (plan != null && index != null) {
+        if (index != null) {
             val request = RestOptions.builder()
                     .addPath("/participant/${userData.ndis_number}/${plan.planID}")
                     .build()
@@ -124,7 +132,6 @@ object AuthServices
                         userData.plans?.set(index, userPlan)
 
                         getInvoiceDetails()
-                        //liveSignInState.postValue(SignInState.SignedIn)
                     },
                     {
                         Log.e("GAZ_ERROR", "GET failed.", it)
@@ -137,35 +144,36 @@ object AuthServices
 
     private fun getInvoiceDetails()
     {
-        val plan : UserPlan? = userData.getMostRecentPlan()
-        if (plan != null)
-        {
-            val request = RestOptions.builder()
-                    .addPath("/participant/${userData.ndis_number}/${plan.planID}/invoices")
-                    .build()
+        val plan : UserPlan = userData.getMostRecentPlan()
+        val request = RestOptions.builder()
+                .addPath("/participant/${userData.ndis_number}/${plan.planID}/invoices")
+                .build()
 
-            Amplify.API.get("mobileAPI", request,
-                    {
-                        Log.i("GAZ_INFO", "GET succeeded for Invoice Details: ${it.data.asString()}")
-                        val invoices: Array<UserInvoice> = Gson().fromJson(it.data.asString(), Array<UserInvoice>::class.java)
-                        plan.planInvoices = invoices
-                        Log.i("GAZ_INFO", "Invoice test: ${plan.planInvoices!![0].provider}")
+        Amplify.API.get("mobileAPI", request,
+                {
+                    Log.i("GAZ_INFO", "GET succeeded for Invoice Details: ${it.data.asString()}")
+                    val invoices: Array<UserInvoice> = Gson().fromJson(it.data.asString(), Array<UserInvoice>::class.java)
+                    plan.planInvoices = invoices
+                    Log.i("GAZ_INFO", "Invoice test: ${plan.planInvoices!![0].provider}")
 
-                        liveSignInState.postValue(SignInState.SignedIn)
-                    },
-                    {
-                        Log.e("GAZ_ERROR", "GET failed.", it)
-                    }
-            )
-        } else
-            liveSignInState.postValue(SignInState.SignInFailed)
+                    liveSignInState.postValue(SignInState.SignedIn)
+                },
+                {
+                    Log.e("GAZ_ERROR", "GET failed.", it)
+                }
+        )
     }
 
     fun attemptSignOut()
     {
         Amplify.Auth.signOut(
-                { Log.i("AuthQuickstart", "Signed out successfully") },
-                { Log.e("AuthQuickstart", "Sign out failed", it) }
+                {
+                    Log.i("AuthQuickstart", "Signed out successfully")
+                    liveSignInState.postValue(SignInState.SignedOut)
+                },
+                {
+                    Log.e("AuthQuickstart", "Sign out failed", it)
+                }
         )
     }
 }

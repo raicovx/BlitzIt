@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
         }
 
         toggleShowOptions(false)
+        AuthServices.checkAuthSession()
 
         return view
     }
