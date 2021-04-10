@@ -1,6 +1,7 @@
 package au.com.blitzit.data
 
 import android.util.Log
+import au.com.blitzit.helper.CranstekHelper
 
 class UserData constructor(
         val ndis_number: Int,
@@ -14,23 +15,44 @@ class UserData constructor(
         val date_of_birth: String,
         var plans: Array<UserPlan>?)
 {
+    //Store the current users active plan
+    private lateinit var activePlan: UserPlan
+
     fun getFullName(): String
     {
         return "$first_name $last_name"
     }
 
-    fun findActivePlan() : UserPlan?
+    private fun findMostRecentPlan(): UserPlan?
     {
-        if(!plans.isNullOrEmpty()) {
-            for (i in plans!!.indices) {
-                if (plans!![i].status == "Active") {
-                    //Log.i("GAZ_INFO", "Found active plan: ${plans!![i].planID}")
-                    return plans!![i]
+        if(!plans.isNullOrEmpty())
+        {
+            var currentActive: UserPlan = plans!![0]
+            for (i in plans!!.indices)
+            {
+                if(i != 0) //Don't check the first plan
+                {
+                    if (!CranstekHelper.isDateAfter(
+                            CranstekHelper.formatDate(currentActive.planStartDate),
+                            CranstekHelper.formatDate(plans!![i].planStartDate)))
+                    {
+                        //if current active is not after the current I plan
+                        currentActive = plans!![i]
+                    }
                 }
             }
+
+            return currentActive
         }
-        //Nothing found, return null
-        //Log.i("GAZ_INFO", "Found nothing")
-        return null
+        else
+            return null
     }
+
+    fun getMostRecentPlan(): UserPlan
+    {
+        activePlan = findMostRecentPlan()!!
+
+        return activePlan
+    }
+
 }

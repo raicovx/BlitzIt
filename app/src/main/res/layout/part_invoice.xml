@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/invoice_part_provider"
+        android:id="@+id/invoice_part_id"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:paddingHorizontal="32dp"
@@ -26,14 +26,14 @@
         android:layout_height="0dp"
         android:fontFamily="@font/avenir"
         android:gravity="center_vertical|end"
-        android:paddingHorizontal="48dp"
+        android:paddingEnd="48dp"
         android:paddingVertical="16dp"
         android:text="$123.45"
         android:textColor="@color/dark_grey"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/invoice_part_provider"
+        app:layout_constraintStart_toEndOf="@id/invoice_part_id"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

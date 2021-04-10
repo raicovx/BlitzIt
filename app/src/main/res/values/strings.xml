@@ -98,4 +98,9 @@
     <string name="abn">ABN</string>
     <string name="email_address">Email Address</string>
     <string name="invoice_details_tooltip">Select individual invoice below to view details.</string>
+    <string name="filter">Filter</string>
+    <string-array name="filter_array">
+        <item>Provider</item>
+        <item>Most Recent</item>
+    </string-array>
 </resources>

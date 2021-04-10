@@ -1,5 +1,8 @@
 package au.com.blitzit.data
 
+import au.com.blitzit.helper.CranstekHelper
+import java.util.*
+
 data class UserInvoice constructor(
         val invoice_id: String,
         val provider: String,
@@ -9,8 +12,7 @@ data class UserInvoice constructor(
         val first_support_date: String,
         val last_support_date: String,
         val payment_date: String?,
-        val amount: String,
-        val status: String
-)
+        val amount: Double,
+        val status: String)
 {
 }

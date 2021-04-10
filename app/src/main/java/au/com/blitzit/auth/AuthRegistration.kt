@@ -3,7 +3,6 @@ package au.com.blitzit.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.helper.CranstekHelper
-import com.amplifyframework.api.rest.RestOperation
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
@@ -11,10 +10,6 @@ import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
-import com.google.gson.annotations.SerializedName
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
 
 enum class RegistrationState(val state: String)
 {
@@ -55,7 +50,7 @@ object AuthRegistration
     {
         liveRegistrationState.postValue(RegistrationState.Registering)
 
-        registrationDetails = RegistrationDetails(CranstekHelper.formatDateForRegistration(dob), email, lName, ndis, type)
+        registrationDetails = RegistrationDetails(CranstekHelper.formatDate(dob), email, lName, ndis, type)
 
         val gson = GsonBuilder().setPrettyPrinting().create()
         val json: String = gson.toJson(registrationDetails)

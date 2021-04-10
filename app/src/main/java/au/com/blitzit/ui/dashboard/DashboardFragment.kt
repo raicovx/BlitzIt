@@ -17,8 +17,6 @@ import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserPlan
 import au.com.blitzit.helper.CranstekHelper
 import com.app.progresviews.ProgressWheel
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class DashboardFragment : Fragment() {
 
@@ -61,7 +59,7 @@ class DashboardFragment : Fragment() {
 
         //TODO("Set the active, expired or archived plan display")
 
-        val activePlan: UserPlan? = AuthServices.userData.findActivePlan()
+        val activePlan: UserPlan? = AuthServices.userData.getMostRecentPlan()
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
         val sDate = "Start Date: " + activePlan?.planStartDate
@@ -72,7 +70,7 @@ class DashboardFragment : Fragment() {
 
     private fun createCategories(inflater: LayoutInflater, container: ViewGroup?)
     {
-        val categoryList : List<String>? = AuthServices.userData.findActivePlan()?.getPartCategories()
+        val categoryList : List<String>? = AuthServices.userData.getMostRecentPlan().getPartCategories()
 
         if (categoryList != null)
         {
@@ -93,7 +91,7 @@ class DashboardFragment : Fragment() {
 
     private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
     {
-        val parts: List<PlanParts>? = AuthServices.userData.findActivePlan()?.getPartListByCategory(category)
+        val parts: List<PlanParts>? = AuthServices.userData.getMostRecentPlan().getPartListByCategory(category)
         if (parts != null)
         {
             for(i in parts.indices)

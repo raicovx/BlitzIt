@@ -1,5 +1,7 @@
 package au.com.blitzit.helper
 
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.util.Patterns
 import com.app.progresviews.ProgressWheel
 import java.math.RoundingMode
@@ -11,7 +13,7 @@ object CranstekHelper
 {
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-    fun formatDateForRegistration(value: String): String
+    fun formatDate(value: String): String
     {
         val inFormatter = SimpleDateFormat("dd-MM-yyyy")
         val date: Date = inFormatter.parse(value)
@@ -37,5 +39,21 @@ object CranstekHelper
     {
         val currencyDF = DecimalFormat("###,###,###.##")
         return "$" + currencyDF.format(value)
+    }
+
+    fun isDateAfter(dateString: String, checkTo: String): Boolean
+    {
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        val date1: Date = sdf.parse(dateString)
+        val date2: Date = sdf.parse(checkTo)
+
+        return date1.after(date2)
+    }
+
+    //Rotates a bitmap and returns the result
+    fun Bitmap.rotate(degrees: Float): Bitmap
+    {
+        val matrix = Matrix().apply { postRotate(degrees) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
 }

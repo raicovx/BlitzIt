@@ -59,6 +59,9 @@
         <action
             android:id="@+id/action_menuFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_invoicesFragment"
+            app:destination="@id/invoicesFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
@@ -230,5 +233,14 @@
         <action
             android:id="@+id/action_forgotPasswordFragment_to_login"
             app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoicesFragment"
+        android:name="au.com.blitzit.ui.invoices.InvoicesFragment"
+        android:label="fragment_invoices"
+        tools:layout="@layout/fragment_invoices" >
+        <action
+            android:id="@+id/action_invoicesFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

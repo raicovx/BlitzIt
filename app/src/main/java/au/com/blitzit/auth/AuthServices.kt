@@ -2,7 +2,6 @@ package au.com.blitzit.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserData
 import au.com.blitzit.data.UserInvoice
 import au.com.blitzit.data.UserPlan
@@ -26,7 +25,7 @@ object AuthServices
         private set //Makes setting userdata private
 
     init {
-        //checkAuthSession()
+        checkAuthSession()
         liveSignInState.postValue(SignInState.SignedOut)
     }
 
@@ -111,7 +110,7 @@ object AuthServices
 
     private fun getPlanDetails()
     {
-        val plan : UserPlan? = userData.findActivePlan()
+        val plan : UserPlan? = userData.getMostRecentPlan()
         val index: Int? = userData.plans?.indexOf(plan)
         if (plan != null && index != null) {
             val request = RestOptions.builder()
@@ -138,7 +137,7 @@ object AuthServices
 
     private fun getInvoiceDetails()
     {
-        val plan : UserPlan? = userData.findActivePlan()
+        val plan : UserPlan? = userData.getMostRecentPlan()
         if (plan != null)
         {
             val request = RestOptions.builder()

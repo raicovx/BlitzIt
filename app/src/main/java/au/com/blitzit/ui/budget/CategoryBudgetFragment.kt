@@ -1,6 +1,5 @@
 package au.com.blitzit.ui.budget
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
-import au.com.blitzit.data.UserPlan
 import au.com.blitzit.helper.CranstekHelper
 import com.app.progresviews.ProgressWheel
 
@@ -48,7 +44,7 @@ class CategoryBudgetFragment : Fragment()
 
     private fun setupViewForSelected(view: View)
     {
-        planPart = AuthServices.userData.findActivePlan()!!.getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
+        planPart = AuthServices.userData.getMostRecentPlan()!!.getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
 
         val titleText: TextView = view.findViewById(R.id.cat_budget_title)
         titleText.text = planPart.category

@@ -1,5 +1,8 @@
 package au.com.blitzit.data
 
+import android.util.Log
+import au.com.blitzit.auth.AuthServices
+import com.amplifyframework.util.Empty
 import com.google.gson.annotations.SerializedName
 
 class UserPlan constructor(
@@ -37,5 +40,59 @@ class UserPlan constructor(
         }
 
         return parts
+    }
+
+    fun getInvoicesByProvider(): List<ProviderInvoices>
+    {
+        var providerInvoices = getEmptyProviderInvoiceList()
+
+        //Sorts invoices into respectable providers
+        for(providerInvoice: ProviderInvoices in providerInvoices)
+        {
+            for(invoice: UserInvoice in planInvoices!!)
+            {
+                if(invoice.provider == providerInvoice.provider)
+                    providerInvoice.invoices = providerInvoice.invoices!!.plus(invoice)
+            }
+        }
+
+        return providerInvoices
+    }
+
+    private fun getEmptyProviderInvoiceList(): List<ProviderInvoices>
+    {
+        var providerInvoices: List<ProviderInvoices> = emptyList()
+        var providers: List<String> = emptyList()
+
+        //Create a string list of the providers
+        for(invoice: UserInvoice in planInvoices!!)
+        {
+            if(providers.isNullOrEmpty() || !providers.contains(invoice.provider))
+                providers = providers.plus(invoice.provider)
+        }
+
+        //create provider invoices so we can store invoices by provider
+        for(provider: String in providers)
+        {
+            val providerInvoice = ProviderInvoices(provider, null)
+            providerInvoices = providerInvoices.plus(providerInvoice)
+        }
+
+        return providerInvoices
+    }
+
+    fun getInvoicesByMostRecent(): List<UserInvoice>
+    {
+        val sortedInvoices: List<UserInvoice> = planInvoices!!.toList()
+        sortedInvoices.sortedByDescending { it.invoice_date }
+        Log.i("GAZ_INGO", "sorted invoice: $sortedInvoices")
+        return sortedInvoices
+    }
+}
+
+data class ProviderInvoices(val provider: String, var invoices: List<UserInvoice>?)
+{
+    init {
+        invoices = emptyList()
     }
 }
