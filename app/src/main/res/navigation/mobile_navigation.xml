@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_menuFragment_to_intro"
             app:destination="@id/intro" />
+        <action
+            android:id="@+id/action_menuFragment_to_myPlansFragment"
+            app:destination="@id/myPlansFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
@@ -245,5 +248,17 @@
         <action
             android:id="@+id/action_invoicesFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPlansFragment"
+        android:name="au.com.blitzit.ui.plans.MyPlansFragment"
+        android:label="fragment_myplans"
+        tools:layout="@layout/fragment_myplans" >
+        <action
+            android:id="@+id/action_myPlansFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_myPlansFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

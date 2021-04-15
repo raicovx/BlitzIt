@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.ui.settings.SettingsFragmentDirections
+import kotlinx.coroutines.runBlocking
 
 class MenuFragment : Fragment()
 {
@@ -20,6 +22,7 @@ class MenuFragment : Fragment()
     private lateinit var settingsButton: Button
     private lateinit var profileButton: Button
     private lateinit var invoicesButton: Button
+    private lateinit var myPlansButton: Button
 
     companion object{
         fun newInstance() = MenuFragment
@@ -40,35 +43,42 @@ class MenuFragment : Fragment()
 
     private fun setOnClickListeners(view: View)
     {
+        val navController: NavController = this.findNavController()
+
         backButton = view.findViewById(R.id.menu_back_button)
         backButton.setOnClickListener {
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToDashboardFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToDashboardFragment())
         }
 
         contactButton = view.findViewById(R.id.menu_contact_button)
         contactButton.setOnClickListener {
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToContactFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToContactFragment())
         }
 
         settingsButton = view.findViewById(R.id.menu_settings_button)
         settingsButton.setOnClickListener {
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToSettingsFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToSettingsFragment())
         }
 
         profileButton = view.findViewById(R.id.menu_profile_button)
         profileButton.setOnClickListener {
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToProfileFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToProfileFragment())
         }
 
         invoicesButton = view.findViewById(R.id.menu_invoices_button)
         invoicesButton.setOnClickListener {
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToInvoicesFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToInvoicesFragment())
+        }
+
+        myPlansButton = view.findViewById(R.id.menu_plans_button)
+        myPlansButton.setOnClickListener {
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToMyPlansFragment())
         }
 
         val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)
         signOutButton.setOnClickListener {
-            AuthServices.attemptSignOut()
-            this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
+            runBlocking { AuthServices.attemptSignOut() }
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
         }
     }
 }

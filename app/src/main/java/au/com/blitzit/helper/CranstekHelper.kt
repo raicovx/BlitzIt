@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.util.Patterns
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import com.app.progresviews.ProgressWheel

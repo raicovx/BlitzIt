@@ -13,16 +13,28 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.auth.SignInState
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class LoginFragment : Fragment() {
 
     companion object {
         fun newInstance() = LoginFragment()
+    }
+
+    init {
+        lifecycleScope.launch {
+            whenStarted {
+                AuthServices.checkAuthSession()
+            }
+        }
     }
 
     private lateinit var viewModel: LoginViewModel
@@ -51,7 +63,6 @@ class LoginFragment : Fragment() {
         }
 
         toggleShowOptions(false)
-        AuthServices.checkAuthSession()
 
         return view
     }
@@ -72,7 +83,12 @@ class LoginFragment : Fragment() {
             val imm: InputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
 
-            AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString())
+            lifecycleScope.launch {
+                whenStarted {
+                    AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString())
+                }
+            }
+            //runBlocking { AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString()) }
 
         }else{
             Toast.makeText(context, "Missing Username or Password", Toast.LENGTH_SHORT).show()

@@ -59,9 +59,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // Amplify core dependency
-    implementation 'com.amplifyframework:core:1.17.0'
-    implementation 'com.amplifyframework:aws-auth-cognito:1.17.0'
-    implementation 'com.amplifyframework:aws-api:1.17.0'
+    implementation 'com.amplifyframework:core-kotlin:0.1.4'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.17.3'
+    implementation 'com.amplifyframework:aws-api:1.17.3'
 
     // Support for Java 8 features
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'

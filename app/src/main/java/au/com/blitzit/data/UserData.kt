@@ -16,11 +16,28 @@ class UserData constructor(
         var plans: Array<UserPlan>?)
 {
     //Store the current users active plan
-    private lateinit var activePlan: UserPlan
+    private lateinit var selectedPlan: UserPlan
 
     fun getFullName(): String
     {
         return "$first_name $last_name"
+    }
+
+    fun getSelectedPlan(): UserPlan
+    {
+        return selectedPlan
+    }
+
+    fun setSelectedPlan(plan: UserPlan)
+    {
+        selectedPlan = plan
+    }
+
+    fun getDefaultPlan(): UserPlan
+    {
+        selectedPlan = findMostRecentPlan()!!
+
+        return selectedPlan
     }
 
     private fun findMostRecentPlan(): UserPlan?
@@ -33,8 +50,8 @@ class UserData constructor(
                 if(i != 0) //Don't check the first plan
                 {
                     if (!CranstekHelper.isDateAfter(
-                            CranstekHelper.formatDate(currentActive.planStartDate),
-                            CranstekHelper.formatDate(plans!![i].planStartDate)))
+                                    CranstekHelper.formatDate(currentActive.planStartDate),
+                                    CranstekHelper.formatDate(plans!![i].planStartDate)))
                     {
                         //if current active is not after the current I plan
                         currentActive = plans!![i]
@@ -46,13 +63,6 @@ class UserData constructor(
         }
         else
             return null
-    }
-
-    fun getMostRecentPlan(): UserPlan
-    {
-        activePlan = findMostRecentPlan()!!
-
-        return activePlan
     }
 
 }

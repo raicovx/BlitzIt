@@ -17,6 +17,18 @@ class UserPlan constructor(
         val planParts: Array<PlanParts>,
         var planInvoices: Array<UserInvoice>?)
 {
+    fun getSortingOrder(): Int
+    {
+        when(status)
+        {
+            "Active" -> return 0
+            "Expired" -> return 1
+            "Archived" -> return 2
+        }
+
+        return 0
+    }
+
     fun getPartCategories(): List<String>
     {
         var categories: List<String> = listOf()

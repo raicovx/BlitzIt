@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.profile.ProfileFragment"
+    tools:context=".ui.plans.MyPlansFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -67,7 +67,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +77,7 @@
                 android:id="@+id/my_plan_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="Ronnie Ruse"
@@ -112,94 +111,10 @@
             android:id="@+id/my_plans_content_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_plan_topLayout">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                app:cardCornerRadius="24dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/plan_start_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:fontFamily="@font/avenir"
-                        android:paddingHorizontal="12dp"
-                        android:layout_marginVertical="8dp"
-                        android:text="Start Date: 19/10/2020"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="21sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/plan_end_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginVertical="8dp"
-                        android:fontFamily="@font/avenir"
-                        android:paddingHorizontal="12dp"
-                        android:text="End Date: 20/10/2021"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="21sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/plan_start_date" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/plan_divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginVertical="12dp"
-                        android:layout_marginEnd="92dp"
-                        android:background="@color/light_grey"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/plan_end_date" />
-
-                    <TextView
-                        android:id="@+id/plan_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/avenir"
-                        android:text="@string/plan"
-                        android:textAlignment="center"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/plan_divider" />
-
-                    <TextView
-                        android:id="@+id/plan_status"
-                        android:layout_width="114dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/active_display"
-                        android:fontFamily="@font/avenir"
-                        android:gravity="center"
-                        android:text="@string/active"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/plan_text"
-                        app:layout_constraintTop_toBottomOf="@+id/plan_divider" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

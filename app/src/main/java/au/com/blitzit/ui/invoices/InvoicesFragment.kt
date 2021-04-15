@@ -31,8 +31,8 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
                 filterSpinner.isEnabled = false
                 withContext(Dispatchers.IO)
                 {
-                    providerInvoices = AuthServices.userData.getMostRecentPlan().getInvoicesByProvider()
-                    mostRecentInvoices = AuthServices.userData.getMostRecentPlan().getInvoicesByMostRecent()
+                    providerInvoices = AuthServices.userData.getSelectedPlan().getInvoicesByProvider()
+                    mostRecentInvoices = AuthServices.userData.getSelectedPlan().getInvoicesByMostRecent()
                 }
 
                 if(!providerInvoices.isNullOrEmpty())

@@ -58,9 +58,9 @@ class DashboardFragment : Fragment() {
         ndisNumber.text = ndis
 
         val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
-        CranstekHelper.setPlanStatusDisplay(planStatus, AuthServices.userData.getMostRecentPlan().status)
+        CranstekHelper.setPlanStatusDisplay(planStatus, AuthServices.userData.getSelectedPlan().status)
 
-        val activePlan: UserPlan = AuthServices.userData.getMostRecentPlan()
+        val activePlan: UserPlan = AuthServices.userData.getSelectedPlan()
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
         val sDate = "Start Date: " + activePlan?.planStartDate
@@ -71,7 +71,7 @@ class DashboardFragment : Fragment() {
 
     private fun createCategories(inflater: LayoutInflater, container: ViewGroup?)
     {
-        val categoryList : List<String> = AuthServices.userData.getMostRecentPlan().getPartCategories()
+        val categoryList : List<String> = AuthServices.userData.getSelectedPlan().getPartCategories()
 
         for(category: String in categoryList)
         {
@@ -89,7 +89,7 @@ class DashboardFragment : Fragment() {
 
     private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
     {
-        val parts: List<PlanParts> = AuthServices.userData.getMostRecentPlan().getPartListByCategory(category)
+        val parts: List<PlanParts> = AuthServices.userData.getSelectedPlan().getPartListByCategory(category)
         for(i in parts.indices)
         {
             //Fill categories with sub categories here

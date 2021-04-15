@@ -9,6 +9,7 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.hub.HubChannel
+import kotlinx.coroutines.runBlocking
 
 class AuthApplication : Application()
 {
@@ -38,7 +39,7 @@ class AuthApplication : Application()
                         Log.i("AuthQuickstart", "Auth just became signed out")
                     AuthChannelEventName.SESSION_EXPIRED -> {
                         Log.i("AuthQuickstart", "Auth session just expired")
-                        AuthServices.attemptSignOut()
+                        runBlocking { AuthServices.attemptSignOut() }
                     }
                     else ->
                         Log.w("AuthQuickstart", "Unhandled Auth Event: ${event.name}")
