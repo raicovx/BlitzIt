@@ -2,6 +2,7 @@ package au.com.blitzit.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import au.com.blitzit.data.ProviderSummary
 import au.com.blitzit.data.UserData
 import au.com.blitzit.data.UserInvoice
 import au.com.blitzit.data.UserPlan
@@ -31,6 +32,29 @@ object AuthServices
 
     lateinit var userData: UserData
         private set //Makes setting userdata private
+
+    private suspend fun getData()
+    {
+        getUserData()
+        userData.setSelectedPlan(userData.getMostRecentPlan())
+        liveSignInState.postValue(SignInState.SignedIn)
+    }
+
+
+    suspend fun attemptSignOut()
+    {
+        try {
+            Amplify.Auth.signOut()
+            Log.i("AuthQuickstart", "Signed out successfully")
+        } catch (error: AuthException) {
+            Log.e("AuthQuickstart", "Sign out failed", error)
+        }
+    }
+
+    fun resetSignUpState()
+    {
+        liveSignInState.postValue(SignInState.SignedOut)
+    }
 
     suspend fun attemptSignIn(username: String, password: String)
     {
@@ -145,6 +169,7 @@ object AuthServices
                     userData.plans?.set(i, userPlan)
 
                     getInvoiceDetails(userData.plans!![i])
+                    getProviderSummary(userData.plans!![i])
                 } catch (error: ApiException)
                 {
                     Log.e("GAZ_ERROR", "GET failed.", error)
@@ -174,27 +199,21 @@ object AuthServices
         }
     }
 
-    private suspend fun getData()
+    private suspend fun getProviderSummary(plan: UserPlan)
     {
-        getUserData()
-        userData.setSelectedPlan(userData.getMostRecentPlan())
-        liveSignInState.postValue(SignInState.SignedIn)
-    }
+        val request = RestOptions.builder()
+                .addPath("/participant/${userData.ndis_number}/${plan.planID}/providerSummary")
+                .build()
 
-
-    suspend fun attemptSignOut()
-    {
-        try {
-            Amplify.Auth.signOut()
-            Log.i("AuthQuickstart", "Signed out successfully")
-        } catch (error: AuthException) {
-            Log.e("AuthQuickstart", "Sign out failed", error)
+        try{
+            val response = Amplify.API.get(request, "mobileAPI")
+            Log.i("GAZ_INFO", "GET succeeded for Plan Provider Summary: ${response.data.asString()}")
+            val providerSum: ProviderSummary = Gson().fromJson(response.data.asString(), ProviderSummary::class.java)
+            plan.planProviderSummary = providerSum
+        }
+        catch (error: ApiException)
+        {
+            Log.e("GAZ_ERROR", "GET failed.", error)
         }
     }
-
-    fun resetSignUpState()
-    {
-        liveSignInState.postValue(SignInState.SignedOut)
-    }
-
 }

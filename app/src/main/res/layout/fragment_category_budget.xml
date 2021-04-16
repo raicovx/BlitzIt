@@ -455,6 +455,8 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- NOT INCLUDED IN V1
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -540,6 +542,10 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            -->
+
+            <!-- PROVIDERS -->
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -556,6 +562,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
                         android:orientation="vertical"
                         android:background="@color/blitz_it_medium_blue">
 
@@ -566,33 +573,12 @@
                             android:paddingTop="8dp"
                             android:fontFamily="@font/avenir"
                             android:gravity="center"
-                            android:text="@string/invoices"
+                            android:text="@string/providers"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="32dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginEnd="32dp"
-                            android:background="@color/white" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:paddingHorizontal="16dp"
-                            android:fontFamily="@font/avenir"
-                            android:gravity="center"
-                            android:text="@string/invoice_select_text"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="21sp" />
 
                     </LinearLayout>
 
@@ -608,7 +594,7 @@
                             android:gravity="center_vertical"
                             android:paddingStart="24dp"
                             android:paddingEnd="0dp"
-                            android:text="@string/invoice_reference"
+                            android:text="@string/provider"
                             android:textColor="@color/dark_grey"
                             android:textSize="21sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -623,7 +609,7 @@
                             android:gravity="center_vertical"
                             android:paddingEnd="24dp"
                             android:paddingStart="16dp"
-                            android:text="@string/amount_paid"
+                            android:text="Total claimed for Category"
                             android:textColor="@color/dark_grey"
                             android:textSize="21sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -631,6 +617,14 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cat_budget_provider_content_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

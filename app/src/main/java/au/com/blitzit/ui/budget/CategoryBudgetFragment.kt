@@ -59,4 +59,9 @@ class CategoryBudgetFragment : Fragment()
         val progressWheel: ProgressWheel = view.findViewById(R.id.cat_budget_overview_progress)
         CranstekHelper.setRadialWheel(progressWheel, planPart.budget, planPart.balance)
     }
+
+    private fun populateProviders(inflater: LayoutInflater, container: ViewGroup?)
+    {
+
+    }
 }

@@ -99,6 +99,8 @@
     <string name="email_address">Email Address</string>
     <string name="invoice_details_tooltip">Select individual invoice below to view details.</string>
     <string name="filter">Filter</string>
+    <string name="providers">Providers</string>
+    <string name="provider">Provider</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

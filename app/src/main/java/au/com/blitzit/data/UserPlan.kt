@@ -15,7 +15,8 @@ class UserPlan constructor(
         val planEndDate: String,
         @SerializedName("parts")
         val planParts: Array<PlanParts>,
-        var planInvoices: Array<UserInvoice>?)
+        var planInvoices: Array<UserInvoice>?,
+        var planProviderSummary: ProviderSummary?)
 {
     fun getSortingOrder(): Int
     {
