@@ -6,19 +6,23 @@ import au.com.blitzit.data.UserData
 import au.com.blitzit.data.UserInvoice
 import au.com.blitzit.data.UserPlan
 import com.amazonaws.mobile.auth.core.signin.AuthException
+import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
+import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
 import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import kotlinx.coroutines.*
-import java.lang.Exception
 
 enum class SignInState(val state: String)
 {
     SignedOut("Signed Out"),
     SigningIn("Attempting sign in"),
     SignedIn("Signed In"),
-    SignInFailed("Incorrect Credentials")
+    SignInFailed("Unhandled exception"),
+    SignInFailedUserNotFound("User not found"),
+    SignInFailedTooManyRequests("Too many attempts have been made to login, please wait 15 minutes and try again"),
+    SignInFailedUserNotConfirmed("User hasn't confirmed via email. Please confirm registration and try again")
 }
 
 object AuthServices
@@ -28,18 +32,13 @@ object AuthServices
     lateinit var userData: UserData
         private set //Makes setting userdata private
 
-    init {
-        //checkAuthSession()
-        //liveSignInState.postValue(SignInState.SignedOut)
-    }
-
     suspend fun attemptSignIn(username: String, password: String)
     {
         liveSignInState.postValue(SignInState.SigningIn)
 
         try
         {
-            val result = Amplify.Auth.signIn("username", "password")
+            val result = Amplify.Auth.signIn(username, password)
             if (result.isSignInComplete)
             {
                 Log.i("AuthQuickstart", "Sign in succeeded")
@@ -52,28 +51,24 @@ object AuthServices
         }
         catch (error: AuthException)
         {
-            Log.e("AuthQuickstart", "Sign in failed", error)
+            Log.i("AuthQuickstart", "Sign in failed", error)
+            liveSignInState.postValue(SignInState.SignInFailed)
         }
-
-        /*Amplify.Auth.signIn(username, password,
-                { result ->
-                    if (result.isSignInComplete)
-                    {
-                        Log.i("AuthQuickstart", "Sign in succeeded")
-                        getData()
-                        //liveSignInState.postValue(SignInState.SignedIn)
-                    }
-                    else
-                    {
-                        Log.i("AuthQuickstart", "Sign in not complete")
-                        liveSignInState.postValue(SignInState.SignInFailed)
-                    }
-                },
-                {
-                    Log.e("AuthQuickstart", "Failed to sign in", it)
-                    liveSignInState.postValue(SignInState.SignInFailed)
-                }
-        )*/
+        catch (error: com.amplifyframework.auth.AuthException.UserNotFoundException)
+        {
+            Log.i("AuthQuickstart", "User not found", error)
+            liveSignInState.postValue(SignInState.SignInFailedUserNotFound)
+        }
+        catch (error: TooManyRequestsException)
+        {
+            Log.i("AuthQuickstart", "Too many attempts to login have been made", error)
+            liveSignInState.postValue(SignInState.SignInFailedTooManyRequests)
+        }
+        catch (error: UserNotConfirmedException)
+        {
+            Log.i("AuthQuickstart", "User hasn't confirmed registration", error)
+            liveSignInState.postValue(SignInState.SignInFailedUserNotConfirmed)
+        }
     }
 
     suspend fun checkAuthSession()
@@ -93,24 +88,6 @@ object AuthServices
             Log.e("AmplifyQuickstart", "Failed to fetch auth session", error)
             liveSignInState.postValue(SignInState.SignedOut)
         }
-
-        /*Amplify.Auth.fetchAuthSession(
-                {
-                    Log.i("AmplifyQuickstart", "Auth session = $it")
-                    if(it.isSignedIn) {
-                        liveSignInState.postValue(SignInState.SigningIn)
-                        getData()
-                    }
-                    else
-                    {
-                        liveSignInState.postValue(SignInState.SignedOut)
-                    }
-                },
-                {
-                    Log.e("AmplifyQuickstart", "Failed to fetch auth session")
-                    liveSignInState.postValue(SignInState.SignedOut)
-                }
-        )*/
     }
 
     private suspend fun getUserData()
@@ -130,19 +107,6 @@ object AuthServices
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
-
-        /*Amplify.API.get("mobileAPI", request,
-                {
-                    Log.i("GAZ_INFO", "GET succeeded: ${it.data.asString()}")
-                    val user: Array<UserData> = Gson().fromJson(it.data.asString(), Array<UserData>::class.java)
-                    userData = user[0]
-
-                    getPlanData()
-                },
-                {
-                    Log.e("GAZ_ERROR", "GET failed.", it)
-                }
-        )*/
     }
 
     private suspend fun getPlanData()
@@ -162,18 +126,6 @@ object AuthServices
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
-        /*Amplify.API.get("mobileAPI", request,
-                { it ->
-                    Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${it.data.asString()}")
-                    val user: UserData = Gson().fromJson(it.data.asString(), UserData::class.java)
-                    userData = user
-
-                    getPlanDetails()
-                },
-                {
-                    Log.e("GAZ_ERROR", "GET failed.", it)
-                }
-        )*/
     }
 
     private suspend fun getPlanDetails()
@@ -197,18 +149,6 @@ object AuthServices
                 {
                     Log.e("GAZ_ERROR", "GET failed.", error)
                 }
-                /*Amplify.API.get("mobileAPI", request,
-                        {
-                            Log.i("GAZ_INFO", "GET succeeded for PlanDetails: ${it.data.asString()}")
-                            val userPlan: UserPlan = Gson().fromJson(it.data.asString(), UserPlan::class.java)
-                            userData.plans?.set(i, userPlan)
-
-                            getInvoiceDetails(userData.plans!![i])
-                        },
-                        {
-                            Log.e("GAZ_ERROR", "GET failed.", it)
-                        }
-                )*/
             }
         }
         else
@@ -232,31 +172,12 @@ object AuthServices
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
-
-        /*Amplify.API.get("mobileAPI", request,
-                {
-                    Log.i("GAZ_INFO", "GET succeeded for Invoice Details: ${it.data.asString()}")
-                    val invoices: Array<UserInvoice> = Gson().fromJson(it.data.asString(), Array<UserInvoice>::class.java)
-                    plan.planInvoices = invoices
-                    Log.i("GAZ_INFO", "Invoice test: ${plan.planInvoices!![0].provider}")
-                },
-                {
-                    Log.e("GAZ_ERROR", "GET failed.", it)
-                }
-        )*/
-    }
-
-    private fun getDatatest() = runBlocking {
-        val job = launch { getUserData() }
-        job.join()
-        userData.setSelectedPlan(userData.getDefaultPlan())
-        liveSignInState.postValue(SignInState.SignedIn)
     }
 
     private suspend fun getData()
     {
         getUserData()
-        userData.setSelectedPlan(userData.getDefaultPlan())
+        userData.setSelectedPlan(userData.getMostRecentPlan())
         liveSignInState.postValue(SignInState.SignedIn)
     }
 
@@ -269,14 +190,11 @@ object AuthServices
         } catch (error: AuthException) {
             Log.e("AuthQuickstart", "Sign out failed", error)
         }
-        /*Amplify.Auth.signOut(
-                {
-                    Log.i("AuthQuickstart", "Signed out successfully")
-                    liveSignInState.postValue(SignInState.SignedOut)
-                },
-                {
-                    Log.e("AuthQuickstart", "Sign out failed", it)
-                }
-        )*/
     }
+
+    fun resetSignUpState()
+    {
+        liveSignInState.postValue(SignInState.SignedOut)
+    }
+
 }

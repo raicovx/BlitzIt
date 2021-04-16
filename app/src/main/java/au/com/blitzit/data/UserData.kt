@@ -33,11 +33,17 @@ class UserData constructor(
         selectedPlan = plan
     }
 
-    fun getDefaultPlan(): UserPlan
+    fun getMostRecentPlan(): UserPlan
     {
         selectedPlan = findMostRecentPlan()!!
 
         return selectedPlan
+    }
+
+    fun isSelectedPlanMostRecent(selectedPlan: UserPlan): Boolean
+    {
+        val mostRecent = findMostRecentPlan()
+        return selectedPlan == mostRecent
     }
 
     private fun findMostRecentPlan(): UserPlan?

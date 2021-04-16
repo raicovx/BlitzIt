@@ -110,7 +110,23 @@ class LoginFragment : Fragment() {
             }
             SignInState.SignInFailed -> {
                 toggleShowOptions(true)
-                Toast.makeText(context, "Incorrect Credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, SignInState.SignInFailed.state, Toast.LENGTH_SHORT).show()
+                AuthServices.resetSignUpState()
+            }
+            SignInState.SignInFailedUserNotConfirmed -> {
+                toggleShowOptions(true)
+                Toast.makeText(context, SignInState.SignInFailedUserNotConfirmed.state, Toast.LENGTH_SHORT).show()
+                AuthServices.resetSignUpState()
+            }
+            SignInState.SignInFailedUserNotFound -> {
+                toggleShowOptions(true)
+                Toast.makeText(context, SignInState.SignInFailedUserNotFound.state, Toast.LENGTH_SHORT).show()
+                AuthServices.resetSignUpState()
+            }
+            SignInState.SignInFailedTooManyRequests -> {
+                toggleShowOptions(true)
+                Toast.makeText(context, SignInState.SignInFailedTooManyRequests.state, Toast.LENGTH_SHORT).show()
+                AuthServices.resetSignUpState()
             }
         }
     }

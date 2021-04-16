@@ -1,5 +1,8 @@
 package au.com.blitzit.ui.dashboard
 
+import android.content.res.ColorStateList
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +12,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
+import androidx.core.widget.CompoundButtonCompat
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
@@ -26,7 +34,15 @@ class DashboardFragment : Fragment() {
 
     private lateinit var viewModel: DashboardViewModel
 
+    private var displayingOldPlan: Boolean = false
+    private lateinit var displayingPlan: UserPlan
+
     private lateinit var layoutFiller: LinearLayout
+
+    //Colour changing group
+    private var buttons: List<Button> = emptyList()
+    private var categoryHeaders: List<TextView> = emptyList()
+    private var progressWheels: List<ProgressWheel> = emptyList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
@@ -36,10 +52,13 @@ class DashboardFragment : Fragment() {
         val mActivity : MainActivity = activity as MainActivity
         mActivity.ShowFAB()
 
+        getPlanToDisplay()
         setupDashboard(view)
 
         layoutFiller = view.findViewById(R.id.dashboard_layout_filler)
         createCategories(inflater, layoutFiller)
+        if(displayingOldPlan)
+            handleOldPlanColours()
 
         return view
     }
@@ -58,20 +77,24 @@ class DashboardFragment : Fragment() {
         ndisNumber.text = ndis
 
         val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
-        CranstekHelper.setPlanStatusDisplay(planStatus, AuthServices.userData.getSelectedPlan().status)
+        CranstekHelper.setPlanStatusDisplay(planStatus, displayingPlan.status)
 
-        val activePlan: UserPlan = AuthServices.userData.getSelectedPlan()
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
-        val sDate = "Start Date: " + activePlan?.planStartDate
-        val eDate = "End Date: " + activePlan?.planEndDate
+        val sDate = "Start Date: " + displayingPlan.planStartDate
+        val eDate = "End Date: " + displayingPlan.planEndDate
         startDate.text = sDate
         endDate.text = eDate
+
+        //View statements button
+        val viewStatements: Button = view.findViewById(R.id.dashboard_view_statements)
+        buttons = buttons + buttons.plus(viewStatements)
+        //TODO("Hook up view statements button")
     }
 
     private fun createCategories(inflater: LayoutInflater, container: ViewGroup?)
     {
-        val categoryList : List<String> = AuthServices.userData.getSelectedPlan().getPartCategories()
+        val categoryList : List<String> = displayingPlan.getPartCategories()
 
         for(category: String in categoryList)
         {
@@ -79,6 +102,9 @@ class DashboardFragment : Fragment() {
             val categoryView = inflater.inflate(R.layout.part_dashboard_category, container, false)
             val titleText: TextView = categoryView.findViewById(R.id.part_category_title)
             titleText.text = category
+
+            //Add category headers to list
+            categoryHeaders = categoryHeaders + categoryHeaders.plus(titleText)
 
             container?.addView(categoryView)
 
@@ -89,7 +115,7 @@ class DashboardFragment : Fragment() {
 
     private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
     {
-        val parts: List<PlanParts> = AuthServices.userData.getSelectedPlan().getPartListByCategory(category)
+        val parts: List<PlanParts> = displayingPlan.getPartListByCategory(category)
         for(i in parts.indices)
         {
             //Fill categories with sub categories here
@@ -105,15 +131,49 @@ class DashboardFragment : Fragment() {
 
             val progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
             CranstekHelper.setRadialWheel(progress, parts[i].budget, parts[i].balance)
+            progressWheels = progressWheels + progressWheels.plus(progress)
 
             //Sets up the view budget button
             val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
             viewButton.setOnClickListener {
                 this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(parts[i].category, i))
             }
+            buttons = buttons + buttons.plus(viewButton)
 
             container?.addView(subCategoryView)
         }
     }
 
+    private fun getPlanToDisplay()
+    {
+        displayingPlan = AuthServices.userData.getSelectedPlan()
+        if(!AuthServices.userData.isSelectedPlanMostRecent(displayingPlan))
+            displayingOldPlan = true
+    }
+
+    private fun handleOldPlanColours()
+    {
+        if(!buttons.isNullOrEmpty())
+        {
+            for(button: Button in buttons)
+            {
+                button.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.old_button)
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            }
+        }
+        if(!categoryHeaders.isNullOrEmpty())
+        {
+            for(text: TextView in categoryHeaders)
+            {
+                text.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+            }
+        }
+        if(!progressWheels.isNullOrEmpty())
+        {
+            for(progress: ProgressWheel in progressWheels)
+            {
+                //TODO("Progress wheel colour changes")
+            }
+        }
+    }
 }
