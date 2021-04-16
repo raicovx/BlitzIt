@@ -109,6 +109,9 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         for(invoice: UserInvoice in invoices)
         {
+            val dividerView = inflater.inflate(R.layout.part_invoice_divider, container, false)
+            container.addView(dividerView)
+
             val view = inflater.inflate(R.layout.part_invoice, container, false)
             view.findViewById<TextView>(R.id.invoice_part_amount).text = CranstekHelper.convertToCurrency(invoice.amount)
             view.findViewById<TextView>(R.id.invoice_part_id).text = invoice.invoice_id
