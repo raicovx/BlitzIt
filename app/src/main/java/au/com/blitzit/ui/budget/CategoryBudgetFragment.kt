@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -37,12 +38,12 @@ class CategoryBudgetFragment : Fragment()
             this.findNavController().navigate(CategoryBudgetFragmentDirections.actionCategoryBudgetFragmentToDashboardFragment())
         }
 
-        setupViewForSelected(view)
+        setupViewForSelected(view, inflater)
 
         return view
     }
 
-    private fun setupViewForSelected(view: View)
+    private fun setupViewForSelected(view: View, inflater: LayoutInflater)
     {
         planPart = AuthServices.userData.getSelectedPlan()!!.getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
 
@@ -58,10 +59,14 @@ class CategoryBudgetFragment : Fragment()
         currentBalanceTV.text = CranstekHelper.convertToCurrency(planPart.balance)
         val progressWheel: ProgressWheel = view.findViewById(R.id.cat_budget_overview_progress)
         CranstekHelper.setRadialWheel(progressWheel, planPart.budget, planPart.balance)
+
+        //Provider section population
+        val providerContentHolder: LinearLayout = view.findViewById(R.id.cat_budget_provider_content_holder)
+        populateProviders(inflater, providerContentHolder)
     }
 
     private fun populateProviders(inflater: LayoutInflater, container: ViewGroup?)
     {
-
+        //TODO("populate with provider summaries")
     }
 }

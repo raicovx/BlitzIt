@@ -3,152 +3,200 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/light_grey">
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient">
+
+            <TextView
+                android:id="@+id/dashboard_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/your_plan_overview"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/dashboard_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dashboard_back_button_image"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/dashboard_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/dashboard_back_button"
+                app:layout_constraintStart_toStartOf="@+id/dashboard_back_button"
+                app:layout_constraintTop_toTopOf="@+id/dashboard_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dashboard_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dashboard_topBar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dashboard_colour_gradient"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dashboard_divider">
+
+                <TextView
+                    android:id="@+id/dashboard_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/avenir"
+                    android:gravity="center"
+                    android:text="Ronnie Ruse"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/dashboard_ndis_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:fontFamily="@font/avenir"
+                    android:gravity="center"
+                    android:text="NDIS Number: 430100000"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center"
+                        android:text="@string/plan"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/dashboard_plan_status"
+                        android:layout_width="114dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/active_display"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="center"
+                        android:text="@string/active"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/dashboard_plan_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/avenir"
+                    android:gravity="center"
+                    android:text="Start Date: 19/10/2019"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/dashboard_plan_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:fontFamily="@font/avenir"
+                    android:gravity="center"
+                    android:text="End Date: 20/10/2021"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/dashboard_view_statements"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/round_button"
+                    android:drawableEnd="@drawable/forward_arrow"
+                    android:fontFamily="@font/avenir"
+                    android:text="@string/view_statements"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blitz_it_dark_blue"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/dashboard_colour_gradient"
-            android:id="@+id/TitleSpace"
-            android:paddingBottom="12dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/avenir"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="@string/your_plan_overview"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/white"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"/>
-
-            <TextView
-                android:id="@+id/dashboard_name"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/avenir"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/white"
-                android:text="Ronnie Ruse"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/dashboard_ndis_number"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/avenir"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="NDIS Number: 430100000"
-                tools:ignore="HardcodedText" />
+            android:background="@color/light_grey">
 
             <LinearLayout
+                android:id="@+id/dashboard_layout_filler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:fontFamily="@font/avenir"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="8dp"
-                    android:textSize="20sp"
-                    android:text="@string/plan"/>
-
-                <TextView
-                    android:id="@+id/dashboard_plan_status"
-                    android:layout_width="114dp"
-                    android:layout_height="32dp"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/avenir"
-                    android:layout_marginStart="8dp"
-                    android:textSize="24sp"
-                    android:background="@drawable/active_display"
-                    android:text="@string/active"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/dashboard_plan_start"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/avenir"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="Start Date: 19/10/2019"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/dashboard_plan_end"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/avenir"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="End Date: 20/10/2021"
-                tools:ignore="HardcodedText" />
-
-            <Button
-                android:id="@+id/dashboard_view_statements"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                app:backgroundTint="@color/white"
-                android:background="@drawable/round_button"
-                android:text="@string/view_statements"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                android:drawableEnd="@drawable/forward_arrow"
-                android:textColor="@color/blitz_it_dark_blue"
-                android:textAllCaps="false"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/dashboard_layout_filler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
 
         </LinearLayout>
 

@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_categoryBudgetFragment"
             app:destination="@id/categoryBudgetFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_myPlansFragment"
+            app:destination="@id/myPlansFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"

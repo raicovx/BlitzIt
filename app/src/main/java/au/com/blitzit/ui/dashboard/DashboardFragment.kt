@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.CompoundButtonCompat
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
@@ -39,6 +41,10 @@ class DashboardFragment : Fragment() {
 
     private lateinit var layoutFiller: LinearLayout
 
+    //BackButton
+    private lateinit var backButton: Button
+    private lateinit var backButtonImage: ImageView
+
     //Colour changing group
     private var buttons: List<Button> = emptyList()
     private var categoryHeaders: List<TextView> = emptyList()
@@ -51,6 +57,17 @@ class DashboardFragment : Fragment() {
 
         val mActivity : MainActivity = activity as MainActivity
         mActivity.ShowFAB()
+
+        //Back button
+        backButton = view.findViewById(R.id.dashboard_back_button)
+        backButton.setOnClickListener {
+            //Reset selected plan
+            AuthServices.userData.setSelectedPlan(AuthServices.userData.getMostRecentPlan())
+            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMyPlansFragment())
+        }
+        backButton.isVisible = false
+        backButtonImage = view.findViewById(R.id.dashboard_back_button_image)
+        backButtonImage.isVisible = false
 
         getPlanToDisplay()
         setupDashboard(view)
@@ -148,7 +165,11 @@ class DashboardFragment : Fragment() {
     {
         displayingPlan = AuthServices.userData.getSelectedPlan()
         if(!AuthServices.userData.isSelectedPlanMostRecent(displayingPlan))
+        {
             displayingOldPlan = true
+            backButtonImage.isVisible = true
+            backButton.isVisible = true
+        }
     }
 
     private fun handleOldPlanColours()
