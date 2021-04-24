@@ -46,6 +46,7 @@ object AuthServices
         try {
             Amplify.Auth.signOut()
             Log.i("AuthQuickstart", "Signed out successfully")
+            resetSignUpState()
         } catch (error: AuthException) {
             Log.e("AuthQuickstart", "Sign out failed", error)
         }

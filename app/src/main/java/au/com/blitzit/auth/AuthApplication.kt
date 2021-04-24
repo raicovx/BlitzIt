@@ -35,8 +35,10 @@ class AuthApplication : Application()
                 else -> when (AuthChannelEventName.valueOf(event.name)) {
                     AuthChannelEventName.SIGNED_IN ->
                         Log.i("AuthQuickstart", "Auth just became signed in")
-                    AuthChannelEventName.SIGNED_OUT ->
+                    AuthChannelEventName.SIGNED_OUT -> {
                         Log.i("AuthQuickstart", "Auth just became signed out")
+                        AuthServices.resetSignUpState()
+                    }
                     AuthChannelEventName.SESSION_EXPIRED -> {
                         Log.i("AuthQuickstart", "Auth session just expired")
                         runBlocking { AuthServices.attemptSignOut() }
