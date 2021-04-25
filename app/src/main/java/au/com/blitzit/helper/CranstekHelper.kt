@@ -1,12 +1,8 @@
 package au.com.blitzit.helper
 
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.util.Patterns
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import au.com.blitzit.R
-import au.com.blitzit.auth.AuthServices
 import com.app.progresviews.ProgressWheel
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -72,5 +68,19 @@ object CranstekHelper
                 tv.setBackgroundResource(R.drawable.archived_display)
             }
         }
+    }
+
+    fun formatABNText(abnString: String): String
+    {
+        return if(abnString.length == 11) {
+            buildString {
+                for(i in abnString.indices) {
+                    append(abnString[i])
+                    if(i == 1 || i == 4 || i == 7)
+                        append(' ')
+                }
+            }
+        } else
+            abnString
     }
 }

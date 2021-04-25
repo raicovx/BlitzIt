@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:layout_marginHorizontal="24dp"
+    app:cardCornerRadius="24dp"
+    android:elevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/provider_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/avenir"
+            android:text="Provider A"
+            android:textColor="@color/dark_grey"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/provider_divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/dark_grey"
+            app:layout_constraintEnd_toStartOf="@+id/provider_side_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_title"/>
+
+        <TextView
+            android:id="@+id/provider_abn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/avenir"
+            android:text="ABN: 01 234 567 892"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_divider" />
+
+        <TextView
+            android:id="@+id/provider_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/avenir"
+            android:text="Address:"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_abn" />
+
+        <TextView
+            android:id="@+id/provider_address_field_street"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/avenir"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="123 Sample Street"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toEndOf="@id/provider_address"
+            app:layout_constraintTop_toBottomOf="@id/provider_abn" />
+
+        <TextView
+            android:id="@+id/provider_address_field_suburb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/avenir"
+            android:maxLines="1"
+            android:text="Sampleton NSW 2123"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toEndOf="@id/provider_address"
+            app:layout_constraintTop_toBottomOf="@id/provider_address_field_street" />
+
+        <TextView
+            android:id="@+id/provider_contact_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/avenir"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Contact Email: sample@provider.com.au"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_address_field_suburb" />
+
+        <TextView
+            android:id="@+id/provider_contact_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="39dp"
+            android:fontFamily="@font/avenir"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Contact Number: 0412 345 678"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/provider_side_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_contact_email" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/provider_side_bar"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:background="@color/light_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/forward_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/provider_contact_number" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

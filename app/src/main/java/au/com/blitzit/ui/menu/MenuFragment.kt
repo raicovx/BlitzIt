@@ -23,6 +23,7 @@ class MenuFragment : Fragment()
     private lateinit var profileButton: Button
     private lateinit var invoicesButton: Button
     private lateinit var myPlansButton: Button
+    private lateinit var myProvidersButton: Button
 
     companion object{
         fun newInstance() = MenuFragment
@@ -73,6 +74,11 @@ class MenuFragment : Fragment()
         myPlansButton = view.findViewById(R.id.menu_plans_button)
         myPlansButton.setOnClickListener {
             navController.navigate(MenuFragmentDirections.actionMenuFragmentToMyPlansFragment())
+        }
+
+        myProvidersButton = view.findViewById(R.id.menu_providers_button)
+        myProvidersButton.setOnClickListener {
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToMyProvidersFragment())
         }
 
         val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)

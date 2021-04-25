@@ -2,15 +2,14 @@ package au.com.blitzit.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import au.com.blitzit.data.ProviderSummary
-import au.com.blitzit.data.UserData
-import au.com.blitzit.data.UserInvoice
-import au.com.blitzit.data.UserPlan
+import au.com.blitzit.data.*
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
 import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
+import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import kotlinx.coroutines.*
@@ -99,9 +98,10 @@ object AuthServices
     suspend fun checkAuthSession()
     {
         try {
-            val session = Amplify.Auth.fetchAuthSession()
+            val session = Amplify.Auth.fetchAuthSession() as AWSCognitoAuthSession
+            val id = session.identityId
             Log.i("AmplifyQuickstart", "Auth session = $session")
-            if(session.isSignedIn) {
+            if(id.type == AuthSessionResult.Type.SUCCESS && session.isSignedIn) {
                 liveSignInState.postValue(SignInState.SigningIn)
                 getData()
             }
@@ -209,8 +209,9 @@ object AuthServices
         try{
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET succeeded for Plan Provider Summary: ${response.data.asString()}")
-            val providerSum: ProviderSummary = Gson().fromJson(response.data.asString(), ProviderSummary::class.java)
-            plan.planProviderSummary = providerSum
+            val providerSummary: ProviderSummary = Gson().fromJson(response.data.asString(), ProviderSummary::class.java)
+            plan.planProviderSummary = providerSummary
+            Log.i("GAZ_INFO", "Provider Summary: ${plan.planProviderSummary}")
         }
         catch (error: ApiException)
         {
