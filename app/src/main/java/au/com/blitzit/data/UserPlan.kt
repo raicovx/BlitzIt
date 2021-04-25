@@ -72,6 +72,19 @@ class UserPlan constructor(
         return providerInvoices
     }
 
+    fun getInvoicesBySpecificProvider(provider: String): List<UserInvoice>
+    {
+        var providerInvoices: List<UserInvoice> = emptyList()
+
+        for(invoice: UserInvoice in planInvoices!!)
+        {
+            if(invoice.provider == provider)
+                providerInvoices = providerInvoices.plus(invoice)
+        }
+
+        return providerInvoices
+    }
+
     private fun getEmptyProviderInvoiceList(): List<ProviderInvoices>
     {
         var providerInvoices: List<ProviderInvoices> = emptyList()

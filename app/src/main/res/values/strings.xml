@@ -101,6 +101,9 @@
     <string name="filter">Filter</string>
     <string name="providers">Providers</string>
     <string name="provider">Provider</string>
+    <string name="contact_email">Contact Email:</string>
+    <string name="contact_person">Contact Person:</string>
+    <string name="contact_number_extra">Contact Number:</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

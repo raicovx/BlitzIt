@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.ProviderOverview
+import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,20 +41,23 @@ class MyProvidersFragment : Fragment()
 
         providersContainer = view.findViewById(R.id.providers_container)
 
-        for (providerOverview: ProviderOverview in AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview)
+        for(i in AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview.indices)
         {
-            populateProviders(providerOverview, layoutInflater, providersContainer)
+            populateProviders(i, layoutInflater, providersContainer)
         }
 
         return view
     }
 
-    private fun populateProviders(providerOverview: ProviderOverview, inflater: LayoutInflater, container: ViewGroup)
+    private fun populateProviders(index: Int, inflater: LayoutInflater, container: ViewGroup)
     {
+        //Get the provider overview
+        val providerOverview: ProviderOverview = AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview[index]
+        //Create the view and inflate it
         val view = inflater.inflate(R.layout.part_provider_display, container, false)
 
+        //NAME
         view.findViewById<TextView>(R.id.provider_title).text = providerOverview.provider.name
-
         //ABN
         view.findViewById<TextView>(R.id.provider_abn).text = providerOverview.provider.getABN()
         //ADDRESS - street
@@ -64,6 +68,12 @@ class MyProvidersFragment : Fragment()
         view.findViewById<TextView>(R.id.provider_contact_email).text = providerOverview.provider.getEmailAddress()
         //PHONE
         view.findViewById<TextView>(R.id.provider_contact_number).text = providerOverview.provider.getContactNumber()
+
+        //Selectable
+        val selectableButton: MaterialCardView = view.findViewById(R.id.provider_display_button)
+        selectableButton.setOnClickListener {
+            this.findNavController().navigate(MyProvidersFragmentDirections.actionMyProvidersFragmentToProviderDetailFragment(index))
+        }
 
         container.addView(view)
     }

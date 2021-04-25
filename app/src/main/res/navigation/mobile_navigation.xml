@@ -275,5 +275,21 @@
         <action
             android:id="@+id/action_myProvidersFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_myProvidersFragment_to_providerDetailFragment"
+            app:destination="@id/providerDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/providerDetailFragment"
+        android:name="au.com.blitzit.ui.providers.ProviderDetailFragment"
+        android:label="fragment_providers_detail"
+        tools:layout="@layout/fragment_providers_detail" >
+        <action
+            android:id="@+id/action_providerDetailFragment_to_myProvidersFragment"
+            app:destination="@id/myProvidersFragment" />
+        <argument
+            android:name="providerOverviewIndex"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>
