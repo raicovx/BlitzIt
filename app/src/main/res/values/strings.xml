@@ -108,4 +108,8 @@
         <item>Provider</item>
         <item>Most Recent</item>
     </string-array>
+    <string-array name="contact_methods">
+        <item>Email</item>
+        <item>Phone</item>
+    </string-array>
 </resources>

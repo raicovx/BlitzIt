@@ -79,8 +79,8 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         //Create the ArrayAdapter using the string resource
         val elements: Array<String> = resources.getStringArray(R.array.filter_array)
-        val dataAdapter = ArrayAdapter(requireContext(), R.layout.filter_spinner_item, elements)
-        dataAdapter.setDropDownViewResource(R.layout.filter_spinner_dropdown_item)
+        val dataAdapter = ArrayAdapter(requireContext(), R.layout.spinner_invoice_filter_item, elements)
+        dataAdapter.setDropDownViewResource(R.layout.spinner_invoice_filter_dropdown_item)
         filterSpinner.adapter = dataAdapter
         filterSpinner.onItemSelectedListener = this
     }

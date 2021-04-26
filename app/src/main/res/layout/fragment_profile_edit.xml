@@ -143,36 +143,22 @@
                 android:textSize="21sp"
                 android:textStyle="bold"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_edit_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="0412 345 678"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_contact"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_contact"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_contact"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="@font/avenir"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="8dp"
+                android:text="0412 345 678"
+                android:textColor="@color/dark_grey"
+                android:drawableRight="@drawable/edit_icon_complete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -183,36 +169,22 @@
                 android:fontFamily="@font/avenir"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_edit_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="example@email.com"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_email"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_email"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_email"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="@font/avenir"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="8dp"
+                android:text="example@email.com"
+                android:textColor="@color/dark_grey"
+                android:drawableRight="@drawable/edit_icon_complete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -223,36 +195,39 @@
                 android:fontFamily="@font/avenir"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/profile_edit_statement_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/profile_edit_statement_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:background="@drawable/input_bg"
-                    android:fontFamily="@font/avenir"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="example@email.com"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_icon_round"
-                    android:src="@drawable/edit_icon"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_edit_statement_email"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_statement_email"
-                    app:layout_constraintTop_toTopOf="@+id/profile_edit_statement_email"
-                    tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="42dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="@font/avenir"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="8dp"
+                android:text="example@email.com"
+                android:textColor="@color/dark_grey"
+                android:drawableRight="@drawable/edit_icon_complete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blitz_it_dark_blue"
+                android:text="Preferred Method of Contact"
+                android:fontFamily="@font/avenir"
+                android:textSize="21sp"
+                android:textStyle="bold"/>
+            <Spinner
+                android:id="@+id/profile_edit_contact_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="@drawable/input_bg"
+                android:backgroundTint="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -273,13 +248,13 @@
                     android:paddingVertical="12dp"
                     android:paddingHorizontal="12dp"
                     android:background="@drawable/input_bg"
-                    android:hint="Is there anything else we should know?"
+                    android:hint="e.g Date of birth is incorrect, please amend surname to XXXX"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:textColor="@color/dark_grey"
                     android:gravity="start|top"
                     android:fontFamily="@font/avenir"
-                    android:maxLines="12"
+                    android:maxLines="20"
                     android:inputType="textMultiLine"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -289,7 +264,7 @@
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/edit_icon_round"
+                    android:background="@drawable/edit_icon_complete"
                     android:src="@drawable/edit_icon"
                     android:padding="3dp"
                     app:layout_constraintBottom_toBottomOf="@+id/profile_edit_notes"
