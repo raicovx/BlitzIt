@@ -2,17 +2,30 @@ package au.com.blitzit.data
 
 import android.util.Log
 import au.com.blitzit.helper.CranstekHelper
+import com.google.gson.annotations.SerializedName
 
 class UserData constructor(
-        val ndis_number: Int,
-        val first_name: String,
-        val last_name: String,
+        @SerializedName("ndis_number")
+        val ndisNumber: Int,
+        @SerializedName("first_name")
+        val firstName: String,
+        @SerializedName("last_name")
+        val lastName: String,
         val mobile: String,
-        val address_line: String,
+        @SerializedName("address_line")
+        val addressLine: String,
         val suburb: String,
         val postcode: Int,
         val state: String,
-        val date_of_birth: String,
+        @SerializedName("date_of_birth")
+        val dateOfBirth: String,
+        val email: String,
+        @SerializedName("statement_email")
+        val statementEmail: List<String>,
+        @SerializedName("primary_contacts")
+        val primaryContacts: List<PrimaryContact>,
+        @SerializedName("support_coordinator")
+        val supportCoordinators: List<SupportCoordinator>,
         var plans: Array<UserPlan>?)
 {
     //Store the current users active plan
@@ -20,7 +33,7 @@ class UserData constructor(
 
     fun getFullName(): String
     {
-        return "$first_name $last_name"
+        return "$firstName $lastName"
     }
 
     fun getSelectedPlan(): UserPlan

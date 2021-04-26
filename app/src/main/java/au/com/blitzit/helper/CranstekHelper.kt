@@ -83,4 +83,18 @@ object CranstekHelper
         } else
             abnString
     }
+
+    fun formatMobileNumberText(string: String): String
+    {
+        return if(string.length == 10) {
+            buildString {
+                for(i in string.indices) {
+                    append(string[i])
+                    if(i == 3 || i == 6)
+                        append(' ')
+                }
+            }
+        } else
+            string
+    }
 }

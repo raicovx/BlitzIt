@@ -40,7 +40,7 @@ class MyPlansFragment: Fragment()
         }
 
         view.findViewById<TextView>(R.id.my_plan_profile_name).text = AuthServices.userData.getFullName()
-        val ndis: String = "NDIS Number: " + AuthServices.userData.ndis_number.toString()
+        val ndis: String = "NDIS Number: " + AuthServices.userData.ndisNumber.toString()
         view.findViewById<TextView>(R.id.my_plan_ndis_number).text = ndis
     }
 

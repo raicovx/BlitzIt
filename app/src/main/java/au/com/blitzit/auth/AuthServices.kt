@@ -137,7 +137,7 @@ object AuthServices
     private suspend fun getPlanData()
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndis_number}")
+                .addPath("/participant/${userData.ndisNumber}")
                 .build()
 
         try{
@@ -160,7 +160,7 @@ object AuthServices
             for(i in userData.plans!!.indices)
             {
                 val request = RestOptions.builder()
-                        .addPath("/participant/${userData.ndis_number}/${userData.plans!![i].planID}")
+                        .addPath("/participant/${userData.ndisNumber}/${userData.plans!![i].planID}")
                         .build()
 
                 try{
@@ -185,7 +185,7 @@ object AuthServices
     private suspend fun getInvoiceDetails(plan: UserPlan)
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndis_number}/${plan.planID}/invoices")
+                .addPath("/participant/${userData.ndisNumber}/${plan.planID}/invoices")
                 .build()
 
         try{
@@ -203,7 +203,7 @@ object AuthServices
     private suspend fun getProviderSummary(plan: UserPlan)
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndis_number}/${plan.planID}/providerSummary")
+                .addPath("/participant/${userData.ndisNumber}/${plan.planID}/providerSummary")
                 .build()
 
         try{

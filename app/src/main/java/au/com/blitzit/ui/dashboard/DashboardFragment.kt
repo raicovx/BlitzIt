@@ -90,7 +90,7 @@ class DashboardFragment : Fragment() {
         val titleName: TextView = view.findViewById(R.id.dashboard_name)
         titleName.text = AuthServices.userData.getFullName()
         val ndisNumber: TextView = view.findViewById(R.id.dashboard_ndis_number)
-        val ndis = "NDIS Number: " + AuthServices.userData.ndis_number
+        val ndis = "NDIS Number: " + AuthServices.userData.ndisNumber
         ndisNumber.text = ndis
 
         val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
