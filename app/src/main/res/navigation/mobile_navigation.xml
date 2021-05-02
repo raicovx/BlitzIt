@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_menuFragment_to_myProvidersFragment"
             app:destination="@id/myProvidersFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_trackSpendingFragment"
+            app:destination="@id/trackSpendingFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
@@ -291,5 +294,14 @@
             android:name="providerOverviewIndex"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackSpendingFragment"
+        android:name="au.com.blitzit.ui.trackspending.TrackSpendingFragment"
+        android:label="fragment_track_spending"
+        tools:layout="@layout/fragment_track_spending" >
+        <action
+            android:id="@+id/action_trackSpendingFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

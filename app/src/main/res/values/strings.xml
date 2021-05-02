@@ -104,6 +104,15 @@
     <string name="contact_email">Contact Email:</string>
     <string name="contact_person">Contact Person:</string>
     <string name="contact_number_extra">Contact Number:</string>
+    <string name="track_your_spending">Track your spending</string>
+    <string name="choose_category_to_view">Choose Category to view</string>
+    <string name="your_current_spend_is">Your current spend is:</string>
+    <string name="current_average_spend">Current Average Spend:</string>
+    <string name="weekly_spend">Weekly spend:</string>
+    <string name="on_track">On Track</string>
+    <string name="plan_end_date">Plan end date:</string>
+    <string name="estimated_consumption_date">Estimated consumption date:</string>
+    <string name="total_claimed_for_category">Total claimed for Category</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

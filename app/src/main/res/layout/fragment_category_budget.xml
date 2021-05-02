@@ -610,7 +610,7 @@
                             android:gravity="center_vertical"
                             android:paddingEnd="24dp"
                             android:paddingStart="16dp"
-                            android:text="Total claimed for Category"
+                            android:text="@string/total_claimed_for_category"
                             android:textColor="@color/dark_grey"
                             android:textSize="21sp"
                             app:layout_constraintBottom_toBottomOf="parent"
