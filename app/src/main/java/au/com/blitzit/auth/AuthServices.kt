@@ -167,6 +167,7 @@ object AuthServices
                     val response = Amplify.API.get(request, "mobileAPI")
                     Log.i("GAZ_INFO", "GET succeeded for PlanDetails: ${response.data.asString()}")
                     val userPlan: UserPlan = Gson().fromJson(response.data.asString(), UserPlan::class.java)
+
                     userData.plans?.set(i, userPlan)
 
                     getInvoiceDetails(userData.plans!![i])

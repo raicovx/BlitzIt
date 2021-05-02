@@ -111,14 +111,7 @@ class UserPlan constructor(
     {
         val sortedInvoices: List<UserInvoice> = planInvoices!!.toList()
         sortedInvoices.sortedByDescending { it.invoice_date }
-        Log.i("GAZ_INGO", "sorted invoice: $sortedInvoices")
+        Log.i("GAZ_INFO", "sorted invoice: $sortedInvoices")
         return sortedInvoices
-    }
-}
-
-data class ProviderInvoices(val provider: String, var invoices: List<UserInvoice>?)
-{
-    init {
-        invoices = emptyList()
     }
 }
