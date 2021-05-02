@@ -83,5 +83,4 @@ class UserData constructor(
         else
             return null
     }
-
 }

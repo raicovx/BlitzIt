@@ -43,6 +43,35 @@ class UserPlan constructor(
         return categories
     }
 
+    fun getPartLabels(): List<String>
+    {
+        var labels: List<String> = emptyList()
+        for(part: PlanParts in planParts)
+        {
+            if(part.category == "Core" || part.category == "CORE")
+                labels = labels.plus("Core")
+            else
+                labels = labels.plus(part.label)
+        }
+
+        return labels
+    }
+
+    fun getPartByLabel(label: String): PlanParts?
+    {
+        for(part: PlanParts in planParts)
+        {
+            if((label == "Core" || label == "CORE") && (part.category == "Core" || part.category == "CORE"))
+            {
+                return part
+            }
+            else if(part.label == label)
+                return part
+        }
+
+        return null
+    }
+
     fun getPartListByCategory(category: String): List<PlanParts>
     {
         var parts: List<PlanParts> = listOf()

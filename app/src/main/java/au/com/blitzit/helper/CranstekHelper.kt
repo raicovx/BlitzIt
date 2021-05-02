@@ -50,6 +50,14 @@ object CranstekHelper
         return date1.after(date2)
     }
 
+    fun convertToReadableDate(value: String): String
+    {
+        val inFormatter = SimpleDateFormat("yyyyMMdd")
+        val date: Date = inFormatter.parse(value)
+        val outFormatter = SimpleDateFormat("dd/MM/yyyy")
+        return outFormatter.format(date)
+    }
+
     //Sets the active display of a plan (text view)
     fun setPlanStatusDisplay(tv: TextView, status: String)
     {
