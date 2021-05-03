@@ -74,10 +74,29 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         consumptionDateTV.text = CranstekHelper.convertToReadableDate(selectedPlanPart.estimatedExhaustionDate)
     }
 
+    private fun populateCategorySpending()
+    {
+        val container: LinearLayout = mainView.findViewById(R.id.spending_provider_content_holder)
+
+        //Remove all old views
+        container.removeAllViews()
+
+        val providerSpending = AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(selectedPlanPart.label)
+
+        for(providerSpend: Map.Entry<String, Double> in providerSpending)
+        {
+            val view = layoutInflater.inflate(R.layout.part_budget_provider, container, false)
+            view.findViewById<TextView>(R.id.provider_id).text = providerSpend.key
+            view.findViewById<TextView>(R.id.provider_amount).text = CranstekHelper.convertToCurrency(providerSpend.value)
+            container.addView(view)
+        }
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
         selectedPlanPart = AuthServices.userData.getSelectedPlan().getPartByLabel(planPartLabels[position])!!
         populateBaseData()
+        populateCategorySpending()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

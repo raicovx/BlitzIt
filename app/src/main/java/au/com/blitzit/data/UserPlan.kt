@@ -143,4 +143,23 @@ class UserPlan constructor(
         Log.i("GAZ_INFO", "sorted invoice: $sortedInvoices")
         return sortedInvoices
     }
+
+    fun getProviderSpendingByCategoryLabel(label: String): Map<String, Double>
+    {
+        var values: Map<String, Double> = emptyMap()
+
+        for(providerOverview: ProviderOverview in planProviderSummary!!.providerOverview)
+        {
+            for(providerCategorySpend: ProviderSpending in providerOverview.categories)
+            {
+                Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
+                if(providerCategorySpend.label == label)
+                {
+                    values = values.plus(Pair(providerOverview.provider.name, providerCategorySpend.spend))
+                }
+            }
+        }
+
+        return values
+    }
 }
