@@ -81,9 +81,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         //Remove all old views
         container.removeAllViews()
 
-        var providerSpending: Map<String, Double> = emptyMap()
-        providerSpending =
-            if(selectedPlanPart.category == "Core" || selectedPlanPart.category == "CORE") {
+        var providerSpending: Map<String, Double> = if(selectedPlanPart.category == "Core" || selectedPlanPart.category == "CORE") {
                 AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabels(selectedPlanPart.subLabels)
             } else
                 AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(selectedPlanPart.label)

@@ -67,8 +67,7 @@ class CategoryBudgetFragment : Fragment()
 
     private fun populateProviders(inflater: LayoutInflater, container: ViewGroup)
     {
-        var providerSpending: Map<String, Double> = emptyMap()
-        providerSpending = if(planPart.category == "Core" || planPart.category == "CORE") {
+        var providerSpending: Map<String, Double> = if(planPart.category == "Core" || planPart.category == "CORE") {
             AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabels(planPart.subLabels)
         } else
             AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(planPart.label)
