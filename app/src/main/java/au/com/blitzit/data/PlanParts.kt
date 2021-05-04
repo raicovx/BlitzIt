@@ -1,8 +1,10 @@
 package au.com.blitzit.data
 
+import android.util.Log
+import au.com.blitzit.helper.CranstekHelper
 import com.google.gson.annotations.SerializedName
 
-class PlanParts constructor(
+data class PlanParts (
         val balance: Double,
         val budget: Double,
         val label: String,
@@ -21,4 +23,5 @@ class PlanParts constructor(
         val averageSpendMonth: Double,
         @SerializedName("estimated_exhaustion_date")
         val estimatedExhaustionDate: String,
-        val totals: Map<String, Double>)
+        val totals: Map<String, Double>,
+        var subLabels: List<String>)

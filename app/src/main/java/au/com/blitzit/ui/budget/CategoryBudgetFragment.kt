@@ -65,8 +65,20 @@ class CategoryBudgetFragment : Fragment()
         populateProviders(inflater, providerContentHolder)
     }
 
-    private fun populateProviders(inflater: LayoutInflater, container: ViewGroup?)
+    private fun populateProviders(inflater: LayoutInflater, container: ViewGroup)
     {
-        //TODO("populate with provider summaries")
+        var providerSpending: Map<String, Double> = emptyMap()
+        providerSpending = if(planPart.category == "Core" || planPart.category == "CORE") {
+            AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabels(planPart.subLabels)
+        } else
+            AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(planPart.label)
+
+        for(providerSpend: Map.Entry<String, Double> in providerSpending)
+        {
+            val view = inflater.inflate(R.layout.part_budget_provider, container, false)
+            view.findViewById<TextView>(R.id.provider_id).text = providerSpend.key
+            view.findViewById<TextView>(R.id.provider_amount).text = CranstekHelper.convertToCurrency(providerSpend.value)
+            container.addView(view)
+        }
     }
 }

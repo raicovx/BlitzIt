@@ -81,7 +81,12 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         //Remove all old views
         container.removeAllViews()
 
-        val providerSpending = AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(selectedPlanPart.label)
+        var providerSpending: Map<String, Double> = emptyMap()
+        providerSpending =
+            if(selectedPlanPart.category == "Core" || selectedPlanPart.category == "CORE") {
+                AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabels(selectedPlanPart.subLabels)
+            } else
+                AuthServices.userData.getSelectedPlan().getProviderSpendingByCategoryLabel(selectedPlanPart.label)
 
         for(providerSpend: Map.Entry<String, Double> in providerSpending)
         {

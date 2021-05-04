@@ -1,5 +1,6 @@
 package au.com.blitzit.helper
 
+import android.util.Log
 import android.util.Patterns
 import android.widget.TextView
 import au.com.blitzit.R
@@ -105,4 +106,22 @@ object CranstekHelper
         } else
             string
     }
+
+    fun splitLabelsByComma(label: String): List<String>
+    {
+        val labels: List<String> = label.split(",", "and")
+        var returns: List<String> = emptyList()
+        for(i in labels.indices)
+        {
+            var str: String = labels[i]
+            if(str.startsWith(" "))
+                str = str.trimStart()
+            if(str.last().isWhitespace())
+                str = str.trimEnd()
+            returns = returns.plus(str)
+        }
+
+        return returns
+    }
+
 }

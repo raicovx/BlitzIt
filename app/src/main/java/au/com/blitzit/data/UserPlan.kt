@@ -162,4 +162,26 @@ class UserPlan constructor(
 
         return values
     }
+
+    fun getProviderSpendingByCategoryLabels(labels: List<String>): Map<String, Double>
+    {
+        var values: Map<String, Double> = emptyMap()
+
+        for(providerOverview: ProviderOverview in planProviderSummary!!.providerOverview)
+        {
+            for(providerCategorySpend: ProviderSpending in providerOverview.categories)
+            {
+                for(label in labels)
+                {
+                    Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
+                    if(providerCategorySpend.label == label)
+                    {
+                        values = values.plus(Pair(providerOverview.provider.name, providerCategorySpend.spend))
+                    }
+                }
+            }
+        }
+
+        return values
+    }
 }

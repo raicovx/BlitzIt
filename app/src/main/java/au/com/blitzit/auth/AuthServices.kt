@@ -3,6 +3,7 @@ package au.com.blitzit.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.data.*
+import au.com.blitzit.helper.CranstekHelper
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
@@ -169,6 +170,16 @@ object AuthServices
                     val userPlan: UserPlan = Gson().fromJson(response.data.asString(), UserPlan::class.java)
 
                     userData.plans?.set(i, userPlan)
+
+                    //Get core sub labels
+                    for(planPart: PlanParts in userData.plans!![i].planParts)
+                    {
+                        if(planPart.category == "CORE" || planPart.category == "Core" || planPart.category == "core")
+                        {
+                            planPart.subLabels = CranstekHelper.splitLabelsByComma(planPart.label)
+                            //Log.i("GAZ_SUB", "Sub label: ${planPart.subLabels}, count: ${planPart.subLabels.count()}")
+                        }
+                    }
 
                     getInvoiceDetails(userData.plans!![i])
                     getProviderSummary(userData.plans!![i])
