@@ -76,12 +76,17 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         graph = mainView.findViewById(R.id.spending_graph)
 
         var graphData: List<DataPoint> = emptyList()
+        var index: Int = 0
         for(total: Map.Entry<String, Double> in selectedPlanPart.totals)
         {
-            val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
+            //val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
+            val month: String = CranstekHelper.getMonthTitleFromMonthNumber(CranstekHelper.getMonthNumberFromDateString(total.key))
+            val dataPoint = DataPoint(index, total.value.roundToInt(), month, total.value)
             graphData = graphData.plus(dataPoint)
+            index++
         }
 
+        graph.setGraphOffset(100,100)
         graph.setData(graphData)
         Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
         Log.i("GAZ_GRAPH", "graph dataset: $graphData")
