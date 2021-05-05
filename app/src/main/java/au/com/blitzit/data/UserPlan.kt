@@ -140,7 +140,7 @@ class UserPlan constructor(
     {
         val sortedInvoices: List<UserInvoice> = planInvoices!!.toList()
         sortedInvoices.sortedByDescending { it.invoice_date }
-        Log.i("GAZ_INFO", "sorted invoice: $sortedInvoices")
+        //Log.i("GAZ_INFO", "sorted invoice: $sortedInvoices")
         return sortedInvoices
     }
 
@@ -152,7 +152,7 @@ class UserPlan constructor(
         {
             for(providerCategorySpend: ProviderSpending in providerOverview.categories)
             {
-                Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
+                //Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
                 if(providerCategorySpend.label == label)
                 {
                     values = values.plus(Pair(providerOverview.provider.name, providerCategorySpend.spend))
@@ -173,7 +173,7 @@ class UserPlan constructor(
             {
                 for(label in labels)
                 {
-                    Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
+                    //Log.i("Gaz_INFO", "GPSBCL: Checking ${providerCategorySpend.label} to $label")
                     if(providerCategorySpend.label == label)
                     {
                         values = values.plus(Pair(providerOverview.provider.name, providerCategorySpend.spend))

@@ -124,4 +124,47 @@ object CranstekHelper
         return returns
     }
 
+    fun getMonthTitleFromMonthNumber(value: Int): String
+    {
+        var returnString = "NULL"
+        when(value){
+            1 -> returnString = "JAN"
+            2 -> returnString = "FEB"
+            3 -> returnString = "MAR"
+            4 -> returnString = "APR"
+            5 -> returnString = "MAY"
+            6 -> returnString = "JUN"
+            7 -> returnString = "JUL"
+            8 -> returnString = "AUG"
+            9 -> returnString = "SEP"
+            10 -> returnString = "OCT"
+            11 -> returnString = "NOV"
+            12 -> returnString = "DEC"
+        }
+        return returnString
+    }
+
+    fun getMonthNumberFromDateString(value: String): Int
+    {
+        val inFormatter = SimpleDateFormat("yyyyMM")
+        val date: Date = inFormatter.parse(value)
+        val outFormatter = SimpleDateFormat("MM")
+
+        var returnValue = 0
+        when(outFormatter.format(date)){
+            "01" -> returnValue = 1
+            "02" -> returnValue = 2
+            "03" -> returnValue = 3
+            "04" -> returnValue = 4
+            "05" -> returnValue = 5
+            "06" -> returnValue = 6
+            "07" -> returnValue = 7
+            "08" -> returnValue = 8
+            "09" -> returnValue = 9
+            "10" -> returnValue = 10
+            "11" -> returnValue = 11
+            "12" -> returnValue = 12
+        }
+        return returnValue
+    }
 }

@@ -107,6 +107,16 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <au.com.blitzit.views.GraphView
+                android:id="@+id/spending_graph"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spending_tracker_spinner_card" />
+
             <TextView
                 android:id="@+id/spending_on_track_text"
                 android:layout_width="wrap_content"
@@ -121,7 +131,7 @@
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spending_tracker_spinner_card" />
+                app:layout_constraintTop_toBottomOf="@id/spending_graph" />
 
             <TextView
                 android:id="@+id/spending_on_track_icon"
@@ -140,7 +150,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spending_on_track_text"
-                app:layout_constraintTop_toBottomOf="@id/spending_tracker_spinner_card" />
+                app:layout_constraintTop_toBottomOf="@id/spending_graph" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

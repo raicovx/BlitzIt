@@ -12,6 +12,9 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.helper.CranstekHelper
+import au.com.blitzit.views.DataPoint
+import au.com.blitzit.views.GraphView
+import kotlin.math.roundToInt
 
 class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 {
@@ -28,6 +31,8 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     private lateinit var currentAverageSpendTV: TextView
     private lateinit var planEndDateTV: TextView
     private lateinit var consumptionDateTV: TextView
+
+    private lateinit var graph: GraphView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -66,6 +71,22 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         consumptionDateTV = mainView.findViewById(R.id.spending_consumption_date_data)
     }
 
+    private fun populateGraph()
+    {
+        graph = mainView.findViewById(R.id.spending_graph)
+
+        var graphData: List<DataPoint> = emptyList()
+        for(total: Map.Entry<String, Double> in selectedPlanPart.totals)
+        {
+            val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
+            graphData = graphData.plus(dataPoint)
+        }
+
+        graph.setData(graphData)
+        Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
+        Log.i("GAZ_GRAPH", "graph dataset: $graphData")
+    }
+
     private fun populateBaseData()
     {
         weeklySpendTV.text = CranstekHelper.convertToCurrency(selectedPlanPart.averageTargetWeek)
@@ -100,6 +121,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         selectedPlanPart = AuthServices.userData.getSelectedPlan().getPartByLabel(planPartLabels[position])!!
         populateBaseData()
         populateCategorySpending()
+        populateGraph()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
