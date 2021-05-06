@@ -1,14 +1,17 @@
 package au.com.blitzit.views
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.DashPathEffect
-import android.graphics.Paint
+import android.graphics.*
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import au.com.blitzit.R
+import kotlin.math.roundToInt
 
 class GraphView(context: Context, attributeSet: AttributeSet): View(context, attributeSet)
 {
@@ -20,7 +23,10 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     private var graphWidthOffset = 0
     private var graphHeightOffset = 0
 
+    private var amountSteps = 0
+
     private val blitzItBlue = ContextCompat.getColor(context, R.color.blitz_it_medium_blue)
+    private val textFont = ResourcesCompat.getFont(context, R.font.avenir)
 
     private val dataPointPaint = Paint().apply{
         color = blitzItBlue
@@ -32,7 +38,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         color = blitzItBlue
     }
 
-    private val intervals = FloatArray(2){1f}
+    private val intervals = FloatArray(2){100f}
     private val dataPointLinePaint = Paint().apply {
         color = blitzItBlue
         strokeWidth = 2f
@@ -43,7 +49,21 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
     private val axisLinePaint = Paint().apply {
         color = Color.WHITE
-        strokeWidth = 3f
+        strokeWidth = 1f
+    }
+
+    private val monthTextPaint: TextPaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = 10 * resources.displayMetrics.density
+        typeface = textFont
+        color = Color.WHITE
+    }
+
+    private val amountTextPaint: TextPaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = 10 * resources.displayMetrics.density
+        typeface = textFont
+        color = Color.WHITE
     }
 
     fun setGraphOffset(widthOffset: Int, heightOffset: Int)
@@ -56,8 +76,12 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     {
         xMin = newDataSet.minByOrNull { it.xVal }?.xVal ?: 0
         xMax = newDataSet.maxByOrNull { it.xVal }?.xVal ?: 0
-        yMin = newDataSet.minByOrNull { it.yVal }?.yVal ?: 0
+        yMin = 0
         yMax = newDataSet.maxByOrNull { it.yVal }?.yVal ?: 0
+        yMax = ((yMax + 999) / 1000.0).roundToInt() * 1000
+
+        amountSteps = yMax / 1000
+
         dataSet.clear()
         dataSet.addAll(newDataSet)
         invalidate()
@@ -73,7 +97,17 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
             canvas.drawLine(i.toRealX() + graphWidthOffset, 0f, i.toRealX() + graphWidthOffset, getGraphHeight().toFloat(), axisLinePaint)
         }
 
+        //Draw amounts
+        for(i in 1..amountSteps)
+        {
+            val amount = i * 1000
+            canvas.drawText(amount.toString(), 0f, amount.toRealY() + (getAmountTextHeight() / 2), amountTextPaint)
+        }
+
         dataSet.forEachIndexed{ index, currentDataPoint ->
+            //Draw month
+            canvas.drawText(currentDataPoint.month, currentDataPoint.xVal.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat() - (graphHeightOffset / 2.5f), monthTextPaint)
+
             val realX = currentDataPoint.xVal.toRealX() + graphWidthOffset
             val realY = currentDataPoint.yVal.toRealY()
 
@@ -91,13 +125,16 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
             canvas.drawCircle(realX, realY, 7f, dataPointFillPaint)
             canvas.drawCircle(realX, realY, 7f, dataPointPaint)
         }
-
-        //canvas.drawLine(0f, 0f, 0f, height.toFloat(), axisLinePaint)
-        //canvas.drawLine(0f, height.toFloat(), width.toFloat(), height.toFloat(), axisLinePaint)
     }
 
     private fun Int.toRealX() = toFloat() / xMax * getGraphWidth()
-    private fun Int.toRealY() = toFloat() / yMax * getGraphHeight()
-    private fun getGraphWidth() = width - graphWidthOffset - 20
+    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight()) + 25
+    private fun getGraphWidth() = width - graphWidthOffset - 40
     private fun getGraphHeight() = height - graphHeightOffset
+    private fun getMonthTextWidth() = monthTextPaint.measureText("###").roundToInt()
+    private fun getAmountTextHeight(): Int {
+        val bounds = Rect()
+        amountTextPaint.getTextBounds(yMax.toString(), 0, yMax.toString().length, bounds)
+        return bounds.height()
+    }
 }

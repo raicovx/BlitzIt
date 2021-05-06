@@ -86,7 +86,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
             index++
         }
 
-        graph.setGraphOffset(100,100)
+        graph.setGraphOffset(100,50)
         graph.setData(graphData)
         Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
         Log.i("GAZ_GRAPH", "graph dataset: $graphData")
