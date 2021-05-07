@@ -74,9 +74,20 @@ class CategoryBudgetFragment : Fragment()
 
         for(providerSpend: Map.Entry<String, Double> in providerSpending)
         {
+            val dividerView = inflater.inflate(R.layout.part_invoice_divider, container, false)
+            container.addView(dividerView)
+
             val view = inflater.inflate(R.layout.part_budget_provider, container, false)
+
+            val providerIndex = AuthServices.userData.getSelectedPlan().getProviderSummaryIndexByProviderName(providerSpend.key)
+            val providerSelectionButton = view.findViewById<LinearLayout>(R.id.provider_button)
+            providerSelectionButton.setOnClickListener {
+                this.findNavController().navigate(CategoryBudgetFragmentDirections.actionCategoryBudgetFragmentToProviderDetailFragment(providerIndex))
+            }
+
             view.findViewById<TextView>(R.id.provider_id).text = providerSpend.key
             view.findViewById<TextView>(R.id.provider_amount).text = CranstekHelper.convertToCurrency(providerSpend.value)
+
             container.addView(view)
         }
     }

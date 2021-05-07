@@ -184,4 +184,18 @@ class UserPlan constructor(
 
         return values
     }
+
+    fun getProviderSummaryIndexByProviderName(provider: String): Int
+    {
+        for(i in planProviderSummary!!.providerOverview.indices)
+        {
+            if(provider == planProviderSummary!!.providerOverview[i].provider.name)
+            {
+                return i
+            }
+        }
+
+        return 0
+    }
+
 }

@@ -191,6 +191,9 @@
             android:name="planPartNumber"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_categoryBudgetFragment_to_providerDetailFragment"
+            app:destination="@id/providerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpTypeFragment"
@@ -298,6 +301,9 @@
         <action
             android:id="@+id/action_trackSpendingFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_trackSpendingFragment_to_providerDetailFragment"
+            app:destination="@id/providerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpSuccessFragment"

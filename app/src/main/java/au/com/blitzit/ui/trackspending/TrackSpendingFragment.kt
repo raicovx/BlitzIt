@@ -12,6 +12,7 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.helper.CranstekHelper
+import au.com.blitzit.ui.budget.CategoryBudgetFragmentDirections
 import au.com.blitzit.views.DataPoint
 import au.com.blitzit.views.GraphView
 import kotlin.math.roundToInt
@@ -114,9 +115,20 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
         for(providerSpend: Map.Entry<String, Double> in providerSpending)
         {
+            val dividerView = layoutInflater.inflate(R.layout.part_invoice_divider, container, false)
+            container.addView(dividerView)
+
             val view = layoutInflater.inflate(R.layout.part_budget_provider, container, false)
+
+            val providerIndex = AuthServices.userData.getSelectedPlan().getProviderSummaryIndexByProviderName(providerSpend.key)
+            val providerSelectionButton = view.findViewById<LinearLayout>(R.id.provider_button)
+            providerSelectionButton.setOnClickListener {
+                this.findNavController().navigate(TrackSpendingFragmentDirections.actionTrackSpendingFragmentToProviderDetailFragment(providerIndex))
+            }
+
             view.findViewById<TextView>(R.id.provider_id).text = providerSpend.key
             view.findViewById<TextView>(R.id.provider_amount).text = CranstekHelper.convertToCurrency(providerSpend.value)
+
             container.addView(view)
         }
     }
