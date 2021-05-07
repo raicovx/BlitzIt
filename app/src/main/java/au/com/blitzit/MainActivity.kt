@@ -3,6 +3,7 @@ package au.com.blitzit
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.amplifyframework.core.Amplify
@@ -18,7 +19,10 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Set up the navhost
+        //Switch off dark mode hopefully
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        //Set up the nav host
         navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         fab = findViewById(R.id.floatingActionButton)

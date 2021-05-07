@@ -21,7 +21,7 @@
             android:layout_marginEnd="64dp"
             android:fontFamily="@font/avenir"
             android:gravity="center"
-            android:text="Create New Account"
+            android:text="@string/confirm_account"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -29,6 +29,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/sign_up_back_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackground"
+            app:backgroundTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/back_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_up_back_button"
+            app:layout_constraintEnd_toEndOf="@+id/sign_up_back_button"
+            app:layout_constraintStart_toStartOf="@+id/sign_up_back_button"
+            app:layout_constraintTop_toTopOf="@+id/sign_up_back_button"
+            tools:ignore="ContentDescription" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sign_up_divider"
@@ -64,53 +85,9 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:fontFamily="@font/avenir"
-                android:gravity="center"
-                android:text="Success!"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/avenir"
-                android:gravity="center"
-                android:text="Your information has been submitted to Blitzit to create a New Account."
-                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/avenir"
-                android:gravity="center"
-                android:text="You should receive an email in 15 minutes with a vertification code, and confirming the account details entered."
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/avenir"
-                android:gravity="center"
-                android:text="If you do not receive this email in 15 minutes, please contact Blitzit Plan Manager."
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:textColor="@color/white"
-                android:text="Confirmation Code"
+                android:text="@string/confirmation_code"
                 android:fontFamily="@font/avenir"
                 android:textSize="24sp"
                 android:gravity="center"/>
@@ -136,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:textColor="@color/white"
-                android:text="Enter Password"
+                android:text="@string/enter_password"
                 android:fontFamily="@font/avenir"
                 android:textSize="24sp"
                 android:gravity="center"/>
@@ -161,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:textColor="@color/white"
-                android:text="Re-Enter Password"
+                android:text="@string/re_enter_password"
                 android:fontFamily="@font/avenir"
                 android:textSize="24sp"
                 android:gravity="center"/>

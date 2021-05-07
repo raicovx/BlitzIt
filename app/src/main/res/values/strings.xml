@@ -113,6 +113,15 @@
     <string name="plan_end_date">Plan end date:</string>
     <string name="estimated_consumption_date">Estimated consumption date:</string>
     <string name="total_claimed_for_category">Total claimed for Category</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="success">Success!</string>
+    <string name="new_account_message_part_1">Your information has been submitted to Blitzit to create a New Account.</string>
+    <string name="new_account_message_part_2">You should receive an email in 15 minutes with a verification code, and confirming the account details entered.</string>
+    <string name="new_account_message_part_3">If you do not receive this email in 15 minutes, please contact Blitzit Plan Manager.</string>
+    <string name="confirm_account">Confirm Account</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="confirmation_code">Confirmation Code</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

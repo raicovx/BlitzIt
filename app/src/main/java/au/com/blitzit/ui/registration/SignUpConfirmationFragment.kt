@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthRegistration
-import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.auth.RegistrationState
-import org.w3c.dom.Text
 
 class SignUpConfirmationFragment : Fragment()
 {
@@ -31,7 +29,7 @@ class SignUpConfirmationFragment : Fragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        val view = inflater.inflate(R.layout.fragment_signup_confirmation, container, false)
+        val view = inflater.inflate(R.layout.fragment_signup_confirm_account, container, false)
 
         confirmationCodeField = view.findViewById(R.id.sign_up_confirmation_code)
         contentHolder = view.findViewById(R.id.sign_up_content)
@@ -48,6 +46,11 @@ class SignUpConfirmationFragment : Fragment()
             val imm: InputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
             submitConfirmation()
+        }
+
+        val backButton = view.findViewById<Button>(R.id.sign_up_back_button)
+        backButton.setOnClickListener {
+            this.findNavController().navigate(SignUpConfirmationFragmentDirections.actionSignUpConfirmationFragmentToSignUpTypeFragment())
         }
 
         return view

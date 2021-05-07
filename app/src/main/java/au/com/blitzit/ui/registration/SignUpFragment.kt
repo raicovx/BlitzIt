@@ -151,7 +151,7 @@ class SignUpFragment : Fragment()
         when(state){
             RegistrationState.Registered -> {
                 //Toast.makeText(context, "Registered", Toast.LENGTH_SHORT).show()
-                this.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpConfirmationFragment())
+                this.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpSuccessFragment())
             }
             RegistrationState.Registering -> {
                 toggleShowOptions(false)

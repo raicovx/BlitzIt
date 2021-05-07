@@ -228,17 +228,8 @@
             app:argType="au.com.blitzit.ui.registration.SignUpAccountType"
             android:defaultValue="PARTICIPANT" />
         <action
-            android:id="@+id/action_signUpFragment_to_signUpConfirmationFragment"
-            app:destination="@id/signUpConfirmationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpConfirmationFragment"
-        android:name="au.com.blitzit.ui.registration.SignUpConfirmationFragment"
-        android:label="fragment_signup_confirmation"
-        tools:layout="@layout/fragment_signup_confirmation" >
-        <action
-            android:id="@+id/action_signUpConfirmationFragment_to_login"
-            app:destination="@id/login" />
+            android:id="@+id/action_signUpFragment_to_signUpSuccessFragment"
+            app:destination="@id/signUpSuccessFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -303,5 +294,26 @@
         <action
             android:id="@+id/action_trackSpendingFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccessFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpSuccessFragment"
+        android:label="fragment_signup_success"
+        tools:layout="@layout/fragment_signup_success" >
+        <action
+            android:id="@+id/action_signUpSuccessFragment_to_signUpConfirmationFragment"
+            app:destination="@id/signUpConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpConfirmationFragment"
+        android:name="au.com.blitzit.ui.registration.SignUpConfirmationFragment"
+        android:label="fragment_signup_confirm_account"
+        tools:layout="@layout/fragment_signup_confirm_account" >
+        <action
+            android:id="@+id/action_signUpConfirmationFragment_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_signUpConfirmationFragment_to_signUpTypeFragment"
+            app:destination="@id/signUpTypeFragment" />
     </fragment>
 </navigation>
