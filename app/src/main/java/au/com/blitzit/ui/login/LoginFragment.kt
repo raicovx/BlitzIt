@@ -16,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.auth.SignInState
@@ -44,6 +45,8 @@ class LoginFragment : Fragment() {
     private lateinit var forgotPassword: Button
     private lateinit var progressWheel: ProgressBar
 
+    val args: LoginFragmentArgs by navArgs()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
@@ -63,6 +66,7 @@ class LoginFragment : Fragment() {
         }
 
         toggleShowOptions(false)
+        handleArgs()
 
         return view
     }
@@ -128,6 +132,14 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, SignInState.SignInFailedTooManyRequests.state, Toast.LENGTH_SHORT).show()
                 AuthServices.resetSignUpState()
             }
+        }
+    }
+
+    private fun handleArgs()
+    {
+        if(args.confirmationSuccess)
+        {
+            Toast.makeText(context, "Account Confirmation Successful", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -32,6 +32,10 @@
         <action
             android:id="@+id/action_login_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <argument
+            android:name="confirmationSuccess"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"

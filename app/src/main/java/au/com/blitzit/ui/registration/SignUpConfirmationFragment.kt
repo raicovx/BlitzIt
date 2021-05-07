@@ -92,7 +92,7 @@ class SignUpConfirmationFragment : Fragment()
                 Toast.makeText(context, "Confirmation failed. Please check code and try again.", Toast.LENGTH_SHORT).show()
             }
             RegistrationState.SignedUp -> {
-                this.findNavController().navigate(SignUpConfirmationFragmentDirections.actionSignUpConfirmationFragmentToLogin())
+                this.findNavController().navigate(SignUpConfirmationFragmentDirections.actionSignUpConfirmationFragmentToLogin(true))
             }
         }
     }
