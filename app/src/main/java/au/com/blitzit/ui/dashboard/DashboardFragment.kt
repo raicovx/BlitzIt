@@ -1,8 +1,5 @@
 package au.com.blitzit.ui.dashboard
 
-import android.content.res.ColorStateList
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,11 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
-import androidx.core.widget.CompoundButtonCompat
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
@@ -56,7 +49,7 @@ class DashboardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
         val mActivity : MainActivity = activity as MainActivity
-        mActivity.ShowFAB()
+        mActivity.showFAB()
 
         //Back button
         backButton = view.findViewById(R.id.dashboard_back_button)

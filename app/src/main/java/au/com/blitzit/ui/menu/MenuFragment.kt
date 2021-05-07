@@ -1,6 +1,5 @@
 package au.com.blitzit.ui.menu
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
-import au.com.blitzit.ui.settings.SettingsFragmentDirections
 import kotlinx.coroutines.runBlocking
 
 class MenuFragment : Fragment()
@@ -38,7 +36,7 @@ class MenuFragment : Fragment()
 
         //Hide the FAB
         val mActivity : MainActivity = activity as MainActivity
-        mActivity.HideFAB()
+        mActivity.hideFAB()
 
         return view
     }

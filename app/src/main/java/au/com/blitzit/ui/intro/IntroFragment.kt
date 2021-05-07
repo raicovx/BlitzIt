@@ -10,8 +10,6 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
-import au.com.blitzit.auth.AuthServices
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class IntroFragment : Fragment() {
 
@@ -39,8 +37,8 @@ class IntroFragment : Fragment() {
             this.findNavController().navigate(IntroFragmentDirections.actionIntroToSignUpTypeFragment())
         }
 
-        var mActivity: MainActivity = activity as MainActivity
-        mActivity.HideFAB()
+        val mActivity: MainActivity = activity as MainActivity
+        mActivity.hideFAB()
 
         return view
     }

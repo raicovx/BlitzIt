@@ -31,19 +31,11 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    override fun onDestroy() {
-        Amplify.Auth.signOut(
-                { Log.i("AuthQuickstart", "Signed out successfully") },
-                { Log.e("AuthQuickstart", "Sign out failed", it) }
-        )
-        super.onDestroy()
-    }
-
-    public fun HideFAB()
+    fun hideFAB()
     {
         fab.hide()
     }
-    public fun ShowFAB()
+    fun showFAB()
     {
         fab.show()
     }
