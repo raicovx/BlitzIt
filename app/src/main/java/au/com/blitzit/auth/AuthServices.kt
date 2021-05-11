@@ -124,7 +124,7 @@ object AuthServices
 
         try{
             val response = Amplify.API.get(request, "mobileAPI")
-            Log.i("GAZ_INFO", "GET succeeded: ${response.data.asString()}")
+            Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
             val user: Array<UserData> = Gson().fromJson(response.data.asString(), Array<UserData>::class.java)
             userData = user[0]
 
