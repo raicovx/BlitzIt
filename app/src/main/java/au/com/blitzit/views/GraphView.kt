@@ -101,7 +101,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         for(i in 1..amountSteps)
         {
             val amount = i * 1000
-            canvas.drawText(amount.toString(), 0f, amount.toRealY() + (getAmountTextHeight() / 2), amountTextPaint)
+            canvas.drawText(amount.toString(), 0f, amount.toRealY() + (getAmountTextHeight() / 2) + 25, amountTextPaint)
         }
 
         dataSet.forEachIndexed{ index, currentDataPoint ->
@@ -121,14 +121,14 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
                 canvas.drawLine(startX, startY, endX, endY, dataPointLinePaint)
             }
-
+            Log.i("GAZ_GRAPH", "realX: $realX, realY: $realY")
             canvas.drawCircle(realX, realY, 7f, dataPointFillPaint)
             canvas.drawCircle(realX, realY, 7f, dataPointPaint)
         }
     }
 
     private fun Int.toRealX() = toFloat() / xMax * getGraphWidth()
-    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight()) + 25
+    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight())
     private fun getGraphWidth() = width - graphWidthOffset - 40
     private fun getGraphHeight() = height - graphHeightOffset
     private fun getMonthTextWidth() = monthTextPaint.measureText("###").roundToInt()

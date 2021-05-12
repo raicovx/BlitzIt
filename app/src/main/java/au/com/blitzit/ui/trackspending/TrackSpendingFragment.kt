@@ -86,16 +86,34 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
         if(selectedPlanPart.totals.isNullOrEmpty())
             graph.isVisible = false
-        else {
+        else
+        {
+            graph.isVisible = true
             var graphData: List<DataPoint> = emptyList()
             var index: Int = 0
-            for (total: Map.Entry<String, Double> in selectedPlanPart.totals) {
-                //val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
-                val month: String = CranstekHelper.getMonthTitleFromMonthNumber(
-                    CranstekHelper.getMonthNumberFromDateString(total.key)
-                )
+            for (total: Map.Entry<String, Double> in selectedPlanPart.totals)
+            {
+                val monthNumber: Int = CranstekHelper.getMonthNumberFromDateString(total.key)
+                val month: String = CranstekHelper.getMonthTitleFromMonthNumber(monthNumber)
                 val dataPoint = DataPoint(index, total.value.roundToInt(), month, total.value)
                 graphData = graphData.plus(dataPoint)
+
+                //Tack some months on the end if there is only 1 point
+                if(selectedPlanPart.totals.size == 1)
+                {
+                    for(i in 1..3)
+                    {
+                        val additionalIndex: Int = index + i
+                        val additionalMonthNumber: Int = monthNumber + i
+                        val additionalMonth: String = CranstekHelper.getMonthTitleFromMonthNumber(additionalMonthNumber)
+                        val additionalDataPoint = DataPoint(additionalIndex, 25, additionalMonth, 0.0)
+
+                        Log.i("GAZ_GRAPH", "Adding addition dataPoint: $additionalDataPoint")
+
+                        graphData = graphData.plus(additionalDataPoint)
+                    }
+                }
+
                 index++
             }
 
