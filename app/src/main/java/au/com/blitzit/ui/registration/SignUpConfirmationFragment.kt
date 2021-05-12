@@ -24,8 +24,6 @@ class SignUpConfirmationFragment : Fragment()
     private lateinit var submitButton: Button
     private lateinit var progressWheel: ProgressBar
     private lateinit var contentHolder: LinearLayout
-    private lateinit var password1Field : TextView
-    private lateinit var password2Field : TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -36,9 +34,6 @@ class SignUpConfirmationFragment : Fragment()
 
         progressWheel = view.findViewById(R.id.sign_up_progress)
         progressWheel.isVisible = false
-
-        password1Field = view.findViewById(R.id.sign_up_password_1)
-        password2Field = view.findViewById(R.id.sign_up_password_2)
 
         submitButton = view.findViewById(R.id.sign_up_submit)
         submitButton.setOnClickListener {
@@ -67,18 +62,8 @@ class SignUpConfirmationFragment : Fragment()
     {
         if(confirmationCodeField.length() == 6)
         {
-            if(password1Field.length() > 0 && password2Field.length() > 0)
-            {
-                if(password1Field.text.toString() == password2Field.text.toString())
-                {
-                    toggleShowOptions(false)
-                    AuthRegistration.attemptConfirmation(password1Field.text.toString(), confirmationCodeField.text.toString())
-                }
-                else
-                    Toast.makeText(context, "Password fields must be the same.", Toast.LENGTH_SHORT).show()
-            }
-            else
-                Toast.makeText(context, "Password fields must not be empty.", Toast.LENGTH_SHORT).show()
+            toggleShowOptions(false)
+            AuthRegistration.attemptConfirmation(confirmationCodeField.text.toString())
         }
         else
             Toast.makeText(context, "Code must be 6 digits.", Toast.LENGTH_SHORT).show()

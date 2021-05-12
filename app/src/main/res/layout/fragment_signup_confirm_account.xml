@@ -108,57 +108,6 @@
                 android:inputType="number"
                 tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:textColor="@color/white"
-                android:text="@string/enter_password"
-                android:fontFamily="@font/avenir"
-                android:textSize="24sp"
-                android:gravity="center"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/sign_up_password_1"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/input_bg"
-                android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:maxLines="1"
-                android:hint="Password"
-                android:textColor="@color/dark_grey"
-                android:inputType="textPassword"
-                tools:ignore="HardcodedText" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:textColor="@color/white"
-                android:text="@string/re_enter_password"
-                android:fontFamily="@font/avenir"
-                android:textSize="24sp"
-                android:gravity="center"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/sign_up_password_2"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/input_bg"
-                android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:fontFamily="@font/avenir"
-                android:textSize="21sp"
-                android:maxLines="1"
-                android:hint="Password"
-                android:textColor="@color/dark_grey"
-                android:inputType="textPassword"
-                tools:ignore="HardcodedText" />
-
             <Button
                 android:id="@+id/sign_up_submit"
                 android:layout_width="match_parent"

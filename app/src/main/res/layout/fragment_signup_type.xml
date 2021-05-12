@@ -110,10 +110,7 @@
             android:text="@string/sign_up_type_1"
             android:textAllCaps="false"
             android:textSize="21sp"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/sign_up_type_2"
@@ -125,10 +122,7 @@
             android:text="@string/sign_up_type_2"
             android:textAllCaps="false"
             android:textSize="21sp"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/sign_up_type_3"
@@ -140,10 +134,19 @@
             android:text="@string/sign_up_type_3"
             android:textAllCaps="false"
             android:textSize="21sp"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/sign_up_confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/avenir"
+            android:text="@string/enter_confirmation_code"
+            android:textAllCaps="false"
+            android:textSize="21sp"
+            app:backgroundTint="@null" />
 
     </LinearLayout>
 

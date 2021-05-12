@@ -11,14 +11,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthRegistration
 import au.com.blitzit.auth.RegistrationState
-import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.helper.CranstekHelper.isValidEmail
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,6 +40,8 @@ class SignUpFragment : Fragment()
     private lateinit var emailField: TextView
     private lateinit var dobField: TextView
     private lateinit var ndisField: TextView
+    private lateinit var passwordField: TextView
+    private lateinit var confirmPasswordField: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -103,6 +103,9 @@ class SignUpFragment : Fragment()
         lastNameField = view.findViewById(R.id.sign_up_lname)
         emailField = view.findViewById(R.id.sign_up_email)
         dobField = view.findViewById(R.id.sign_up_dob)
+        passwordField = view.findViewById(R.id.sign_up_password)
+        confirmPasswordField = view.findViewById(R.id.sign_up_re_password)
+
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
             handleDatePicker()
         else
@@ -123,14 +126,27 @@ class SignUpFragment : Fragment()
     {
         if(firstNameField.length() > 0 && lastNameField.length() > 0 && dobField.length() > 0)
         {
-            if(emailField.text.isValidEmail()) {
-                if (ndisField.length() == 9)
-                    AuthRegistration.attemptRegistration(lastNameField.text.toString(), emailField.text.toString(), dobField.text.toString(), ndisField.text.toString(), "participant")
+            if(passwordField.length() > 0 && confirmPasswordField.length() > 0 && passwordField.text == confirmPasswordField.text)
+            {
+                if (emailField.text.isValidEmail())
+                {
+                    if (ndisField.length() == 9) {
+                        AuthRegistration.attemptRegistration(
+                            lastNameField.text.toString(),
+                            emailField.text.toString(),
+                            dobField.text.toString(),
+                            ndisField.text.toString(),
+                            "participant",
+                            passwordField.text.toString())
+                    }
+                    else
+                        Toast.makeText(context, "NDIS number invalid.", Toast.LENGTH_SHORT).show()
+                }
                 else
-                    Toast.makeText(context, "NDIS number invalid.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Must use a valid email address.", Toast.LENGTH_SHORT).show()
             }
             else
-                Toast.makeText(context, "Must use a valid email address.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Passwords must be the same", Toast.LENGTH_SHORT).show()
         }
         else
             Toast.makeText(context, "All fields must be filled in.", Toast.LENGTH_SHORT).show()

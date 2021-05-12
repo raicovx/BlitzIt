@@ -40,7 +40,6 @@ object AuthServices
         liveSignInState.postValue(SignInState.SignedIn)
     }
 
-
     suspend fun attemptSignOut()
     {
         try {

@@ -40,15 +40,27 @@ object AuthRegistration
     val liveRegistrationState = MutableLiveData<RegistrationState>()
     private lateinit var registrationDetails: RegistrationDetails
     private lateinit var registrationResponse: RegistrationResponse
-    private lateinit var responseID: String
+    private lateinit var passwordHolder: String
 
     init {
         liveRegistrationState.postValue(RegistrationState.NotRegistered)
     }
 
-    fun attemptRegistration(lName: String, email: String, dob: String, ndis: String, type: String)
+    fun hasResponseID(): Boolean
+    {
+        if(::registrationResponse.isInitialized)
+        {
+            if(!registrationResponse.id.isNullOrEmpty())
+                return true
+        }
+        return false
+    }
+
+    fun attemptRegistration(lName: String, email: String, dob: String, ndis: String, type: String, password: String)
     {
         liveRegistrationState.postValue(RegistrationState.Registering)
+
+        passwordHolder = password
 
         registrationDetails = RegistrationDetails(CranstekHelper.formatDate(dob), email, lName, ndis, type)
 
@@ -80,7 +92,7 @@ object AuthRegistration
                     })
     }
 
-    fun attemptConfirmation(password: String, confirmationCode: String)
+    fun attemptConfirmation(confirmationCode: String)
     {
         if(registrationResponse.id != null)
         {
@@ -89,7 +101,7 @@ object AuthRegistration
             Log.i("GAZ_INFO", "confirmation code: $confirmationCode")
             Log.i("GAZ_INFO", "response code: ${registrationResponse.id}")
             Log.i("GAZ_INFO", "email: ${registrationDetails.email}")
-            Log.i("GAZ_INFO", "password: $password")
+            Log.i("GAZ_INFO", "password: $passwordHolder")
 
             val attrs = mapOf(
                     AuthUserAttributeKey.email() to registrationDetails.email,
@@ -102,7 +114,7 @@ object AuthRegistration
                     .build()
             Log.i("GAZ_INFO", "attr: ${options.userAttributes}")
 
-            Amplify.Auth.signUp(registrationDetails.email.toLowerCase(), password, options,
+            Amplify.Auth.signUp(registrationDetails.email.toLowerCase(), passwordHolder, options,
                     {
                         Log.i("GAZ_INFO", "Sign up succeeded: $it")
                         liveRegistrationState.postValue(RegistrationState.SignedUp)

@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
+import au.com.blitzit.auth.AuthRegistration
 
 class SignUpTypeFragment : Fragment()
 {
@@ -41,11 +43,20 @@ class SignUpTypeFragment : Fragment()
         repSignUpButton.setOnClickListener {
             this.findNavController().navigate(SignUpTypeFragmentDirections.actionSignUpTypeFragmentToSignUpFragment(SignUpAccountType.REPRESENTATIVE))
         }
+        repSignUpButton.isVisible = false
 
-        val coordSignUpButton: Button = view.findViewById(R.id.sign_up_type_3)
-        coordSignUpButton.setOnClickListener {
+        val coordinatorSignUpButton: Button = view.findViewById(R.id.sign_up_type_3)
+        coordinatorSignUpButton.setOnClickListener {
             this.findNavController().navigate(SignUpTypeFragmentDirections.actionSignUpTypeFragmentToSignUpFragment(SignUpAccountType.COORDINATOR))
         }
+        coordinatorSignUpButton.isVisible = false
+
+        val confirmationButton: Button = view.findViewById(R.id.sign_up_confirmation)
+        confirmationButton.setOnClickListener {
+            this.findNavController().navigate(SignUpTypeFragmentDirections.actionSignUpTypeFragmentToSignUpConfirmationFragment())
+        }
+        if(!AuthRegistration.hasResponseID())
+            confirmationButton.isVisible = false
 
         return view
     }
