@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
@@ -35,6 +37,8 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
     private lateinit var graph: GraphView
 
+    private val args: TrackSpendingFragmentArgs by navArgs()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         mainView = inflater.inflate(R.layout.fragment_track_spending, container, false)
@@ -60,8 +64,12 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         filterSpinner.adapter = dataAdapter
         filterSpinner.onItemSelectedListener = this
 
-        //Sets default selection
-        filterSpinner.setSelection(planPartLabels.indexOf("Core"))
+        if(args.selectedPlanPartLabel.isNullOrBlank()) {
+            //Sets default selection
+            filterSpinner.setSelection(planPartLabels.indexOf("Core"))
+        } else {
+            filterSpinner.setSelection(planPartLabels.indexOf(args.selectedPlanPartLabel))
+        }
     }
 
     private fun setupView()
@@ -76,21 +84,26 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         graph = mainView.findViewById(R.id.spending_graph)
 
-        var graphData: List<DataPoint> = emptyList()
-        var index: Int = 0
-        for(total: Map.Entry<String, Double> in selectedPlanPart.totals)
-        {
-            //val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
-            val month: String = CranstekHelper.getMonthTitleFromMonthNumber(CranstekHelper.getMonthNumberFromDateString(total.key))
-            val dataPoint = DataPoint(index, total.value.roundToInt(), month, total.value)
-            graphData = graphData.plus(dataPoint)
-            index++
-        }
+        if(selectedPlanPart.totals.isNullOrEmpty())
+            graph.isVisible = false
+        else {
+            var graphData: List<DataPoint> = emptyList()
+            var index: Int = 0
+            for (total: Map.Entry<String, Double> in selectedPlanPart.totals) {
+                //val dataPoint = DataPoint(CranstekHelper.getMonthNumberFromDateString(total.key), total.value.roundToInt())
+                val month: String = CranstekHelper.getMonthTitleFromMonthNumber(
+                    CranstekHelper.getMonthNumberFromDateString(total.key)
+                )
+                val dataPoint = DataPoint(index, total.value.roundToInt(), month, total.value)
+                graphData = graphData.plus(dataPoint)
+                index++
+            }
 
-        graph.setGraphOffset(100,50)
-        graph.setData(graphData)
-        Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
-        Log.i("GAZ_GRAPH", "graph dataset: $graphData")
+            graph.setGraphOffset(100, 50)
+            graph.setData(graphData)
+            Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
+            Log.i("GAZ_GRAPH", "graph dataset: $graphData")
+        }
     }
 
     private fun populateBaseData()

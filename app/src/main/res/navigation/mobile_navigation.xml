@@ -194,6 +194,9 @@
         <action
             android:id="@+id/action_categoryBudgetFragment_to_providerDetailFragment"
             app:destination="@id/providerDetailFragment" />
+        <action
+            android:id="@+id/action_categoryBudgetFragment_to_trackSpendingFragment"
+            app:destination="@id/trackSpendingFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpTypeFragment"
@@ -304,6 +307,10 @@
         <action
             android:id="@+id/action_trackSpendingFragment_to_providerDetailFragment"
             app:destination="@id/providerDetailFragment" />
+        <argument
+            android:name="selectedPlanPartLabel"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpSuccessFragment"

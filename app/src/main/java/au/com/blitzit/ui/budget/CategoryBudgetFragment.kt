@@ -52,6 +52,12 @@ class CategoryBudgetFragment : Fragment()
         val subtitleText: TextView = view.findViewById(R.id.cat_budget_subtitle)
         subtitleText.text = planPart.label
 
+        //View tracking button
+        val viewTrackingButton = view.findViewById<Button>(R.id.cat_budget_view_tracking)
+        viewTrackingButton.setOnClickListener {
+            this.findNavController().navigate(CategoryBudgetFragmentDirections.actionCategoryBudgetFragmentToTrackSpendingFragment(planPart.label))
+        }
+
         //Overview card
         val startingBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_start_balance)
         startingBalanceTV.text = CranstekHelper.convertToCurrency(planPart.budget)

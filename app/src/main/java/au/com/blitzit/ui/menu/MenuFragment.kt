@@ -82,7 +82,7 @@ class MenuFragment : Fragment()
 
         trackSpendingButton = view.findViewById(R.id.menu_spending_button)
         trackSpendingButton.setOnClickListener {
-            navController.navigate(MenuFragmentDirections.actionMenuFragmentToTrackSpendingFragment())
+            navController.navigate(MenuFragmentDirections.actionMenuFragmentToTrackSpendingFragment(null))
         }
 
         val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)
