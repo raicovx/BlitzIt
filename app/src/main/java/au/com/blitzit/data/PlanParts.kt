@@ -25,3 +25,9 @@ data class PlanParts (
         val estimatedExhaustionDate: String,
         val totals: Map<String, Double>,
         var subLabels: List<String>)
+{
+        fun checkMonthlySpendOnTrack(): Boolean
+        {
+                return averageTargetMonth > averageSpendMonth
+        }
+}

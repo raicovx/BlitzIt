@@ -34,6 +34,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     private lateinit var currentAverageSpendTV: TextView
     private lateinit var planEndDateTV: TextView
     private lateinit var consumptionDateTV: TextView
+    private lateinit var onTrackIcon: TextView
 
     private lateinit var graph: GraphView
 
@@ -78,6 +79,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         currentAverageSpendTV = mainView.findViewById(R.id.spending_weekly_average_data)
         planEndDateTV = mainView.findViewById(R.id.spending_plan_end_data)
         consumptionDateTV = mainView.findViewById(R.id.spending_consumption_date_data)
+        onTrackIcon = mainView.findViewById(R.id.spending_on_track_icon)
     }
 
     private fun populateGraph()
@@ -119,8 +121,8 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
             graph.setGraphOffset(100, 50)
             graph.setData(graphData)
-            Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
-            Log.i("GAZ_GRAPH", "graph dataset: $graphData")
+            //Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
+            //Log.i("GAZ_GRAPH", "graph dataset: $graphData")
         }
     }
 
@@ -130,6 +132,15 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         currentAverageSpendTV.text = CranstekHelper.convertToCurrency(selectedPlanPart.averageSpendWeek)
         planEndDateTV.text = CranstekHelper.convertToReadableDate(AuthServices.userData.getSelectedPlan().planEndDate)
         consumptionDateTV.text = CranstekHelper.convertToReadableDate(selectedPlanPart.estimatedExhaustionDate)
+
+        //On track display
+        if(selectedPlanPart.checkMonthlySpendOnTrack()) {
+            onTrackIcon.text = "On Track"
+            onTrackIcon.setBackgroundResource(R.drawable.active_display)
+        } else {
+            onTrackIcon.text = "Over Spending"
+            onTrackIcon.setBackgroundResource(R.drawable.expired_display)
+        }
     }
 
     private fun populateCategorySpending()
