@@ -1,7 +1,5 @@
 package au.com.blitzit.data
 
-import android.util.Log
-import au.com.blitzit.helper.CranstekHelper
 import com.google.gson.annotations.SerializedName
 
 data class PlanParts (

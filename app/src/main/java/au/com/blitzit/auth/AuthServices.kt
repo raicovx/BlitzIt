@@ -1,18 +1,28 @@
 package au.com.blitzit.auth
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import au.com.blitzit.AppDatabase
 import au.com.blitzit.data.*
 import au.com.blitzit.helper.CranstekHelper
+import au.com.blitzit.responses.GenericParticipantResponse
+import au.com.blitzit.roomdata.Participant
+import au.com.blitzit.roomdata.PrimaryContact
+import au.com.blitzit.roomdata.User
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
 import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.api.rest.RestResponse
+import com.amplifyframework.auth.AuthUserAttribute
+import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
 
 enum class SignInState(val state: String)
@@ -28,6 +38,10 @@ enum class SignInState(val state: String)
 
 object AuthServices
 {
+    private lateinit var appDatabase: AppDatabase
+    lateinit var loggedUser: User
+        private set
+
     val liveSignInState = MutableLiveData<SignInState>()
 
     lateinit var userData: UserData
@@ -35,7 +49,7 @@ object AuthServices
 
     private suspend fun getData()
     {
-        getUserData()
+        getParticipantData()
         userData.setSelectedPlan(userData.getMostRecentPlan())
         liveSignInState.postValue(SignInState.SignedIn)
     }
@@ -56,8 +70,10 @@ object AuthServices
         liveSignInState.postValue(SignInState.SignedOut)
     }
 
-    suspend fun attemptSignIn(username: String, password: String)
+    suspend fun attemptSignIn(username: String, password: String, context: Context)
     {
+        appDatabase = AppDatabase.getDatabase(context)
+
         liveSignInState.postValue(SignInState.SigningIn)
 
         try
@@ -66,6 +82,9 @@ object AuthServices
             if (result.isSignInComplete)
             {
                 Log.i("AuthQuickstart", "Sign in succeeded")
+
+                handleUserData(username)
+
                 getData()
             }
             else
@@ -95,27 +114,56 @@ object AuthServices
         }
     }
 
-    suspend fun checkAuthSession()
+    suspend fun checkAuthSession(context: Context)
     {
-        try {
+        appDatabase = AppDatabase.getDatabase(context)
+        try
+        {
             val session = Amplify.Auth.fetchAuthSession() as AWSCognitoAuthSession
             val id = session.identityId
             Log.i("AmplifyQuickstart", "Auth session = $session")
-            if(id.type == AuthSessionResult.Type.SUCCESS && session.isSignedIn) {
+            if(id.type == AuthSessionResult.Type.SUCCESS && session.isSignedIn)
+            {
                 liveSignInState.postValue(SignInState.SigningIn)
+
+                try {
+                    val attributes = Amplify.Auth.fetchUserAttributes()
+                    Log.i("AuthDemo", "User attributes = $attributes")
+                    for(attr: AuthUserAttribute in attributes)
+                    {
+                        if(attr.key == AuthUserAttributeKey.email())
+                            handleUserData(attr.value)
+                    }
+                }catch (error: AuthException) {
+                    Log.e("AuthDemo", "Failed to fetch user attributes", error)
+                }
+
                 getData()
             }
             else
             {
                 liveSignInState.postValue(SignInState.SignedOut)
             }
-        } catch (error: AuthException) {
+        }
+        catch (error: AuthException)
+        {
             Log.e("AmplifyQuickstart", "Failed to fetch auth session", error)
             liveSignInState.postValue(SignInState.SignedOut)
         }
     }
 
-    private suspend fun getUserData()
+    private suspend fun handleUserData(email: String)
+    {
+        if(!appDatabase.userDAO().doesUserExist(email))
+        {
+            appDatabase.userDAO().insertUser(User(0, email))
+        }
+
+        loggedUser = appDatabase.userDAO().findByEmail(email)
+        Log.i("GAZ_DB", "Logged User: $loggedUser")
+    }
+
+    private suspend fun getParticipantData()
     {
         val request = RestOptions.builder()
                 .addPath("/participant")
@@ -124,14 +172,25 @@ object AuthServices
         try{
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
-            val user: Array<UserData> = Gson().fromJson(response.data.asString(), Array<UserData>::class.java)
-            userData = user[0]
 
-            getPlanData()
+            handleParticipantData(response)
+
+            //TODO(getPlanData())
         } catch (error: ApiException)
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
+    }
+
+    private suspend fun handleParticipantData(data: RestResponse)
+    {
+        //Generic Class
+        var genericParticipants: Array<GenericParticipantResponse> = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
+
+        //Participant
+        val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
+        Log.i("GAZ_INFO", "participant: $participant")
+        appDatabase.participantDAO().upsertParticipant(participant)
     }
 
     private suspend fun getPlanData()

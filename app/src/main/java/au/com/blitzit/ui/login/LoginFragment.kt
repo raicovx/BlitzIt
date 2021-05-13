@@ -21,7 +21,6 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.auth.SignInState
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class LoginFragment : Fragment() {
@@ -33,7 +32,7 @@ class LoginFragment : Fragment() {
     init {
         lifecycleScope.launch {
             whenStarted {
-                AuthServices.checkAuthSession()
+                AuthServices.checkAuthSession(requireContext().applicationContext)
             }
         }
     }
@@ -45,11 +44,13 @@ class LoginFragment : Fragment() {
     private lateinit var forgotPassword: Button
     private lateinit var progressWheel: ProgressBar
 
-    val args: LoginFragmentArgs by navArgs()
+    private val args: LoginFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View?
+    {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
         //Assign Views
         loginButton = view.findViewById(R.id.login_button)
         usernameField = view.findViewById(R.id.username_field)
@@ -89,10 +90,11 @@ class LoginFragment : Fragment() {
 
             lifecycleScope.launch {
                 whenStarted {
-                    AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString())
+                    AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH),
+                        passwordField.text.toString(),
+                        requireContext().applicationContext)
                 }
             }
-            //runBlocking { AuthServices.attemptSignIn(usernameField.text.toString().toLowerCase(Locale.ENGLISH), passwordField.text.toString()) }
 
         }else{
             Toast.makeText(context, "Missing Username or Password", Toast.LENGTH_SHORT).show()
