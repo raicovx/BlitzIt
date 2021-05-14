@@ -27,7 +27,7 @@ data class GenericParticipantResponse(
     val primaryContacts: List<GenericPrimaryContactResponse>,
     @SerializedName("support_coordinator")
     val supportCoordinators: List<GenericSupportCoordinatorResponse>,
-    var plans: List<UserPlan>)
+    var plans: Array<GenericPlanResponse>)
 {
     fun toParticipant(uID: Long): Participant
     {

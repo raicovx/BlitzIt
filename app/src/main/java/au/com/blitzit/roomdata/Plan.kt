@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 data class Plan(
     @PrimaryKey
     val plan_id: String,
-    val ndis_number: String,
+    val ndis_number: Int,
     val status: String,
     val plan_start_date: String,
-    val plan_end_date: String
-)
+    val plan_end_date: String)

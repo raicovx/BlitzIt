@@ -5,11 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.AppDatabase
 import au.com.blitzit.data.*
-import au.com.blitzit.helper.CranstekHelper
-import au.com.blitzit.responses.GenericParticipantResponse
-import au.com.blitzit.roomdata.Participant
-import au.com.blitzit.roomdata.PrimaryContact
-import au.com.blitzit.roomdata.User
+import au.com.blitzit.responses.*
+import au.com.blitzit.roomdata.*
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
@@ -22,7 +19,6 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
 
 enum class SignInState(val state: String)
@@ -41,6 +37,9 @@ object AuthServices
     private lateinit var appDatabase: AppDatabase
     lateinit var loggedUser: User
         private set
+    lateinit var loggedParticipant: Participant
+        private set
+    private lateinit var genericPlans: Array<GenericPlanResponse>
 
     val liveSignInState = MutableLiveData<SignInState>()
 
@@ -169,14 +168,16 @@ object AuthServices
                 .addPath("/participant")
                 .build()
 
-        try{
+        try
+        {
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
 
             handleParticipantData(response)
 
-            //TODO(getPlanData())
-        } catch (error: ApiException)
+            getPlanData()
+        }
+        catch (error: ApiException)
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
@@ -191,101 +192,134 @@ object AuthServices
         val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
         Log.i("GAZ_INFO", "participant: $participant")
         appDatabase.participantDAO().upsertParticipant(participant)
+        loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
+
+        //Primary Contacts
+        //TODO("Primary contacts")
+
+        //Support Contacts
+        //TODO("Support contacts")
     }
 
     private suspend fun getPlanData()
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndisNumber}")
+                .addPath("/participant/${loggedParticipant.ndisNumber}")
                 .build()
 
-        try{
+        try
+        {
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${response.data.asString()}")
-            val user: UserData = Gson().fromJson(response.data.asString(), UserData::class.java)
-            userData = user
+
+            handlePlanData(response)
 
             getPlanDetails()
-        } catch (error: ApiException)
+        }
+        catch (error: ApiException)
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
     }
 
-    private suspend fun getPlanDetails()
+    private suspend fun handlePlanData(response: RestResponse)
     {
-        if (!userData.plans.isNullOrEmpty())
+        //Generic Class
+        val genericParticipant = Gson().fromJson(response.data.asString(), GenericParticipantResponse::class.java)
+        genericPlans = genericParticipant.plans
+
+        for(genericPlan: GenericPlanResponse in genericPlans)
         {
-            for(i in userData.plans!!.indices)
+            //Plan
+            val plan = genericPlan.toPlan(loggedParticipant.ndisNumber)
+            appDatabase.planDAO().upsertPlan(plan)
+
+            //Purposes
+            val purposes = genericPlan.getPurposes()
+            for(purpose: Purpose in purposes)
             {
-                val request = RestOptions.builder()
-                        .addPath("/participant/${userData.ndisNumber}/${userData.plans!![i].planID}")
-                        .build()
+                appDatabase.purposeDAO().upsertPurpose(purpose)
 
-                try{
-                    val response = Amplify.API.get(request, "mobileAPI")
-                    Log.i("GAZ_INFO", "GET succeeded for PlanDetails: ${response.data.asString()}")
-                    val userPlan: UserPlan = Gson().fromJson(response.data.asString(), UserPlan::class.java)
-
-                    userData.plans?.set(i, userPlan)
-
-                    //Get core sub labels
-                    for(planPart: PlanParts in userData.plans!![i].planParts)
-                    {
-                        if(planPart.category == "CORE" || planPart.category == "Core" || planPart.category == "core")
-                        {
-                            planPart.subLabels = CranstekHelper.splitLabelsByComma(planPart.label)
-                            //Log.i("GAZ_SUB", "Sub label: ${planPart.subLabels}, count: ${planPart.subLabels.count()}")
-                        }
-                    }
-
-                    getInvoiceDetails(userData.plans!![i])
-                    getProviderSummary(userData.plans!![i])
-                } catch (error: ApiException)
+                //Categories
+                val categories = genericPlan.getCategoriesByString(purpose)
+                for(category: Category in categories)
                 {
-                    Log.e("GAZ_ERROR", "GET failed.", error)
+                    appDatabase.categoryDAO().upsertCategory(category)
                 }
             }
         }
-        else
-            liveSignInState.postValue(SignInState.SignInFailed)
-
     }
 
-    private suspend fun getInvoiceDetails(plan: UserPlan)
+    /**
+     * Gets all plans invoices and provider details
+     */
+    private suspend fun getPlanDetails()
+    {
+        for(i in genericPlans.indices)
+        {
+            getPlanInvoices(genericPlans[i])
+            getPlanProviderSummaries(genericPlans[i])
+        }
+    }
+
+    private suspend fun getPlanInvoices(plan: GenericPlanResponse)
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndisNumber}/${plan.planID}/invoices")
+                .addPath("/participant/${loggedParticipant.ndisNumber}/${plan.planID}/invoices")
                 .build()
 
         try{
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET succeeded for Invoice Details: ${response.data.asString()}")
-            val invoices: Array<UserInvoice> = Gson().fromJson(response.data.asString(), Array<UserInvoice>::class.java)
 
-            plan.planInvoices = invoices
-        } catch (error: ApiException)
+            handleInvoiceData(response, plan.planID)
+        }
+        catch (error: ApiException)
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
         }
     }
 
-    private suspend fun getProviderSummary(plan: UserPlan)
+    private suspend fun handleInvoiceData(response: RestResponse, planID: String)
+    {
+        val invoices: Array<GenericInvoiceResponse> = Gson().fromJson(response.data.asString(), Array<GenericInvoiceResponse>::class.java)
+
+        for(invoice: GenericInvoiceResponse in invoices)
+            appDatabase.invoiceDAO().upsertInvoice(invoice.toInvoice(planID))
+    }
+
+    private suspend fun getPlanProviderSummaries(plan: GenericPlanResponse)
     {
         val request = RestOptions.builder()
-                .addPath("/participant/${userData.ndisNumber}/${plan.planID}/providerSummary")
+                .addPath("/participant/${loggedParticipant.ndisNumber}/${plan.planID}/providerSummary")
                 .build()
 
         try{
             val response = Amplify.API.get(request, "mobileAPI")
             Log.i("GAZ_INFO", "GET succeeded for Plan Provider Summary: ${response.data.asString()}")
-            val providerSummary: ProviderSummary = Gson().fromJson(response.data.asString(), ProviderSummary::class.java)
-            plan.planProviderSummary = providerSummary
-            Log.i("GAZ_INFO", "Provider Summary: ${plan.planProviderSummary}")
+
+            handleProviderSummeryData(response, plan.planID)
         }
         catch (error: ApiException)
         {
             Log.e("GAZ_ERROR", "GET failed.", error)
+        }
+    }
+
+    private suspend fun handleProviderSummeryData(response: RestResponse, planID: String)
+    {
+        val genericProvider: GenericProviderOverviewResponse = Gson().fromJson(response.data.asString(), GenericProviderOverviewResponse::class.java)
+
+        for(summary: GenericProviderSummaryResponse in genericProvider.providerOverview)
+        {
+            //Provider
+            appDatabase.providerDAO().upsertProvider(summary.getProvider(planID))
+
+            //Provider Category Spending
+            for(spending: ProviderCategorySpending in summary.getProviderCategorySpending())
+            {
+                appDatabase.providerCategorySpendingDAO().upsertProviderCategorySpending(spending)
+            }
         }
     }
 }

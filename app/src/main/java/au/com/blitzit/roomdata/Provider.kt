@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class Provider(
     @PrimaryKey
     val provider_id: String,
+    val plan_id: String,
     val name: String,
     val abn: String,
     @SerializedName("address_line")
@@ -16,5 +17,5 @@ data class Provider(
     val state: String,
     val postcode: String,
     val email: String,
-    val phone: String
+    val phone: List<String>
 )

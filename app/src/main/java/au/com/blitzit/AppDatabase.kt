@@ -2,8 +2,7 @@ package au.com.blitzit
 
 import android.content.Context
 import androidx.room.*
-import au.com.blitzit.dao.ParticipantDAO
-import au.com.blitzit.dao.UserDAO
+import au.com.blitzit.dao.*
 import au.com.blitzit.roomdata.*
 
 @Database(entities = [
@@ -14,17 +13,24 @@ import au.com.blitzit.roomdata.*
     Plan::class,
     PrimaryContact::class,
     Provider::class,
+    ProviderCategorySpending::class,
     Purpose::class,
     SignUpRequest::class,
     SupportCoordinator::class,
     User::class],
-    version = 1002, exportSchema = false)
+    version = 1009, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase()
 {
     //DAOs
     abstract fun userDAO(): UserDAO
     abstract fun participantDAO(): ParticipantDAO
+    abstract fun planDAO(): PlanDAO
+    abstract fun purposeDAO(): PurposeDAO
+    abstract fun categoryDAO(): CategoryDAO
+    abstract fun invoiceDAO(): InvoiceDAO
+    abstract fun providerDAO(): ProviderDAO
+    abstract fun providerCategorySpendingDAO(): ProviderCategorySpendingDAO
 
     //Singleton Pattern
     companion object {
@@ -42,7 +48,7 @@ abstract class AppDatabase: RoomDatabase()
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "word_database"
+                    "blitzit_Database"
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance

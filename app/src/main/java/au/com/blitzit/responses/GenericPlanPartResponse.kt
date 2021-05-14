@@ -1,19 +1,12 @@
-package au.com.blitzit.roomdata
+package au.com.blitzit.responses
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
-data class Category(
-    @PrimaryKey(autoGenerate = true)
-    val support_category_number: Long,
-    val plan_id: String,
-    val purpose: String,
+data class GenericPlanPartResponse(
+    val balance: Double,
+    val budget: Double,
     val label: String,
     val category: String,
-    val budget: Double,
-    val balance: Double,
     @SerializedName("average_target_week")
     val averageTargetWeek: Double,
     @SerializedName("remain_target_week")
@@ -28,10 +21,5 @@ data class Category(
     val averageSpendMonth: Double,
     @SerializedName("estimated_exhaustion_date")
     val estimatedExhaustionDate: String,
-    val totals: Map<String, Double>)
-{
-    fun checkMonthlySpendOnTrack(): Boolean
-    {
-        return averageTargetMonth > averageSpendMonth
-    }
-}
+    val totals: Map<String, Double>,
+    var subLabels: List<String>)

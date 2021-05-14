@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Invoice(
     @PrimaryKey
     val invoice_id: String,
+    val plan_id: String,
     val provider: String,
     val invoice_number: String,
     val invoice_date: String,

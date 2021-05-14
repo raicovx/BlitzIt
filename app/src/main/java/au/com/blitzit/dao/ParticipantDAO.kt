@@ -8,7 +8,7 @@ import au.com.blitzit.roomdata.Participant
 interface ParticipantDAO
 {
     @Query("SELECT * FROM Participant WHERE user_id = :id LIMIT 1")
-    suspend fun getParticipantByUserID(id: String): Participant
+    suspend fun getParticipantByUserID(id: Long): Participant
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertParticipant(participant: Participant)
