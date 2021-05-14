@@ -7,6 +7,9 @@ import au.com.blitzit.roomdata.PrimaryContact
 @Dao
 interface PrimaryContactDAO
 {
+    @Query("SELECT email FROM PrimaryContact WHERE ndis_number = :ndisNumber LIMIT 1")
+    suspend fun getPrimaryContactEmail(ndisNumber: Int): String
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPrimaryContact(primaryContact: PrimaryContact)
 

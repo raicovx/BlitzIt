@@ -61,7 +61,7 @@ class ProviderDetailFragment: Fragment()
 
         loadingBar = view.findViewById(R.id.loading_progress)
 
-        provider = AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview[args.providerOverviewIndex].provider
+        //provider = AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview[args.providerOverviewIndex].provider
         invoiceContainer = view.findViewById(R.id.provider_detail_invoices_holder)
         invoiceContainer.isVisible = false
 

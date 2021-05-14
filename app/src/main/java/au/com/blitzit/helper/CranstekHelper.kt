@@ -14,11 +14,16 @@ object CranstekHelper
 {
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
+    fun getCoreLabels(): List<String>
+    {
+        return listOf("Daily Activities", "Consumables", "Social Community and Civic Participation")
+    }
+
     fun formatDate(value: String): String
     {
-        val inFormatter = SimpleDateFormat("dd-MM-yyyy")
+        val inFormatter = SimpleDateFormat("yyyy-MM-dd")
         val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("yyyy-MM-dd")
+        val outFormatter = SimpleDateFormat("dd-MM-yyyy")
         return outFormatter.format(date)
     }
 

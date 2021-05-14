@@ -10,12 +10,16 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.ProviderOverview
+import au.com.blitzit.roomdata.Provider
+import au.com.blitzit.ui.dashboard.DashboardViewModel
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,54 +31,66 @@ class MyProvidersFragment : Fragment()
         fun newInstance() = MyProvidersFragment()
     }
 
+    private lateinit var viewModel: MyProvidersViewModel
     private lateinit var providersContainer: LinearLayout
-    private lateinit var loadingBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
+        //viewModel
+        viewModel = ViewModelProvider(this).get(MyProvidersViewModel::class.java)
+
+        //View
         val view = inflater.inflate(R.layout.fragment_providers, container, false)
 
+        //Back Button
         val backButton: Button = view.findViewById(R.id.profile_back_button)
         backButton.setOnClickListener {
             this.findNavController().navigate(MyProvidersFragmentDirections.actionMyProvidersFragmentToMenuFragment())
         }
 
+        //Container
         providersContainer = view.findViewById(R.id.providers_container)
 
-        for(i in AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview.indices)
-        {
-            populateProviders(i, layoutInflater, providersContainer)
+        //LiveData
+        val providerObserver = Observer<List<Provider>>{
+            populateProviders(it, layoutInflater, providersContainer)
         }
+        viewModel.providersList.observe(viewLifecycleOwner, providerObserver)
 
         return view
     }
 
-    private fun populateProviders(index: Int, inflater: LayoutInflater, container: ViewGroup)
+    private fun populateProviders(providers: List<Provider>, inflater: LayoutInflater, container: ViewGroup)
     {
-        //Get the provider overview
-        val providerOverview: ProviderOverview = AuthServices.userData.getSelectedPlan().planProviderSummary!!.providerOverview[index]
-        //Create the view and inflate it
-        val view = inflater.inflate(R.layout.part_provider_display, container, false)
+        for(provider: Provider in providers)
+        {
+            //Create the view and inflate it
+            val view = inflater.inflate(R.layout.part_provider_display, container, false)
 
-        //NAME
-        view.findViewById<TextView>(R.id.provider_title).text = providerOverview.provider.name
-        //ABN
-        view.findViewById<TextView>(R.id.provider_abn).text = providerOverview.provider.getABN()
-        //ADDRESS - street
-        view.findViewById<TextView>(R.id.provider_address_field_street).text = providerOverview.provider.getStreetAddress()
-        //ADDRESS - Suburb, State, Postcode
-        view.findViewById<TextView>(R.id.provider_address_field_suburb).text = providerOverview.provider.getSuburbStatePostcode()
-        //EMAIL
-        view.findViewById<TextView>(R.id.provider_contact_email).text = providerOverview.provider.getEmailAddress()
-        //PHONE
-        view.findViewById<TextView>(R.id.provider_contact_number).text = providerOverview.provider.getContactNumber()
+            //NAME
+            view.findViewById<TextView>(R.id.provider_title).text = provider.name
+            //ABN
+            view.findViewById<TextView>(R.id.provider_abn).text = provider.getABN()
+            //ADDRESS - street
+            view.findViewById<TextView>(R.id.provider_address_field_street).text = provider.getStreetAddress()
+            //ADDRESS - Suburb, State, Postcode
+            view.findViewById<TextView>(R.id.provider_address_field_suburb).text = provider.getSuburbStatePostcode()
+            //EMAIL
+            view.findViewById<TextView>(R.id.provider_contact_email).text = provider.getEmailAddress()
+            //PHONE
+            view.findViewById<TextView>(R.id.provider_contact_number).text = provider.getContactNumber()
 
-        //Selectable
-        val selectableButton: MaterialCardView = view.findViewById(R.id.provider_display_button)
-        selectableButton.setOnClickListener {
-            this.findNavController().navigate(MyProvidersFragmentDirections.actionMyProvidersFragmentToProviderDetailFragment(index))
+            //Selectable
+            val selectableButton: MaterialCardView = view.findViewById(R.id.provider_display_button)
+            selectableButton.setOnClickListener {
+                this.findNavController().navigate(
+                    MyProvidersFragmentDirections.actionMyProvidersFragmentToProviderDetailFragment(
+                        provider.provider_id
+                    )
+                )
+            }
+
+            container.addView(view)
         }
-
-        container.addView(view)
     }
 }

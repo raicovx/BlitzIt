@@ -74,6 +74,7 @@ class DashboardFragment : Fragment() {
         setupDashboard(view)
 
         layoutFiller = view.findViewById(R.id.dashboard_layout_filler)
+
         val purposeObserver = Observer<List<PurposeWithCategories>>{
             populateDashboard(it, inflater, layoutFiller)
         }
@@ -95,8 +96,8 @@ class DashboardFragment : Fragment() {
 
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
-        val sDate = "Start Date: " + viewModel.selectedPlan.plan_start_date
-        val eDate = "End Date: " + viewModel.selectedPlan.plan_end_date
+        val sDate = "Start Date: " + CranstekHelper.formatDate(viewModel.selectedPlan.plan_start_date)
+        val eDate = "End Date: " + CranstekHelper.formatDate(viewModel.selectedPlan.plan_end_date)
         startDate.text = sDate
         endDate.text = eDate
 
@@ -151,7 +152,7 @@ class DashboardFragment : Fragment() {
         //Sets up the view budget button
         val viewButton: Button = categoryView.findViewById(R.id.part_subcategory_view_budget_button)
         viewButton.setOnClickListener {
-            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(category.category, 200))
+            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(category.category, category.label, category.purpose))
         }
         buttons = buttons + buttons.plus(viewButton)
 

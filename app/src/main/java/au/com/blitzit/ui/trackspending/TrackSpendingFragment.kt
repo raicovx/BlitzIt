@@ -165,7 +165,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
             val providerIndex = AuthServices.userData.getSelectedPlan().getProviderSummaryIndexByProviderName(providerSpend.key)
             val providerSelectionButton = view.findViewById<LinearLayout>(R.id.provider_button)
             providerSelectionButton.setOnClickListener {
-                this.findNavController().navigate(TrackSpendingFragmentDirections.actionTrackSpendingFragmentToProviderDetailFragment(providerIndex))
+                this.findNavController().navigate(TrackSpendingFragmentDirections.actionTrackSpendingFragmentToProviderDetailFragment("providerIndex"))
             }
 
             view.findViewById<TextView>(R.id.provider_id).text = providerSpend.key

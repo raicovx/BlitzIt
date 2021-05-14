@@ -7,6 +7,9 @@ import au.com.blitzit.roomdata.ProviderCategorySpending
 @Dao
 interface ProviderCategorySpendingDAO
 {
+    @Query("SELECT * FROM ProviderCategorySpending WHERE plan_id = :planID AND label = :label")
+    suspend fun getProviderCategorySpendingByLabel(planID: String, label: String): List<ProviderCategorySpending>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProviderCategorySpending(providerCategorySpending: ProviderCategorySpending)
 

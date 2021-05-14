@@ -183,19 +183,20 @@
         <action
             android:id="@+id/action_categoryBudgetFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
-        <argument
-            android:name="cat_budget_args"
-            app:argType="string"
-            android:defaultValue="failed" />
-        <argument
-            android:name="planPartNumber"
-            app:argType="long" />
         <action
             android:id="@+id/action_categoryBudgetFragment_to_providerDetailFragment"
             app:destination="@id/providerDetailFragment" />
         <action
             android:id="@+id/action_categoryBudgetFragment_to_trackSpendingFragment"
             app:destination="@id/trackSpendingFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="label"
+            app:argType="string" />
+        <argument android:name="purpose"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/signUpTypeFragment"
@@ -294,9 +295,8 @@
             android:id="@+id/action_providerDetailFragment_to_myProvidersFragment"
             app:destination="@id/myProvidersFragment" />
         <argument
-            android:name="providerOverviewIndex"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="provider_id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/trackSpendingFragment"

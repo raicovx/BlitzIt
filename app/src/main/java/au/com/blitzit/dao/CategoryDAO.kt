@@ -7,6 +7,9 @@ import au.com.blitzit.roomdata.Category
 @Dao
 interface CategoryDAO
 {
+    @Query("SELECT * FROM Category WHERE category = :category AND label = :label LIMIT 1")
+    suspend fun getCategoryByCategoryAndLabel(category: String, label: String): Category
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategory(category: Category)
 

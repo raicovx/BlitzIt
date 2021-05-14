@@ -23,9 +23,9 @@ data class GenericPlanResponse(
 
     fun getPurposes(): List<Purpose>
     {
-        val core = Purpose(planID, "CORE")
-        val capacityBuilding = Purpose(planID, "CAPACITY BUILDING")
-        val capital = Purpose(planID, "CAPITAL")
+        val core = Purpose(1, planID, "CORE")
+        val capacityBuilding = Purpose(2, planID, "CAPACITY BUILDING")
+        val capital = Purpose(3, planID, "CAPITAL")
 
         return listOf(core, capacityBuilding, capital)
     }

@@ -28,6 +28,6 @@ interface PurposeDAO
     }
 
     @Transaction
-    @Query("SELECT * FROM Purpose WHERE plan_id = :planID")
+    @Query("SELECT * FROM Purpose WHERE plan_id = :planID ORDER BY purpose_position ASC")
     suspend fun getPurposesWithCategories(planID: String): List<PurposeWithCategories>
 }

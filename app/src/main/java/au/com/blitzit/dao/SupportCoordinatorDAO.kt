@@ -7,6 +7,9 @@ import au.com.blitzit.roomdata.SupportCoordinator
 @Dao
 interface SupportCoordinatorDAO
 {
+    @Query("SELECT email FROM SupportCoordinator WHERE ndis_number = :ndisNumber LIMIT 1")
+    suspend fun getSupportCoordinatorEmail(ndisNumber: Int): String
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertSupportCoordinator(supportCoordinator: SupportCoordinator)
 

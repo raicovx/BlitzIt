@@ -326,7 +326,7 @@ object AuthServices
             appDatabase.providerDAO().upsertProvider(summary.getProvider(planID))
 
             //Provider Category Spending
-            for(spending: ProviderCategorySpending in summary.getProviderCategorySpending())
+            for(spending: ProviderCategorySpending in summary.getProviderCategorySpending(planID))
             {
                 appDatabase.providerCategorySpendingDAO().upsertProviderCategorySpending(spending)
             }
