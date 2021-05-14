@@ -25,4 +25,7 @@ interface PlanDAO
             updatePlan(plan)
         }
     }
+
+    @Query("SELECT * FROM `plan` ORDER BY plan_start_date DESC LIMIT 1")
+    suspend fun getMostRecentPlan(): Plan
 }

@@ -189,8 +189,7 @@
             android:defaultValue="failed" />
         <argument
             android:name="planPartNumber"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="long" />
         <action
             android:id="@+id/action_categoryBudgetFragment_to_providerDetailFragment"
             app:destination="@id/providerDetailFragment" />

@@ -12,10 +12,10 @@ data class Provider(
     val name: String,
     val abn: String,
     @SerializedName("address_line")
-    val addressLine: String,
-    val suburb: String,
-    val state: String,
-    val postcode: String,
-    val email: String,
-    val phone: List<String>
+    val addressLine: String?,
+    val suburb: String?,
+    val state: String?,
+    val postcode: String?,
+    val email: String?,
+    val phone: List<String>?
 )

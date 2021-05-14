@@ -24,5 +24,7 @@ data class Participant(
     @SerializedName("date_of_birth")
     val dateOfBirth: String,
     @SerializedName("statement_email")
-    val statementEmails: List<String>
-)
+    val statementEmails: List<String>)
+{
+    fun getFullName(): String = "$firstName $lastName"
+}

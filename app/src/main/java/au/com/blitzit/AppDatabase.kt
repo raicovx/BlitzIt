@@ -18,13 +18,15 @@ import au.com.blitzit.roomdata.*
     SignUpRequest::class,
     SupportCoordinator::class,
     User::class],
-    version = 1009, exportSchema = false)
+    version = 1015, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase()
 {
     //DAOs
     abstract fun userDAO(): UserDAO
     abstract fun participantDAO(): ParticipantDAO
+    abstract fun primaryContactDAO(): PrimaryContactDAO
+    abstract fun supportCoordinatorDAO(): SupportCoordinatorDAO
     abstract fun planDAO(): PlanDAO
     abstract fun purposeDAO(): PurposeDAO
     abstract fun categoryDAO(): CategoryDAO

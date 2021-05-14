@@ -45,13 +45,12 @@ data class GenericParticipantResponse(
             statementEmails)
     }
 
-    fun toPrimaryContacts(ndisNumber: String): List<au.com.blitzit.roomdata.PrimaryContact>
+    fun getPrimaryContactList(): List<au.com.blitzit.roomdata.PrimaryContact>
     {
         var pContacts = emptyList<au.com.blitzit.roomdata.PrimaryContact>()
         for(contact: GenericPrimaryContactResponse in primaryContacts)
         {
             val newContact = au.com.blitzit.roomdata.PrimaryContact(
-                0,
                 ndisNumber,
                 contact.firstName,
                 contact.lastName,
@@ -67,13 +66,12 @@ data class GenericParticipantResponse(
         return pContacts
     }
 
-    fun toSupportCoordinators(ndisNumber: String): List<au.com.blitzit.roomdata.SupportCoordinator>
+    fun getSupportCoordinatorList(): List<au.com.blitzit.roomdata.SupportCoordinator>
     {
         var sContacts = emptyList<au.com.blitzit.roomdata.SupportCoordinator>()
         for(contact: GenericSupportCoordinatorResponse in supportCoordinators)
         {
             val newContact = au.com.blitzit.roomdata.SupportCoordinator(
-                0,
                 ndisNumber,
                 contact.firstName,
                 contact.lastName,

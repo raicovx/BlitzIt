@@ -12,6 +12,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
@@ -19,7 +21,11 @@ import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.data.PlanParts
 import au.com.blitzit.data.UserPlan
 import au.com.blitzit.helper.CranstekHelper
+import au.com.blitzit.roomdata.Category
+import au.com.blitzit.roomdata.Purpose
+import au.com.blitzit.roomdata.PurposeWithCategories
 import com.app.progresviews.ProgressWheel
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
 
@@ -28,9 +34,6 @@ class DashboardFragment : Fragment() {
     }
 
     private lateinit var viewModel: DashboardViewModel
-
-    private var displayingOldPlan: Boolean = false
-    private lateinit var displayingPlan: UserPlan
 
     private lateinit var layoutFiller: LinearLayout
 
@@ -46,16 +49,21 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
+        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
+        //Show the FAB
         val mActivity : MainActivity = activity as MainActivity
         mActivity.showFAB()
 
-        //Back button
+        //Back button - ONLY VISIBLE WHEN VIEWING OLDER PLANS
         backButton = view.findViewById(R.id.dashboard_back_button)
         backButton.setOnClickListener {
             //Reset selected plan
-            AuthServices.userData.setSelectedPlan(AuthServices.userData.getMostRecentPlan())
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.resetSelectedPlan()
+            }
             this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMyPlansFragment())
         }
         backButton.isVisible = false
@@ -66,102 +74,99 @@ class DashboardFragment : Fragment() {
         setupDashboard(view)
 
         layoutFiller = view.findViewById(R.id.dashboard_layout_filler)
-        createCategories(inflater, layoutFiller)
-        if(displayingOldPlan)
-            handleOldPlanColours()
+        val purposeObserver = Observer<List<PurposeWithCategories>>{
+            populateDashboard(it, inflater, layoutFiller)
+        }
+        viewModel.purposes.observe(viewLifecycleOwner, purposeObserver)
 
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
     }
 
     private fun setupDashboard(view: View)
     {
         val titleName: TextView = view.findViewById(R.id.dashboard_name)
-        titleName.text = AuthServices.userData.getFullName()
+        titleName.text = viewModel.participant.getFullName()
         val ndisNumber: TextView = view.findViewById(R.id.dashboard_ndis_number)
-        val ndis = "NDIS Number: " + AuthServices.userData.ndisNumber
+        val ndis = "NDIS Number: ${viewModel.participant.ndisNumber}"
         ndisNumber.text = ndis
 
         val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
-        CranstekHelper.setPlanStatusDisplay(planStatus, displayingPlan.status)
+        CranstekHelper.setPlanStatusDisplay(planStatus, viewModel.selectedPlan.status)
 
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
-        val sDate = "Start Date: " + displayingPlan.planStartDate
-        val eDate = "End Date: " + displayingPlan.planEndDate
+        val sDate = "Start Date: " + viewModel.selectedPlan.plan_start_date
+        val eDate = "End Date: " + viewModel.selectedPlan.plan_end_date
         startDate.text = sDate
         endDate.text = eDate
 
         //View statements button
         val viewStatements: Button = view.findViewById(R.id.dashboard_view_statements)
         buttons = buttons + buttons.plus(viewStatements)
-        //TODO("Hook up view statements button")
+        viewStatements.isVisible = false
     }
 
-    private fun createCategories(inflater: LayoutInflater, container: ViewGroup?)
+    private fun populateDashboard(purposes: List<PurposeWithCategories>, inflater: LayoutInflater, container: ViewGroup)
     {
-        val categoryList : List<String> = displayingPlan.getPartCategories()
-
-        for(category: String in categoryList)
+        //Get List of purposes that have categories
+        for(purposeWithCategories: PurposeWithCategories in purposes)
         {
-            //Create categories here
-            val categoryView = inflater.inflate(R.layout.part_dashboard_category, container, false)
-            val titleText: TextView = categoryView.findViewById(R.id.part_category_title)
-            titleText.text = category
+            if(purposeWithCategories.categories.isNotEmpty())
+            {
+                val purposeView = inflater.inflate(R.layout.part_dashboard_category, container, false)
 
-            //Add category headers to list
-            categoryHeaders = categoryHeaders + categoryHeaders.plus(titleText)
+                val titleText: TextView = purposeView.findViewById(R.id.part_category_title)
+                titleText.text = purposeWithCategories.purpose.name
 
-            container?.addView(categoryView)
+                //Add category headers to list (This is to handle colour changes)
+                categoryHeaders = categoryHeaders + categoryHeaders.plus(titleText)
 
-            val subCategoryFiller: LinearLayout = categoryView.findViewById(R.id.part_subcategory_filler)
-            createSubCategories(category, inflater, subCategoryFiller)
-        }
-    }
+                //Add this view to the container
+                container.addView(purposeView)
 
-    private fun createSubCategories(category: String, inflater: LayoutInflater, container: ViewGroup?)
-    {
-        val parts: List<PlanParts> = displayingPlan.getPartListByCategory(category)
-        for(i in parts.indices)
-        {
-            //Fill categories with sub categories here
-            val subCategoryView = inflater.inflate(R.layout.part_dashboard_subcategory, container, false)
-
-            val subTitle: TextView = subCategoryView.findViewById(R.id.part_subcategory_title)
-            subTitle.text = parts[i].label
-
-            val startBalance: TextView = subCategoryView.findViewById(R.id.part_subcategory_start_balance)
-            startBalance.text = CranstekHelper.convertToCurrency(parts[i].budget)
-            val balance: TextView = subCategoryView.findViewById(R.id.part_subcategory_balance)
-            balance.text = CranstekHelper.convertToCurrency(parts[i].balance)
-
-            val progress: ProgressWheel = subCategoryView.findViewById(R.id.part_subcategory_progress)
-            CranstekHelper.setRadialWheel(progress, parts[i].budget, parts[i].balance)
-            progressWheels = progressWheels + progressWheels.plus(progress)
-
-            //Sets up the view budget button
-            val viewButton: Button = subCategoryView.findViewById(R.id.part_subcategory_view_budget_button)
-            viewButton.setOnClickListener {
-                this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(parts[i].category, i))
+                //Create all category views for this purpose
+                val categoryHolder: LinearLayout = purposeView.findViewById(R.id.part_subcategory_filler)
+                for(category: Category in purposeWithCategories.categories)
+                    if(category.plan_id == purposeWithCategories.purpose.plan_id)
+                        createCategoryView(category, inflater, categoryHolder)
             }
-            buttons = buttons + buttons.plus(viewButton)
-
-            container?.addView(subCategoryView)
         }
+    }
+
+    private fun createCategoryView(category: Category, inflater: LayoutInflater, container: ViewGroup)
+    {
+        val categoryView = inflater.inflate(R.layout.part_dashboard_subcategory, container, false)
+
+        categoryView.findViewById<TextView>(R.id.part_subcategory_title).text = category.label
+
+        val startBalance: TextView = categoryView.findViewById(R.id.part_subcategory_start_balance)
+        startBalance.text = CranstekHelper.convertToCurrency(category.budget)
+        val balance: TextView = categoryView.findViewById(R.id.part_subcategory_balance)
+        balance.text = CranstekHelper.convertToCurrency(category.balance)
+
+        val progress: ProgressWheel = categoryView.findViewById(R.id.part_subcategory_progress)
+        CranstekHelper.setRadialWheel(progress, category.budget, category.balance)
+        progressWheels = progressWheels + progressWheels.plus(progress)
+
+        //Sets up the view budget button
+        val viewButton: Button = categoryView.findViewById(R.id.part_subcategory_view_budget_button)
+        viewButton.setOnClickListener {
+            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(category.category, 200))
+        }
+        buttons = buttons + buttons.plus(viewButton)
+
+        container.addView(categoryView)
     }
 
     private fun getPlanToDisplay()
     {
-        displayingPlan = AuthServices.userData.getSelectedPlan()
-        if(!AuthServices.userData.isSelectedPlanMostRecent(displayingPlan))
-        {
-            displayingOldPlan = true
-            backButtonImage.isVisible = true
-            backButton.isVisible = true
+        viewLifecycleOwner.lifecycleScope.launch{
+            if(!viewModel.isSelectedPlanMostRecentPlan())
+            {
+                backButtonImage.isVisible = true
+                backButton.isVisible = true
+                handleOldPlanColours()
+            }
         }
     }
 

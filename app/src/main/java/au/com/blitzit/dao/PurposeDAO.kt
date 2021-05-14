@@ -3,6 +3,7 @@ package au.com.blitzit.dao
 import android.database.sqlite.SQLiteConstraintException
 import androidx.room.*
 import au.com.blitzit.roomdata.Purpose
+import au.com.blitzit.roomdata.PurposeWithCategories
 
 @Dao
 interface PurposeDAO
@@ -25,4 +26,8 @@ interface PurposeDAO
             updatePurpose(purpose)
         }
     }
+
+    @Transaction
+    @Query("SELECT * FROM Purpose WHERE plan_id = :planID")
+    suspend fun getPurposesWithCategories(planID: String): List<PurposeWithCategories>
 }

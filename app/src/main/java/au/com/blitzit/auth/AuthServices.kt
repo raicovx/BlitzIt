@@ -7,6 +7,8 @@ import au.com.blitzit.AppDatabase
 import au.com.blitzit.data.*
 import au.com.blitzit.responses.*
 import au.com.blitzit.roomdata.*
+import au.com.blitzit.roomdata.PrimaryContact
+import au.com.blitzit.roomdata.SupportCoordinator
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
@@ -35,10 +37,14 @@ enum class SignInState(val state: String)
 object AuthServices
 {
     private lateinit var appDatabase: AppDatabase
+
+    //View references
     lateinit var loggedUser: User
         private set
     lateinit var loggedParticipant: Participant
         private set
+    lateinit var selectedPlan: Plan
+
     private lateinit var genericPlans: Array<GenericPlanResponse>
 
     val liveSignInState = MutableLiveData<SignInState>()
@@ -49,7 +55,7 @@ object AuthServices
     private suspend fun getData()
     {
         getParticipantData()
-        userData.setSelectedPlan(userData.getMostRecentPlan())
+        selectedPlan = appDatabase.planDAO().getMostRecentPlan()
         liveSignInState.postValue(SignInState.SignedIn)
     }
 
@@ -127,14 +133,14 @@ object AuthServices
 
                 try {
                     val attributes = Amplify.Auth.fetchUserAttributes()
-                    Log.i("AuthDemo", "User attributes = $attributes")
+                    Log.i("GAZ_INFO", "User attributes = $attributes")
                     for(attr: AuthUserAttribute in attributes)
                     {
                         if(attr.key == AuthUserAttributeKey.email())
                             handleUserData(attr.value)
                     }
                 }catch (error: AuthException) {
-                    Log.e("AuthDemo", "Failed to fetch user attributes", error)
+                    Log.e("GAZ_INFO", "Failed to fetch user attributes", error)
                 }
 
                 getData()
@@ -159,7 +165,6 @@ object AuthServices
         }
 
         loggedUser = appDatabase.userDAO().findByEmail(email)
-        Log.i("GAZ_DB", "Logged User: $loggedUser")
     }
 
     private suspend fun getParticipantData()
@@ -190,15 +195,8 @@ object AuthServices
 
         //Participant
         val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
-        Log.i("GAZ_INFO", "participant: $participant")
         appDatabase.participantDAO().upsertParticipant(participant)
         loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
-
-        //Primary Contacts
-        //TODO("Primary contacts")
-
-        //Support Contacts
-        //TODO("Support contacts")
     }
 
     private suspend fun getPlanData()
@@ -227,6 +225,18 @@ object AuthServices
         //Generic Class
         val genericParticipant = Gson().fromJson(response.data.asString(), GenericParticipantResponse::class.java)
         genericPlans = genericParticipant.plans
+
+        //Primary Contacts
+        for(pContact: PrimaryContact in genericParticipant.getPrimaryContactList())
+        {
+            appDatabase.primaryContactDAO().upsertPrimaryContact(pContact)
+        }
+
+        //Support Contacts
+        for(sContact: SupportCoordinator in genericParticipant.getSupportCoordinatorList())
+        {
+            appDatabase.supportCoordinatorDAO().upsertSupportCoordinator(sContact)
+        }
 
         for(genericPlan: GenericPlanResponse in genericPlans)
         {

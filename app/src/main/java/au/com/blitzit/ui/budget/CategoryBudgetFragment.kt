@@ -45,7 +45,8 @@ class CategoryBudgetFragment : Fragment()
 
     private fun setupViewForSelected(view: View, inflater: LayoutInflater)
     {
-        planPart = AuthServices.userData.getSelectedPlan().getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
+        //planPart = AuthServices.userData.getSelectedPlan().getPartListByCategory(args.catBudgetArgs)[args.planPartNumber]
+        planPart = AuthServices.userData.getSelectedPlan().getPartListByCategory(args.catBudgetArgs)[1]
 
         val titleText: TextView = view.findViewById(R.id.cat_budget_title)
         titleText.text = planPart.category

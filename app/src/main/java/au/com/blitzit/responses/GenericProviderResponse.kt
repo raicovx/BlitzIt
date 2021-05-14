@@ -33,7 +33,7 @@ data class GenericProviderSummaryResponse(
         var pCSpending: List<ProviderCategorySpending> = emptyList()
         for(spend: GenericProviderCategorySpendingResponse in categories)
         {
-            pCSpending = pCSpending.plus(ProviderCategorySpending(0, provider.id, spend.label, spend.spend))
+            pCSpending = pCSpending.plus(ProviderCategorySpending(provider.id, spend.label, spend.spend))
         }
 
         return pCSpending

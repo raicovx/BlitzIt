@@ -37,9 +37,9 @@ data class GenericPlanResponse(
         {
             if(part.category == purpose.name)
             {
-                val category = Category(0,
+                val category = Category(
                     planID,
-                    purpose.plan_id + purpose.name,
+                    purpose.name,
                     part.label,
                     part.category,
                     part.budget,
