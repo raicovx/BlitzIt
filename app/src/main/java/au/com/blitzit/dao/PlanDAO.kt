@@ -7,6 +7,9 @@ import au.com.blitzit.roomdata.Plan
 @Dao
 interface PlanDAO
 {
+    @Query("SELECT * FROM `Plan` WHERE ndis_number = :ndisNumber ORDER BY status ASC")
+    suspend fun getPlans(ndisNumber: Int): List<Plan>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPlan(plan: Plan)
 
@@ -26,6 +29,6 @@ interface PlanDAO
         }
     }
 
-    @Query("SELECT * FROM `plan` ORDER BY plan_start_date DESC LIMIT 1")
-    suspend fun getMostRecentPlan(): Plan
+    @Query("SELECT * FROM `plan` WHERE ndis_number = :ndisNumber ORDER BY plan_start_date DESC LIMIT 1")
+    suspend fun getMostRecentPlan(ndisNumber: Int): Plan
 }

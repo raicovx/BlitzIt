@@ -18,11 +18,8 @@ import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
-import au.com.blitzit.data.PlanParts
-import au.com.blitzit.data.UserPlan
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
-import au.com.blitzit.roomdata.Purpose
 import au.com.blitzit.roomdata.PurposeWithCategories
 import com.app.progresviews.ProgressWheel
 import kotlinx.coroutines.launch
@@ -41,11 +38,6 @@ class DashboardFragment : Fragment() {
     private lateinit var backButton: Button
     private lateinit var backButtonImage: ImageView
 
-    //Colour changing group
-    private var buttons: List<Button> = emptyList()
-    private var categoryHeaders: List<TextView> = emptyList()
-    private var progressWheels: List<ProgressWheel> = emptyList()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
@@ -57,21 +49,11 @@ class DashboardFragment : Fragment() {
         val mActivity : MainActivity = activity as MainActivity
         mActivity.showFAB()
 
-        //Back button - ONLY VISIBLE WHEN VIEWING OLDER PLANS
-        backButton = view.findViewById(R.id.dashboard_back_button)
-        backButton.setOnClickListener {
-            //Reset selected plan
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.resetSelectedPlan()
-            }
-            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMyPlansFragment())
-        }
-        backButton.isVisible = false
-        backButtonImage = view.findViewById(R.id.dashboard_back_button_image)
-        backButtonImage.isVisible = false
+        //Back button
+        setupBackButton(view)
 
-        getPlanToDisplay()
-        setupDashboard(view)
+        //Dashboard Header
+        setupDashboardHeader(view)
 
         layoutFiller = view.findViewById(R.id.dashboard_layout_filler)
 
@@ -83,7 +65,31 @@ class DashboardFragment : Fragment() {
         return view
     }
 
-    private fun setupDashboard(view: View)
+    private fun setupBackButton(view: View)
+    {
+        //Back button - ONLY VISIBLE WHEN VIEWING OLDER PLANS
+        backButton = view.findViewById(R.id.dashboard_back_button)
+        backButton.setOnClickListener {
+            //Reset selected plan
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.resetSelectedPlan()
+            }
+            this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMyPlansFragment())
+        }
+        backButtonImage = view.findViewById(R.id.dashboard_back_button_image)
+        if(checkPlanStatusExpired())
+        {
+            backButtonImage.isVisible = true
+            backButton.isVisible = true
+        }
+        else
+        {
+            backButton.isVisible = false
+            backButtonImage.isVisible = false
+        }
+    }
+
+    private fun setupDashboardHeader(view: View)
     {
         val titleName: TextView = view.findViewById(R.id.dashboard_name)
         titleName.text = viewModel.participant.getFullName()
@@ -103,7 +109,7 @@ class DashboardFragment : Fragment() {
 
         //View statements button
         val viewStatements: Button = view.findViewById(R.id.dashboard_view_statements)
-        buttons = buttons + buttons.plus(viewStatements)
+        handleButtonColours(viewStatements)
         viewStatements.isVisible = false
     }
 
@@ -120,7 +126,7 @@ class DashboardFragment : Fragment() {
                 titleText.text = purposeWithCategories.purpose.name
 
                 //Add category headers to list (This is to handle colour changes)
-                categoryHeaders = categoryHeaders + categoryHeaders.plus(titleText)
+                handleCategoryHeaderColours(titleText)
 
                 //Add this view to the container
                 container.addView(purposeView)
@@ -147,47 +153,47 @@ class DashboardFragment : Fragment() {
 
         val progress: ProgressWheel = categoryView.findViewById(R.id.part_subcategory_progress)
         CranstekHelper.setRadialWheel(progress, category.budget, category.balance)
-        progressWheels = progressWheels + progressWheels.plus(progress)
+        //progressWheels = progressWheels + progressWheels.plus(progress)
 
         //Sets up the view budget button
         val viewButton: Button = categoryView.findViewById(R.id.part_subcategory_view_budget_button)
         viewButton.setOnClickListener {
             this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(category.category, category.label, category.purpose))
         }
-        buttons = buttons + buttons.plus(viewButton)
+        handleButtonColours(viewButton)
 
         container.addView(categoryView)
     }
 
-    private fun getPlanToDisplay()
+    private fun checkPlanStatusExpired(): Boolean
     {
-        viewLifecycleOwner.lifecycleScope.launch{
-            if(!viewModel.isSelectedPlanMostRecentPlan())
-            {
-                backButtonImage.isVisible = true
-                backButton.isVisible = true
-                handleOldPlanColours()
-            }
+        return if(AuthServices.selectedPlan.status == "Expired" || AuthServices.selectedPlan.status == "EXPIRED")
+        {
+            backButtonImage.isVisible = true
+            backButton.isVisible = true
+            true
+        }
+        else
+            false
+    }
+
+    private fun handleButtonColours(button: Button)
+    {
+        if(checkPlanStatusExpired())
+        {
+            button.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.old_button)
+            button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
     }
 
-    private fun handleOldPlanColours()
+    private fun handleCategoryHeaderColours(text: TextView)
     {
-        if(!buttons.isNullOrEmpty())
-        {
-            for(button: Button in buttons)
-            {
-                button.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.old_button)
-                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            }
-        }
-        if(!categoryHeaders.isNullOrEmpty())
-        {
-            for(text: TextView in categoryHeaders)
-            {
-                text.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
-            }
-        }
+        if(checkPlanStatusExpired())
+            text.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+    }
+
+    /*private fun unUsedFunction()
+    {
         if(!progressWheels.isNullOrEmpty())
         {
             for(progress: ProgressWheel in progressWheels)
@@ -195,5 +201,5 @@ class DashboardFragment : Fragment() {
                 //TODO("Progress wheel colour changes")
             }
         }
-    }
+    }*/
 }

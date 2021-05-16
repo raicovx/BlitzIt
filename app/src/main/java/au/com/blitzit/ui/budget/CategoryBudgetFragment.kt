@@ -15,14 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
-import au.com.blitzit.data.PlanParts
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.ProviderCategorySpending
-import au.com.blitzit.ui.dashboard.DashboardViewModel
 import com.app.progresviews.ProgressWheel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class CategoryBudgetFragment : Fragment()
@@ -30,7 +27,6 @@ class CategoryBudgetFragment : Fragment()
     private lateinit var backButton : Button
 
     private val args: CategoryBudgetFragmentArgs by navArgs()
-    private lateinit var planPart: PlanParts
 
     private lateinit var viewModel: CategoryBudgetViewModel
 
@@ -63,7 +59,7 @@ class CategoryBudgetFragment : Fragment()
     {
         //Subscribe to the livedata
         val categoryObserver = Observer<Category>{
-            setupViewForSelected(it, view, inflater)
+            setupViewForSelected(it, view)
         }
         viewModel.categoryLiveData.observe(viewLifecycleOwner, categoryObserver)
         val providerCategorySpendingObserver = Observer<List<ProviderCategorySpending>> {
@@ -78,7 +74,7 @@ class CategoryBudgetFragment : Fragment()
         }
     }
 
-    private fun setupViewForSelected(category: Category, view: View, inflater: LayoutInflater)
+    private fun setupViewForSelected(category: Category, view: View)
     {
         val titleText: TextView = view.findViewById(R.id.cat_budget_title)
         titleText.text = category.category

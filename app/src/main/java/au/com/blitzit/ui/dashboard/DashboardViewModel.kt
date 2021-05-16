@@ -34,7 +34,7 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app)
      */
     suspend fun resetSelectedPlan()
     {
-        AuthServices.selectedPlan = appDatabase.planDAO().getMostRecentPlan()
+        AuthServices.selectedPlan = appDatabase.planDAO().getMostRecentPlan(AuthServices.loggedParticipant.ndisNumber)
     }
 
     /***
@@ -42,7 +42,7 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app)
      */
     suspend fun isSelectedPlanMostRecentPlan(): Boolean
     {
-        val mostRecent = appDatabase.planDAO().getMostRecentPlan()
+        val mostRecent = appDatabase.planDAO().getMostRecentPlan(AuthServices.loggedParticipant.ndisNumber)
         return selectedPlan == mostRecent
     }
 }

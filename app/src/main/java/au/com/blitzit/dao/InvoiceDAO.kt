@@ -7,6 +7,12 @@ import au.com.blitzit.roomdata.Invoice
 @Dao
 interface InvoiceDAO
 {
+    @Query("SELECT * FROM Invoice WHERE plan_id = :planID")
+    suspend fun getInvoiceListByPlan(planID: String): List<Invoice>
+
+    @Query("SELECT * FROM Invoice WHERE plan_id = :planID AND provider = :providerName")
+    suspend fun getInvoiceListByProviderName(planID: String, providerName: String): List<Invoice>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertInvoice(invoice: Invoice)
 

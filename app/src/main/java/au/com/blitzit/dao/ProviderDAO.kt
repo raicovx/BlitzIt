@@ -10,6 +10,9 @@ interface ProviderDAO
     @Query("SELECT name FROM Provider WHERE provider_id = :providerID")
     suspend fun getProviderNameById(providerID: String): String
 
+    @Query("SELECT * FROM Provider WHERE provider_id = :providerID")
+    suspend fun getProviderById(providerID: String): Provider
+
     @Query("SELECT * FROM Provider WHERE plan_id = :planID")
     suspend fun getAllProviders(planID: String): List<Provider>
 

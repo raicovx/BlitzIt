@@ -49,13 +49,10 @@ object AuthServices
 
     val liveSignInState = MutableLiveData<SignInState>()
 
-    lateinit var userData: UserData
-        private set //Makes setting userdata private
-
     private suspend fun getData()
     {
         getParticipantData()
-        selectedPlan = appDatabase.planDAO().getMostRecentPlan()
+        selectedPlan = appDatabase.planDAO().getMostRecentPlan(loggedParticipant.ndisNumber)
         liveSignInState.postValue(SignInState.SignedIn)
     }
 
@@ -191,7 +188,7 @@ object AuthServices
     private suspend fun handleParticipantData(data: RestResponse)
     {
         //Generic Class
-        var genericParticipants: Array<GenericParticipantResponse> = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
+        val genericParticipants: Array<GenericParticipantResponse> = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
 
         //Participant
         val participant = genericParticipants[0].toParticipant(loggedUser.user_id)

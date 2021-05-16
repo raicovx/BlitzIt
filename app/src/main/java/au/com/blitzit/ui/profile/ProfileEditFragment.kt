@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
-import org.w3c.dom.Text
 
 class ProfileEditFragment : Fragment(), AdapterView.OnItemSelectedListener
 {
@@ -45,16 +44,17 @@ class ProfileEditFragment : Fragment(), AdapterView.OnItemSelectedListener
 
     private fun prePopulateDataFields(view: View)
     {
-        val userData = AuthServices.userData
+        val participantData = AuthServices.loggedParticipant
+        val userData = AuthServices.loggedUser
 
         contactNumberField = view.findViewById(R.id.profile_edit_contact)
-        contactNumberField.text = CranstekHelper.formatMobileNumberText(userData.mobile)
+        contactNumberField.text = CranstekHelper.formatMobileNumberText(participantData.mobile)
 
         userEmailField = view.findViewById(R.id.profile_edit_email)
         userEmailField.text = userData.email
 
         statementEmailField = view.findViewById(R.id.profile_edit_statement_email)
-        statementEmailField.text = userData.statementEmail[0]
+        statementEmailField.text = participantData.statementEmails[0]
 
         notesField = view.findViewById(R.id.profile_edit_notes)
 

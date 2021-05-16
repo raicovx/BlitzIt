@@ -1,8 +1,5 @@
 package au.com.blitzit.responses
 
-import au.com.blitzit.data.PrimaryContact
-import au.com.blitzit.data.SupportCoordinator
-import au.com.blitzit.data.UserPlan
 import au.com.blitzit.roomdata.Participant
 import com.google.gson.annotations.SerializedName
 
