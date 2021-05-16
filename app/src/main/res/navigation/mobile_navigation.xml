@@ -261,6 +261,9 @@
         <action
             android:id="@+id/action_invoicesFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_invoicesFragment_to_invoiceDetailFragment"
+            app:destination="@id/invoiceDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPlansFragment"
@@ -334,5 +337,17 @@
         <action
             android:id="@+id/action_signUpConfirmationFragment_to_signUpTypeFragment"
             app:destination="@id/signUpTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoiceDetailFragment"
+        android:name="au.com.blitzit.ui.invoices.InvoiceDetailFragment"
+        android:label="fragment_invoice_detail"
+        tools:layout="@layout/fragment_invoice_detail" >
+        <action
+            android:id="@+id/action_invoiceDetailFragment_to_invoicesFragment2"
+            app:destination="@id/invoicesFragment" />
+        <argument
+            android:name="invoice_id"
+            app:argType="string" />
     </fragment>
 </navigation>

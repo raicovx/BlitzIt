@@ -4,10 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
+@Entity(primaryKeys = ["plan_id", "invoice_id", "supportCode", "total"])
 data class LineItem(
-    @PrimaryKey
-    val id: String,
+    val plan_id: String,
     val invoice_id: String,
     @SerializedName("support_code")
     val supportCode: String,

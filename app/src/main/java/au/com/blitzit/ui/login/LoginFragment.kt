@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
@@ -77,7 +78,10 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         //add observers
-        AuthServices.liveSignInState.observeForever { onSignInStateChanged(it) }
+        val signInStateObserver = Observer<SignInState>{
+            onSignInStateChanged(it)
+        }
+        AuthServices.liveSignInState.observe(viewLifecycleOwner, signInStateObserver)
     }
 
     private fun handleLogin(view: View)

@@ -9,10 +9,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthRegistration
 import au.com.blitzit.auth.RegistrationState
+import kotlinx.coroutines.launch
 
 class SignUpConfirmationFragment : Fragment()
 {
@@ -63,7 +65,9 @@ class SignUpConfirmationFragment : Fragment()
         if(confirmationCodeField.length() == 6)
         {
             toggleShowOptions(false)
-            AuthRegistration.attemptConfirmation(confirmationCodeField.text.toString())
+            viewLifecycleOwner.lifecycleScope.launch {
+                AuthRegistration.attemptConfirmation(confirmationCodeField.text.toString())
+            }
         }
         else
             Toast.makeText(context, "Code must be 6 digits.", Toast.LENGTH_SHORT).show()

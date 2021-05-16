@@ -157,8 +157,8 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         weeklySpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageTargetWeek)
         currentAverageSpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageSpendWeek)
-        planEndDateTV.text = CranstekHelper.convertToReadableDate(CranstekHelper.formatDate(AuthServices.selectedPlan.plan_end_date))
-        consumptionDateTV.text = CranstekHelper.convertToReadableDate(selectedCategory.estimatedExhaustionDate)
+        planEndDateTV.text = CranstekHelper.formatDate(CranstekHelper.formatDate(AuthServices.selectedPlan.plan_end_date))
+        consumptionDateTV.text = CranstekHelper.formatDate(selectedCategory.estimatedExhaustionDate)
 
         //On track display
         if(selectedCategory.checkMonthlySpendOnTrack()) {

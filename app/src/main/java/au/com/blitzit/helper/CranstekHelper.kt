@@ -56,11 +56,11 @@ object CranstekHelper
         return date1.after(date2)
     }
 
-    fun convertToReadableDate(value: String): String
+    fun convertToRegisterDate(value: String): String
     {
-        val inFormatter = SimpleDateFormat("yyyyMMdd")
+        val inFormatter = SimpleDateFormat("dd-MM-yyyy")
         val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("dd/MM/yyyy")
+        val outFormatter = SimpleDateFormat("yyyy-MM-dd")
         return outFormatter.format(date)
     }
 

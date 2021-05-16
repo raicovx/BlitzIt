@@ -18,7 +18,7 @@ import au.com.blitzit.roomdata.*
     SignUpRequest::class,
     SupportCoordinator::class,
     User::class],
-    version = 1017, exportSchema = false)
+    version = 1019, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase()
 {
@@ -33,6 +33,8 @@ abstract class AppDatabase: RoomDatabase()
     abstract fun invoiceDAO(): InvoiceDAO
     abstract fun providerDAO(): ProviderDAO
     abstract fun providerCategorySpendingDAO(): ProviderCategorySpendingDAO
+    abstract fun signUpRequestDAO(): SignUpRequestDAO
+    abstract fun lineItemDAO(): LineItemDAO
 
     //Singleton Pattern
     companion object {

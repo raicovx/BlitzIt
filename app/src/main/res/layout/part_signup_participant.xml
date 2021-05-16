@@ -134,7 +134,7 @@
         android:maxLines="1"
         android:hint="Password"
         android:textColor="@color/dark_grey"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -160,7 +160,7 @@
         android:maxLines="1"
         android:hint="Password"
         android:textColor="@color/dark_grey"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         tools:ignore="HardcodedText" />
 
     <TextView

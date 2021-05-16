@@ -1,13 +1,17 @@
 package au.com.blitzit.auth
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import au.com.blitzit.helper.CranstekHelper
+import au.com.blitzit.AppDatabase
+import au.com.blitzit.roomdata.SignUpRequest
+import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.rest.RestOptions
+import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.options.AuthSignUpOptions
-import com.amplifyframework.core.Amplify
+import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
@@ -16,7 +20,6 @@ enum class RegistrationState(val state: String)
     NotRegistered("Awaiting registration"),
     Registering("Awaiting Registration Results"),
     Registered("Registration received, awaiting email"),
-    SigningUp("Unsure"),
     SignedUp("Registered and Signed up"),
     AlreadyRegistered("An account using this email has been found. Please contact Blitzit"),
     Failed01("Registration failed"),
@@ -37,32 +40,26 @@ data class RegistrationResponse(
 
 object AuthRegistration
 {
+    lateinit var appDatabase: AppDatabase
+
     val liveRegistrationState = MutableLiveData<RegistrationState>()
-    private lateinit var registrationDetails: RegistrationDetails
     private lateinit var registrationResponse: RegistrationResponse
-    private lateinit var passwordHolder: String
+
+    val signUpRequest = MutableLiveData<SignUpRequest>()
 
     init {
         liveRegistrationState.postValue(RegistrationState.NotRegistered)
     }
 
-    fun hasResponseID(): Boolean
-    {
-        if(::registrationResponse.isInitialized)
-        {
-            if(!registrationResponse.id.isNullOrEmpty())
-                return true
-        }
-        return false
-    }
+    suspend fun getSignUpRequest() = signUpRequest.postValue(appDatabase.signUpRequestDAO().getSignUpRequest())
 
-    fun attemptRegistration(lName: String, email: String, dob: String, ndis: String, type: String, password: String)
+    suspend fun attemptRegistration(context: Context, email: String, password: String, dob: String, last_name: String, type: String, ndis_number: String)
     {
+        appDatabase = AppDatabase.getDatabase(context)
+
         liveRegistrationState.postValue(RegistrationState.Registering)
 
-        passwordHolder = password
-
-        registrationDetails = RegistrationDetails(CranstekHelper.formatDate(dob), email, lName, ndis, type)
+        val registrationDetails = RegistrationDetails(dob, email, last_name, ndis_number, type)
 
         val gson = GsonBuilder().setPrettyPrinting().create()
         val json: String = gson.toJson(registrationDetails)
@@ -72,57 +69,74 @@ object AuthRegistration
                 .addPath("/registration")
                 .addBody(json.toByteArray())
                 .build()
-        Amplify.API.post("mobileAPI", request,
-                    {
-                        Log.i("GAZ_INFO", "POST succeeded, return Data: ${it.data.asString()}")
+        try
+        {
+            val response = Amplify.API.post(request, "mobileAPI")
 
-                        registrationResponse = Gson().fromJson(it.data.asString(), RegistrationResponse::class.java)
-                        if(registrationResponse.id != null) {
-                            Log.i("GAZ_INFO", "Registration POST Accepted: ${registrationResponse.id}")
-                            liveRegistrationState.postValue(RegistrationState.Registered)
-                        }
-                        else {
-                            Log.i("GAZ_INFO", "Already Registered: ${registrationResponse.already_registered}")
-                            liveRegistrationState.postValue(RegistrationState.AlreadyRegistered)
-                        }
-                    },
-                    {
-                        Log.e("GAZ_ERROR", "Register POST failed.", it)
-                        liveRegistrationState.postValue(RegistrationState.Failed01)
-                    })
+            Log.i("GAZ_INFO", "POST succeeded, return Data: $response")
+
+            registrationResponse = Gson().fromJson(response.data.asString(), RegistrationResponse::class.java)
+            if(registrationResponse.id != null)
+            {
+                Log.i("GAZ_INFO", "Registration POST Accepted: ${registrationResponse.id}")
+
+                appDatabase.signUpRequestDAO().nukeTable()
+
+                appDatabase.signUpRequestDAO().upsertSignUpRequest(SignUpRequest(
+                    registrationResponse.id!!,
+                    email,
+                    password,
+                    1
+                ))
+
+                getSignUpRequest()
+
+                liveRegistrationState.postValue(RegistrationState.Registered)
+            }
+            else {
+                Log.i("GAZ_INFO", "Already Registered: ${registrationResponse.already_registered}")
+                liveRegistrationState.postValue(RegistrationState.AlreadyRegistered)
+            }
+        }
+        catch (error: ApiException)
+        {
+            Log.e("GAZ_ERROR", "Register POST failed.", error)
+            liveRegistrationState.postValue(RegistrationState.Failed01)
+        }
     }
 
-    fun attemptConfirmation(confirmationCode: String)
+    suspend fun attemptConfirmation(confirmationCode: String)
     {
-        if(registrationResponse.id != null)
+        val signUpDetails: SignUpRequest = signUpRequest.value!!
+
+        val attrs = mapOf(
+            AuthUserAttributeKey.email() to signUpDetails.email,
+            AuthUserAttributeKey.custom("custom:requestId") to signUpDetails.request_id,
+            AuthUserAttributeKey.custom("custom:code") to confirmationCode)
+
+        val options = AuthSignUpOptions.builder()
+            .userAttributes(attrs.map { AuthUserAttribute(it.key, it.value) })
+            .build()
+
+        try
         {
-            liveRegistrationState.postValue(RegistrationState.SigningUp)
-
-            Log.i("GAZ_INFO", "confirmation code: $confirmationCode")
-            Log.i("GAZ_INFO", "response code: ${registrationResponse.id}")
-            Log.i("GAZ_INFO", "email: ${registrationDetails.email}")
-            Log.i("GAZ_INFO", "password: $passwordHolder")
-
-            val attrs = mapOf(
-                    AuthUserAttributeKey.email() to registrationDetails.email,
-                    AuthUserAttributeKey.custom("custom:requestId") to registrationResponse.id!!,
-                    AuthUserAttributeKey.custom("custom:code") to confirmationCode
-            )
-
-            val options = AuthSignUpOptions.builder()
-                    .userAttributes(attrs.map { AuthUserAttribute(it.key, it.value) })
-                    .build()
-            Log.i("GAZ_INFO", "attr: ${options.userAttributes}")
-
-            Amplify.Auth.signUp(registrationDetails.email.toLowerCase(), passwordHolder, options,
-                    {
-                        Log.i("GAZ_INFO", "Sign up succeeded: $it")
-                        liveRegistrationState.postValue(RegistrationState.SignedUp)
-                    },
-                    {
-                        Log.i("GAZ_INFO", "Sign up failed: $it")
-                        liveRegistrationState.postValue(RegistrationState.SignUpFailed01)
-                    })
+            val result = Amplify.Auth.signUp(signUpDetails.email, signUpDetails.password, options)
+            Log.i("GAZ_INFO", "Sign up succeeded: $result")
+            if(result.isSignUpComplete)
+            {
+                liveRegistrationState.postValue(RegistrationState.SignedUp)
+                appDatabase.signUpRequestDAO().nukeTable()
+            }
+            else
+            {
+                Log.i("GAZ_INFO", "Sign up failed: $result")
+                liveRegistrationState.postValue(RegistrationState.SignUpFailed01)
+            }
+        }
+        catch (error: AuthException)
+        {
+            Log.e("AuthQuickStart", "Sign up failed", error)
+            liveRegistrationState.postValue(RegistrationState.SignUpFailed01)
         }
     }
 

@@ -329,4 +329,38 @@ object AuthServices
             }
         }
     }
+
+    suspend fun launchGetInvoiceLineItems(invoiceId: String, planId: String)
+    {
+        getInvoiceLineItems(invoiceId, planId)
+    }
+
+    private suspend fun getInvoiceLineItems(invoiceId: String, planId: String)
+    {
+        val request = RestOptions.builder()
+            .addPath("/invoice/$invoiceId")
+            .build()
+
+        try{
+            val response = Amplify.API.get(request, "mobileAPI")
+            Log.i("GAZ_INFO", "GET succeeded for Line Items: ${response.data.asString()}")
+
+            handleLineItemData(response, invoiceId, planId)
+        }
+        catch (error: ApiException)
+        {
+            Log.e("GAZ_ERROR", "GET failed.", error)
+        }
+    }
+
+    private suspend fun handleLineItemData(response: RestResponse, invoiceId: String, planId: String)
+    {
+        val invoices: GenericInvoiceResponse = Gson().fromJson(response.data.asString(), GenericInvoiceResponse::class.java)
+        val lineItems = invoices.toLineItems(invoiceId, planId)
+
+        for(lineItem: LineItem in lineItems)
+        {
+            appDatabase.lineItemDAO().upsertLineItem(lineItem)
+        }
+    }
 }

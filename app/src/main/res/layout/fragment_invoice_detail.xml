@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.invoices.InvoiceDetailFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:background="@color/light_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_colour_gradient"
+            android:paddingBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/profile_topBar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:fontFamily="@font/avenir"
+                android:gravity="center"
+                android:text="@string/invoice"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/invoice_detail_back_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/invoice_detail_back_button"
+                app:layout_constraintEnd_toEndOf="@+id/invoice_detail_back_button"
+                app:layout_constraintStart_toStartOf="@+id/invoice_detail_back_button"
+                app:layout_constraintTop_toTopOf="@+id/invoice_detail_back_button"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profile_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_topBar" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="24dp"
+                android:background="@color/light_grey"
+                app:cardCornerRadius="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_divider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="12dp"
+                        android:background="@color/blitz_it_medium_blue"
+                        android:text="@string/payment_details"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/avenir"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                    <ProgressBar
+                        android:id="@+id/invoice_detail_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="225dp"
+                        android:paddingVertical="32dp"
+                        android:layout_gravity="center"/>
+
+                    <LinearLayout
+                        android:id="@+id/invoice_detail_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="12dp"
+                        android:paddingHorizontal="24dp"
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@string/paid_to"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="21sp"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/invoice_detail_paid_to"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/input_bg"
+                            android:text="0412 345 678"
+                            android:textColor="@color/dark_grey"
+                            android:paddingStart="16dp"
+                            android:paddingVertical="8dp"
+                            android:paddingEnd="16dp"
+                            android:fontFamily="@font/avenir"
+                            android:inputType="none"
+                            android:focusable="false"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@string/invoice_number"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="21sp"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/invoice_detail_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="8dp"
+                            android:background="@drawable/input_bg"
+                            android:text="0412 345 678"
+                            android:textColor="@color/dark_grey"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:fontFamily="@font/avenir"
+                            android:maxLines="1"
+                            android:inputType="none"
+                            android:focusable="false"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@string/claimed_total"
+                            android:fontFamily="@font/avenir"
+                            android:textSize="21sp"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/invoice_detail_claimed_total"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="8dp"
+                            android:background="@drawable/input_bg"
+                            android:text="0412 345 678"
+                            android:textColor="@color/dark_grey"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:fontFamily="@font/avenir"
+                            android:maxLines="1"
+                            android:inputType="none"
+                            android:focusable="false"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/invoice_detail_line_item_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingHorizontal="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:elevation="4dp"
+            android:background="@drawable/rounded_bottom_corners"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_topLayout">
+
+            <ProgressBar
+                android:id="@+id/invoice_line_item_progress"
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:paddingVertical="32dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

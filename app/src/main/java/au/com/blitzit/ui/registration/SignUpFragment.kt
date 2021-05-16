@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,15 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthRegistration
 import au.com.blitzit.auth.RegistrationState
+import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.helper.CranstekHelper.isValidEmail
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -126,18 +130,23 @@ class SignUpFragment : Fragment()
     {
         if(firstNameField.length() > 0 && lastNameField.length() > 0 && dobField.length() > 0)
         {
-            if(passwordField.length() > 0 && confirmPasswordField.length() > 0 && passwordField.text == confirmPasswordField.text)
+            if(passwordField.text.isNotEmpty() && confirmPasswordField.text.isNotEmpty() && passwordField.text.toString() == confirmPasswordField.text.toString())
             {
                 if (emailField.text.isValidEmail())
                 {
-                    if (ndisField.length() == 9) {
-                        AuthRegistration.attemptRegistration(
-                            lastNameField.text.toString(),
-                            emailField.text.toString(),
-                            dobField.text.toString(),
-                            ndisField.text.toString(),
-                            "participant",
-                            passwordField.text.toString())
+                    if (ndisField.length() == 9)
+                    {
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            AuthRegistration.attemptRegistration(
+                                requireContext().applicationContext,
+                                emailField.text.toString(),
+                                passwordField.text.toString(),
+                                CranstekHelper.convertToRegisterDate(dobField.text.toString()),
+                                lastNameField.text.toString(),
+                                "participant",
+                                ndisField.text.toString()
+                            )
+                        }
                     }
                     else
                         Toast.makeText(context, "NDIS number invalid.", Toast.LENGTH_SHORT).show()

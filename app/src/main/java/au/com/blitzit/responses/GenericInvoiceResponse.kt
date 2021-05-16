@@ -1,6 +1,7 @@
 package au.com.blitzit.responses
 
 import au.com.blitzit.roomdata.Invoice
+import au.com.blitzit.roomdata.LineItem
 
 data class GenericInvoiceResponse(
     val invoice_id: String,
@@ -12,7 +13,8 @@ data class GenericInvoiceResponse(
     val last_support_date: String,
     val payment_date: String?,
     val amount: Double,
-    val status: String)
+    val status: String,
+    val items: List<GenericLineItemResponse>)
 {
     fun toInvoice(planID: String): Invoice
     {
@@ -28,4 +30,35 @@ data class GenericInvoiceResponse(
             amount,
             status)
     }
+
+    fun toLineItems(invoice_id: String, planID: String): List<LineItem>
+    {
+        var lineItems: List<LineItem> = emptyList()
+
+        for(lineItem: GenericLineItemResponse in items)
+        {
+            lineItems = lineItems.plus(LineItem(
+                planID,
+                invoice_id,
+                lineItem.support_code,
+                lineItem.unit_price,
+                lineItem.quantity,
+                lineItem.support_end_date,
+                lineItem.support_start_date,
+                lineItem.total,
+                lineItem.status)
+            )
+        }
+
+        return lineItems
+    }
 }
+
+data class GenericLineItemResponse(
+    val support_code: String,
+    val unit_price: Double,
+    val quantity: Int,
+    val support_end_date: String,
+    val support_start_date: String,
+    val total: Double,
+    val status: String)

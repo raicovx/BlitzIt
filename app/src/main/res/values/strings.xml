@@ -124,6 +124,12 @@
     <string name="confirmation_code">Confirmation Code</string>
     <string name="enter_code">Enter Code</string>
     <string name="enter_confirmation_code">Enter Confirmation Code</string>
+    <string name="paid_to">Paid to:</string>
+    <string name="invoice_number">Invoice Number:</string>
+    <string name="claimed_total">Claimed Total:</string>
+    <string name="payment_details">PAYMENT DETAILS</string>
+    <string name="invoice">Invoice</string>
+    <string name="line_item">Line Item:</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

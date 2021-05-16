@@ -124,6 +124,13 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
             val view = layoutInflater.inflate(R.layout.part_invoice, container, false)
             view.findViewById<TextView>(R.id.invoice_part_amount).text = CranstekHelper.convertToCurrency(invoice.amount)
             view.findViewById<TextView>(R.id.invoice_part_id).text = invoice.invoice_id
+
+            //Invoice detail button
+            val invoiceButton: LinearLayout = view.findViewById(R.id.invoice_selector_button)
+            invoiceButton.setOnClickListener {
+                this.findNavController().navigate(InvoicesFragmentDirections.actionInvoicesFragmentToInvoiceDetailFragment(invoice.invoice_id))
+            }
+
             container.addView(view)
         }
     }
