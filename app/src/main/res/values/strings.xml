@@ -109,7 +109,6 @@
     <string name="your_current_spend_is">Your current spend is:</string>
     <string name="current_average_spend">Current Average Spend:</string>
     <string name="weekly_spend">Weekly spend:</string>
-    <string name="on_track">On Track</string>
     <string name="plan_end_date">Plan end date:</string>
     <string name="estimated_consumption_date">Estimated consumption date:</string>
     <string name="total_claimed_for_category">Total claimed for Category</string>
@@ -136,6 +135,8 @@
     <string name="service_description">Service Description:</string>
     <string name="you_have_been_sent_a_confirmation_code_to_the_email_provided">You have been sent a confirmation code to the email provided</string>
     <string name="please_enter_the_code_and_set_your_new_password">Please enter the code and set your new password</string>
+    <string name="on_track">On Track</string>
+    <string name="over_spending">Over Spending</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

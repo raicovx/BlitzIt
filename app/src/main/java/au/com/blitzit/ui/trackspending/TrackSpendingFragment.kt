@@ -1,7 +1,6 @@
 package au.com.blitzit.ui.trackspending
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -137,8 +136,6 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
                         val additionalMonth: String = CranstekHelper.getMonthTitleFromMonthNumber(additionalMonthNumber)
                         val additionalDataPoint = DataPoint(additionalIndex, 25, additionalMonth, 0.0)
 
-                        Log.i("GAZ_GRAPH", "Adding addition dataPoint: $additionalDataPoint")
-
                         graphData = graphData.plus(additionalDataPoint)
                     }
                 }
@@ -148,8 +145,6 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
             graph.setGraphOffset(100, 50)
             graph.setData(graphData)
-            //Log.i("GAZ_GRAPH", "totals: ${selectedPlanPart.totals}")
-            //Log.i("GAZ_GRAPH", "graph dataset: $graphData")
         }
     }
 
@@ -157,16 +152,18 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         weeklySpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageTargetWeek)
         currentAverageSpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageSpendWeek)
-        planEndDateTV.text = CranstekHelper.formatDate(CranstekHelper.formatDate(AuthServices.selectedPlan.plan_end_date))
-        consumptionDateTV.text = CranstekHelper.formatDate(selectedCategory.estimatedExhaustionDate)
+        planEndDateTV.text = CranstekHelper.formatDate(AuthServices.selectedPlan.plan_end_date)
+        consumptionDateTV.text = CranstekHelper.formatDateNoFancyOnInput(selectedCategory.estimatedExhaustionDate)
 
         //On track display
         if(selectedCategory.checkMonthlySpendOnTrack()) {
-            onTrackIcon.text = "On Track"
+            onTrackIcon.text = getString(R.string.on_track)
             onTrackIcon.setBackgroundResource(R.drawable.active_display)
+            onTrackIcon.setPadding(28, 4, 28, 4)
         } else {
-            onTrackIcon.text = "Over Spending"
+            onTrackIcon.text = getString(R.string.over_spending)
             onTrackIcon.setBackgroundResource(R.drawable.expired_display)
+            onTrackIcon.setPadding(28, 4, 28, 4)
         }
     }
 

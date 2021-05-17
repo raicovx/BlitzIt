@@ -20,17 +20,17 @@ object CranstekHelper
 
     fun formatDate(value: String): String
     {
-        val inFormatter = SimpleDateFormat("yyyy-MM-dd")
+        val inFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("dd-MM-yyyy")
+        val outFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         return outFormatter.format(date)
     }
 
     fun formatDateNoFancyOnInput(value: String): String
     {
-        val inFormatter = SimpleDateFormat("yyyyMMdd")
+        val inFormatter = SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
         val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("dd-MM-yyyy")
+        val outFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         return outFormatter.format(date)
     }
 

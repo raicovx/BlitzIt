@@ -245,7 +245,8 @@
                 android:paddingEnd="16dp"
                 android:fontFamily="@font/avenir"
                 android:maxLines="1"
-                android:inputType="none"
+                android:ellipsize="end"
+                android:inputType="textEmailAddress"
                 android:focusable="false"
                 tools:ignore="HardcodedText" />
 
@@ -269,7 +270,8 @@
                 android:gravity="center_vertical"
                 android:fontFamily="@font/avenir"
                 android:maxLines="1"
-                android:inputType="none"
+                android:ellipsize="end"
+                android:inputType="textEmailAddress"
                 android:focusable="false"
                 tools:ignore="HardcodedText" />
 
@@ -293,7 +295,8 @@
                 android:paddingEnd="16dp"
                 android:fontFamily="@font/avenir"
                 android:maxLines="1"
-                android:inputType="none"
+                android:ellipsize="end"
+                android:inputType="textEmailAddress"
                 android:focusable="false"
                 tools:ignore="HardcodedText" />
 
@@ -400,8 +403,9 @@
                 android:paddingEnd="16dp"
                 android:fontFamily="@font/avenir"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:focusable="false"
-                android:inputType="none"
+                android:inputType="textEmailAddress"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
