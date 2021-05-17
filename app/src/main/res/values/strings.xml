@@ -130,6 +130,10 @@
     <string name="payment_details">PAYMENT DETAILS</string>
     <string name="invoice">Invoice</string>
     <string name="line_item">Line Item:</string>
+    <string name="claimed_price_per_unit_hour">Claimed Price per unit/hour:</string>
+    <string name="claimed_quantity_hour">Claimed quantity/hour:</string>
+    <string name="service_dates">Service Dates:</string>
+    <string name="service_description">Service Description:</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

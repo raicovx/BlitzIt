@@ -27,6 +27,14 @@ object CranstekHelper
         return outFormatter.format(date)
     }
 
+    fun formatDateNoFancyOnInput(value: String): String
+    {
+        val inFormatter = SimpleDateFormat("yyyyMMdd")
+        val date: Date = inFormatter.parse(value)
+        val outFormatter = SimpleDateFormat("dd-MM-yyyy")
+        return outFormatter.format(date)
+    }
+
     //Sets the radial wheel up
     fun setRadialWheel(radialWheel: ProgressWheel, maxValue: Double, curValue: Double)
     {

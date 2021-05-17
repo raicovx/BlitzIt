@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.contains
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +52,10 @@ class InvoiceDetailFragment: Fragment()
     private lateinit var invoiceLineItemProgressBar: ProgressBar
     private lateinit var invoiceDetailInfo: LinearLayout
 
+    private var lineItemViews: List<View> = emptyList()
+    private lateinit var lineItemDetailView: View
+    private var isLineItemDetailShowing = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         //view Model
@@ -65,7 +71,10 @@ class InvoiceDetailFragment: Fragment()
 
         //BackButton
         mainView.findViewById<Button>(R.id.invoice_detail_back_button).setOnClickListener {
-            this.findNavController().navigate(InvoiceDetailFragmentDirections.actionInvoiceDetailFragmentToInvoicesFragment2())
+            if(!isLineItemDetailShowing)
+                this.findNavController().navigate(InvoiceDetailFragmentDirections.actionInvoiceDetailFragmentToInvoicesFragment2())
+            else
+                hideLineItemDetail()
         }
 
         //Holder
@@ -100,6 +109,7 @@ class InvoiceDetailFragment: Fragment()
         {
             if(lineItem != lineItems[0]) {
                 val dividerView = layoutInflater.inflate(R.layout.part_invoice_divider, lineItemHolder, false)
+                lineItemViews = lineItemViews.plus(dividerView)
                 lineItemHolder.addView(dividerView)
             }
 
@@ -109,10 +119,51 @@ class InvoiceDetailFragment: Fragment()
 
             val lineItemSelector: ConstraintLayout = view.findViewById(R.id.invoice_detail_line_item_selector)
             lineItemSelector.setOnClickListener {
-                //TODO
+                showLineItemDetail(lineItem)
             }
+
+            lineItemViews = lineItemViews.plus(view)
 
             lineItemHolder.addView(view)
         }
+    }
+
+    private fun showLineItemDetail(lineItem: LineItem)
+    {
+        isLineItemDetailShowing = true
+
+        populateLineItemDetail(lineItem)
+        lineItemDetailView.visibility = View.VISIBLE
+
+        for(lineItemView: View in lineItemViews)
+            lineItemView.visibility = View.GONE
+    }
+
+    private fun hideLineItemDetail()
+    {
+        isLineItemDetailShowing = false
+
+        lineItemDetailView.visibility = View.GONE
+
+        for(lineItemView: View in lineItemViews)
+            lineItemView.visibility = View.VISIBLE
+    }
+
+    private fun populateLineItemDetail(lineItem: LineItem)
+    {
+        //If view hasnt been set yet
+        if(!this::lineItemDetailView.isInitialized)
+            lineItemDetailView = layoutInflater.inflate(R.layout.part_line_item_detail, lineItemHolder, false)
+        //If viewgroup already has the view then remove it
+        if(lineItemHolder.contains(lineItemDetailView))
+            lineItemHolder.removeView(lineItemDetailView)
+
+        lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_item_name).text = lineItem.supportCode
+        val serviceDates = "${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportStartDate)} to ${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportEndDate)}"
+        lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_service_dates).text = serviceDates
+        lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_quantity_hour).text = lineItem.quantity.toString()
+        lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_price_unit_hour).text = CranstekHelper.convertToCurrency(lineItem.unitPrice)
+
+        lineItemHolder.addView(lineItemDetailView)
     }
 }

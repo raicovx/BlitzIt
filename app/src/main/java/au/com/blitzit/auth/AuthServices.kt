@@ -201,7 +201,6 @@ object AuthServices
         val request = RestOptions.builder()
                 .addPath("/participant/${loggedParticipant.ndisNumber}")
                 .build()
-
         try
         {
             val response = Amplify.API.get(request, "mobileAPI")
