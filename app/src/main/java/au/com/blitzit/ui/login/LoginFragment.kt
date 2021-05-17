@@ -147,6 +147,10 @@ class LoginFragment : Fragment() {
         {
             Toast.makeText(context, "Account Confirmation Successful", Toast.LENGTH_SHORT).show()
         }
+        if(args.resetPasswordDone)
+        {
+            Toast.makeText(context, "Password Reset Successful", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun toggleShowOptions(value: Boolean)

@@ -1,6 +1,5 @@
 package au.com.blitzit.helper
 
-import android.util.Log
 import android.util.Patterns
 import android.widget.TextView
 import au.com.blitzit.R
@@ -53,15 +52,6 @@ object CranstekHelper
     {
         val currencyDF = DecimalFormat("###,###,###.##")
         return "$" + currencyDF.format(value)
-    }
-
-    fun isDateAfter(dateString: String, checkTo: String): Boolean
-    {
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
-        val date1: Date = sdf.parse(dateString)
-        val date2: Date = sdf.parse(checkTo)
-
-        return date1.after(date2)
     }
 
     fun convertToRegisterDate(value: String): String
@@ -118,23 +108,6 @@ object CranstekHelper
             }
         } else
             string
-    }
-
-    fun splitLabelsByComma(label: String): List<String>
-    {
-        val labels: List<String> = label.split(",", "and")
-        var returns: List<String> = emptyList()
-        for(i in labels.indices)
-        {
-            var str: String = labels[i]
-            if(str.startsWith(" "))
-                str = str.trimStart()
-            if(str.last().isWhitespace())
-                str = str.trimEnd()
-            returns = returns.plus(str)
-        }
-
-        return returns
     }
 
     fun getMonthTitleFromMonthNumber(value: Int): String

@@ -32,6 +32,7 @@ class ContactFragment : Fragment()
         bookButton.setOnClickListener {
             this.findNavController().navigate(ContactFragmentDirections.actionContactFragmentToBookingFragment())
         }
+        bookButton.visibility = View.GONE
 
         return view
     }

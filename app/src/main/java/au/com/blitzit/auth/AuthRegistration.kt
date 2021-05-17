@@ -11,6 +11,7 @@ import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.options.AuthSignUpOptions
+import com.amplifyframework.auth.result.AuthResetPasswordResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -143,5 +144,29 @@ object AuthRegistration
     fun resetRegistrationState()
     {
         liveRegistrationState.postValue(RegistrationState.NotRegistered)
+    }
+
+    suspend fun attemptResetPassword(email: String): AuthResetPasswordResult?
+    {
+        return try {
+            val result = Amplify.Auth.resetPassword(email)
+            Log.i("AuthQuickstart", "Password reset OK: $result")
+            result
+        } catch (error: AuthException) {
+            Log.e("AuthQuickstart", "Password reset failed", error)
+            null
+        }
+    }
+
+    suspend fun confirmPasswordReset(password: String, confirmationCode: String): Boolean
+    {
+        return try {
+            Amplify.Auth.confirmResetPassword(password, confirmationCode)
+            Log.i("GAZ_RESET_PASSWORD", "New Password Confirmed")
+            true
+        } catch (error: AuthException){
+            Log.e("GAZ_RESET_PASSWORD", "Failed to confirm password reset", error)
+            false
+        }
     }
 }

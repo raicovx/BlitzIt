@@ -36,6 +36,10 @@
             android:name="confirmationSuccess"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="resetPasswordDone"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"

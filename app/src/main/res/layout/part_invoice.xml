@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/invoice_selector_button"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="92dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
             android:paddingVertical="8dp"
             android:text="PROVIDER REF$ 0123"
             android:textColor="@color/dark_grey"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
 
     </LinearLayout>
 
@@ -41,7 +43,8 @@
             android:paddingVertical="16dp"
             android:text="$123.45"
             android:textColor="@color/dark_grey"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/invoice_part_status"
@@ -54,7 +57,8 @@
             android:gravity="center"
             android:background="@drawable/approved_display"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
@@ -71,7 +75,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

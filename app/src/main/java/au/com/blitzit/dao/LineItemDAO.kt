@@ -2,7 +2,6 @@ package au.com.blitzit.dao
 
 import android.database.sqlite.SQLiteConstraintException
 import androidx.room.*
-import au.com.blitzit.roomdata.Invoice
 import au.com.blitzit.roomdata.LineItem
 
 @Dao

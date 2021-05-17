@@ -10,7 +10,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.contains
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,11 +18,9 @@ import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import au.com.blitzit.R
-import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Invoice
 import au.com.blitzit.roomdata.LineItem
-import au.com.blitzit.ui.budget.CategoryBudgetViewModel
 import kotlinx.coroutines.launch
 
 class InvoiceDetailFragment: Fragment()
@@ -151,10 +148,10 @@ class InvoiceDetailFragment: Fragment()
 
     private fun populateLineItemDetail(lineItem: LineItem)
     {
-        //If view hasnt been set yet
+        //If view hasn't been set yet
         if(!this::lineItemDetailView.isInitialized)
             lineItemDetailView = layoutInflater.inflate(R.layout.part_line_item_detail, lineItemHolder, false)
-        //If viewgroup already has the view then remove it
+        //If view group already has the view then remove it
         if(lineItemHolder.contains(lineItemDetailView))
             lineItemHolder.removeView(lineItemDetailView)
 

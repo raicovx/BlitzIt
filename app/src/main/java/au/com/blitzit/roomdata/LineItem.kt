@@ -1,7 +1,6 @@
 package au.com.blitzit.roomdata
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(primaryKeys = ["plan_id", "invoice_id", "supportCode", "total"])

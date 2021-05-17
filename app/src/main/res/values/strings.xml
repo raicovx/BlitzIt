@@ -134,6 +134,8 @@
     <string name="claimed_quantity_hour">Claimed quantity/hour:</string>
     <string name="service_dates">Service Dates:</string>
     <string name="service_description">Service Description:</string>
+    <string name="you_have_been_sent_a_confirmation_code_to_the_email_provided">You have been sent a confirmation code to the email provided</string>
+    <string name="please_enter_the_code_and_set_your_new_password">Please enter the code and set your new password</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>
