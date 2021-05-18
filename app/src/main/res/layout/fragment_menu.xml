@@ -97,7 +97,7 @@
                 android:id="@+id/menu_profile_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginEnd="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/profile_icon"
                 android:fontFamily="@font/avenir"
@@ -109,6 +109,7 @@
                 android:textSize="15sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,7 +117,7 @@
                 android:id="@+id/menu_plans_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/plans_icon"
                 android:fontFamily="@font/avenir"
@@ -129,6 +130,7 @@
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -141,7 +143,7 @@
                 android:id="@+id/menu_invoices_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginEnd="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/invoices_icon"
                 android:fontFamily="@font/avenir"
@@ -153,6 +155,7 @@
                 android:textSize="15sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,7 +163,7 @@
                 android:id="@+id/menu_spending_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/spending_icon"
                 android:fontFamily="@font/avenir"
@@ -173,6 +176,7 @@
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -185,7 +189,7 @@
                 android:id="@+id/menu_providers_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginEnd="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/providers_icon"
                 android:fontFamily="@font/avenir"
@@ -197,6 +201,7 @@
                 android:textSize="15sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -204,7 +209,7 @@
                 android:id="@+id/menu_settings_button"
                 android:layout_width="128dp"
                 android:layout_height="144dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="156dp"
                 android:backgroundTint="@color/white"
                 android:drawableTop="@drawable/settings_icon"
                 android:fontFamily="@font/avenir"
@@ -217,6 +222,7 @@
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
