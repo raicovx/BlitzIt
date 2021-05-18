@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -47,7 +47,9 @@ class SignUpFragment : Fragment()
     private lateinit var passwordField: TextView
     private lateinit var confirmPasswordField: TextView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    private var sentData = false
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         val view = inflater.inflate(R.layout.fragment_signup, container, false)
 
@@ -68,14 +70,13 @@ class SignUpFragment : Fragment()
         signUpAccountType = args.signuptype
         createSubView(inflater, contentHolder)
 
+        //Live data
+        val registrationObserver = Observer<RegistrationState>{
+            onRegistrationStateChanged(it)
+        }
+        AuthRegistration.liveRegistrationState.observe(viewLifecycleOwner, registrationObserver)
+
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        //Add Observers
-        AuthRegistration.liveRegistrationState.observeForever{ onRegistrationStateChanged(it) }
     }
 
     private fun createSubView(inflater: LayoutInflater, container: ViewGroup?)
@@ -110,7 +111,7 @@ class SignUpFragment : Fragment()
         passwordField = view.findViewById(R.id.sign_up_password)
         confirmPasswordField = view.findViewById(R.id.sign_up_re_password)
 
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             handleDatePicker()
         else
             handleDatePickerLower()
@@ -132,24 +133,30 @@ class SignUpFragment : Fragment()
         {
             if(passwordField.text.isNotEmpty() && confirmPasswordField.text.isNotEmpty() && passwordField.text.toString() == confirmPasswordField.text.toString())
             {
-                if (emailField.text.isValidEmail())
+                if(passwordField.text.length >= 6)
                 {
-                    if (ndisField.length() == 9)
+                    if (emailField.text.isValidEmail())
                     {
-                        viewLifecycleOwner.lifecycleScope.launch {
-                            AuthRegistration.attemptRegistration(
-                                requireContext().applicationContext,
-                                emailField.text.toString(),
-                                passwordField.text.toString(),
-                                CranstekHelper.convertToRegisterDate(dobField.text.toString()),
-                                lastNameField.text.toString(),
-                                "participant",
-                                ndisField.text.toString()
-                            )
+                        if (ndisField.length() == 9)
+                        {
+                            viewLifecycleOwner.lifecycleScope.launch{
+                                sentData = true
+                                AuthRegistration.attemptRegistration(
+                                    requireContext().applicationContext,
+                                    emailField.text.toString(),
+                                    passwordField.text.toString(),
+                                    CranstekHelper.convertToRegisterDate(dobField.text.toString()),
+                                    lastNameField.text.toString(),
+                                    "participant",
+                                    ndisField.text.toString()
+                                )
+                            }
                         }
+                        else
+                            Toast.makeText(context, "NDIS number invalid.", Toast.LENGTH_SHORT).show()
                     }
                     else
-                        Toast.makeText(context, "NDIS number invalid.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Password must be 6 characters or longer.", Toast.LENGTH_SHORT).show()
                 }
                 else
                     Toast.makeText(context, "Must use a valid email address.", Toast.LENGTH_SHORT).show()
@@ -175,8 +182,10 @@ class SignUpFragment : Fragment()
     {
         when(state){
             RegistrationState.Registered -> {
-                //Toast.makeText(context, "Registered", Toast.LENGTH_SHORT).show()
-                this.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpSuccessFragment())
+                if(sentData)
+                    this.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpSuccessFragment())
+                else
+                    AuthRegistration.resetRegistrationState()
             }
             RegistrationState.Registering -> {
                 toggleShowOptions(false)

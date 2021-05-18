@@ -30,14 +30,6 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    init {
-        lifecycleScope.launch {
-            whenStarted {
-                AuthServices.checkAuthSession(requireContext().applicationContext)
-            }
-        }
-    }
-
     private lateinit var viewModel: LoginViewModel
     private lateinit var loginButton: Button
     private lateinit var usernameField: AppCompatEditText
@@ -51,6 +43,14 @@ class LoginFragment : Fragment() {
                               savedInstanceState: Bundle?): View?
     {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        if(!args.resetPasswordDone && !args.confirmationSuccess) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                whenStarted {
+                    AuthServices.checkAuthSession(requireContext().applicationContext)
+                }
+            }
+        }
 
         //Assign Views
         loginButton = view.findViewById(R.id.login_button)

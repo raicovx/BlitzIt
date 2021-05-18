@@ -18,6 +18,7 @@ import com.amplifyframework.api.rest.RestResponse
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
+import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
@@ -62,7 +63,7 @@ object AuthServices
             Amplify.Auth.signOut()
             Log.i("AuthQuickstart", "Signed out successfully")
             resetSignUpState()
-        } catch (error: AuthException) {
+        } catch (error: com.amplifyframework.auth.AuthException) {
             Log.e("AuthQuickstart", "Sign out failed", error)
         }
     }

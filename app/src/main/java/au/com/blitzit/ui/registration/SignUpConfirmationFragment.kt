@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.R
@@ -50,14 +51,12 @@ class SignUpConfirmationFragment : Fragment()
             this.findNavController().navigate(SignUpConfirmationFragmentDirections.actionSignUpConfirmationFragmentToSignUpTypeFragment())
         }
 
+        val registrationObserver = Observer<RegistrationState>{
+            onRegistrationStateChanged(it)
+        }
+        AuthRegistration.liveRegistrationState.observe(viewLifecycleOwner, registrationObserver)
+
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?)
-    {
-        super.onActivityCreated(savedInstanceState)
-
-        AuthRegistration.liveRegistrationState.observeForever { (onRegistrationStateChanged(it)) }
     }
 
     private fun submitConfirmation()

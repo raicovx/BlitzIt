@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MenuFragment : Fragment()
@@ -87,7 +89,9 @@ class MenuFragment : Fragment()
 
         val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)
         signOutButton.setOnClickListener {
-            runBlocking { AuthServices.attemptSignOut() }
+            viewLifecycleOwner.lifecycleScope.launch {
+                AuthServices.attemptSignOut()
+            }
             navController.navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
         }
     }

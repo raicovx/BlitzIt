@@ -18,6 +18,7 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Invoice
+import au.com.blitzit.ui.invoices.InvoicesFragmentDirections
 
 class ProviderDetailFragment: Fragment()
 {
@@ -100,7 +101,11 @@ class ProviderDetailFragment: Fragment()
             view.findViewById<TextView>(R.id.invoice_part_id).text = invoice.invoice_id
             container.addView(view)
 
-            //TODO("Invoice detail selection")
+            //Invoice detail button
+            val invoiceButton: LinearLayout = view.findViewById(R.id.invoice_selector_button)
+            invoiceButton.setOnClickListener {
+                this.findNavController().navigate(ProviderDetailFragmentDirections.actionProviderDetailFragmentToInvoiceDetailFragment(invoice.invoice_id))
+            }
         }
     }
 }

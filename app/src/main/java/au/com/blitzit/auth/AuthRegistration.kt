@@ -80,6 +80,7 @@ object AuthRegistration
             if(registrationResponse.id != null)
             {
                 Log.i("GAZ_INFO", "Registration POST Accepted: ${registrationResponse.id}")
+                Log.i("GAZ_INFO", "Registration POST response data: ${response.data.asString()}")
 
                 appDatabase.signUpRequestDAO().nukeTable()
 
