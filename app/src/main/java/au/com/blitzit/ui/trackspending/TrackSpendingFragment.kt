@@ -183,7 +183,7 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
 
             val providerSelectionButton = view.findViewById<LinearLayout>(R.id.provider_button)
             providerSelectionButton.setOnClickListener {
-                this.findNavController().navigate(CategoryBudgetFragmentDirections.actionCategoryBudgetFragmentToProviderDetailFragment(providerSpend.provider_id))
+                this.findNavController().navigate(TrackSpendingFragmentDirections.actionTrackSpendingFragmentToProviderDetailFragment(providerSpend.provider_id))
             }
 
             viewLifecycleOwner.lifecycleScope.launch {
