@@ -138,6 +138,11 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, SignInState.SignInFailedTooManyRequests.state, Toast.LENGTH_SHORT).show()
                 AuthServices.resetSignUpState()
             }
+            SignInState.SignInFailedIncorrect -> {
+                toggleShowOptions(true)
+                Toast.makeText(context, SignInState.SignInFailedIncorrect.state, Toast.LENGTH_SHORT).show()
+                AuthServices.resetSignUpState()
+            }
         }
     }
 

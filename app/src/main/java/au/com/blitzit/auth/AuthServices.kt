@@ -11,6 +11,7 @@ import au.com.blitzit.roomdata.PrimaryContact
 import au.com.blitzit.roomdata.SupportCoordinator
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
+import com.amazonaws.services.cognitoidentityprovider.model.NotAuthorizedException
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
 import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.rest.RestOptions
@@ -32,7 +33,8 @@ enum class SignInState(val state: String)
     SignInFailed("Unhandled exception"),
     SignInFailedUserNotFound("User not found"),
     SignInFailedTooManyRequests("Too many attempts have been made to login, please wait 15 minutes and try again"),
-    SignInFailedUserNotConfirmed("User hasn't confirmed via email. Please confirm registration and try again")
+    SignInFailedUserNotConfirmed("User hasn't confirmed via email. Please confirm registration and try again"),
+    SignInFailedIncorrect("Incorrect username or password")
 }
 
 object AuthServices
@@ -114,6 +116,16 @@ object AuthServices
         {
             Log.i("AuthQuickstart", "User hasn't confirmed registration", error)
             liveSignInState.postValue(SignInState.SignInFailedUserNotConfirmed)
+        }
+        catch (error: NotAuthorizedException)
+        {
+            Log.i("AuthQuickstart", "Sign in failed", error)
+            liveSignInState.postValue(SignInState.SignInFailedIncorrect)
+        }
+        catch (error: com.amplifyframework.auth.AuthException)
+        {
+            Log.i("AuthQuickstart", "Sign in failed", error)
+            liveSignInState.postValue(SignInState.SignInFailedIncorrect)
         }
     }
 
