@@ -150,7 +150,7 @@
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_1_header"
                 android:fontFamily="@font/avenir"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 app:drawableRightCompat="@drawable/forward_arrow" />
             <TextView
                 android:id="@+id/faq_body_1"
@@ -161,18 +161,24 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_1"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
 
             <TextView
                 android:id="@+id/faq_header_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_2_header"
                 android:fontFamily="@font/avenir"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 app:drawableRightCompat="@drawable/forward_arrow"/>
             <TextView
                 android:id="@+id/faq_body_2_1"
@@ -184,7 +190,7 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_2_part1"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_2_2"
@@ -195,29 +201,34 @@
                 android:textColor="@color/dark_grey"
                 android:text="@string/faq_2_part2"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_2_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="32dp"
                 android:textColor="@color/dark_grey"
                 android:text="@string/faq_2_part3"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
 
             <TextView
                 android:id="@+id/faq_header_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_3"
                 android:fontFamily="@font/avenir"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 app:drawableRightCompat="@drawable/forward_arrow" />
             <TextView
                 android:id="@+id/faq_body_3_1"
@@ -228,7 +239,7 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_3_1"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_3_2"
@@ -239,7 +250,7 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_3_2"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_3_3"
@@ -250,18 +261,70 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_3_3"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_3_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_3_4"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_3_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_3_5"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_3_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_5_6"
+                android:textStyle="bold"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_3_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:autoLink="all"
+                android:text="@string/faq_body_5_7"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
 
             <TextView
                 android:id="@+id/faq_header_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_4"
                 android:fontFamily="@font/avenir"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 app:drawableRightCompat="@drawable/forward_arrow" />
             <TextView
                 android:id="@+id/faq_body_4_1"
@@ -272,29 +335,25 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_4_1"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:autoLink="all"
                 android:visibility="gone"/>
-            <TextView
-                android:id="@+id/faq_body_4_2"
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/dark_grey"
-                android:textColorLink="@color/blitz_it_light_blue"
-                android:text="@string/faq_body_3_3"
-                android:fontFamily="@font/avenir"
-                android:textSize="18sp"
-                android:visibility="gone"/>
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
 
             <TextView
                 android:id="@+id/faq_header_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_5"
                 android:fontFamily="@font/avenir"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 app:drawableRightCompat="@drawable/forward_arrow" />
             <TextView
                 android:id="@+id/faq_body_5_1"
@@ -305,7 +364,7 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_5_1"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_5_2"
@@ -316,7 +375,7 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_5_2"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_5_3"
@@ -327,19 +386,185 @@
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_5_3"
                 android:fontFamily="@font/avenir"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:autoLink="email"
                 android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
+
             <TextView
-                android:id="@+id/faq_body_5_4"
+                android:id="@+id/faq_header_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/darker_grey"
+                android:text="@string/faq_header_6"
+                android:fontFamily="@font/avenir"
+                android:textSize="18sp"
+                app:drawableRightCompat="@drawable/forward_arrow" />
+            <TextView
+                android:id="@+id/faq_body_6_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/dark_grey"
                 android:textColorLink="@color/blitz_it_light_blue"
-                android:text="@string/faq_body_5_4"
+                android:text="@string/faq_body_6_1"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_2"
+                android:fontFamily="@font/avenir"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_3"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_4"
+                android:fontFamily="@font/avenir"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_5"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:autoLink="email"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_6"
+                android:fontFamily="@font/avenir"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_6_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_6_7"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
+
+            <TextView
+                android:id="@+id/faq_header_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/darker_grey"
+                android:text="@string/faq_header_7"
                 android:fontFamily="@font/avenir"
                 android:textSize="18sp"
-                android:autoLink="email"
+                app:drawableRightCompat="@drawable/forward_arrow" />
+            <TextView
+                android:id="@+id/faq_body_7_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_7_1"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_7_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_7_2"
+                android:fontFamily="@font/avenir"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/faq_body_7_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_7_3"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/light_grey"/>
+
+            <TextView
+                android:id="@+id/faq_header_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/darker_grey"
+                android:text="@string/faq_header_8"
+                android:fontFamily="@font/avenir"
+                android:textSize="18sp"
+                app:drawableRightCompat="@drawable/forward_arrow" />
+            <TextView
+                android:id="@+id/faq_body_8_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:textColorLink="@color/blitz_it_light_blue"
+                android:text="@string/faq_body_8"
+                android:fontFamily="@font/avenir"
+                android:textSize="16sp"
                 android:visibility="gone"/>
 
             <ImageView
