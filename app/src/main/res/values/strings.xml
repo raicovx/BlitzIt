@@ -137,6 +137,17 @@
     <string name="please_enter_the_code_and_set_your_new_password">Please enter the code and set your new password</string>
     <string name="on_track">On Track</string>
     <string name="over_spending">Over Spending</string>
+    <string name="faq_body_3_3">Please see <a href="https://www.blitzit.com.au/faq">FAQs</a> for more information.</string>
+    <string name="faq_header_3">What is \'Reasonable and Necessary\'?</string>
+    <string name="faq_body_3_1">The NDIS provides funding to participants for support and services aimed at increasing their independence, inclusion, and social and economic participation.</string>
+    <string name="faq_body_3_2">Reasonable and necessary is a term used to determine what kind of funded support you might need. Simply put - reasonable is something that is considered fair, and necessary is something that you need because of your disability. This can be very confusing as everyone interprets differently.</string>
+    <string name="faq_header_4">What Types of Plan Reviews are available?</string>
+    <string name="faq_body_4_1">There are several types of plan reviews available that you should know about. Each one has a specific purpose, which you can learn from your Blitzit administrators.</string>
+    <string name="faq_header_5">What is a scheduled review</string>
+    <string name="faq_body_5_1">A scheduled review (also referred to as an annual review) You will be contacted by your Local Area Coordinator or your planner to arrange a time for your scheduled review.</string>
+    <string name="faq_body_5_2">Prior to your scheduled review is a good time to check if your supports are working for you and that they are helping you work towards your goals and achieve them and if you would like to make any changes to your goas or supports then this is the best time to make this changes.</string>
+    <string name="faq_body_5_3">The best time to review your budget is at least 3 months before your NDIS plan expires. This ensures that you don’t underspend or overspend, helping you make the most out of your NDIS plan. This way, you avoid out-of-pocket expenses and you can still engage new or existing services that can help you achieve your goals. Start booking your assessments and gathering your reports to take to the meeting.</string>
+    <string name="faq_body_5_4">When you are plan-managed by Blitzit, we’ll take care of reminding you of your plan’s timeline! If you need help managing your NDIS budget, get in touch with our expert staff at 1300 966 119 or hello@blitzit.com.au and we’ll be happy to help.</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>
