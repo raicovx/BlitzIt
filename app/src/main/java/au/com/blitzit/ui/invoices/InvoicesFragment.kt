@@ -71,6 +71,10 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
         mostRecentContainer = view.findViewById(R.id.invoices_most_recent)
         mostRecentContainer.isVisible = false
 
+        //Colour changes
+        val filterTitle: TextView = view.findViewById(R.id.invoices_filter_title)
+        CranstekHelper.handleCategoryTextViewColours(requireContext(), filterTitle)
+
         //LiveData
         val providerInvoicesObserver = Observer<List<ProviderAndInvoices>> {
             setupProviderDisplay(it)
@@ -95,6 +99,10 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
             val view = layoutInflater.inflate(R.layout.part_invoice_provider_holder, providerHolder, false)
             //Set the title
             view.findViewById<TextView>(R.id.invoice_provider_title).text = providerInvoices.provider.name
+
+            //handle colour changes
+            val header: LinearLayout = view.findViewById(R.id.invoice_provider_title_header)
+            CranstekHelper.handleHeaderColours(requireContext(), header)
 
             //populate with invoices
             val invoiceContainer: LinearLayout = view.findViewById(R.id.invoices_invoice_holder)

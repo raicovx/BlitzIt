@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/invoice_provider_title_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blitz_it_medium_blue"
@@ -27,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:paddingHorizontal="12dp"
-                android:background="@color/blitz_it_medium_blue"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="provider"
@@ -46,7 +46,6 @@
                 android:layout_height="48dp"
                 android:paddingHorizontal="32dp"
                 android:layout_marginVertical="8dp"
-                android:background="@color/blitz_it_medium_blue"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/invoice_details_tooltip"

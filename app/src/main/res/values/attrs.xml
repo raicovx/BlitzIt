@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RadialProgressBar">
+        <attr name="progressBarColour" format="color"/>
+        <attr name="progressTextColour" format="color"/>
+        <attr name="progressTextSize" format="dimension"/>
+        <attr name="progressBarWidth" format="dimension"/>
+        <attr name="progressBarRimColour" format="color"/>
+    </declare-styleable>
+</resources>

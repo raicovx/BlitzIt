@@ -55,6 +55,9 @@ class ProviderDetailFragment: Fragment()
         invoiceContainer = view.findViewById(R.id.provider_detail_invoices_holder)
         invoiceContainer.isVisible = false
 
+        val providerTitle: TextView = view.findViewById(R.id.provider_detail_name)
+        CranstekHelper.handleCategoryTextViewColours(requireContext(), providerTitle)
+
         //Provider Details
         val invoiceObserver = Observer<List<Invoice>> {
             populateInvoices(it, inflater, invoiceContainer)

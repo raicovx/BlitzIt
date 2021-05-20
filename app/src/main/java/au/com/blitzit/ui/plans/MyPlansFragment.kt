@@ -72,7 +72,7 @@ class MyPlansFragment: Fragment()
                 val view = inflater.inflate(R.layout.part_plan_display, container, false)
                 view.findViewById<TextView>(R.id.plan_start_date).text = plan.plan_start_date
                 view.findViewById<TextView>(R.id.plan_end_date).text = plan.plan_end_date
-                CranstekHelper.setPlanStatusDisplay(view.findViewById(R.id.plan_status), plan.status)
+                CranstekHelper.setPlanStatusDisplay(requireContext(), view.findViewById(R.id.plan_status), plan.status)
 
                 //Setup button
                 val planSelector: MaterialCardView = view.findViewById(R.id.plan_top_view)

@@ -165,6 +165,8 @@
     <string name="faq_body_3_5">For a support to be reasonable and necessary, it should:\n\n• Relate to your disability\n\n• Help you pursue your goals and aspirations\n\n• Increase your independence\n\n• Increase your community, social and workplace involvement\n\n• Be considered value for money (this is especially true if the support is priced above the NDIS Price Guide)\n\n• Be effective and work for your needs\n\n• Take into account your current formal and informal supports\n\nIf you answered yes to all of the questions then you may be able to make the purchase using your NDIS funds.\n\nThere are some things that may not be considered as ‘reasonable and necessary’, like:\n\n• Day-to-day living costs that are not related to your disability support needs\n\n• Supports that can reasonably be given by a family member, carer, or the wider community\n\n• Supports already funded by other areas of government</string>
     <string name="faq_body_5_6">What if I am still unsure ?</string>
     <string name="faq_body_5_7">To discuss your individual circumstances and better understand the NDIS <a href="https://www.blitzit.com.au/contact">contact</a> our team of expert plan managers at hello@blitzit.com.au or call us for a chat on 1300 966 119.</string>
+    <string name="expired">Expired</string>
+    <string name="archived">Archived</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

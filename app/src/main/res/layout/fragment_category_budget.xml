@@ -138,6 +138,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/cat_budget_title_card_header"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:background="@color/blitz_it_medium_blue"
@@ -252,16 +253,14 @@
                                 android:textColor="@color/darker_grey"
                                 android:textSize="16sp" />
 
-                            <com.app.progresviews.ProgressWheel
+                            <au.com.blitzit.views.RadialProgressBar
                                 android:id="@+id/cat_budget_overview_progress"
                                 android:layout_width="match_parent"
                                 android:layout_height="128dp"
-                                app:barWidth="16dp"
-                                app:countText="100%"
-                                app:countTextColor="@color/blitz_it_medium_blue"
-                                app:countTextSize="20dp"
-                                app:percentage="360"
-                                app:progressColor="@color/blitz_it_medium_blue" />
+                                app:progressBarWidth="21dp"
+                                app:progressBarColour="@color/blitz_it_orange"
+                                app:progressTextColour="@color/blitz_it_medium_blue"
+                                app:progressBarRimColour="@color/blitz_it_medium_blue"/>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -561,6 +560,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/cat_budget_provider_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="16dp"

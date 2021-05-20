@@ -17,7 +17,6 @@ import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.ProviderCategorySpending
-import au.com.blitzit.ui.budget.CategoryBudgetFragmentDirections
 import au.com.blitzit.views.DataPoint
 import au.com.blitzit.views.GraphView
 import kotlinx.coroutines.launch
@@ -59,6 +58,12 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         }
 
         setupView()
+
+        //Handle colour change
+        val spinnerTitle: TextView = mainView.findViewById(R.id.track_spending_spinner_title)
+        val providerHeader: LinearLayout = mainView.findViewById(R.id.track_spending_provider_header)
+        CranstekHelper.handleCategoryTextViewColours(requireContext(), spinnerTitle)
+        CranstekHelper.handleHeaderColours(requireContext(), providerHeader)
 
         //Get categories
         viewLifecycleOwner.lifecycleScope.launch {

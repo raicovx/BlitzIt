@@ -1,13 +1,19 @@
 package au.com.blitzit.helper
 
+import android.content.Context
 import android.util.Patterns
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import au.com.blitzit.R
-import com.app.progresviews.ProgressWheel
-import java.math.RoundingMode
+import au.com.blitzit.auth.AuthServices
+import au.com.blitzit.views.RadialProgressBar
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 object CranstekHelper
 {
@@ -21,7 +27,7 @@ object CranstekHelper
     fun formatDate(value: String): String
     {
         val inFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-        val date: Date = inFormatter.parse(value)
+        val date: Date = inFormatter.parse(value)!!
         val outFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         return outFormatter.format(date)
     }
@@ -29,23 +35,19 @@ object CranstekHelper
     fun formatDateNoFancyOnInput(value: String): String
     {
         val inFormatter = SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-        val date: Date = inFormatter.parse(value)
+        val date: Date = inFormatter.parse(value)!!
         val outFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         return outFormatter.format(date)
     }
 
     //Sets the radial wheel up
-    fun setRadialWheel(radialWheel: ProgressWheel, maxValue: Double, curValue: Double)
+    fun setRadialWheel(radialWheel: RadialProgressBar, maxValue: Double, curValue: Double)
     {
         //calculate percentages
         val percent = curValue / maxValue * 100
-        val radialPercent = (360 * percent) / 100
-        val df = DecimalFormat("#")
-        df.roundingMode = RoundingMode.CEILING
 
         //Set the progress wheel
-        radialWheel.setPercentage(df.format(radialPercent).toInt())
-        radialWheel.setStepCountText(df.format(percent).toString() + "%")
+        radialWheel.setPercentage(percent.roundToInt())
     }
 
     fun convertToCurrency(value: Double): String
@@ -56,27 +58,27 @@ object CranstekHelper
 
     fun convertToRegisterDate(value: String): String
     {
-        val inFormatter = SimpleDateFormat("dd-MM-yyyy")
-        val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("yyyy-MM-dd")
+        val inFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        val date: Date = inFormatter.parse(value)!!
+        val outFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         return outFormatter.format(date)
     }
 
     //Sets the active display of a plan (text view)
-    fun setPlanStatusDisplay(tv: TextView, status: String)
+    fun setPlanStatusDisplay(context: Context, tv: TextView, status: String)
     {
         when(status)
         {
             "Active" -> {
-                tv.text = "Active"
+                tv.text = context.getString(R.string.active)
                 tv.setBackgroundResource(R.drawable.active_display)
             }
             "Expired" -> {
-                tv.text = "Expired"
+                tv.text = context.getString(R.string.expired)
                 tv.setBackgroundResource(R.drawable.expired_display)
             }
             "Archived" -> {
-                tv.text = "Archived"
+                tv.text = context.getString(R.string.archived)
                 tv.setBackgroundResource(R.drawable.archived_display)
             }
         }
@@ -132,9 +134,9 @@ object CranstekHelper
 
     fun getMonthNumberFromDateString(value: String): Int
     {
-        val inFormatter = SimpleDateFormat("yyyyMM")
-        val date: Date = inFormatter.parse(value)
-        val outFormatter = SimpleDateFormat("MM")
+        val inFormatter = SimpleDateFormat("yyyyMM", Locale.ENGLISH)
+        val date: Date = inFormatter.parse(value)!!
+        val outFormatter = SimpleDateFormat("MM", Locale.ENGLISH)
 
         var returnValue = 0
         when(outFormatter.format(date)){
@@ -152,5 +154,33 @@ object CranstekHelper
             "12" -> returnValue = 12
         }
         return returnValue
+    }
+
+    fun handleButtonColours(context: Context, button: Button)
+    {
+        if(AuthServices.checkPlanStatusExpired())
+        {
+            button.backgroundTintList = ContextCompat.getColorStateList(context, R.color.old_button)
+            button.setTextColor(ContextCompat.getColor(context, R.color.white))
+        }
+    }
+
+    fun handleCategoryTextViewColours(context: Context, text: TextView)
+    {
+        if(AuthServices.checkPlanStatusExpired())
+            text.setBackgroundColor(ContextCompat.getColor(context, R.color.dark_grey))
+    }
+
+    fun handleHeaderColours(context: Context, linearLayout: LinearLayout)
+    {
+        if(AuthServices.checkPlanStatusExpired())
+            linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.dark_grey))
+    }
+
+    fun handleRadialProgressBarColours(context: Context, bar: RadialProgressBar)
+    {
+        val colour: Int = ContextCompat.getColor(context, R.color.dark_grey)
+        if(AuthServices.checkPlanStatusExpired())
+            bar.setProgressBarColour(colour, colour, true)
     }
 }

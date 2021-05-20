@@ -1,13 +1,13 @@
 package au.com.blitzit.ui.budget
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +18,7 @@ import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.ProviderCategorySpending
-import com.app.progresviews.ProgressWheel
+import au.com.blitzit.views.RadialProgressBar
 import kotlinx.coroutines.launch
 
 
@@ -29,6 +29,10 @@ class CategoryBudgetFragment : Fragment()
     private val args: CategoryBudgetFragmentArgs by navArgs()
 
     private lateinit var viewModel: CategoryBudgetViewModel
+
+    //Colour changing UI Objects
+    private lateinit var viewTrackingButton: Button
+    private lateinit var progressBar: RadialProgressBar
 
     companion object
     {
@@ -48,6 +52,16 @@ class CategoryBudgetFragment : Fragment()
 
         //view Model
         viewModel = ViewModelProvider(this).get(CategoryBudgetViewModel::class.java)
+
+        //Colour Changing Objects
+        viewTrackingButton = view.findViewById(R.id.cat_budget_view_tracking)
+        val header: TextView = view.findViewById(R.id.cat_budget_title_card_header)
+        progressBar = view.findViewById(R.id.cat_budget_overview_progress)
+        val providerHeader: LinearLayout = view.findViewById(R.id.cat_budget_provider_header)
+        CranstekHelper.handleButtonColours(requireContext(), viewTrackingButton)
+        CranstekHelper.handleCategoryTextViewColours(requireContext(), header)
+        CranstekHelper.handleRadialProgressBarColours(requireContext(), progressBar)
+        CranstekHelper.handleHeaderColours(requireContext(), providerHeader)
 
         //LiveData
         liveDataSubscriptions(view, inflater, view.findViewById(R.id.cat_budget_provider_content_holder))
@@ -82,7 +96,6 @@ class CategoryBudgetFragment : Fragment()
         subtitleText.text = category.label
 
         //View tracking button
-        val viewTrackingButton = view.findViewById<Button>(R.id.cat_budget_view_tracking)
         viewTrackingButton.setOnClickListener {
             this.findNavController().navigate(CategoryBudgetFragmentDirections.actionCategoryBudgetFragmentToTrackSpendingFragment(category.label))
         }
@@ -92,8 +105,7 @@ class CategoryBudgetFragment : Fragment()
         startingBalanceTV.text = CranstekHelper.convertToCurrency(category.budget)
         val currentBalanceTV: TextView = view.findViewById(R.id.cat_budget_overview_current_balance)
         currentBalanceTV.text = CranstekHelper.convertToCurrency(category.balance)
-        val progressWheel: ProgressWheel = view.findViewById(R.id.cat_budget_overview_progress)
-        CranstekHelper.setRadialWheel(progressWheel, category.budget, category.balance)
+        CranstekHelper.setRadialWheel(progressBar, category.budget, category.balance)
     }
 
     private fun populateProviderCategorySpending(providerCategorySpendingList: List<ProviderCategorySpending>, inflater: LayoutInflater, container: ViewGroup)
@@ -104,7 +116,6 @@ class CategoryBudgetFragment : Fragment()
             container.addView(dividerView)
 
             val view = inflater.inflate(R.layout.part_budget_provider, container, false)
-
 
             val providerSelectionButton = view.findViewById<LinearLayout>(R.id.provider_button)
             providerSelectionButton.setOnClickListener {

@@ -77,6 +77,10 @@ class InvoiceDetailFragment: Fragment()
         //Holder
         lineItemHolder = mainView.findViewById(R.id.invoice_detail_line_item_holder)
 
+        //Colour change
+        val invoiceHeaderTitle: TextView = mainView.findViewById(R.id.invoice_detail_title)
+        CranstekHelper.handleCategoryTextViewColours(requireContext(), invoiceHeaderTitle)
+
         //live Data
         val selectedInvoiceObserver = Observer<Invoice>{
             populateHeader(it)

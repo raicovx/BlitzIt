@@ -90,6 +90,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/invoices_filter_title"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@color/blitz_it_medium_blue"

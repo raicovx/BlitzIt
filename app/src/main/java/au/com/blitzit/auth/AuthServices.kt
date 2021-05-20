@@ -52,6 +52,11 @@ object AuthServices
 
     val liveSignInState = MutableLiveData<SignInState>()
 
+    fun checkPlanStatusExpired(): Boolean
+    {
+        return selectedPlan.status == "Expired" || selectedPlan.status == "EXPIRED"
+    }
+
     private suspend fun getData()
     {
         getParticipantData()

@@ -1,8 +1,6 @@
 package au.com.blitzit.ui.dashboard
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +8,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
@@ -21,7 +20,7 @@ import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.PurposeWithCategories
-import com.app.progresviews.ProgressWheel
+import au.com.blitzit.views.RadialProgressBar
 import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
@@ -77,7 +76,7 @@ class DashboardFragment : Fragment() {
             this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMyPlansFragment())
         }
         backButtonImage = view.findViewById(R.id.dashboard_back_button_image)
-        if(checkPlanStatusExpired())
+        if(AuthServices.checkPlanStatusExpired())
         {
             backButtonImage.isVisible = true
             backButton.isVisible = true
@@ -98,7 +97,7 @@ class DashboardFragment : Fragment() {
         ndisNumber.text = ndis
 
         val planStatus: TextView = view.findViewById(R.id.dashboard_plan_status)
-        CranstekHelper.setPlanStatusDisplay(planStatus, viewModel.selectedPlan.status)
+        CranstekHelper.setPlanStatusDisplay(requireContext(), planStatus, viewModel.selectedPlan.status)
 
         val startDate: TextView = view.findViewById(R.id.dashboard_plan_start)
         val endDate: TextView = view.findViewById(R.id.dashboard_plan_end)
@@ -109,7 +108,7 @@ class DashboardFragment : Fragment() {
 
         //View statements button
         val viewStatements: Button = view.findViewById(R.id.dashboard_view_statements)
-        handleButtonColours(viewStatements)
+        CranstekHelper.handleButtonColours(requireContext(), viewStatements)
         viewStatements.isVisible = false
     }
 
@@ -126,7 +125,7 @@ class DashboardFragment : Fragment() {
                 titleText.text = purposeWithCategories.purpose.name
 
                 //Add category headers to list (This is to handle colour changes)
-                handleCategoryHeaderColours(titleText)
+                CranstekHelper.handleCategoryTextViewColours(requireContext(), titleText)
 
                 //Add this view to the container
                 container.addView(purposeView)
@@ -151,55 +150,17 @@ class DashboardFragment : Fragment() {
         val balance: TextView = categoryView.findViewById(R.id.part_subcategory_balance)
         balance.text = CranstekHelper.convertToCurrency(category.balance)
 
-        val progress: ProgressWheel = categoryView.findViewById(R.id.part_subcategory_progress)
+        val progress: RadialProgressBar = categoryView.findViewById(R.id.part_subcategory_progress)
         CranstekHelper.setRadialWheel(progress, category.budget, category.balance)
-        //progressWheels = progressWheels + progressWheels.plus(progress)
+        CranstekHelper.handleRadialProgressBarColours(requireContext(), progress)
 
         //Sets up the view budget button
         val viewButton: Button = categoryView.findViewById(R.id.part_subcategory_view_budget_button)
         viewButton.setOnClickListener {
             this.findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToCategoryBudgetFragment(category.category, category.label, category.purpose))
         }
-        handleButtonColours(viewButton)
+        CranstekHelper.handleButtonColours(requireContext(), viewButton)
 
         container.addView(categoryView)
     }
-
-    private fun checkPlanStatusExpired(): Boolean
-    {
-        return if(AuthServices.selectedPlan.status == "Expired" || AuthServices.selectedPlan.status == "EXPIRED")
-        {
-            backButtonImage.isVisible = true
-            backButton.isVisible = true
-            true
-        }
-        else
-            false
-    }
-
-    private fun handleButtonColours(button: Button)
-    {
-        if(checkPlanStatusExpired())
-        {
-            button.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.old_button)
-            button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        }
-    }
-
-    private fun handleCategoryHeaderColours(text: TextView)
-    {
-        if(checkPlanStatusExpired())
-            text.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
-    }
-
-    /*private fun unUsedFunction()
-    {
-        if(!progressWheels.isNullOrEmpty())
-        {
-            for(progress: ProgressWheel in progressWheels)
-            {
-                //TODO("Progress wheel colour changes")
-            }
-        }
-    }*/
 }
