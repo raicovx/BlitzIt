@@ -7,8 +7,6 @@ import au.com.blitzit.AppDatabase
 import au.com.blitzit.data.*
 import au.com.blitzit.responses.*
 import au.com.blitzit.roomdata.*
-import au.com.blitzit.roomdata.PrimaryContact
-import au.com.blitzit.roomdata.SupportCoordinator
 import com.amazonaws.mobile.auth.core.signin.AuthException
 import com.amazonaws.services.cognitoidentity.model.TooManyRequestsException
 import com.amazonaws.services.cognitoidentityprovider.model.NotAuthorizedException
@@ -19,7 +17,6 @@ import com.amplifyframework.api.rest.RestResponse
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
-import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
@@ -37,6 +34,14 @@ enum class SignInState(val state: String)
     SignInFailedIncorrect("Incorrect username or password")
 }
 
+enum class EditSubmissionState
+{
+    Awaiting,
+    Submitting,
+    Success,
+    Failure
+}
+
 object AuthServices
 {
     private lateinit var appDatabase: AppDatabase
@@ -51,6 +56,7 @@ object AuthServices
     private lateinit var genericPlans: Array<GenericPlanResponse>
 
     val liveSignInState = MutableLiveData<SignInState>()
+    val editSubmissionState = MutableLiveData<EditSubmissionState>()
 
     fun checkPlanStatusExpired(): Boolean
     {
@@ -378,6 +384,26 @@ object AuthServices
         for(lineItem: LineItem in lineItems)
         {
             appDatabase.lineItemDAO().upsertLineItem(lineItem)
+        }
+    }
+
+    suspend fun editProfileSubmission(json: String)
+    {
+        val request = RestOptions.builder()
+            .addPath("/profile")
+            .addBody(json.toByteArray())
+            .build()
+
+        try
+        {
+            val response = Amplify.API.post(request, "mobileAPI")
+            Log.i("GAZ_EDIT_PROFILE_POST", "Post Succeeded: ${response.data.asString()}")
+            editSubmissionState.postValue(EditSubmissionState.Success)
+        }
+        catch (error: ApiException)
+        {
+            Log.e("GAZ_EDIT_PROFILE_POST", "POST failed", error)
+            editSubmissionState.postValue(EditSubmissionState.Failure)
         }
     }
 }

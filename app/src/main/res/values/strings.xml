@@ -167,6 +167,10 @@
     <string name="faq_body_5_7">To discuss your individual circumstances and better understand the NDIS <a href="https://www.blitzit.com.au/contact">contact</a> our team of expert plan managers at hello@blitzit.com.au or call us for a chat on 1300 966 119.</string>
     <string name="expired">Expired</string>
     <string name="archived">Archived</string>
+    <string name="edit_profile_request">Edit Profile Request</string>
+    <string name="x">X</string>
+    <string name="edit_profile_success_message">You have requested to change your profile details.\n\nA Blitzit team member will review this request and be in touch soon.</string>
+    <string name="preferred_method_of_contact">Preferred Method of Contact</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

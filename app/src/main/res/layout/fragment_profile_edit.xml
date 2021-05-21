@@ -76,6 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profile_edit_topBar" />
 
             <LinearLayout
+                android:id="@+id/profile_edit_description_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -128,6 +129,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/profile_edit_content_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -155,7 +157,7 @@
                 android:paddingEnd="8dp"
                 android:text="0412 345 678"
                 android:textColor="@color/dark_grey"
-                android:drawableRight="@drawable/edit_icon_complete"
+                android:drawableEnd="@drawable/edit_icon_complete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -181,7 +183,7 @@
                 android:paddingEnd="8dp"
                 android:text="example@email.com"
                 android:textColor="@color/dark_grey"
-                android:drawableRight="@drawable/edit_icon_complete"
+                android:drawableEnd="@drawable/edit_icon_complete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -207,7 +209,7 @@
                 android:paddingEnd="8dp"
                 android:text="example@email.com"
                 android:textColor="@color/dark_grey"
-                android:drawableRight="@drawable/edit_icon_complete"
+                android:drawableEnd="@drawable/edit_icon_complete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -217,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textColor="@color/blitz_it_dark_blue"
-                android:text="Preferred Method of Contact"
+                android:text="@string/preferred_method_of_contact"
                 android:fontFamily="@font/avenir"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
@@ -273,6 +275,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/profile_edit_loading_bar"
+            android:layout_width="match_parent"
+            android:layout_height="192dp"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/profile_edit_submit"
