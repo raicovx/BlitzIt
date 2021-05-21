@@ -10,6 +10,7 @@ import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.hub.HubChannel
 import kotlinx.coroutines.runBlocking
+import java.lang.IllegalStateException
 
 class AuthApplication : Application()
 {
@@ -24,7 +25,12 @@ class AuthApplication : Application()
             Log.i("MyAmplifyApp", "Initialized Amplify")
         } catch (error: AmplifyException) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error)
+        } catch (error: IllegalStateException)
+        {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error)
         }
+
+
 
         Amplify.Hub.subscribe(HubChannel.AUTH) { event ->
             when (event.name) {

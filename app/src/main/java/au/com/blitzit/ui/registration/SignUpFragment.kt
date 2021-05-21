@@ -137,7 +137,7 @@ class SignUpFragment : Fragment()
                 {
                     if (emailField.text.isValidEmail())
                     {
-                        if (ndisField.length() == 9)
+                        if (ndisField.text.isNotEmpty())
                         {
                             viewLifecycleOwner.lifecycleScope.launch{
                                 sentData = true

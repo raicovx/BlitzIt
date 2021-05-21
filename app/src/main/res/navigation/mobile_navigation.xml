@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_intro_to_signUpTypeFragment"
             app:destination="@id/signUpTypeFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="home" />
     </fragment>
     <fragment
         android:id="@+id/login"

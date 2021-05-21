@@ -21,6 +21,7 @@ import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import java.lang.RuntimeException
 
 enum class SignInState(val state: String)
 {
@@ -66,8 +67,10 @@ object AuthServices
     private suspend fun getData()
     {
         getParticipantData()
-        selectedPlan = appDatabase.planDAO().getMostRecentPlan(loggedParticipant.ndisNumber)
-        liveSignInState.postValue(SignInState.SignedIn)
+        if(this::loggedParticipant.isInitialized) {
+            selectedPlan = appDatabase.planDAO().getMostRecentPlan(loggedParticipant.ndisNumber)
+            liveSignInState.postValue(SignInState.SignedIn)
+        }
     }
 
     suspend fun attemptSignOut()
@@ -200,8 +203,6 @@ object AuthServices
             Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
 
             handleParticipantData(response)
-
-            getPlanData()
         }
         catch (error: ApiException)
         {
@@ -211,13 +212,23 @@ object AuthServices
 
     private suspend fun handleParticipantData(data: RestResponse)
     {
+        val genericParticipants: Array<GenericParticipantResponse>
         //Generic Class
-        val genericParticipants: Array<GenericParticipantResponse> = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
+        try
+        {
+            genericParticipants = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
 
-        //Participant
-        val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
-        appDatabase.participantDAO().upsertParticipant(participant)
-        loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
+            //Participant
+            val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
+            appDatabase.participantDAO().upsertParticipant(participant)
+            loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
+
+            getPlanData()
+        }
+        catch (error: RuntimeException)
+        {
+            attemptSignOut()
+        }
     }
 
     private suspend fun getPlanData()

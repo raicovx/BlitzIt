@@ -6,13 +6,13 @@
       "awsAPIPlugin": {
         "AdminQueries": {
           "endpointType": "REST",
-          "endpoint": "https://nxbarl87d8.execute-api.ap-southeast-2.amazonaws.com/dev",
+          "endpoint": "https://ejsi46zuxd.execute-api.ap-southeast-2.amazonaws.com/live",
           "region": "ap-southeast-2",
           "authorizationType": "AWS_IAM"
         },
         "mobileAPI": {
           "endpointType": "REST",
-          "endpoint": "https://hftkopqbcj.execute-api.ap-southeast-2.amazonaws.com/dev",
+          "endpoint": "https://rxryzfpt8i.execute-api.ap-southeast-2.amazonaws.com/live",
           "region": "ap-southeast-2",
           "authorizationType": "AWS_IAM"
         }
@@ -57,7 +57,7 @@
                 "aws.cognito.signin.user.admin"
               ]
             },
-            "authenticationFlowType": "USER_SRP_AUTH"
+            "authenticationFlowType": "USER_PASSWORD_AUTH"
           }
         }
       }

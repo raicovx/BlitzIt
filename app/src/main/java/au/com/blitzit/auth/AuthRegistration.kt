@@ -116,6 +116,8 @@ object AuthRegistration
             AuthUserAttributeKey.custom("custom:requestId") to signUpDetails.request_id,
             AuthUserAttributeKey.custom("custom:code") to confirmationCode)
 
+        Log.i("GAZ_INFO", "attrs: $attrs")
+
         val options = AuthSignUpOptions.builder()
             .userAttributes(attrs.map { AuthUserAttribute(it.key, it.value) })
             .build()
