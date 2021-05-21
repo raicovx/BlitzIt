@@ -47,8 +47,8 @@ class LoginFragment : Fragment() {
         if(!args.resetPasswordDone && !args.confirmationSuccess) {
             viewLifecycleOwner.lifecycleScope.launch {
                 whenStarted {
-                    //AuthServices.checkAuthSession(requireContext().applicationContext)
-                    AuthServices.resetSignUpState()
+                    AuthServices.checkAuthSession(requireContext().applicationContext)
+                    //AuthServices.resetSignUpState()
                 }
             }
         }
