@@ -2,11 +2,8 @@ package au.com.blitzit.views
 
 import android.content.Context
 import android.graphics.*
-import android.text.Layout
-import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -24,6 +21,8 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     private var graphHeightOffset = 0
 
     private var amountSteps = 0
+
+    private var graphInThousands = false
 
     private val blitzItBlue = ContextCompat.getColor(context, R.color.blitz_it_medium_blue)
     private val textFont = ResourcesCompat.getFont(context, R.font.avenir)
@@ -78,9 +77,15 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         xMax = newDataSet.maxByOrNull { it.xVal }?.xVal ?: 0
         yMin = 0
         yMax = newDataSet.maxByOrNull { it.yVal }?.yVal ?: 0
-        yMax = ((yMax + 999) / 1000.0).roundToInt() * 1000
-
-        amountSteps = yMax / 1000
+        if(yMax > 1000) {
+            yMax = ((yMax + 999) / 1000.0).roundToInt() * 1000
+            amountSteps = yMax / 1000
+            graphInThousands = true
+        } else {
+            yMax = ((yMax + 99) / 100.0).roundToInt() * 100
+            amountSteps = yMax / 100
+            graphInThousands = false
+        }
 
         dataSet.clear()
         dataSet.addAll(newDataSet)
@@ -100,7 +105,11 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         //Draw amounts
         for(i in 1..amountSteps)
         {
-            val amount = i * 1000
+            val amount: Int = if(graphInThousands)
+                i * 1000
+            else
+                i * 100
+
             canvas.drawText(amount.toString(), 0f, amount.toRealY() + (getAmountTextHeight() / 2) + 25, amountTextPaint)
         }
 
@@ -121,7 +130,6 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
                 canvas.drawLine(startX, startY, endX, endY, dataPointLinePaint)
             }
-            Log.i("GAZ_GRAPH", "realX: $realX, realY: $realY")
             canvas.drawCircle(realX, realY, 7f, dataPointFillPaint)
             canvas.drawCircle(realX, realY, 7f, dataPointPaint)
         }
