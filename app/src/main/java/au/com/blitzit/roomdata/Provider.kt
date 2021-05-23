@@ -56,11 +56,18 @@ data class Provider(
         else
             "Contact Email: $email"
     }
-    fun getContactNumber(): String
+    fun getContactNumber(withPadding: Boolean): String
     {
-        return if(phone.isNullOrEmpty())
-            "Contact Number: N/A"
-        else
-            "Contact Number: ${phone[0]}"
+        return if(withPadding) {
+            if (phone.isNullOrEmpty())
+                "Contact Number: N/A"
+            else
+                "Contact Number: ${phone[0]}"
+        } else {
+            if (phone.isNullOrEmpty())
+                "N/A"
+            else
+                phone[0]
+        }
     }
 }

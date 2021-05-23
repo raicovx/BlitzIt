@@ -68,7 +68,7 @@ class MyProvidersFragment : Fragment()
             //EMAIL
             view.findViewById<TextView>(R.id.provider_contact_email).text = provider.getEmailAddress()
             //PHONE
-            view.findViewById<TextView>(R.id.provider_contact_number).text = provider.getContactNumber()
+            view.findViewById<TextView>(R.id.provider_contact_number).text = provider.getContactNumber(true)
 
             //Selectable
             val selectableButton: MaterialCardView = view.findViewById(R.id.provider_display_button)

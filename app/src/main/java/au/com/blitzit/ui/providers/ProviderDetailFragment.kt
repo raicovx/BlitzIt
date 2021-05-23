@@ -89,7 +89,7 @@ class ProviderDetailFragment: Fragment()
 
         //Contact Number
         val numberTV: TextView = view.findViewById(R.id.provider_contact_number_field)
-        numberTV.text = provider.getContactNumber()
+        numberTV.text = provider.getContactNumber(false)
     }
 
     private fun populateInvoices(invoices: List<Invoice>, inflater: LayoutInflater, container: ViewGroup)
