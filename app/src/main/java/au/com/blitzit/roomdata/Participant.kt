@@ -27,4 +27,44 @@ data class Participant(
     val statementEmails: List<String>)
 {
     fun getFullName(): String = "$firstName $lastName"
+
+    fun handleMobile(): String
+    {
+        return if(mobile.isNullOrEmpty())
+            "N/A"
+        else
+            mobile
+    }
+
+    fun handleAddressLine(): String
+    {
+        return if(addressLine.isNullOrEmpty())
+            "N/A"
+        else
+            addressLine
+    }
+
+    fun handleSuburb(): String
+    {
+        return if(suburb.isNullOrEmpty())
+            "N/A"
+        else
+            suburb
+    }
+
+    fun handlePostCode(): String
+    {
+        return if(postcode == 0)
+            "N/A"
+        else
+            postcode.toString()
+    }
+
+    fun handleState(): String
+    {
+        return if(state.isNullOrEmpty())
+            "N/A"
+        else
+            state
+    }
 }

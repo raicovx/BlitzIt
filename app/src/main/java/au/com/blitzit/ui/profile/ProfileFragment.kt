@@ -70,17 +70,13 @@ class ProfileFragment : Fragment()
         view.findViewById<TextView>(R.id.profile_lname).text = participantData.lastName
         view.findViewById<TextView>(R.id.profile_dob).text = CranstekHelper.formatDate(participantData.dateOfBirth)
         view.findViewById<TextView>(R.id.profile_ndis).text = participantData.ndisNumber.toString()
-        view.findViewById<TextView>(R.id.profile_contactnum).text = participantData.mobile?.let {
-            CranstekHelper.formatMobileNumberText(
-                it
-            )
-        }
+        view.findViewById<TextView>(R.id.profile_contactnum).text = participantData.handleMobile()
         view.findViewById<TextView>(R.id.profile_email).text = userData.email
         view.findViewById<TextView>(R.id.profile_statement_email).text = participantData.statementEmails[0]
-        view.findViewById<TextView>(R.id.profile_address_line1).text = participantData.addressLine
-        view.findViewById<TextView>(R.id.profile_address_suburb).text = participantData.suburb
-        view.findViewById<TextView>(R.id.profile_address_state).text = participantData.state
-        view.findViewById<TextView>(R.id.profile_address_postcode).text = participantData.postcode.toString()
+        view.findViewById<TextView>(R.id.profile_address_line1).text = participantData.handleAddressLine()
+        view.findViewById<TextView>(R.id.profile_address_suburb).text = participantData.handleSuburb()
+        view.findViewById<TextView>(R.id.profile_address_state).text = participantData.handleState()
+        view.findViewById<TextView>(R.id.profile_address_postcode).text = participantData.handlePostCode()
     }
 
     private fun populatePrimaryContactData(email: String, view: View)
