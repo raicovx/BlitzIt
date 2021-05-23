@@ -66,7 +66,11 @@ class ProfileEditFragment : Fragment(), AdapterView.OnItemSelectedListener
         val userData = AuthServices.loggedUser
 
         contactNumberField = view.findViewById(R.id.profile_edit_contact)
-        contactNumberField.text = CranstekHelper.formatMobileNumberText(participantData.mobile)
+        contactNumberField.text = participantData.mobile?.let {
+            CranstekHelper.formatMobileNumberText(
+                it
+            )
+        }
 
         userEmailField = view.findViewById(R.id.profile_edit_email)
         userEmailField.text = userData.email

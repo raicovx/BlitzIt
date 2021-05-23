@@ -57,7 +57,7 @@ data class GenericInvoiceResponse(
 data class GenericLineItemResponse(
     val support_code: String,
     val unit_price: Double,
-    val quantity: Int,
+    val quantity: Float,
     val support_end_date: String,
     val support_start_date: String,
     val total: Double,

@@ -48,12 +48,14 @@ class ProfileFragment : Fragment()
 
         //LiveData
         val primaryContactEmailObserver = Observer<String>{
-            populatePrimaryContactData(it, view)
+            if(!it.isNullOrEmpty())
+                populatePrimaryContactData(it, view)
         }
         viewModel.primaryContactEmail.observe(viewLifecycleOwner, primaryContactEmailObserver)
 
         val supportCoordinatorEmailObserver = Observer<String>{
-            populateSupportCoordinatorData(it, view)
+            if(!it.isNullOrEmpty())
+                populateSupportCoordinatorData(it, view)
         }
         viewModel.supportCoordinatorEmail.observe(viewLifecycleOwner, supportCoordinatorEmailObserver)
 
@@ -68,7 +70,11 @@ class ProfileFragment : Fragment()
         view.findViewById<TextView>(R.id.profile_lname).text = participantData.lastName
         view.findViewById<TextView>(R.id.profile_dob).text = CranstekHelper.formatDate(participantData.dateOfBirth)
         view.findViewById<TextView>(R.id.profile_ndis).text = participantData.ndisNumber.toString()
-        view.findViewById<TextView>(R.id.profile_contactnum).text = CranstekHelper.formatMobileNumberText(participantData.mobile)
+        view.findViewById<TextView>(R.id.profile_contactnum).text = participantData.mobile?.let {
+            CranstekHelper.formatMobileNumberText(
+                it
+            )
+        }
         view.findViewById<TextView>(R.id.profile_email).text = userData.email
         view.findViewById<TextView>(R.id.profile_statement_email).text = participantData.statementEmails[0]
         view.findViewById<TextView>(R.id.profile_address_line1).text = participantData.addressLine

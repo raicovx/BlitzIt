@@ -15,12 +15,12 @@ data class Participant(
     val firstName: String,
     @SerializedName("last_name")
     val lastName: String,
-    val mobile: String,
+    val mobile: String?,
     @SerializedName("address_line")
-    val addressLine: String,
-    val suburb: String,
-    val postcode: Int,
-    val state: String,
+    val addressLine: String?,
+    val suburb: String?,
+    val postcode: Int?,
+    val state: String?,
     @SerializedName("date_of_birth")
     val dateOfBirth: String,
     @SerializedName("statement_email")

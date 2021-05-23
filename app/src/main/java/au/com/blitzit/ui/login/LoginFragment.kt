@@ -3,6 +3,7 @@ package au.com.blitzit.ui.login
 import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,8 @@ import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.auth.SignInState
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.util.*
 
 class LoginFragment : Fragment() {
@@ -39,10 +42,28 @@ class LoginFragment : Fragment() {
 
     private val args: LoginFragmentArgs by navArgs()
 
+    init {
+        var strings: List<String> = emptyList()
+        val empty = Json.encodeToString(strings)
+        Log.i("TEST", "Empty: $empty")
+        strings = strings.plus("Hello")
+        strings = strings.plus("World")
+        val notEmpty = Json.encodeToString(strings)
+        Log.i("TEST", "Not Empty: $notEmpty")
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        //add observers
+        val signInStateObserver = Observer<SignInState>{
+            onSignInStateChanged(it)
+        }
+        AuthServices.liveSignInState.observe(viewLifecycleOwner, signInStateObserver)
 
         if(!args.resetPasswordDone && !args.confirmationSuccess) {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -72,17 +93,6 @@ class LoginFragment : Fragment() {
         handleArgs()
 
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
-        //add observers
-        val signInStateObserver = Observer<SignInState>{
-            onSignInStateChanged(it)
-        }
-        AuthServices.liveSignInState.observe(viewLifecycleOwner, signInStateObserver)
     }
 
     private fun handleLogin(view: View)

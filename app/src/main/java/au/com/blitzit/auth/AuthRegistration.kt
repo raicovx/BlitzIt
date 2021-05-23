@@ -129,6 +129,7 @@ object AuthRegistration
             if(result.isSignUpComplete)
             {
                 liveRegistrationState.postValue(RegistrationState.SignedUp)
+                AuthServices.liveSignInState.postValue(SignInState.SignedOut)
                 appDatabase.signUpRequestDAO().nukeTable()
             }
             else

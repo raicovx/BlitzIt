@@ -11,7 +11,7 @@ data class LineItem(
     val supportCode: String,
     @SerializedName("unit_price")
     val unitPrice: Double,
-    val quantity: Int,
+    val quantity: Float,
     @SerializedName("support_end_date")
     val supportEndDate: String,
     @SerializedName("support_start_date")

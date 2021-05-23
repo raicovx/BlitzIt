@@ -14,7 +14,9 @@ data class GenericPlanResponse(
     @SerializedName("plan_end_date")
     val planEndDate: String,
     @SerializedName("parts")
-    val planParts: Array<GenericPlanPartResponse>)
+    val planParts: Array<GenericPlanPartResponse>,
+    @SerializedName("providers")
+    val providerOverviews: Array<GenericProviderSummaryResponse>)
 {
     fun toPlan(ndisNumber: Int): Plan
     {

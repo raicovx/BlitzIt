@@ -67,10 +67,8 @@ object AuthServices
     private suspend fun getData()
     {
         getParticipantData()
-        if(this::loggedParticipant.isInitialized) {
-            selectedPlan = appDatabase.planDAO().getMostRecentPlan(loggedParticipant.ndisNumber)
-            liveSignInState.postValue(SignInState.SignedIn)
-        }
+        selectedPlan = appDatabase.planDAO().getMostRecentPlan(loggedParticipant.ndisNumber)
+        liveSignInState.postValue(SignInState.SignedIn)
     }
 
     suspend fun attemptSignOut()
@@ -194,8 +192,8 @@ object AuthServices
     private suspend fun getParticipantData()
     {
         val request = RestOptions.builder()
-                .addPath("/participant")
-                .build()
+            .addPath("/participant")
+            .build()
 
         try
         {
@@ -203,6 +201,8 @@ object AuthServices
             Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
 
             handleParticipantData(response)
+
+            getPlanData()
         }
         catch (error: ApiException)
         {
@@ -212,23 +212,13 @@ object AuthServices
 
     private suspend fun handleParticipantData(data: RestResponse)
     {
-        val genericParticipants: Array<GenericParticipantResponse>
         //Generic Class
-        try
-        {
-            genericParticipants = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
+        val genericParticipants: Array<GenericParticipantResponse> = Gson().fromJson(data.data.asString(), Array<GenericParticipantResponse>::class.java)
 
-            //Participant
-            val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
-            appDatabase.participantDAO().upsertParticipant(participant)
-            loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
-
-            getPlanData()
-        }
-        catch (error: RuntimeException)
-        {
-            attemptSignOut()
-        }
+        //Participant
+        val participant = genericParticipants[0].toParticipant(loggedUser.user_id)
+        appDatabase.participantDAO().upsertParticipant(participant)
+        loggedParticipant = appDatabase.participantDAO().getParticipantByUserID(loggedUser.user_id)
     }
 
     private suspend fun getPlanData()
@@ -247,7 +237,7 @@ object AuthServices
         }
         catch (error: ApiException)
         {
-            Log.e("GAZ_ERROR", "GET failed.", error)
+            Log.e("GAZ_ERROR", "GET failed for plan Data.", error)
         }
     }
 
@@ -288,6 +278,19 @@ object AuthServices
                     appDatabase.categoryDAO().upsertCategory(category)
                 }
             }
+
+            //Provider Spending
+            for(summary: GenericProviderSummaryResponse in genericPlan.providerOverviews)
+            {
+                //Provider
+                appDatabase.providerDAO().upsertProvider(summary.getProvider(genericPlan.planID))
+
+                //Provider Category Spending
+                for(spending: ProviderCategorySpending in summary.getProviderCategorySpending(genericPlan.planID))
+                {
+                    appDatabase.providerCategorySpendingDAO().upsertProviderCategorySpending(spending)
+                }
+            }
         }
     }
 
@@ -299,7 +302,6 @@ object AuthServices
         for(i in genericPlans.indices)
         {
             getPlanInvoices(genericPlans[i])
-            getPlanProviderSummaries(genericPlans[i])
         }
     }
 
@@ -317,7 +319,7 @@ object AuthServices
         }
         catch (error: ApiException)
         {
-            Log.e("GAZ_ERROR", "GET failed.", error)
+            Log.e("GAZ_ERROR", "GET failed for Invoice Details with planID: ${plan.planID}.", error)
         }
     }
 
@@ -327,41 +329,6 @@ object AuthServices
 
         for(invoice: GenericInvoiceResponse in invoices)
             appDatabase.invoiceDAO().upsertInvoice(invoice.toInvoice(planID))
-    }
-
-    private suspend fun getPlanProviderSummaries(plan: GenericPlanResponse)
-    {
-        val request = RestOptions.builder()
-                .addPath("/participant/${loggedParticipant.ndisNumber}/${plan.planID}/providerSummary")
-                .build()
-
-        try{
-            val response = Amplify.API.get(request, "mobileAPI")
-            Log.i("GAZ_INFO", "GET succeeded for Plan Provider Summary: ${response.data.asString()}")
-
-            handleProviderSummeryData(response, plan.planID)
-        }
-        catch (error: ApiException)
-        {
-            Log.e("GAZ_ERROR", "GET failed.", error)
-        }
-    }
-
-    private suspend fun handleProviderSummeryData(response: RestResponse, planID: String)
-    {
-        val genericProvider: GenericProviderOverviewResponse = Gson().fromJson(response.data.asString(), GenericProviderOverviewResponse::class.java)
-
-        for(summary: GenericProviderSummaryResponse in genericProvider.providerOverview)
-        {
-            //Provider
-            appDatabase.providerDAO().upsertProvider(summary.getProvider(planID))
-
-            //Provider Category Spending
-            for(spending: ProviderCategorySpending in summary.getProviderCategorySpending(planID))
-            {
-                appDatabase.providerCategorySpendingDAO().upsertProviderCategorySpending(spending)
-            }
-        }
     }
 
     suspend fun launchGetInvoiceLineItems(invoiceId: String, planId: String)
@@ -383,7 +350,7 @@ object AuthServices
         }
         catch (error: ApiException)
         {
-            Log.e("GAZ_ERROR", "GET failed.", error)
+            Log.e("GAZ_ERROR", "GET failed for Line Items with invoiceID: $invoiceId and planId: $planId.", error)
         }
     }
 
@@ -413,7 +380,7 @@ object AuthServices
         }
         catch (error: ApiException)
         {
-            Log.e("GAZ_EDIT_PROFILE_POST", "POST failed", error)
+            Log.e("GAZ_EDIT_PROFILE_POST", "POST failed for Edit Profile", error)
             editSubmissionState.postValue(EditSubmissionState.Failure)
         }
     }

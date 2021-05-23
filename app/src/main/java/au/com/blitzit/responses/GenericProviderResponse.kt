@@ -4,11 +4,6 @@ import au.com.blitzit.roomdata.Provider
 import au.com.blitzit.roomdata.ProviderCategorySpending
 import com.google.gson.annotations.SerializedName
 
-data class GenericProviderOverviewResponse(
-    @SerializedName("provider_overview")
-    val providerOverview: List<GenericProviderSummaryResponse>
-)
-
 data class GenericProviderSummaryResponse(
     val provider: GenericProviderResponse,
     val categories: List<GenericProviderCategorySpendingResponse>)

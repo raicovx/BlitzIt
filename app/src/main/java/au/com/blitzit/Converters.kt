@@ -9,9 +9,23 @@ class Converters
 {
     //LIST
     @TypeConverter
-    fun fromList(value: List<String>) = Json.encodeToString(value)
+    fun fromList(value: List<String>?): String
+    {
+        return if(value == null) {
+            val emptyList: List<String> = emptyList()
+            Json.encodeToString(emptyList)
+        } else
+            Json.encodeToString(value)
+    }
+
     @TypeConverter
-    fun toList(value: String) = Json.decodeFromString<List<String>>(value)
+    fun toList(value: String?): List<String>?
+    {
+        return if (value == null)
+            null
+        else
+            Json.decodeFromString(value)
+    }
 
     //MAP<String, Double>
     @TypeConverter
