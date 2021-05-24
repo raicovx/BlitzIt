@@ -95,6 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="8dp"
+                        android:paddingHorizontal="8dp"
                         android:background="@color/blitz_it_medium_blue"
                         android:fontFamily="@font/avenir"
                         android:gravity="center"
@@ -105,7 +106,8 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/provider_abn"
