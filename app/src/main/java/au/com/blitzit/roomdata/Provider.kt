@@ -10,7 +10,7 @@ data class Provider(
     val provider_id: String,
     val plan_id: String,
     val name: String,
-    val abn: String,
+    val abn: String?,
     @SerializedName("address_line")
     val addressLine: String?,
     val suburb: String?,
