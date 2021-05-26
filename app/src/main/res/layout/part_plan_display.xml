@@ -70,17 +70,20 @@
 
         <TextView
             android:id="@+id/plan_status"
-            android:layout_width="114dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="12dp"
             android:background="@drawable/active_display"
             android:fontFamily="@font/avenir"
             android:gravity="center"
             android:text="@string/active"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/plan_text"
             app:layout_constraintTop_toBottomOf="@+id/plan_divider" />
 

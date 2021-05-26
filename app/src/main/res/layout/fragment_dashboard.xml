@@ -125,16 +125,20 @@
 
                     <TextView
                         android:id="@+id/dashboard_plan_status"
-                        android:layout_width="114dp"
-                        android:layout_height="32dp"
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="32dp"
                         android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="12dp"
                         android:background="@drawable/active_display"
                         android:fontFamily="@font/avenir"
                         android:gravity="center"
                         android:text="@string/active"
+                        android:textAllCaps="true"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -188,7 +192,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/light_grey">
+            android:background="@color/standard_grey">
 
             <LinearLayout
                 android:id="@+id/dashboard_layout_filler"
@@ -197,6 +201,11 @@
                 android:orientation="vertical">
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

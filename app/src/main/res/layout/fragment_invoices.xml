@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/light_grey">
+        android:background="@color/standard_grey">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/invoices_topLayout"
@@ -149,6 +149,11 @@
             android:visibility="invisible">
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

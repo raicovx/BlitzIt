@@ -429,6 +429,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            app:layout_constraintTop_toBottomOf="@+id/profile_edit_button"
+            tools:ignore="ContentDescription" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
