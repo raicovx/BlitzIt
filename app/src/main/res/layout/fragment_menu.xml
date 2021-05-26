@@ -85,6 +85,25 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/menu_sign_out_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/round_button"
+                android:fontFamily="@font/avenir"
+                android:text="Sign out"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/blitz_it_orange"
+                app:cornerRadius="92dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -106,7 +125,7 @@
                 android:text="@string/my_profile"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +145,7 @@
                 android:text="@string/my_plans"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +171,7 @@
                 android:text="@string/invoices"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +191,7 @@
                 android:text="@string/track_spending"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -198,7 +217,7 @@
                 android:text="@string/my_providers"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +237,7 @@
                 android:text="@string/setting_info"
                 android:textAllCaps="false"
                 android:textColor="@color/darker_grey"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -226,21 +245,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/menu_sign_out_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="64dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/round_button"
-            android:fontFamily="@font/avenir"
-            android:text="Sign out"
-            android:textAllCaps="true"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/blitz_it_orange"
-            app:cornerRadius="92dp" />
 
     </LinearLayout>
 

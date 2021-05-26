@@ -6,10 +6,10 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.views.RadialProgressBar
+import com.google.gson.Gson
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*

@@ -21,7 +21,6 @@ import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.kotlin.core.Amplify
 import com.google.gson.Gson
 import kotlinx.coroutines.*
-import java.lang.RuntimeException
 
 enum class SignInState(val state: String)
 {
@@ -198,6 +197,7 @@ object AuthServices
         try
         {
             val response = Amplify.API.get(request, "mobileAPI")
+
             Log.i("GAZ_INFO", "GET participants succeeded: ${response.data.asString()}")
 
             handleParticipantData(response)
