@@ -1,5 +1,7 @@
 package au.com.blitzit.ui.menu
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -89,10 +91,30 @@ class MenuFragment : Fragment()
 
         val signOutButton: Button = view.findViewById(R.id.menu_sign_out_button)
         signOutButton.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                AuthServices.attemptSignOut()
-            }
-            navController.navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
+            signOutDialog()
         }
+    }
+
+    fun signOutDialog()
+    {
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when(which){
+                DialogInterface.BUTTON_NEGATIVE -> {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        AuthServices.attemptSignOut()
+                    }
+                    this.findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToIntro())
+                }
+            }
+        }
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Are you sure?")
+            .setMessage("This will log the current user out.")
+            .setPositiveButton("Cancel", dialogClickListener)
+            .setNegativeButton("Sign Out", dialogClickListener)
+            .create()
+            .show()
+
     }
 }
