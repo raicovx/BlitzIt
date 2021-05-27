@@ -72,6 +72,11 @@ data class GenericParticipantResponse(
                 ndisNumber,
                 contact.firstName,
                 contact.lastName,
+                contact.mobile,
+                contact.addressLine,
+                contact.suburb,
+                contact.postcode,
+                contact.state,
                 contact.email)
 
             sContacts = sContacts.plus(newContact)

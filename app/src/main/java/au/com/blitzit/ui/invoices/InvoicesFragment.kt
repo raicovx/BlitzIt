@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.contains
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.data.ProviderAndInvoices
+import au.com.blitzit.data.ProviderInvoicesDisplayHandler
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Invoice
 import kotlinx.coroutines.launch
@@ -44,6 +46,12 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
 
     private lateinit var providerHolder: LinearLayout
     private lateinit var mostRecentContainer: LinearLayout
+
+    private var numberOfInvoicesToDisplay: Int = 20
+    private var numberOfInvoicesDisplayingMostRecent: Int = 0
+    private var numberOfMostRecentInvoices: Int = 0
+
+    private var providerInvoicesDisplayHandlers: List<ProviderInvoicesDisplayHandler> = emptyList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -90,6 +98,7 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
         viewModel.providerAndInvoicesList.observe(viewLifecycleOwner, providerInvoicesObserver)
         val mostRecentInvoiceObserver = Observer<List<Invoice>> {
             setupMostRecentDisplay(it)
+            numberOfMostRecentInvoices = it.count()
         }
         viewModel.mostRecentInvoiceList.observe(viewLifecycleOwner, mostRecentInvoiceObserver)
 
@@ -109,11 +118,31 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
             val header: LinearLayout = view.findViewById(R.id.invoice_provider_title_header)
             CranstekHelper.handleHeaderColours(requireContext(), header)
 
-            //populate with invoices
-            val invoiceContainer: LinearLayout = view.findViewById(R.id.invoices_invoice_holder)
-            populateInvoices(invoiceContainer, providerInvoices.invoices)
-
             providerHolder.addView(view)
+
+            val invoicesHolder: LinearLayout = view.findViewById(R.id.invoices_invoice_holder)
+
+            val displayHandler = ProviderInvoicesDisplayHandler(providerInvoices, 0, invoicesHolder)
+            providerInvoicesDisplayHandlers = providerInvoicesDisplayHandlers.plus(displayHandler)
+
+            //Ensure we don't try to populate more invoices then we have
+            val numberToDisplay = if(providerInvoices.invoices.count() < 20) providerInvoices.invoices.count() else numberOfInvoicesToDisplay
+            displayHandler.numberOfDisplayingInvoices = numberToDisplay
+
+            //populate invoices
+            populateInvoiceRange(0, numberToDisplay - 1, providerInvoices.invoices, invoicesHolder)
+
+            //Draw load more button
+            if(numberToDisplay == 20)
+            {
+                val buttonView = layoutInflater.inflate(R.layout.part_invoice_load_more, invoicesHolder, false)
+                val loadMoreButton = buttonView.findViewById<Button>(R.id.invoices_load_more)
+                loadMoreButton.setOnClickListener {
+                    handleLoadMoreByProvider(displayHandler)
+                    invoicesHolder.removeView(buttonView)
+                }
+                invoicesHolder.addView(buttonView)
+            }
         }
     }
 
@@ -121,30 +150,110 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         val view = layoutInflater.inflate(R.layout.part_invoice_most_recent, mostRecentContainer, false)
 
-        val invoiceContainer: LinearLayout = view.findViewById(R.id.invoices_most_recent_holder)
-        populateInvoices(invoiceContainer, sortedInvoices)
-
         mostRecentContainer.addView(view)
+
+        //Ensure we don't try to populate more invoices then we have
+        val numberToDisplay = if(sortedInvoices.count() < 20) sortedInvoices.count() else numberOfInvoicesToDisplay
+        numberOfInvoicesDisplayingMostRecent = numberToDisplay
+
+        populateInvoiceRange(0, numberToDisplay - 1, sortedInvoices, mostRecentContainer)
+
+        //Draw load more button
+        if(numberToDisplay == 20)
+        {
+            val buttonView = layoutInflater.inflate(R.layout.part_invoice_load_more, mostRecentContainer, false)
+            val loadMoreButton = buttonView.findViewById<Button>(R.id.invoices_load_more)
+            loadMoreButton.setOnClickListener {
+                handleLoadMoreMostRecent()
+                mostRecentContainer.removeView(buttonView)
+            }
+            mostRecentContainer.addView(buttonView)
+        }
     }
 
-    private fun populateInvoices(container: ViewGroup, invoices: List<Invoice>)
+    private fun populateInvoiceRange(rangeStart: Int, rangeEnd: Int, invoices: List<Invoice>, container: ViewGroup)
     {
-        for(invoice: Invoice in invoices)
+        for(i in rangeStart..rangeEnd)
         {
-            val dividerView = layoutInflater.inflate(R.layout.part_invoice_divider, container, false)
-            container.addView(dividerView)
+            createDivider(container)
+            createInvoice(invoices[i], container)
+        }
+    }
 
-            val view = layoutInflater.inflate(R.layout.part_invoice, container, false)
-            view.findViewById<TextView>(R.id.invoice_part_amount).text = CranstekHelper.convertToCurrency(invoice.amount)
-            view.findViewById<TextView>(R.id.invoice_part_id).text = invoice.invoice_id
+    private fun createDivider(container: ViewGroup)
+    {
+        val dividerView =
+            layoutInflater.inflate(R.layout.part_invoice_divider, container, false)
+        container.addView(dividerView)
+    }
 
-            //Invoice detail button
-            val invoiceButton: LinearLayout = view.findViewById(R.id.invoice_selector_button)
-            invoiceButton.setOnClickListener {
-                this.findNavController().navigate(InvoicesFragmentDirections.actionInvoicesFragmentToInvoiceDetailFragment(invoice.invoice_id))
+    private fun createInvoice(invoice: Invoice, container: ViewGroup)
+    {
+        val view = layoutInflater.inflate(R.layout.part_invoice, container, false)
+        view.findViewById<TextView>(R.id.invoice_part_amount).text =
+            CranstekHelper.convertToCurrency(invoice.amount)
+        view.findViewById<TextView>(R.id.invoice_part_id).text = invoice.invoice_id
+
+        //Invoice detail button
+        val invoiceButton: LinearLayout = view.findViewById(R.id.invoice_selector_button)
+        invoiceButton.setOnClickListener {
+            this.findNavController().navigate(
+                InvoicesFragmentDirections.actionInvoicesFragmentToInvoiceDetailFragment(
+                    invoice.invoice_id
+                )
+            )
+        }
+
+        container.addView(view)
+    }
+
+    private fun handleLoadMoreMostRecent()
+    {
+        //Figure out how many more to display
+        val invoicesToLoad = if((numberOfMostRecentInvoices - numberOfInvoicesDisplayingMostRecent) > 20) 20
+        else numberOfMostRecentInvoices - numberOfInvoicesDisplayingMostRecent
+
+        populateInvoiceRange(numberOfInvoicesDisplayingMostRecent + 1, numberOfInvoicesDisplayingMostRecent + invoicesToLoad - 1,
+            viewModel.mostRecentInvoiceList.value!!, mostRecentContainer)
+
+        numberOfInvoicesDisplayingMostRecent += invoicesToLoad
+
+        //Draw load more button
+        if(invoicesToLoad == 20)
+        {
+            val buttonView = layoutInflater.inflate(R.layout.part_invoice_load_more, mostRecentContainer, false)
+            val loadMoreButton = buttonView.findViewById<Button>(R.id.invoices_load_more)
+            loadMoreButton.setOnClickListener {
+                handleLoadMoreMostRecent()
+                mostRecentContainer.removeView(buttonView)
             }
+            mostRecentContainer.addView(buttonView)
+        }
+    }
 
-            container.addView(view)
+    private fun handleLoadMoreByProvider(displayHandler: ProviderInvoicesDisplayHandler)
+    {
+        //Figure out how many more to display
+        val invoicesToLoad = if((displayHandler.providerAndInvoices.invoices.count() - displayHandler.numberOfDisplayingInvoices) > 20) 20
+        else numberOfMostRecentInvoices - numberOfInvoicesDisplayingMostRecent
+
+        //Populate the invoices
+        populateInvoiceRange(displayHandler.numberOfDisplayingInvoices + 1, displayHandler.numberOfDisplayingInvoices + invoicesToLoad - 1,
+            displayHandler.providerAndInvoices.invoices, displayHandler.container)
+
+        //Update the display total
+        displayHandler.numberOfDisplayingInvoices += invoicesToLoad
+
+        //Draw load more button
+        if(invoicesToLoad == 20)
+        {
+            val buttonView = layoutInflater.inflate(R.layout.part_invoice_load_more, mostRecentContainer, false)
+            val loadMoreButton = buttonView.findViewById<Button>(R.id.invoices_load_more)
+            loadMoreButton.setOnClickListener {
+                handleLoadMoreMostRecent()
+                mostRecentContainer.removeView(buttonView)
+            }
+            mostRecentContainer.addView(buttonView)
         }
     }
 
