@@ -3,9 +3,9 @@ package au.com.blitzit.roomdata
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(primaryKeys = ["ndis_number", "invoice_id"])
 data class Invoice(
-    @PrimaryKey
+    val ndis_number: Int,
     val invoice_id: String,
     val plan_id: String,
     val provider: String,

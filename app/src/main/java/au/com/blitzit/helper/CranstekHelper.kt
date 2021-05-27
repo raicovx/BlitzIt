@@ -1,6 +1,7 @@
 package au.com.blitzit.helper
 
 import android.content.Context
+import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.LinearLayout
@@ -182,5 +183,17 @@ object CranstekHelper
         val colour: Int = ContextCompat.getColor(context, R.color.dark_grey)
         if(AuthServices.checkPlanStatusExpired())
             bar.setProgressBarColour(colour, colour, true)
+    }
+
+    fun longInfo(str: String)
+    {
+        if(str.length > 4000)
+        {
+            Log.i("Gaz_LONG_STR", str.substring(0,4000))
+            longInfo(str.substring(4000))
+        } else
+        {
+            Log.i("Gaz_LONG_STR", str)
+        }
     }
 }

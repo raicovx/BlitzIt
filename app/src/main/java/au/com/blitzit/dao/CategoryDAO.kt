@@ -7,11 +7,11 @@ import au.com.blitzit.roomdata.Category
 @Dao
 interface CategoryDAO
 {
-    @Query("SELECT * FROM Category WHERE plan_id = :planID")
-    suspend fun getCategoriesByPlan(planID: String): List<Category>
+    @Query("SELECT * FROM Category WHERE plan_id = :planID AND ndis_number = :ndis")
+    suspend fun getCategoriesByPlan(planID: String, ndis: Int): List<Category>
 
-    @Query("SELECT * FROM Category WHERE category = :category AND label = :label LIMIT 1")
-    suspend fun getCategoryByCategoryAndLabel(category: String, label: String): Category
+    @Query("SELECT * FROM Category WHERE category = :category AND label = :label AND ndis_number = :ndis LIMIT 1")
+    suspend fun getCategoryByCategoryAndLabel(category: String, label: String, ndis: Int): Category
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategory(category: Category)

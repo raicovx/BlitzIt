@@ -20,7 +20,7 @@ class TrackSpendingViewModel(app: Application) : AndroidViewModel(app)
 
     suspend fun getCategories()
     {
-        categories = appDatabase.categoryDAO().getCategoriesByPlan(AuthServices.selectedPlan.plan_id)
+        categories = appDatabase.categoryDAO().getCategoriesByPlan(AuthServices.selectedPlan.plan_id, AuthServices.loggedParticipant.ndisNumber)
     }
 
     fun getCategoryLabels(): List<String>

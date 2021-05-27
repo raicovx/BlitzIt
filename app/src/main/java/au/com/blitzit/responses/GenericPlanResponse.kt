@@ -1,5 +1,6 @@
 package au.com.blitzit.responses
 
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.Plan
 import au.com.blitzit.roomdata.Purpose
@@ -40,6 +41,7 @@ data class GenericPlanResponse(
             if(part.category == purpose.name)
             {
                 val category = Category(
+                    AuthServices.loggedParticipant.ndisNumber,
                     planID,
                     purpose.name,
                     part.label,

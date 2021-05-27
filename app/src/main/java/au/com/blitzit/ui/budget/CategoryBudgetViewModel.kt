@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.AppDatabase
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.roomdata.Category
 import au.com.blitzit.roomdata.ProviderCategorySpending
@@ -17,7 +18,7 @@ class CategoryBudgetViewModel(app: Application): AndroidViewModel(app)
 
     suspend fun getCategory(category: String, label: String)
     {
-        categoryLiveData.postValue(appDatabase.categoryDAO().getCategoryByCategoryAndLabel(category, label))
+        categoryLiveData.postValue(appDatabase.categoryDAO().getCategoryByCategoryAndLabel(category, label, AuthServices.loggedParticipant.ndisNumber))
     }
 
     suspend fun getProviderCategorySpending(purposeName: String, planID: String, label: String)

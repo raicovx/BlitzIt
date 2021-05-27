@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import au.com.blitzit.AppDatabase
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.roomdata.Invoice
 import au.com.blitzit.roomdata.Provider
 
@@ -28,5 +29,5 @@ class ProviderDetailViewModel(app: Application): AndroidViewModel(app)
     private suspend fun getSelectedProvider(): Provider = appDatabase.providerDAO().getProviderById(providerID)
 
     private suspend fun getInvoicesByProvider(planId: String, providerName: String): List<Invoice> =
-        appDatabase.invoiceDAO().getInvoiceListByProviderName(planId, providerName)
+        appDatabase.invoiceDAO().getInvoiceListByProviderName(planId, providerName, AuthServices.loggedParticipant.ndisNumber)
 }

@@ -33,7 +33,8 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app)
     }
 
 
-    private suspend fun getSelectedInvoiceFromDB(): Invoice = appDatabase.invoiceDAO().getInvoiceById(selectedInvoiceId, AuthServices.selectedPlan.plan_id)
+    private suspend fun getSelectedInvoiceFromDB(): Invoice = appDatabase.invoiceDAO().getInvoiceById(
+        selectedInvoiceId, AuthServices.selectedPlan.plan_id, AuthServices.loggedParticipant.ndisNumber)
 
     private suspend fun getSelectedInvoiceLineItems(): List<LineItem> = appDatabase.lineItemDAO().getLineItemsByInvoice(selectedInvoiceId)
 }

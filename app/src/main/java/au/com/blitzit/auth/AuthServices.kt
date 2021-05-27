@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import au.com.blitzit.AppDatabase
 import au.com.blitzit.data.*
+import au.com.blitzit.helper.CranstekHelper
 import au.com.blitzit.responses.*
 import au.com.blitzit.roomdata.*
 import com.amazonaws.mobile.auth.core.signin.AuthException
@@ -229,7 +230,7 @@ object AuthServices
         try
         {
             val response = Amplify.API.get(request, "mobileAPI")
-            Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${response.data.asString()}")
+            Log.i("GAZ_INFO", "GET succeeded for Plan Data: ${CranstekHelper.longInfo(response.data.asString())}")
 
             handlePlanData(response)
 

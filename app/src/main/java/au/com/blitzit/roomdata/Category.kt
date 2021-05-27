@@ -4,8 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(primaryKeys = ["plan_id", "purpose", "label"])
+@Entity(primaryKeys = ["ndis_number", "plan_id", "purpose", "label"])
 data class Category(
+    val ndis_number: Int,
     val plan_id: String,
     val purpose: String,
     val label: String,

@@ -1,5 +1,6 @@
 package au.com.blitzit.responses
 
+import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.roomdata.Invoice
 import au.com.blitzit.roomdata.LineItem
 
@@ -18,7 +19,9 @@ data class GenericInvoiceResponse(
 {
     fun toInvoice(planID: String): Invoice
     {
-        return Invoice(invoice_id,
+        return Invoice(
+            AuthServices.loggedParticipant.ndisNumber,
+            invoice_id,
             planID,
             provider,
             invoice_number,

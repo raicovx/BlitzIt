@@ -18,12 +18,14 @@ class InvoicesViewModel(app: Application): AndroidViewModel(app)
 
     val providerAndInvoicesList = MutableLiveData<List<ProviderAndInvoices>>()
 
-    private suspend fun getInvoices(): List<Invoice> = appDatabase.invoiceDAO().getInvoiceListByPlan(AuthServices.selectedPlan.plan_id)
+    private suspend fun getInvoices(): List<Invoice> = appDatabase.invoiceDAO().getInvoiceListByPlan(
+        AuthServices.selectedPlan.plan_id, AuthServices.loggedParticipant.ndisNumber)
 
     private suspend fun getProviders(): List<Provider> = appDatabase.providerDAO().getAllProviders(AuthServices.selectedPlan.plan_id)
 
     private suspend fun getInvoicesByProvider(providerName: String): List<Invoice> =
-        appDatabase.invoiceDAO().getInvoiceListByProviderName(AuthServices.selectedPlan.plan_id, providerName)
+        appDatabase.invoiceDAO().getInvoiceListByProviderName(
+            AuthServices.selectedPlan.plan_id, providerName, AuthServices.loggedParticipant.ndisNumber)
 
     suspend fun getProvidersAndInvoices()
     {
