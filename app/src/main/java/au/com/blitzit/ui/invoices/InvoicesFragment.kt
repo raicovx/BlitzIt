@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
+import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.data.ProviderAndInvoices
 import au.com.blitzit.helper.CranstekHelper
@@ -51,6 +52,10 @@ class InvoicesFragment: Fragment(), AdapterView.OnItemSelectedListener
 
         //View
         val view = inflater.inflate(R.layout.fragment_invoices, container, false)
+
+        //Un-Hide the FAB
+        val mActivity : MainActivity = activity as MainActivity
+        mActivity.showFAB()
 
         //Loading bar
         progressWheel = view.findViewById(R.id.loading_progress)

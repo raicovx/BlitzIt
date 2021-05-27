@@ -631,6 +631,11 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                tools:ignore="ContentDescription" />
+
         </LinearLayout>
 
     </LinearLayout>

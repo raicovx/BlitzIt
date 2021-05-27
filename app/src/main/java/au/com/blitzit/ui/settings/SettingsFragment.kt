@@ -27,6 +27,10 @@ class SettingsFragment : Fragment()
     {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
+        //Un-Hide the FAB
+        val mActivity : MainActivity = activity as MainActivity
+        mActivity.showFAB()
+
         setOnClickListeners(view)
 
         return view

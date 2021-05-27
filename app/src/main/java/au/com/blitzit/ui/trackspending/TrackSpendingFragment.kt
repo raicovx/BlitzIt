@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.auth.AuthServices
 import au.com.blitzit.helper.CranstekHelper
@@ -47,6 +48,10 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
     {
         //view Model
         viewModel = ViewModelProvider(this).get(TrackSpendingViewModel::class.java)
+
+        //Un-Hide the FAB
+        val mActivity : MainActivity = activity as MainActivity
+        mActivity.showFAB()
 
         //View
         mainView = inflater.inflate(R.layout.fragment_track_spending, container, false)

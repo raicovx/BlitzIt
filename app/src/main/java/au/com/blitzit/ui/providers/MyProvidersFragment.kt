@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import au.com.blitzit.MainActivity
 import au.com.blitzit.R
 import au.com.blitzit.roomdata.Provider
 import com.google.android.material.card.MaterialCardView
@@ -28,6 +29,10 @@ class MyProvidersFragment : Fragment()
     {
         //viewModel
         viewModel = ViewModelProvider(this).get(MyProvidersViewModel::class.java)
+
+        //Un-Hide the FAB
+        val mActivity : MainActivity = activity as MainActivity
+        mActivity.showFAB()
 
         //View
         val view = inflater.inflate(R.layout.fragment_providers, container, false)
