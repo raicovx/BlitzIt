@@ -1,6 +1,7 @@
 package au.com.blitzit.ui.login
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -19,5 +20,4 @@ import java.util.*
 
 class LoginViewModel(application: Application) : AndroidViewModel(application)
 {
-
 }

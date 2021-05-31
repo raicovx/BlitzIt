@@ -1,6 +1,8 @@
 package au.com.blitzit.ui.login
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
@@ -34,11 +37,14 @@ class LoginFragment : Fragment() {
     }
 
     private lateinit var viewModel: LoginViewModel
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var loginButton: Button
     private lateinit var usernameField: AppCompatEditText
     private lateinit var passwordField: AppCompatEditText
     private lateinit var forgotPassword: Button
     private lateinit var progressWheel: ProgressBar
+
+    private lateinit var rememberAccount: CheckBox
 
     private val args: LoginFragmentArgs by navArgs()
 
@@ -56,6 +62,7 @@ class LoginFragment : Fragment() {
                               savedInstanceState: Bundle?): View?
     {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        sharedPreferences = activity?.getSharedPreferences(getString(R.string.sharedPreferences), Context.MODE_PRIVATE)!!
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
@@ -92,7 +99,23 @@ class LoginFragment : Fragment() {
         toggleShowOptions(false)
         handleArgs()
 
+        //Remember account
+        rememberAccount = view.findViewById(R.id.remember_me)
+        handleRememberAccount()
+
         return view
+    }
+
+    private fun handleRememberAccount()
+    {
+        //Get the value of remember account from sharedPreferences
+        rememberAccount.isChecked = getRememberAccountSetting()
+
+        //If we should remember the account then remember it
+        if(rememberAccount.isChecked)
+        {
+            usernameField.setText(getLastUser())
+        }
     }
 
     private fun handleLogin(view: View)
@@ -110,6 +133,9 @@ class LoginFragment : Fragment() {
                         requireContext().applicationContext)
                 }
             }
+
+            //Store user name if remember account
+            storeSharedPreferences(rememberAccount.isChecked, usernameField.text.toString())
 
         }else{
             Toast.makeText(context, "Missing Username or Password", Toast.LENGTH_SHORT).show()
@@ -175,7 +201,31 @@ class LoginFragment : Fragment() {
         passwordField.isVisible = value
         forgotPassword.isVisible = value
         loginButton.isVisible = value
+        rememberAccount.isVisible = value
 
         progressWheel.isVisible = !value
+    }
+
+    private fun getRememberAccountSetting(): Boolean {
+        return sharedPreferences.getBoolean("rememberAccountState", false)
+    }
+
+    private fun getLastUser(): String
+    {
+        val user = sharedPreferences.getString("lastUser", "")
+        return if(user.isNullOrEmpty())
+            ""
+        else
+            user
+    }
+
+    private fun storeSharedPreferences(state: Boolean, user: String)
+    {
+        with(sharedPreferences.edit())
+        {
+            putBoolean("rememberAccountState", state)
+            putString("lastUser", user)
+            apply()
+        }
     }
 }
