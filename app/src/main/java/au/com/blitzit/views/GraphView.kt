@@ -13,6 +13,7 @@ import kotlin.math.roundToInt
 class GraphView(context: Context, attributeSet: AttributeSet): View(context, attributeSet)
 {
     private val dataSet = mutableListOf<DataPoint>()
+    private var averageTargetSpend: Int = 0
     private var xMin = 0
     private var xMax = 0
     private var yMin = 0
@@ -24,22 +25,58 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
     private var graphInThousands = false
 
-    private val blitzItBlue = ContextCompat.getColor(context, R.color.blitz_it_medium_blue)
+    private val blitzItGreen = ContextCompat.getColor(context, R.color.blitz_it_green)
+    private val blitzItOrange = ContextCompat.getColor(context, R.color.blitz_it_orange)
+    private val blitzItRed = ContextCompat.getColor(context, R.color.blitz_it_red)
     private val textFont = ResourcesCompat.getFont(context, R.font.avenir)
 
     private val dataPointPaint = Paint().apply{
-        color = blitzItBlue
-        strokeWidth = 7f
+        color = blitzItGreen
+        strokeWidth = 9f
+        style = Paint.Style.STROKE
+    }
+
+    private val dataPointPaintOver = Paint().apply{
+        color = blitzItRed
+        strokeWidth = 9f
+        style = Paint.Style.STROKE
+    }
+
+    private val dataPointPaintAverage = Paint().apply{
+        color = blitzItOrange
+        strokeWidth = 9f
         style = Paint.Style.STROKE
     }
 
     private val dataPointFillPaint = Paint().apply {
-        color = blitzItBlue
+        color = blitzItGreen
+    }
+
+    private val dataPointFillPaintAverage = Paint().apply {
+        color = blitzItOrange
+    }
+
+    private val dataPointFillPaintOver = Paint().apply {
+        color = blitzItRed
     }
 
     private val intervals = FloatArray(2){100f}
     private val dataPointLinePaint = Paint().apply {
-        color = blitzItBlue
+        color = blitzItGreen
+        strokeWidth = 2f
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        DashPathEffect(intervals, 0f)
+    }
+    private val dataPointLinePaintOver = Paint().apply {
+        color = blitzItRed
+        strokeWidth = 2f
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        DashPathEffect(intervals, 0f)
+    }
+    private val dataPointLinePaintAverage = Paint().apply {
+        color = blitzItOrange
         strokeWidth = 2f
         style = Paint.Style.STROKE
         isAntiAlias = true
@@ -71,12 +108,16 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         graphHeightOffset = heightOffset
     }
 
-    fun setData(newDataSet: List<DataPoint>)
+    fun setData(newDataSet: List<DataPoint>, averageTarget: Int)
     {
         xMin = newDataSet.minByOrNull { it.xVal }?.xVal ?: 0
         xMax = newDataSet.maxByOrNull { it.xVal }?.xVal ?: 0
         yMin = 0
+
         yMax = newDataSet.maxByOrNull { it.yVal }?.yVal ?: 0
+        if(averageTarget > yMax)
+            yMax = averageTarget
+
         if(yMax > 1000) {
             yMax = ((yMax + 999) / 1000.0).roundToInt() * 1000
             amountSteps = yMax / 1000
@@ -89,6 +130,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
         dataSet.clear()
         dataSet.addAll(newDataSet)
+        averageTargetSpend = averageTarget
         invalidate()
     }
 
@@ -110,7 +152,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
             else
                 i * 100
 
-            canvas.drawText(amount.toString(), 0f, amount.toRealY() + (getAmountTextHeight() / 2) + 25, amountTextPaint)
+            canvas.drawText(amount.toString(), 0f, amount.toRealY(), amountTextPaint)
         }
 
         dataSet.forEachIndexed{ index, currentDataPoint ->
@@ -119,6 +161,8 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
             val realX = currentDataPoint.xVal.toRealX() + graphWidthOffset
             val realY = currentDataPoint.yVal.toRealY()
+            val fillPaint = if(currentDataPoint.yVal > averageTargetSpend) dataPointFillPaintOver else dataPointFillPaint
+            val circlePaint = if(currentDataPoint.yVal > averageTargetSpend) dataPointPaintOver else dataPointPaint
 
             if(index < dataSet.size - 1)
             {
@@ -128,15 +172,30 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
                 val endX = nextDataPoint.xVal.toRealX() + graphWidthOffset
                 val endY = nextDataPoint.yVal.toRealY()
 
-                canvas.drawLine(startX, startY, endX, endY, dataPointLinePaint)
+                val nextPaint = if(nextDataPoint.yVal > averageTargetSpend) dataPointLinePaintOver else dataPointLinePaint
+                canvas.drawLine(startX, startY, endX, endY, nextPaint)
             }
-            canvas.drawCircle(realX, realY, 7f, dataPointFillPaint)
-            canvas.drawCircle(realX, realY, 7f, dataPointPaint)
+            canvas.drawCircle(realX, realY, 9f, circlePaint)
+            canvas.drawCircle(realX, realY, 9f, fillPaint)
+
+            //Average
+            val averageY = averageTargetSpend.toRealY()
+            canvas.drawCircle(realX, averageY, 9f, dataPointPaintAverage)
+            canvas.drawCircle(realX, averageY, 9f, dataPointFillPaintAverage)
+
+            if(index < dataSet.size - 1)
+            {
+                val nextDataPoint = dataSet[index + 1]
+                val startX = currentDataPoint.xVal.toRealX() + graphWidthOffset
+                val endX = nextDataPoint.xVal.toRealX() + graphWidthOffset
+
+                canvas.drawLine(startX, averageY, endX, averageY, dataPointLinePaintAverage)
+            }
         }
     }
 
     private fun Int.toRealX() = toFloat() / xMax * getGraphWidth()
-    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight())
+    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight()) + 35
     private fun getGraphWidth() = width - graphWidthOffset - 40
     private fun getGraphHeight() = height - graphHeightOffset
     private fun getMonthTextWidth() = monthTextPaint.measureText("###").roundToInt()

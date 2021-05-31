@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
         passwordField = view.findViewById(R.id.password_field)
         forgotPassword = view.findViewById(R.id.forgot_password)
         progressWheel = view.findViewById(R.id.login_progress)
+        rememberAccount = view.findViewById(R.id.remember_me)
         progressWheel.isVisible = false
 
         loginButton.setOnClickListener {
@@ -100,7 +101,6 @@ class LoginFragment : Fragment() {
         handleArgs()
 
         //Remember account
-        rememberAccount = view.findViewById(R.id.remember_me)
         handleRememberAccount()
 
         return view

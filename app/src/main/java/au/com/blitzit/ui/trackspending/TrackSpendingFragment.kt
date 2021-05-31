@@ -154,14 +154,14 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
             }
 
             graph.setGraphOffset(100, 50)
-            graph.setData(graphData)
+            graph.setData(graphData, selectedCategory.averageTargetMonth.roundToInt())
         }
     }
 
     private fun populateBaseData(selectedCategory: Category)
     {
-        weeklySpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageTargetWeek)
-        currentAverageSpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageSpendWeek)
+        weeklySpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageSpendMonth) //Change this
+        currentAverageSpendTV.text = CranstekHelper.convertToCurrency(selectedCategory.averageTargetMonth)
         planEndDateTV.text = CranstekHelper.formatDate(AuthServices.selectedPlan.plan_end_date)
         consumptionDateTV.text = CranstekHelper.formatDateNoFancyOnInput(selectedCategory.estimatedExhaustionDate)
 
