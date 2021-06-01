@@ -157,7 +157,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
         dataSet.forEachIndexed{ index, currentDataPoint ->
             //Draw month
-            canvas.drawText(currentDataPoint.month, currentDataPoint.xVal.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat() - (graphHeightOffset / 2.5f), monthTextPaint)
+            canvas.drawText(currentDataPoint.month, currentDataPoint.xVal.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat(), monthTextPaint)
 
             val realX = currentDataPoint.xVal.toRealX() + graphWidthOffset
             val realY = currentDataPoint.yVal.toRealY()
