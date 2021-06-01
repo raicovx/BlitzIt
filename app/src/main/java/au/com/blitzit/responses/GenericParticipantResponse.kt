@@ -44,44 +44,64 @@ data class GenericParticipantResponse(
 
     fun getPrimaryContactList(): List<au.com.blitzit.roomdata.PrimaryContact>
     {
-        var pContacts = emptyList<au.com.blitzit.roomdata.PrimaryContact>()
-        for(contact: GenericPrimaryContactResponse in primaryContacts)
+        if(primaryContacts.isNotEmpty())
         {
-            val newContact = au.com.blitzit.roomdata.PrimaryContact(
-                ndisNumber,
-                contact.firstName,
-                contact.lastName,
-                contact.mobile,
-                contact.addressLine,
-                contact.suburb,
-                contact.postcode,
-                contact.state,
-                contact.email)
-            pContacts = pContacts.plus(newContact)
+            var pContacts = emptyList<au.com.blitzit.roomdata.PrimaryContact>()
+
+            for (contact: GenericPrimaryContactResponse in primaryContacts)
+            {
+                if(!contact.firstName.isNullOrEmpty() && !contact.lastName.isNullOrEmpty())
+                {
+                    val newContact = au.com.blitzit.roomdata.PrimaryContact(
+                        ndisNumber,
+                        contact.firstName,
+                        contact.lastName,
+                        contact.mobile,
+                        contact.addressLine,
+                        contact.suburb,
+                        contact.postcode,
+                        contact.state,
+                        contact.email
+                    )
+                    pContacts = pContacts.plus(newContact)
+                }
+            }
+
+            return pContacts
         }
 
-        return pContacts
+        return emptyList()
     }
 
     fun getSupportCoordinatorList(): List<au.com.blitzit.roomdata.SupportCoordinator>
     {
-        var sContacts = emptyList<au.com.blitzit.roomdata.SupportCoordinator>()
-        for(contact: GenericSupportCoordinatorResponse in supportCoordinators)
+        if(supportCoordinators.isNotEmpty())
         {
-            val newContact = au.com.blitzit.roomdata.SupportCoordinator(
-                ndisNumber,
-                contact.firstName,
-                contact.lastName,
-                contact.mobile,
-                contact.addressLine,
-                contact.suburb,
-                contact.postcode,
-                contact.state,
-                contact.email)
+            var sContacts = emptyList<au.com.blitzit.roomdata.SupportCoordinator>()
 
-            sContacts = sContacts.plus(newContact)
+            for (contact: GenericSupportCoordinatorResponse in supportCoordinators)
+            {
+                if(!contact.firstName.isNullOrEmpty() && !contact.lastName.isNullOrEmpty())
+                {
+                    val newContact = au.com.blitzit.roomdata.SupportCoordinator(
+                        ndisNumber,
+                        contact.firstName,
+                        contact.lastName,
+                        contact.mobile,
+                        contact.addressLine,
+                        contact.suburb,
+                        contact.postcode,
+                        contact.state,
+                        contact.email
+                    )
+
+                    sContacts = sContacts.plus(newContact)
+                }
+            }
+
+            return sContacts
         }
-
-        return sContacts
+        else
+            return emptyList()
     }
 }
