@@ -102,6 +102,13 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         color = Color.WHITE
     }
 
+    private val amountTextPaintSmall: TextPaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = 9 * resources.displayMetrics.density
+        typeface = textFont
+        color = Color.WHITE
+    }
+
     fun setGraphOffset(widthOffset: Int, heightOffset: Int)
     {
         graphWidthOffset = widthOffset
@@ -152,7 +159,10 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
             else
                 i * 100
 
-            canvas.drawText(amount.toString(), 0f, amount.toRealY(), amountTextPaint)
+            val textPaint = if(amountSteps <= 8) amountTextPaint else amountTextPaintSmall
+
+            val amountText = "$${amount}"
+            canvas.drawText(amountText, 0f, amount.toRealY(), textPaint)
         }
 
         dataSet.forEachIndexed{ index, currentDataPoint ->
