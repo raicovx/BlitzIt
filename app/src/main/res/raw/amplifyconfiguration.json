@@ -39,7 +39,8 @@
           "Default": {
             "PoolId": "ap-southeast-2_kDPrtCANp",
             "AppClientId": "5dc87kd7ef67irm82i29p3elph",
-            "Region": "ap-southeast-2"
+            "Region": "ap-southeast-2",
+            "MigrationEnabled": true
           }
         },
         "Auth": {
@@ -57,7 +58,7 @@
                 "aws.cognito.signin.user.admin"
               ]
             },
-            "authenticationFlowType": "USER_PASSWORD_AUTH"
+            "authenticationFlowType": "USER_PASSWORD"
           }
         }
       }
