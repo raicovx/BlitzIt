@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <Button
             android:id="@+id/contact_back_button"
@@ -56,7 +57,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/phone"
@@ -66,20 +67,20 @@
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/_1300_966_119"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textColorLink="@color/blitz_it_orange"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 android:autoLink="phone"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/email"
@@ -89,20 +90,20 @@
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/hello_blitzit_com_au"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textColorLink="@color/blitz_it_orange"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 android:autoLink="email"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/website"
@@ -113,20 +114,20 @@
             <TextView
                 android:id="@+id/contact_us_web_link"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/www_blitzit_com_au"
+                android:textColorLink="@color/blitz_it_orange"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 android:autoLink="web"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/visit_us"
@@ -136,29 +137,27 @@
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/_319_george_street"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="21sp" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/windsor_nsw_2756"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="21sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/postal_address"
@@ -168,24 +167,22 @@
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/po_box_4323"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="21sp" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
                 android:text="@string/pitt_town_nsw_2756"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="21sp" />
 
             <Button
                 android:id="@+id/contact_book"
@@ -204,6 +201,11 @@
                 app:backgroundTint="@color/blitz_it_light_blue"
                 app:cornerRadius="92dp"
                 android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

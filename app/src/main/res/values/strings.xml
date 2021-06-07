@@ -173,6 +173,7 @@
     <string name="edit_profile_success_message">You have requested to change your profile details.\n\nA Blitzit team member will review this request and be in touch soon.</string>
     <string name="preferred_method_of_contact">Preferred Method of Contact</string>
     <string name="show_more_invoices">Show More Invoices</string>
+    <string name="sign_out">Sign Out</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>
