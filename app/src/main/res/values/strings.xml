@@ -48,14 +48,14 @@
     <string name="faqs">FAQs</string>
     <string name="who_can_see_my_plan">Who can see my plan?</string>
     <string name="faq_1">Blitzit Plan Manager typically processes and pays invoices within three to five business days of receiving the invoice. While we endeavour to turn around your invoices within this time period, payments may sometimes be delayed due to circumstances out of our control. Please see <a href="https://www.blitzit.com.au/getting-paid">Getting Paid</a> for more information.</string>
-    <string name="faq_1_header">When will i be Paid?</string>
+    <string name="faq_1_header">When will I be Paid?</string>
     <string name="faq_2_header">How do I send you an Invoice?</string>
     <string name="faq_2_part1">Simple send it to us via email: invoices@blitzit.com.au \n\nOr, put the invoice in the post and send to:</string>
     <string name="faq_2_part2">Blitzit Plan Manager \nPO Box 4323 \nPitt Town, NSW, 2756</string>
     <string name="faq_2_part3">(Note: please allow additional time if you choose to post your invoice as postage times are dependent on Australia Post. We will do our utmost to pay posted invoices promptly.)</string>
     <string name="keyword_search">Keyword Search</string>
     <string name="faq_desc_1">Whether you\'re a participant or service provider, we understand that you\'ll have a lot of questions about plan management.</string>
-    <string name="faq_desc_2">Here are some of the common questions we get asked</string>
+    <string name="faq_desc_2">Here are some of the common questions we get asked.</string>
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
     <string name="booking_text_p1">"To book a meeting with one of our consultants, please complete the form below. We'll be in touch within two business days to set up a time for discussion."</string>
     <string name="booking_text_p2">We understand that as an NDIS participant, you or your carer may have questions on the best way to manage your plan. We offer both in-person and phone-based consultation with a friendly and knowledgeable Blitzit Plan Manager staff member to help you make the right choice and decisions about your NDIS plan.</string>
@@ -155,14 +155,14 @@
     <string name="faq_body_6_4">Option 2. Download, Scan and Return</string>
     <string name="faq_body_6_5">1. Download <a href="https://www.blitzit.com.au/forms">this form</a> \n\n2. Complete the information to request a reimbursement - fill in all fields \n\n3. Scan and return by email with the original Tax Invoice to invoices@blitzit.com.au</string>
     <string name="faq_body_6_6">Option 3. Mail to</string>
-    <string name="faq_body_6_7">Blitzit Plan Manager \n PO Box 4323 \n Pitt Town NSW 2756</string>
+    <string name="faq_body_6_7">Blitzit Plan Manager \nPO Box 4323 \nPitt Town NSW 2756</string>
     <string name="faq_header_7">What is funded by the NDIS?</string>
     <string name="faq_body_7_1">NDIS covers funding for the following categories. See <a href="https://www.blitzit.com.au/understanding-your-ndis-plan#">Understanding Your NDIS Plan</a> for a broad overview on what’s covered under funded support.</string>
     <string name="faq_body_7_2">• Assistance with daily life (Core) \n\n• Transport (Core) \n\n• Consumables (Core) \n\n• Assistance with social community and civic participation (Core) \n\n• Assistive technology \n\n• Home modifications and specialist disability accommodation \n\n• Support coordination \n\n• Increased social and community participation \n\n• Improved daily living \n\n• Improved relationships \n\n• Improved learning \n\n• Improved health and wellbeing \n\n• Improved life choices \n\n• Finding and keeping a job \n\n• Improved living arrangements</string>
     <string name="faq_body_7_3">We work closely with many different service providers that can support your individual needs and situation. We may be able to suggest providers in your local area – simply <a href="https://www.blitzit.com.au/contact">contact us</a> to find out more.</string>
-    <string name="faq_header_8">Can i change my providers if i am not happy with their service?</string>
+    <string name="faq_header_8">Can I change my providers if I am not happy with their service?</string>
     <string name="faq_body_8">Of course! Participants can choose to change to a different provider at any time. Contact us and we can help answer questions you may have on changing providers.</string>
-    <string name="faq_body_3_4">The NDIS may ask you to determine how you justify purchasing products, services and items as reasonable and necessary from your NDIS funds, it is important to provide them with as much evidence as you can to confirm the reasoning for your choice.\n\nWhen you attend your NDIS planning meeting, the NDIA Planner or Local Area Coordinator or ECIC will collect information about you to build your plan to include supports that NDIS considers are reasonable and necessary to your situation and help you pursue your goals and aspirations.\n\n Your NDIS Planner determines reasonable and necessary as everyone\'s situation, disability and goals are different this means that what NDIS considers reasonable and necessary for you will be different for someone else and and likewise, what they consider reasonable and necessary to someone else will be different to you.\n\n This checklist and guide will assist you to break down the criteria that the NDIS uses when determining if a support, product or service you\'re seeking meets the definition NDIS considers to be reasonable and necessary to your personal situation.</string>
+    <string name="faq_body_3_4">The NDIS may ask you to determine how you justify purchasing products, services and items as reasonable and necessary from your NDIS funds, it is important to provide them with as much evidence as you can to confirm the reasoning for your choice.\n\nWhen you attend your NDIS planning meeting, the NDIA Planner or Local Area Coordinator or ECIC will collect information about you to build your plan to include supports that NDIS considers are reasonable and necessary to your situation and help you pursue your goals and aspirations. \n\nYour NDIS Planner determines reasonable and necessary as everyone\'s situation, disability and goals are different this means that what NDIS considers reasonable and necessary for you will be different for someone else and likewise, what they consider reasonable and necessary to someone else will be different to you. \n\nThis checklist and guide will assist you to break down the criteria that the NDIS uses when determining if a support, product or service you\'re seeking meets the definition NDIS considers to be reasonable and necessary to your personal situation.</string>
     <string name="faq_body_3_5">For a support to be reasonable and necessary, it should:\n\n• Relate to your disability\n\n• Help you pursue your goals and aspirations\n\n• Increase your independence\n\n• Increase your community, social and workplace involvement\n\n• Be considered value for money (this is especially true if the support is priced above the NDIS Price Guide)\n\n• Be effective and work for your needs\n\n• Take into account your current formal and informal supports\n\nIf you answered yes to all of the questions then you may be able to make the purchase using your NDIS funds.\n\nThere are some things that may not be considered as ‘reasonable and necessary’, like:\n\n• Day-to-day living costs that are not related to your disability support needs\n\n• Supports that can reasonably be given by a family member, carer, or the wider community\n\n• Supports already funded by other areas of government</string>
     <string name="faq_body_5_6">What if I am still unsure ?</string>
     <string name="faq_body_5_7">To discuss your individual circumstances and better understand the NDIS <a href="https://www.blitzit.com.au/contact">contact</a> our team of expert plan managers at hello@blitzit.com.au or call us for a chat on 1300 966 119.</string>
@@ -174,6 +174,12 @@
     <string name="preferred_method_of_contact">Preferred Method of Contact</string>
     <string name="show_more_invoices">Show More Invoices</string>
     <string name="sign_out">Sign Out</string>
+    <string name="blitzit_plan_manager">Blitzit Plan Manager</string>
+    <string name="release_date">June 2021</string>
+    <string name="privacy_agreement"><a href="https://www.blitzit.com.au/privacy/blitzit-privacy-policy.pdf">Privacy Agreement</a></string>
+    <string name="all_rights_reserved">All rights reserved.</string>
+    <string name="_169_2021_blitzit">© 2021 Blitzit.</string>
+    <string name="version_number">Version: 1.0.2</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

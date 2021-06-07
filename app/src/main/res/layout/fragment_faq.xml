@@ -167,14 +167,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_2_header"
                 android:fontFamily="@font/avenir"
@@ -217,14 +218,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_3"
                 android:fontFamily="@font/avenir"
@@ -313,14 +315,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_4"
                 android:fontFamily="@font/avenir"
@@ -342,14 +345,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_5"
                 android:fontFamily="@font/avenir"
@@ -393,14 +397,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_6"
                 android:fontFamily="@font/avenir"
@@ -456,13 +461,13 @@
                 android:id="@+id/faq_body_6_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/dark_grey"
                 android:textColorLink="@color/blitz_it_light_blue"
                 android:text="@string/faq_body_6_5"
                 android:fontFamily="@font/avenir"
                 android:textSize="16sp"
-                android:autoLink="email"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/faq_body_6_6"
@@ -491,14 +496,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_7"
                 android:fontFamily="@font/avenir"
@@ -542,14 +548,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/light_grey"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/light_grey"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/faq_header_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/darker_grey"
                 android:text="@string/faq_header_8"
                 android:fontFamily="@font/avenir"
@@ -569,7 +576,8 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="32dp"/>
+                android:layout_height="32dp"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

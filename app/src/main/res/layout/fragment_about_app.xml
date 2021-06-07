@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <Button
             android:id="@+id/about_app_back_button"
@@ -59,7 +60,7 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="Blitzit Plan Manager"
+                android:text="@string/blitzit_plan_manager"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -69,21 +70,19 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="Version 1"
+                android:text="@string/version_number"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="June 2021"
+                android:text="@string/release_date"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,7 +90,7 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="&#169; 2021 Blitzit."
+                android:text="@string/_169_2021_blitzit"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -101,11 +100,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="All rights reserved."
+                android:text="@string/all_rights_reserved"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -114,11 +112,13 @@
                 android:layout_marginBottom="256dp"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:text="Privacy Agreement"
+                android:text="@string/privacy_agreement"
+                android:textColorLink="@color/blitz_it_orange"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autoLink="web"/>
 
         </LinearLayout>
 
