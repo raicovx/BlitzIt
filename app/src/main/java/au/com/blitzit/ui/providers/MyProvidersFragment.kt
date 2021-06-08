@@ -67,13 +67,13 @@ class MyProvidersFragment : Fragment()
             //ABN
             view.findViewById<TextView>(R.id.provider_abn).text = provider.getABN()
             //ADDRESS - street
-            view.findViewById<TextView>(R.id.provider_address_field_street).text = provider.getStreetAddress()
+            view.findViewById<TextView>(R.id.provider_address_field_street).text = provider.addressLine
             //ADDRESS - Suburb, State, Postcode
             view.findViewById<TextView>(R.id.provider_address_field_suburb).text = provider.getSuburbStatePostcode()
             //EMAIL
             view.findViewById<TextView>(R.id.provider_contact_email).text = provider.getEmailAddress()
             //PHONE
-            view.findViewById<TextView>(R.id.provider_contact_number).text = provider.getContactNumber(true)
+            view.findViewById<TextView>(R.id.provider_contact_number).text = provider.getContactNumber(false)
 
             //Selectable
             val selectableButton: MaterialCardView = view.findViewById(R.id.provider_display_button)

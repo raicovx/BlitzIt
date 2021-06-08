@@ -36,12 +36,14 @@
 
         <ImageView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/logo"
             tools:ignore="ContentDescription" />
 

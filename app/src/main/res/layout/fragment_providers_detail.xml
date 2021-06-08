@@ -116,7 +116,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/avenir"
-                        android:text="ABN:"
+                        android:text="@string/abn_semicolon"
                         android:textStyle="bold"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
@@ -145,7 +145,7 @@
                         android:layout_marginStart="24dp"
                         android:fontFamily="@font/avenir"
                         android:textStyle="bold"
-                        android:text="Address:"
+                        android:text="@string/address_semicolon"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -158,14 +158,13 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/avenir"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:text="123 Sample Street"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/provider_address"
-                        app:layout_constraintTop_toBottomOf="@id/provider_abn" />
+                        app:layout_constraintTop_toBottomOf="@id/provider_abn"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/provider_address_field_suburb"
@@ -173,15 +172,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
-                        android:ellipsize="end"
                         android:fontFamily="@font/avenir"
-                        android:maxLines="1"
                         android:text="Sampleton NSW 2123"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/provider_address"
-                        app:layout_constraintTop_toBottomOf="@id/provider_address_field_street" />
+                        app:layout_constraintTop_toBottomOf="@id/provider_address_field_street"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/provider_contact_person"
@@ -208,13 +206,12 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/avenir"
                         android:text="Susan Sample"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/provider_contact_person"
-                        app:layout_constraintTop_toBottomOf="@id/provider_address_field_suburb" />
+                        app:layout_constraintTop_toBottomOf="@id/provider_address_field_suburb"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/provider_contact_number"
@@ -231,7 +228,7 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/provider_contact_person" />
+                        app:layout_constraintTop_toBottomOf="@+id/provider_contact_person_field" />
 
                     <TextView
                         android:id="@+id/provider_contact_number_field"
@@ -240,14 +237,13 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/avenir"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:text="0412 345 678"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/provider_contact_number"
-                        app:layout_constraintTop_toBottomOf="@id/provider_contact_person" />
+                        app:layout_constraintTop_toBottomOf="@+id/provider_contact_person_field"
+                        tools:ignore="HardcodedText" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

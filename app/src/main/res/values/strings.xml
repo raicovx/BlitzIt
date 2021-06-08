@@ -180,6 +180,12 @@
     <string name="all_rights_reserved">All rights reserved.</string>
     <string name="_169_2021_blitzit">© 2021 Blitzit.</string>
     <string name="version_number">Version: 1.0.2</string>
+    <string name="remember_account">Remember account?</string>
+    <string name="abn_semicolon">ABN:</string>
+    <string name="address_semicolon">Address:</string>
+    <string name="contact_number_semicolon">Contact Number:</string>
+    <string name="average_spending_per_month">Average spending per month:</string>
+    <string name="target_average_spending_per_month">Target average spending per month:</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

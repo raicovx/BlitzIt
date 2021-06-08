@@ -82,7 +82,7 @@ class ProviderDetailFragment: Fragment()
 
         //ABN
         val abnTV: TextView = view.findViewById(R.id.provider_abn_field)
-        abnTV.text = provider.abn
+        abnTV.text = provider.getABN()
 
         view.findViewById<TextView>(R.id.provider_address_field_street).text = provider.getStreetAddress()
         view.findViewById<TextView>(R.id.provider_address_field_suburb).text = provider.getSuburbStatePostcode()

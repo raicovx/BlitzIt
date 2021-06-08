@@ -563,13 +563,13 @@
                         android:id="@+id/cat_budget_provider_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="16dp"
                         android:orientation="vertical"
+                        android:paddingBottom="16dp"
                         android:background="@color/blitz_it_medium_blue">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="32dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:paddingTop="8dp"
                             android:fontFamily="@font/avenir"
@@ -585,11 +585,12 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
                         android:background="@color/light_grey">
 
                         <TextView
-                            android:layout_width="180dp"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/avenir"
                             android:gravity="center_vertical"
@@ -608,7 +609,7 @@
                             android:layout_gravity="end|center_vertical"
                             android:fontFamily="@font/avenir"
                             android:gravity="center_vertical"
-                            android:paddingEnd="24dp"
+                            android:layout_marginEnd="48dp"
                             android:paddingStart="16dp"
                             android:text="@string/total_claimed_for_category"
                             android:textColor="@color/dark_grey"

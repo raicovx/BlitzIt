@@ -53,7 +53,7 @@ object CranstekHelper
 
     fun convertToCurrency(value: Double): String
     {
-        val currencyDF = DecimalFormat("###,###,###.##")
+        val currencyDF = DecimalFormat("###,###,###.00")
         return "$" + currencyDF.format(value)
     }
 

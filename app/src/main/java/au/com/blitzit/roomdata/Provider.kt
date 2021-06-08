@@ -22,9 +22,9 @@ data class Provider(
     fun getABN(): String
     {
         return if(abn.isNullOrEmpty())
-            "ABN: N/A"
+            "N/A"
         else
-            "ABN: ${CranstekHelper.formatABNText(abn)}"
+            CranstekHelper.formatABNText(abn)
     }
     fun getStreetAddress(): String
     {
@@ -52,9 +52,9 @@ data class Provider(
     fun getEmailAddress(): String
     {
         return if(email.isNullOrEmpty())
-            "Contact Email: N/A"
+            "N/A"
         else
-            "Contact Email: $email"
+            email
     }
     fun getContactNumber(withPadding: Boolean): String
     {

@@ -48,16 +48,6 @@ class LoginFragment : Fragment() {
 
     private val args: LoginFragmentArgs by navArgs()
 
-    init {
-        var strings: List<String> = emptyList()
-        val empty = Json.encodeToString(strings)
-        Log.i("TEST", "Empty: $empty")
-        strings = strings.plus("Hello")
-        strings = strings.plus("World")
-        val notEmpty = Json.encodeToString(strings)
-        Log.i("TEST", "Not Empty: $notEmpty")
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {

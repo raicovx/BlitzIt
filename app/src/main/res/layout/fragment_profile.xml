@@ -93,7 +93,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_fname"
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_bg"
                     android:gravity="center"
@@ -119,7 +119,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_lname"
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_bg"
                     android:text="Ruse"
@@ -145,7 +145,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_dob"
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_bg"
                     android:text="01/01/1990"
@@ -171,7 +171,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_ndis"
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_bg"
                     android:text="430100000"
@@ -214,7 +214,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_contactnum"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="@drawable/input_bg"
                 android:text="0412 345 678"
                 android:textColor="@color/dark_grey"
@@ -237,7 +237,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_email"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="@drawable/input_bg"
                 android:text="hello@sample.com.au"
                 android:textColor="@color/dark_grey"
@@ -261,9 +261,9 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_statement_email"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="@drawable/input_bg"
-                android:text="statement@sample.com.au"
+                android:text="statement@sample.com.au.au.au.au.au.au.au"
                 android:textColor="@color/dark_grey"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -286,7 +286,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_primary_email"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="@drawable/input_bg"
                 android:text="contact@sample.com.au"
                 android:textColor="@color/dark_grey"
@@ -311,7 +311,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_address_line1"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:background="@drawable/input_bg"
                 android:text="Address 1"
                 android:textColor="@color/dark_grey"
@@ -325,7 +325,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_address_suburb"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/input_bg"
                 android:text="Suburb"
@@ -346,7 +346,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_address_state"
                     android:layout_width="140dp"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/input_bg"
                     android:fontFamily="@font/avenir"
@@ -365,7 +365,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/profile_address_postcode"
                     android:layout_width="140dp"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/input_bg"
                     android:fontFamily="@font/avenir"
@@ -394,7 +394,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/profile_support_email"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="48dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/input_bg"
                 android:text="support@sample.com.au"

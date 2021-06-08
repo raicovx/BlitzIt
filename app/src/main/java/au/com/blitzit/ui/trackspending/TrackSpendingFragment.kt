@@ -1,6 +1,7 @@
 package au.com.blitzit.ui.trackspending
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,7 +106,10 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
             //Sets default selection
             filterSpinner.setSelection(categoryLabels.indexOf("CORE"))
         } else {
-            filterSpinner.setSelection(categoryLabels.indexOf(args.selectedPlanPartLabel))
+            if(args.selectedPlanPartLabel == "Daily Activities, Consumables, Social Community and Civic Participation")
+                filterSpinner.setSelection(categoryLabels.indexOf("CORE"))
+            else
+                filterSpinner.setSelection(categoryLabels.indexOf(args.selectedPlanPartLabel))
         }
     }
 
@@ -128,12 +132,28 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         {
             graph.isVisible = true
             var graphData: List<DataPoint> = emptyList()
+            //TEST DATA
+            /*val graphData = listOf(
+                DataPoint(1, 400, "JAN", 400.00),
+                DataPoint(2, 600, "FEB", 400.00),
+                DataPoint(3, 200, "MAR", 400.00),
+                DataPoint(4, 800, "APR", 400.00),
+                DataPoint(5, 700, "MAY", 400.00),
+                DataPoint(6, 1200, "JUN", 400.00),
+                DataPoint(7, 900, "JUL", 400.00),
+                DataPoint(8, 1400, "AUG", 400.00),
+                DataPoint(9, 1100, "SEP", 400.00),
+                DataPoint(10, 100, "OCT", 400.00),
+                DataPoint(11, 1700, "NOV", 400.00),
+                DataPoint(12, 200, "DEC", 400.00),
+                DataPoint(13, 4000, "JAN", 400.00),
+                DataPoint(14, 300, "FEB", 400.00))*/
             var index = 0
             for (total: Map.Entry<String, Double> in selectedCategory.totals)
             {
                 val monthNumber: Int = CranstekHelper.getMonthNumberFromDateString(total.key)
                 val month: String = CranstekHelper.getMonthTitleFromMonthNumber(monthNumber)
-                val dataPoint = DataPoint(index, total.value.roundToInt(), month, total.value)
+                val dataPoint = DataPoint(total.value.roundToInt(), month, total.value)
                 graphData = graphData.plus(dataPoint)
 
                 //Tack some months on the end if there is only 1 point
@@ -141,10 +161,9 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
                 {
                     for(i in 1..3)
                     {
-                        val additionalIndex: Int = index + i
                         val additionalMonthNumber: Int = monthNumber + i
                         val additionalMonth: String = CranstekHelper.getMonthTitleFromMonthNumber(additionalMonthNumber)
-                        val additionalDataPoint = DataPoint(additionalIndex, 25, additionalMonth, 0.0)
+                        val additionalDataPoint = DataPoint(25, additionalMonth, 0.0)
 
                         graphData = graphData.plus(additionalDataPoint)
                     }

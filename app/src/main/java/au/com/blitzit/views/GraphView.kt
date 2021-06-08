@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -14,16 +15,13 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 {
     private val dataSet = mutableListOf<DataPoint>()
     private var averageTargetSpend: Int = 0
-    private var xMin = 0
-    private var xMax = 0
-    private var yMin = 0
     private var yMax = 0
     private var graphWidthOffset = 0
     private var graphHeightOffset = 0
-
-    private var amountSteps = 0
-
     private var graphInThousands = false
+    private val maxAmountSteps = 10
+    private val maxDateSteps = 8
+    private var amountStepsArray = IntArray(0)
 
     private val blitzItGreen = ContextCompat.getColor(context, R.color.blitz_it_green)
     private val blitzItOrange = ContextCompat.getColor(context, R.color.blitz_it_orange)
@@ -97,13 +95,6 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
     private val amountTextPaint: TextPaint = TextPaint().apply {
         isAntiAlias = true
-        textSize = 10 * resources.displayMetrics.density
-        typeface = textFont
-        color = Color.WHITE
-    }
-
-    private val amountTextPaintSmall: TextPaint = TextPaint().apply {
-        isAntiAlias = true
         textSize = 9 * resources.displayMetrics.density
         typeface = textFont
         color = Color.WHITE
@@ -117,26 +108,45 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
     fun setData(newDataSet: List<DataPoint>, averageTarget: Int)
     {
-        xMin = newDataSet.minByOrNull { it.xVal }?.xVal ?: 0
-        xMax = newDataSet.maxByOrNull { it.xVal }?.xVal ?: 0
-        yMin = 0
+        //Check that our dataset isn't above our max
+        Log.i("GAZ_TEST", "newdataset size: ${newDataSet.size}")
+        val refinedDataSet: List<DataPoint> = if(newDataSet.size > maxDateSteps) {
+            val dropSize = newDataSet.size - maxDateSteps
+            newDataSet.drop(dropSize)
+        } else
+            newDataSet
 
-        yMax = newDataSet.maxByOrNull { it.yVal }?.yVal ?: 0
+        //Create our max values
+        yMax = refinedDataSet.maxByOrNull { it.yVal }?.yVal ?: 0
+
+        //Ensure our highest graph point is not lower then then average value
         if(averageTarget > yMax)
             yMax = averageTarget
 
+        //Check if our graph is in the thousands and round it up to the nearest whole value
         if(yMax > 1000) {
             yMax = ((yMax + 999) / 1000.0).roundToInt() * 1000
-            amountSteps = yMax / 1000
             graphInThousands = true
         } else {
             yMax = ((yMax + 99) / 100.0).roundToInt() * 100
-            amountSteps = yMax / 100
             graphInThousands = false
         }
 
+        //If number is not even
+        if(yMax % maxAmountSteps != 0)
+        {
+            //Add another whole number to make it even
+            val additional = if(graphInThousands) 1000 else 100
+            yMax += additional
+        }
+
+        //Create our amounts array
+        val yStep = yMax / maxAmountSteps
+        amountStepsArray = IntArray(maxAmountSteps) { yStep * (it + 1) }
+        amountStepsArray.sort()
+
         dataSet.clear()
-        dataSet.addAll(newDataSet)
+        dataSet.addAll(refinedDataSet)
         averageTargetSpend = averageTarget
         invalidate()
     }
@@ -146,40 +156,34 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         super.onDraw(canvas)
 
         //Frame lines
-        for(i in 0..xMax)
+        for(i in 0 until dataSet.size)
         {
             canvas.drawLine(i.toRealX() + graphWidthOffset, 0f, i.toRealX() + graphWidthOffset, getGraphHeight().toFloat(), axisLinePaint)
         }
 
         //Draw amounts
-        for(i in 1..amountSteps)
+        for(i: Int in amountStepsArray)
         {
-            val amount: Int = if(graphInThousands)
-                i * 1000
-            else
-                i * 100
-
-            val textPaint = if(amountSteps <= 8) amountTextPaint else amountTextPaintSmall
-
-            val amountText = "$${amount}"
-            canvas.drawText(amountText, 0f, amount.toRealY(), textPaint)
+            val amountText = "$${i}"
+            canvas.drawText(amountText, 0f, i.toRealY(), amountTextPaint)
         }
 
-        dataSet.forEachIndexed{ index, currentDataPoint ->
+        for(i in dataSet.indices)
+        {
             //Draw month
-            canvas.drawText(currentDataPoint.month, currentDataPoint.xVal.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat(), monthTextPaint)
+            canvas.drawText(dataSet[i].month, i.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat(), monthTextPaint)
 
-            val realX = currentDataPoint.xVal.toRealX() + graphWidthOffset
-            val realY = currentDataPoint.yVal.toRealY()
-            val fillPaint = if(currentDataPoint.yVal > averageTargetSpend) dataPointFillPaintOver else dataPointFillPaint
-            val circlePaint = if(currentDataPoint.yVal > averageTargetSpend) dataPointPaintOver else dataPointPaint
+            val realX = i.toRealX() + graphWidthOffset
+            val realY = dataSet[i].yVal.toRealY()
+            val fillPaint = if(dataSet[i].yVal > averageTargetSpend) dataPointFillPaintOver else dataPointFillPaint
+            val circlePaint = if(dataSet[i].yVal > averageTargetSpend) dataPointPaintOver else dataPointPaint
 
-            if(index < dataSet.size - 1)
+            if(i < dataSet.size - 1)
             {
-                val nextDataPoint = dataSet[index + 1]
-                val startX = currentDataPoint.xVal.toRealX() + graphWidthOffset
-                val startY = currentDataPoint.yVal.toRealY()
-                val endX = nextDataPoint.xVal.toRealX() + graphWidthOffset
+                val nextDataPoint = dataSet[i + 1]
+                val startX = i.toRealX() + graphWidthOffset
+                val startY = dataSet[i].yVal.toRealY()
+                val endX = (i + 1).toRealX() + graphWidthOffset
                 val endY = nextDataPoint.yVal.toRealY()
 
                 val nextPaint = if(nextDataPoint.yVal > averageTargetSpend) dataPointLinePaintOver else dataPointLinePaint
@@ -193,18 +197,17 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
             canvas.drawCircle(realX, averageY, 9f, dataPointPaintAverage)
             canvas.drawCircle(realX, averageY, 9f, dataPointFillPaintAverage)
 
-            if(index < dataSet.size - 1)
+            if(i < dataSet.size - 1)
             {
-                val nextDataPoint = dataSet[index + 1]
-                val startX = currentDataPoint.xVal.toRealX() + graphWidthOffset
-                val endX = nextDataPoint.xVal.toRealX() + graphWidthOffset
+                val startX = i.toRealX() + graphWidthOffset
+                val endX = (i + 1).toRealX() + graphWidthOffset
 
                 canvas.drawLine(startX, averageY, endX, averageY, dataPointLinePaintAverage)
             }
         }
     }
 
-    private fun Int.toRealX() = toFloat() / xMax * getGraphWidth()
+    private fun Int.toRealX() = toFloat() / (dataSet.size - 1) * getGraphWidth()
     private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight()) + 35
     private fun getGraphWidth() = width - graphWidthOffset - 40
     private fun getGraphHeight() = height - graphHeightOffset
