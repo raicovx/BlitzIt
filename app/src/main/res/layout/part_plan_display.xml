@@ -16,31 +16,61 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/plan_start_date"
+            android:id="@+id/plan_start_date_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:fontFamily="@font/avenir"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
-            android:text="Start Date: 19/10/2020"
+            android:text="@string/start_date"
             android:textColor="@color/dark_grey"
-            android:textSize="21sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/plan_end_date"
+            android:id="@+id/plan_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/avenir"
+            android:text="12/01/2012"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/plan_start_date_header"
+            app:layout_constraintTop_toTopOf="@+id/plan_start_date_header"
+            app:layout_constraintBottom_toBottomOf="@+id/plan_start_date_header"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/plan_end_date_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginVertical="8dp"
             android:fontFamily="@font/avenir"
-            android:text="End Date: 20/10/2021"
+            android:text="@string/end_date"
             android:textColor="@color/dark_grey"
-            android:textSize="21sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plan_start_date" />
+
+        <TextView
+            android:id="@+id/plan_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/avenir"
+            android:text="12/08/2012"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/plan_end_date_header"
+            app:layout_constraintTop_toTopOf="@+id/plan_end_date_header"
+            app:layout_constraintBottom_toBottomOf="@+id/plan_end_date_header"
+            tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/plan_divider"
@@ -65,7 +95,8 @@
             android:text="@string/plan"
             android:textAlignment="center"
             android:textColor="@color/dark_grey"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plan_divider" />
 
@@ -103,7 +134,8 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="56dp"
                 android:layout_gravity="center|center_vertical"
-                android:src="@drawable/forward_arrow"/>
+                android:src="@drawable/forward_arrow"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

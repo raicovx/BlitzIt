@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">BlitzIt</string>
     <string name="sharedPreferences">blitzit.app.sharedPreference</string>
     <string name="title_home">Home</string>
@@ -32,7 +32,7 @@
     <string name="www_blitzit_com_au">www.blitzit.com.au</string>
     <string name="website">Website</string>
     <string name="hello_blitzit_com_au">hello@blitzit.com.au</string>
-    <string name="_1300_966_119">1300–966-119</string>
+    <string name="_1300_966_119" tools:ignore="TypographyDashes">1300–966-119</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
     <string name="windsor_nsw_2756">Windsor NSW 2756</string>
@@ -186,6 +186,8 @@
     <string name="contact_number_semicolon">Contact Number:</string>
     <string name="average_spending_per_month">Average spending per month:</string>
     <string name="target_average_spending_per_month">Target average spending per month:</string>
+    <string name="end_date">End Date:</string>
+    <string name="start_date">Start Date:</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>

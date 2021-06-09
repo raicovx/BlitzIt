@@ -109,7 +109,6 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     fun setData(newDataSet: List<DataPoint>, averageTarget: Int)
     {
         //Check that our dataset isn't above our max
-        Log.i("GAZ_TEST", "newdataset size: ${newDataSet.size}")
         val refinedDataSet: List<DataPoint> = if(newDataSet.size > maxDateSteps) {
             val dropSize = newDataSet.size - maxDateSteps
             newDataSet.drop(dropSize)

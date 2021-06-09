@@ -1,6 +1,7 @@
 package au.com.blitzit.ui.plans
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,10 +76,8 @@ class MyPlansFragment: Fragment()
                 }
 
                 val view = inflater.inflate(R.layout.part_plan_display, container, false)
-                val startDate = "Start date: ${plan.plan_start_date}"
-                view.findViewById<TextView>(R.id.plan_start_date).text = startDate
-                val endDate = "End date: ${plan.plan_end_date}"
-                view.findViewById<TextView>(R.id.plan_end_date).text = endDate
+                view.findViewById<TextView>(R.id.plan_start_date).text = CranstekHelper.formatDate(plan.plan_start_date)
+                view.findViewById<TextView>(R.id.plan_end_date).text = CranstekHelper.formatDate(plan.plan_end_date)
                 CranstekHelper.setPlanStatusDisplay(requireContext(), view.findViewById(R.id.plan_status), plan.status)
 
                 //Setup button

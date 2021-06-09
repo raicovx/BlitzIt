@@ -135,7 +135,8 @@
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/provider_abn"
-                        app:layout_constraintTop_toBottomOf="@id/provider_detail_name" />
+                        app:layout_constraintTop_toBottomOf="@id/provider_detail_name"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/provider_address"
@@ -268,7 +269,8 @@
                 android:textSize="21sp"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:background="@color/light_grey"/>
+                android:background="@color/light_grey"
+                tools:ignore="HardcodedText" />
 
             <ProgressBar
                 android:id="@+id/loading_progress"
@@ -290,6 +292,11 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
