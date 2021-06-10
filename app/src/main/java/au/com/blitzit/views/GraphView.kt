@@ -4,11 +4,11 @@ import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import au.com.blitzit.R
+import au.com.blitzit.helper.CranstekHelper
 import kotlin.math.roundToInt
 
 class GraphView(context: Context, attributeSet: AttributeSet): View(context, attributeSet)
@@ -28,17 +28,12 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     private val blitzItRed = ContextCompat.getColor(context, R.color.blitz_it_red)
     private val textFont = ResourcesCompat.getFont(context, R.font.avenir)
 
-    private val dataPointPaint = Paint().apply{
-        color = blitzItGreen
-        strokeWidth = 9f
-        style = Paint.Style.STROKE
-    }
+    private var graphRect= Rect()
+    private var amountRect = Rect()
+    private var monthRect = Rect()
 
-    private val dataPointPaintOver = Paint().apply{
-        color = blitzItRed
-        strokeWidth = 9f
-        style = Paint.Style.STROKE
-    }
+    private var graphContentPadding = 50
+    private var graphContentBarPadding = 100
 
     private val dataPointPaintAverage = Paint().apply{
         color = blitzItOrange
@@ -58,31 +53,19 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         color = blitzItRed
     }
 
-    private val intervals = FloatArray(2){100f}
-    private val dataPointLinePaint = Paint().apply {
-        color = blitzItGreen
-        strokeWidth = 2f
-        style = Paint.Style.STROKE
-        isAntiAlias = true
-        DashPathEffect(intervals, 0f)
-    }
-    private val dataPointLinePaintOver = Paint().apply {
-        color = blitzItRed
-        strokeWidth = 2f
-        style = Paint.Style.STROKE
-        isAntiAlias = true
-        DashPathEffect(intervals, 0f)
-    }
     private val dataPointLinePaintAverage = Paint().apply {
         color = blitzItOrange
         strokeWidth = 2f
         style = Paint.Style.STROKE
         isAntiAlias = true
-        DashPathEffect(intervals, 0f)
     }
 
     private val axisLinePaint = Paint().apply {
         color = Color.WHITE
+        strokeWidth = 2f
+    }
+    private val axisSecondaryLinePaint = Paint().apply {
+        color = ContextCompat.getColor(context, R.color.grey)
         strokeWidth = 1f
     }
 
@@ -95,7 +78,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
     private val amountTextPaint: TextPaint = TextPaint().apply {
         isAntiAlias = true
-        textSize = 9 * resources.displayMetrics.density
+        textSize = 10 * resources.displayMetrics.density
         typeface = textFont
         color = Color.WHITE
     }
@@ -106,8 +89,21 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
         graphHeightOffset = heightOffset
     }
 
+    private val displayAmountTextPaint: TextPaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = 10 * resources.displayMetrics.density
+        typeface = Typeface.create(textFont, Typeface.BOLD)
+        color = Color.WHITE
+
+    }
+
     fun setData(newDataSet: List<DataPoint>, averageTarget: Int)
     {
+        //Create the display rectangles
+        amountRect = Rect(0, 0 + graphContentPadding, graphWidthOffset, height - graphHeightOffset + graphContentPadding)
+        monthRect = Rect(0, height - graphHeightOffset, width, height)
+        graphRect = Rect(amountRect.right, amountRect.top, width, monthRect.top)
+
         //Check that our dataset isn't above our max
         val refinedDataSet: List<DataPoint> = if(newDataSet.size > maxDateSteps) {
             val dropSize = newDataSet.size - maxDateSteps
@@ -154,66 +150,69 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     {
         super.onDraw(canvas)
 
-        //Frame lines
-        for(i in 0 until dataSet.size)
-        {
-            canvas.drawLine(i.toRealX() + graphWidthOffset, 0f, i.toRealX() + graphWidthOffset, getGraphHeight().toFloat(), axisLinePaint)
-        }
+        //Vertical Line
+        canvas.drawLine(graphRect.left.toFloat(), 0f, graphRect.left.toFloat(), graphRect.bottom.toFloat(), axisLinePaint)
+        //Horizontal Line
+        canvas.drawLine(graphRect.left.toFloat(), graphRect.bottom.toFloat(), graphRect.right.toFloat(), graphRect.bottom.toFloat(), axisLinePaint)
 
         //Draw amounts
         for(i: Int in amountStepsArray)
         {
             val amountText = "$${i}"
-            canvas.drawText(amountText, 0f, i.toRealY(), amountTextPaint)
+            canvas.drawText(amountText, 0f, i.getY(), amountTextPaint)
+
+            //Draw amount frames
+            canvas.drawLine(graphRect.left.toFloat(), i.getY(), graphRect.right.toFloat(), i.getY(), axisSecondaryLinePaint)
         }
 
         for(i in dataSet.indices)
         {
             //Draw month
-            canvas.drawText(dataSet[i].month, i.toRealX() - (getMonthTextWidth() / 2) + graphWidthOffset, height.toFloat(), monthTextPaint)
+            canvas.drawText(dataSet[i].month, i.getX() - (getMonthTextWidth() / 1.5).toFloat(), height.toFloat(), monthTextPaint)
 
-            val realX = i.toRealX() + graphWidthOffset
-            val realY = dataSet[i].yVal.toRealY()
+            val x = i.getX()
+            val realY = dataSet[i].yVal.getY()
             val fillPaint = if(dataSet[i].yVal > averageTargetSpend) dataPointFillPaintOver else dataPointFillPaint
-            val circlePaint = if(dataSet[i].yVal > averageTargetSpend) dataPointPaintOver else dataPointPaint
 
-            if(i < dataSet.size - 1)
-            {
-                val nextDataPoint = dataSet[i + 1]
-                val startX = i.toRealX() + graphWidthOffset
-                val startY = dataSet[i].yVal.toRealY()
-                val endX = (i + 1).toRealX() + graphWidthOffset
-                val endY = nextDataPoint.yVal.toRealY()
+            canvas.drawRect(-25f + x, realY, x + 25f, graphRect.bottom.toFloat(), fillPaint)
 
-                val nextPaint = if(nextDataPoint.yVal > averageTargetSpend) dataPointLinePaintOver else dataPointLinePaint
-                canvas.drawLine(startX, startY, endX, endY, nextPaint)
-            }
-            canvas.drawCircle(realX, realY, 9f, circlePaint)
-            canvas.drawCircle(realX, realY, 9f, fillPaint)
+            //Draw amount
+            val amountText = CranstekHelper.convertToCurrency(dataSet[i].amount)
+            canvas.drawText(amountText, i.getX() - (getAmountTextWidth(amountText) / 2).toFloat(), realY - 20, displayAmountTextPaint)
 
             //Average
-            val averageY = averageTargetSpend.toRealY()
-            canvas.drawCircle(realX, averageY, 9f, dataPointPaintAverage)
-            canvas.drawCircle(realX, averageY, 9f, dataPointFillPaintAverage)
+            val averageY = averageTargetSpend.getY()
+            canvas.drawCircle(x, averageY, 4f, dataPointPaintAverage)
+            canvas.drawCircle(x, averageY, 4f, dataPointFillPaintAverage)
 
             if(i < dataSet.size - 1)
             {
-                val startX = i.toRealX() + graphWidthOffset
-                val endX = (i + 1).toRealX() + graphWidthOffset
+                val startX = i.getX()
+                val endX = (i + 1).getX()
 
+                canvas.drawLine(startX, averageY, endX, averageY, dataPointLinePaintAverage)
+            }
+            //Draw the start and end lines
+            if(i == 0)
+            {
+                val startX = graphRect.left.toFloat()
+                val endX = 1.getX()
+                canvas.drawLine(startX, averageY, endX, averageY, dataPointLinePaintAverage)
+            }
+            else if(i == dataSet.size - 1)
+            {
+                val startX = i.getX()
+                val endX = graphRect.right.toFloat()
                 canvas.drawLine(startX, averageY, endX, averageY, dataPointLinePaintAverage)
             }
         }
     }
 
-    private fun Int.toRealX() = toFloat() / (dataSet.size - 1) * getGraphWidth()
-    private fun Int.toRealY() = getGraphHeight() - (toFloat() / yMax * getGraphHeight()) + 35
-    private fun getGraphWidth() = width - graphWidthOffset - 40
-    private fun getGraphHeight() = height - graphHeightOffset
-    private fun getMonthTextWidth() = monthTextPaint.measureText("###").roundToInt()
-    private fun getAmountTextHeight(): Int {
-        val bounds = Rect()
-        amountTextPaint.getTextBounds(yMax.toString(), 0, yMax.toString().length, bounds)
-        return bounds.height()
+    private fun Int.getX(): Float {
+        val position = toFloat() / (dataSet.size - 1)
+        return ((graphRect.width() - (graphContentBarPadding * 2)) * position) + (graphRect.left + graphContentBarPadding)
     }
+    private fun Int.getY() = graphRect.height() - (toFloat() / yMax * graphRect.height().toFloat()) + graphContentPadding
+    private fun getMonthTextWidth() = monthTextPaint.measureText("###").roundToInt()
+    private fun getAmountTextWidth(text: String) = displayAmountTextPaint.measureText(text).roundToInt()
 }
