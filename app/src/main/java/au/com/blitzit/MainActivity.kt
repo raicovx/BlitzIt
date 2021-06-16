@@ -1,20 +1,17 @@
 package au.com.blitzit
 
-import android.hardware.display.DisplayManager
-import android.os.Build
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
-import android.view.WindowInsetsController
-import androidx.annotation.RequiresApi
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.WindowInsetsControllerCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.amplifyframework.core.Amplify
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class MainActivity : AppCompatActivity()
 {
@@ -47,6 +44,16 @@ class MainActivity : AppCompatActivity()
         displayMetrics.scaledDensity = config.fontScale * displayMetrics.density
         config.densityDpi = resources.displayMetrics.xdpi.toInt()
         resources.updateConfiguration(config, displayMetrics)
+    }
+
+    //Handles changing of the font size to anything but default
+    //Effectively forces the app to use the default font size of the phone ensuring that our applications text sizes are kept try to design
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        val newOverride = Configuration(newBase?.resources?.configuration)
+        newOverride.fontScale = 1.0f
+        Log.i("GAz_STUFF", "override applied")
+        applyOverrideConfiguration(newOverride)
     }
 
     fun hideFAB()
