@@ -33,7 +33,7 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
     private var monthRect = Rect()
 
     private var graphContentPadding = 50
-    private var graphContentBarPadding = 100
+    private var graphContentBarPadding = 75
 
     private val dataPointPaintAverage = Paint().apply{
         color = blitzItOrange
@@ -178,7 +178,8 @@ class GraphView(context: Context, attributeSet: AttributeSet): View(context, att
 
             //Draw amount
             val amountText = CranstekHelper.convertToCurrency(dataSet[i].amount)
-            canvas.drawText(amountText, i.getX() - (getAmountTextWidth(amountText) / 2).toFloat(), realY - 20, displayAmountTextPaint)
+            val yPos = if(i % 2 == 0) realY - 10 else realY - 50 //Sets the texts to be higher or lower slightly to avoid overlapping
+            canvas.drawText(amountText, i.getX() - (getAmountTextWidth(amountText) / 2).toFloat(), yPos, displayAmountTextPaint)
 
             //Average
             val averageY = averageTargetSpend.getY()

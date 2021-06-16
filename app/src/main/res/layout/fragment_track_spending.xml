@@ -20,7 +20,8 @@
             <TextView
                 android:id="@+id/spending_topBar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
+                android:minHeight="56dp"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="64dp"
@@ -88,7 +89,8 @@
                     <TextView
                         android:id="@+id/track_spending_spinner_title"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:background="@color/blitz_it_medium_blue"
                         android:fontFamily="@font/avenir"
                         android:gravity="center"
@@ -96,7 +98,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:paddingVertical="4dp"
-                        android:textSize="24sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -131,7 +133,7 @@
                 android:text="@string/your_current_spend_is"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/spending_on_track_icon"
@@ -145,12 +147,12 @@
                 android:background="@drawable/active_display"
                 android:fontFamily="@font/avenir"
                 android:gravity="center"
-                android:paddingHorizontal="28dp"
+                android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
                 android:text="@string/on_track"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="21sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spending_on_track_text"
