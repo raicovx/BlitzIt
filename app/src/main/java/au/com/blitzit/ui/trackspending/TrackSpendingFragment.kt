@@ -130,24 +130,24 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
         else
         {
             graph.isVisible = true
-            //var graphData: List<DataPoint> = emptyList()
+            var graphData: List<DataPoint> = emptyList()
             //TEST DATA
-            val graphData = listOf(
+            /*val graphData = listOf(
                 DataPoint(400, "JAN", 400.00),
                 DataPoint(600, "FEB", 400.00),
                 DataPoint(200, "MAR", 400.00),
                 DataPoint(800, "APR", 400.00),
                 DataPoint(700, "MAY", 700.00),
                 DataPoint(1200, "JUN", 1200.00),
-                DataPoint(56453, "JUL", 56453.94),
+                DataPoint(41453, "JUL", 41453.94),
                 DataPoint(45817, "AUG", 45817.18),
                 DataPoint(38209, "SEP", 38209.56),
                 DataPoint(38967, "OCT", 38967.98),
                 DataPoint(63108, "NOV", 63108.13),
-                DataPoint(63108, "DEC", 64583.18),
-                DataPoint(72903, "JAN", 72903.26),
-                DataPoint(3410, "FEB", 3410.98))
-            /*var index = 0
+                DataPoint(34583, "DEC", 34583.18),
+                DataPoint(24892, "JAN", 24892.26),
+                DataPoint(3410, "FEB", 3410.98))*/
+            var index = 0
             for (total: Map.Entry<String, Double> in selectedCategory.totals)
             {
                 val monthNumber: Int = CranstekHelper.getMonthNumberFromDateString(total.key)
@@ -169,11 +169,11 @@ class TrackSpendingFragment: Fragment(), AdapterView.OnItemSelectedListener
                 }
 
                 index++
-            }*/
+            }
 
             graph.setGraphOffset(100, 50)
-            //graph.setData(graphData, selectedCategory.averageTargetMonth.roundToInt())
-            graph.setData(graphData, 30000)
+            graph.setData(graphData, selectedCategory.averageTargetMonth.roundToInt())
+            //graph.setData(graphData, 48500)
         }
     }
 
