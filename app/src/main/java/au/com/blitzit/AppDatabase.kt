@@ -18,7 +18,7 @@ import au.com.blitzit.roomdata.*
     SignUpRequest::class,
     SupportCoordinator::class,
     User::class],
-    version = 1028, exportSchema = false)
+    version = 1029, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase()
 {

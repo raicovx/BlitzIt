@@ -9,6 +9,7 @@ data class LineItem(
     val invoice_id: String,
     @SerializedName("support_code")
     val supportCode: String,
+    val description: String,
     @SerializedName("unit_price")
     val unitPrice: Double,
     val quantity: Float,

@@ -160,7 +160,9 @@ class InvoiceDetailFragment: Fragment()
             lineItemHolder.removeView(lineItemDetailView)
 
         lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_item_name).text = lineItem.supportCode
-        val serviceDates = "${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportStartDate)} to ${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportEndDate)}"
+        lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_desc).text = lineItem.description
+        val serviceDates =
+            "${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportStartDate)} to ${CranstekHelper.formatDateNoFancyOnInput(lineItem.supportEndDate)}"
         lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_service_dates).text = serviceDates
         lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_quantity_hour).text = lineItem.quantity.toString()
         lineItemDetailView.findViewById<TextView>(R.id.line_item_detail_price_unit_hour).text = CranstekHelper.convertToCurrency(lineItem.unitPrice)

@@ -44,6 +44,7 @@ data class GenericInvoiceResponse(
                 planID,
                 invoice_id,
                 lineItem.support_code,
+                lineItem.description,
                 lineItem.unit_price,
                 lineItem.quantity,
                 lineItem.support_end_date,
@@ -59,6 +60,7 @@ data class GenericInvoiceResponse(
 
 data class GenericLineItemResponse(
     val support_code: String,
+    val description: String,
     val unit_price: Double,
     val quantity: Float,
     val support_end_date: String,

@@ -33,7 +33,31 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:fontFamily="@font/avenir"
+        android:layout_marginTop="16dp"
+        android:text="@string/service_description"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        android:textSize="21sp" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/line_item_detail_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="42dp"
+        android:background="@drawable/input_bg"
+        android:focusable="false"
+        android:fontFamily="@font/avenir"
+        android:inputType="none"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:text="Access community, social and Rec Activities -Standard -Weekday Daytime"
+        android:textColor="@color/dark_grey"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/avenir"
         android:text="@string/service_dates"
         android:textColor="@color/dark_grey"
@@ -58,7 +82,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/avenir"
         android:text="@string/claimed_quantity_hour"
         android:textColor="@color/dark_grey"
@@ -83,7 +107,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/avenir"
         android:text="@string/claimed_price_per_unit_hour"
         android:textColor="@color/dark_grey"
@@ -107,6 +131,6 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="24dp"/>
+        android:layout_height="36dp"/>
 
 </LinearLayout>
