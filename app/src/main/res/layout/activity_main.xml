@@ -19,7 +19,7 @@
         android:focusable="true"
         android:src="@drawable/menu_icon"
         app:tint="@color/white"
-        app:maxImageSize="32dp"
+        app:maxImageSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
