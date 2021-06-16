@@ -114,7 +114,6 @@
     <string name="plan_end_date">Plan end date:</string>
     <string name="estimated_consumption_date">Estimated consumption date:</string>
     <string name="total_claimed_for_category">Total claimed for Category</string>
-    <string name="create_new_account">Create New Account</string>
     <string name="success">Success!</string>
     <string name="new_account_message_part_1">Your information has been submitted to Blitzit to create a New Account.</string>
     <string name="new_account_message_part_2">You should receive an email in 15 minutes with a verification code, and confirming the account details entered.</string>
@@ -188,6 +187,7 @@
     <string name="end_date">End Date:</string>
     <string name="start_date">Start Date:</string>
     <string name="service_description">Service Description:</string>
+    <string name="create_new_account">Create New Account</string>
     <string-array name="filter_array">
         <item>Provider</item>
         <item>Most Recent</item>
