@@ -25,7 +25,7 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app)
 
     private suspend fun getPurposesWithCategories(): List<PurposeWithCategories>
     {
-        return appDatabase.purposeDAO().getPurposesWithCategories(selectedPlan.plan_id)
+        return appDatabase.purposeDAO().getPurposesWithCategories(selectedPlan.plan_id, AuthServices.loggedParticipant.ndisNumber)
     }
 
     /***

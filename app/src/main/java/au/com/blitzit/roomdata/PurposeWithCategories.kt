@@ -2,6 +2,7 @@ package au.com.blitzit.roomdata
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Junction
 import androidx.room.Relation
 
 data class PurposeWithCategories(

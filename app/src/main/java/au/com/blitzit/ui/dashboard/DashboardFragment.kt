@@ -117,7 +117,7 @@ class DashboardFragment : Fragment() {
         //Get List of purposes that have categories
         for(purposeWithCategories: PurposeWithCategories in purposes)
         {
-            if(purposeWithCategories.categories.isNotEmpty())
+            if(hasValidCategories(purposeWithCategories))
             {
                 val purposeView = inflater.inflate(R.layout.part_dashboard_category, container, false)
 
@@ -162,5 +162,16 @@ class DashboardFragment : Fragment() {
         CranstekHelper.handleButtonColours(requireContext(), viewButton)
 
         container.addView(categoryView)
+    }
+
+    //Checks if any categories are from the selected plan and user
+    private fun hasValidCategories(purposeWithCategories: PurposeWithCategories): Boolean
+    {
+        for(category in purposeWithCategories.categories)
+        {
+            if(category.plan_id == AuthServices.selectedPlan.plan_id && category.ndis_number == AuthServices.loggedParticipant.ndisNumber)
+                return true
+        }
+        return false
     }
 }
