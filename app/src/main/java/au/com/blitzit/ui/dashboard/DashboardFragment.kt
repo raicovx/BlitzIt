@@ -133,7 +133,7 @@ class DashboardFragment : Fragment() {
                 //Create all category views for this purpose
                 val categoryHolder: LinearLayout = purposeView.findViewById(R.id.part_subcategory_filler)
                 for(category: Category in purposeWithCategories.categories)
-                    if(category.plan_id == purposeWithCategories.purpose.plan_id)
+                    if(category.plan_id == purposeWithCategories.purpose.plan_id && category.ndis_number == AuthServices.loggedParticipant.ndisNumber)
                         createCategoryView(category, inflater, categoryHolder)
             }
         }
