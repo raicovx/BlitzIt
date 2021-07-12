@@ -111,10 +111,7 @@ class SignUpFragment : Fragment()
         passwordField = view.findViewById(R.id.sign_up_password)
         confirmPasswordField = view.findViewById(R.id.sign_up_re_password)
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            handleDatePicker()
-        else
-            handleDatePickerLower()
+        handleDatePicker()
         ndisField = view.findViewById(R.id.sign_up_ndis)
 
         val submitButton: Button = view.findViewById(R.id.sign_up_submit)
@@ -198,7 +195,6 @@ class SignUpFragment : Fragment()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun handleDatePicker()
     {
         dobField.isFocusable = false
@@ -218,18 +214,6 @@ class SignUpFragment : Fragment()
         dobField.setOnClickListener{
             DatePickerDialog(requireContext(), dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
         }
-    }
-
-    private fun handleDatePickerLower()
-    {
-        //Check dobfield text, attempt to format to useable type
-        val myFormat = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(myFormat)
-
-        //try {
-            
-        //}
-        TODO("This")
     }
 
 
